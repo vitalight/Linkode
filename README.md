@@ -1,3 +1,3 @@
-# LinKode
+# Linkode
 SJTU SE Project
-yyy
+basic architecture
