@@ -1,3 +1,2 @@
-# LinKode
+# Linkode
 SJTU SE Project
-yyy
