@@ -18,7 +18,7 @@
     <!--配置类型别名-->
     <typeAliases>
         <!--引入pojo包-->
-        <package name="com.zkh.pojo"/>
+        <package name="com.linkode.pojo"/>
     </typeAliases>
 
 </configuration>
