@@ -16,7 +16,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <bean id="movieService" class="com.linkode.service.impl.MovieServiceImpl"></bean>
-    <bean id="userService" class="com.linkode.service.impl.UserServiceImpl"></bean>
+    <bean id="movieService" class="com.linkode.service.impl.MovieServiceImpl"/>
+    <bean id="userService" class="com.linkode.service.impl.UserServiceImpl"/>
 
 </beans>

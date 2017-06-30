@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zkh.dao.MovieMapper">
-  <resultMap id="BaseResultMap" type="com.zkh.pojo.Movie">
+<mapper namespace="com.linkode.dao.MovieMapper">
+  <resultMap id="BaseResultMap" type="com.linkode.pojo.Movie">
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="Title" jdbcType="VARCHAR" property="title" />
     <result column="Director" jdbcType="VARCHAR" property="director" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     Id, Title, Director, Genre, Language
   </sql>
-  <select id="selectByExample" parameterType="com.zkh.pojo.MovieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.linkode.pojo.MovieExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from movie
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zkh.pojo.MovieExample">
+  <delete id="deleteByExample" parameterType="com.linkode.pojo.MovieExample">
     delete from movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zkh.pojo.Movie">
+  <insert id="insert" parameterType="com.linkode.pojo.Movie">
     insert into movie (Id, Title, Director, 
       Genre, Language)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, 
       #{genre,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zkh.pojo.Movie">
+  <insert id="insertSelective" parameterType="com.linkode.pojo.Movie">
     insert into movie
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zkh.pojo.MovieExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.linkode.pojo.MovieExample" resultType="java.lang.Long">
     select count(*) from movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zkh.pojo.Movie">
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.Movie">
     update movie
     <set>
       <if test="title != null">
@@ -200,7 +200,7 @@
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zkh.pojo.Movie">
+  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Movie">
     update movie
     set Title = #{title,jdbcType=VARCHAR},
       Director = #{director,jdbcType=VARCHAR},
