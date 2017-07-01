@@ -51,3 +51,4 @@ cmt是comment缩写
 *	sex 性别
 *	birthday 生日
 *	role 角色
+* money 余额
