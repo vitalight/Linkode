@@ -1,8 +1,11 @@
 # 数据库sql文档
-## 前言
+#### 备注
+
 都省略了id  
 
 cmt是comment缩写
+
+
 
 ## ad 广告 
 * title 标题
@@ -42,7 +45,7 @@ cmt是comment缩写
 * endDate 截止日期
 * status 状态
 * money 酬金
-## user 用户 
+## users 用户 
 * username 用户名
 * password密码
 * email 邮箱

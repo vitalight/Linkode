@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-01 04:53:30
+-- Generation Time: 2017-07-01 11:04:38
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -173,10 +173,10 @@ INSERT INTO `project` (`id`, `posterId`, `contractorId`, `title`, `requirement`,
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user`
+-- 表的结构 `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
@@ -190,10 +190,10 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `user`
+-- 转存表中的数据 `users`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
 (1, 'admin', 'admin', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000);
 
 --
@@ -251,9 +251,9 @@ ALTER TABLE `project`
   ADD KEY `posterId` (`posterId`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -296,9 +296,9 @@ ALTER TABLE `post_cmt`
 ALTER TABLE `project`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- 使用表AUTO_INCREMENT `user`
+-- 使用表AUTO_INCREMENT `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
