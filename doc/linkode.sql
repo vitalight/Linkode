@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-06-29 11:13:32
+-- Generation Time: 2017-07-01 04:53:30
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -185,15 +185,16 @@ CREATE TABLE `user` (
   `ratingTotal` int(11) DEFAULT NULL,
   `sex` varchar(10) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `role` varchar(20) DEFAULT NULL
+  `role` varchar(20) DEFAULT NULL,
+  `money` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`) VALUES
-(1, 'admin', 'admin', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
+(1, 'admin', 'admin', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000);
 
 --
 -- Indexes for dumped tables
