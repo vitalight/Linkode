@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.linkode.dao.MovieMapper">
-  <resultMap id="BaseResultMap" type="com.linkode.pojo.Movie">
-    <id column="Id" jdbcType="INTEGER" property="id" />
-    <result column="Title" jdbcType="VARCHAR" property="title" />
-    <result column="Director" jdbcType="VARCHAR" property="director" />
-    <result column="Genre" jdbcType="VARCHAR" property="genre" />
-    <result column="Language" jdbcType="VARCHAR" property="language" />
+<mapper namespace="com.linkode.dao.AdMapper">
+  <resultMap id="BaseResultMap" type="com.linkode.pojo.Ad">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="startDate" jdbcType="DATE" property="startdate" />
+    <result column="endDate" jdbcType="DATE" property="enddate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    Id, Title, Director, Genre, Language
+    id, title, content, startDate, endDate
   </sql>
-  <select id="selectByExample" parameterType="com.linkode.pojo.MovieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.linkode.pojo.AdExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from movie
+    from ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +86,87 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from movie
-    where Id = #{id,jdbcType=INTEGER}
+    from ad
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from movie
-    where Id = #{id,jdbcType=INTEGER}
+    delete from ad
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.linkode.pojo.MovieExample">
-    delete from movie
+  <delete id="deleteByExample" parameterType="com.linkode.pojo.AdExample">
+    delete from ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.linkode.pojo.Movie">
-    insert into movie (Id, Title, Director, 
-      Genre, Language)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, 
-      #{genre,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.linkode.pojo.Ad">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad (id, title, content, 
+      startDate, endDate)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=DATE}, #{enddate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.linkode.pojo.Movie">
-    insert into movie
+  <insert id="insertSelective" parameterType="com.linkode.pojo.Ad">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        Id,
-      </if>
+      id,
       <if test="title != null">
-        Title,
+        title,
       </if>
-      <if test="director != null">
-        Director,
+      <if test="content != null">
+        content,
       </if>
-      <if test="genre != null">
-        Genre,
+      <if test="startdate != null">
+        startDate,
       </if>
-      <if test="language != null">
-        Language,
+      <if test="enddate != null">
+        endDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
+      #{id,jdbcType=INTEGER},
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="director != null">
-        #{director,jdbcType=VARCHAR},
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
       </if>
-      <if test="genre != null">
-        #{genre,jdbcType=VARCHAR},
+      <if test="startdate != null">
+        #{startdate,jdbcType=DATE},
       </if>
-      <if test="language != null">
-        #{language,jdbcType=VARCHAR},
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.linkode.pojo.MovieExample" resultType="java.lang.Long">
-    select count(*) from movie
+  <select id="countByExample" parameterType="com.linkode.pojo.AdExample" resultType="java.lang.Long">
+    select count(*) from ad
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update movie
+    update ad
     <set>
       <if test="record.id != null">
-        Id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.title != null">
-        Title = #{record.title,jdbcType=VARCHAR},
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.director != null">
-        Director = #{record.director,jdbcType=VARCHAR},
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.genre != null">
-        Genre = #{record.genre,jdbcType=VARCHAR},
+      <if test="record.startdate != null">
+        startDate = #{record.startdate,jdbcType=DATE},
       </if>
-      <if test="record.language != null">
-        Language = #{record.language,jdbcType=VARCHAR},
+      <if test="record.enddate != null">
+        endDate = #{record.enddate,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,40 +174,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update movie
-    set Id = #{record.id,jdbcType=INTEGER},
-      Title = #{record.title,jdbcType=VARCHAR},
-      Director = #{record.director,jdbcType=VARCHAR},
-      Genre = #{record.genre,jdbcType=VARCHAR},
-      Language = #{record.language,jdbcType=VARCHAR}
+    update ad
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      startDate = #{record.startdate,jdbcType=DATE},
+      endDate = #{record.enddate,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.Movie">
-    update movie
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.Ad">
+    update ad
     <set>
       <if test="title != null">
-        Title = #{title,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="director != null">
-        Director = #{director,jdbcType=VARCHAR},
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="genre != null">
-        Genre = #{genre,jdbcType=VARCHAR},
+      <if test="startdate != null">
+        startDate = #{startdate,jdbcType=DATE},
       </if>
-      <if test="language != null">
-        Language = #{language,jdbcType=VARCHAR},
+      <if test="enddate != null">
+        endDate = #{enddate,jdbcType=DATE},
       </if>
     </set>
-    where Id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Movie">
-    update movie
-    set Title = #{title,jdbcType=VARCHAR},
-      Director = #{director,jdbcType=VARCHAR},
-      Genre = #{genre,jdbcType=VARCHAR},
-      Language = #{language,jdbcType=VARCHAR}
-    where Id = #{id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Ad">
+    update ad
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      startDate = #{startdate,jdbcType=DATE},
+      endDate = #{enddate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
   
-  <classPathEntry location="F:/MyCodes/LinKode/target/Linkode/WEB-INF/lib/mysql-connector-java-6.0.6.jar" />
+  <classPathEntry location="F:\MyCodes\BookStore\target\BookStore\WEB-INF\lib\mysql-connector-java-5.1.13.jar" />
   <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
     <property name="beginningDelimiter" value="`"/>
     <property name="endingDelimiter" value="`"/>
