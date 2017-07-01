@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  
+  <classPathEntry location="F:/MyCodes/LinKode/target/Linkode/WEB-INF/lib/mysql-connector-java-6.0.6.jar" />
+  <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    <commentGenerator>    
+      <property name="suppressDate" value="true"/>    
+      <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+      <property name="suppressAllComments" value="true"/>    
+    </commentGenerator> 
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/linkode?serverTimezone=UTC" driverClass="com.mysql.jdbc.Driver" password="" userId="root" />
+    <javaModelGenerator targetPackage="com.linkode.pojo" targetProject="Linkode/src/main/java" />
+    <sqlMapGenerator targetPackage="mapping" targetProject="Linkode/src/main/resources" />
+    <javaClientGenerator targetPackage="com.linkode.dao" targetProject="Linkode/src/main/java" type="XMLMAPPER" />
+    <table schema="linkode" tableName="ad">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="chatlog">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="portfolio">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="portfolio_cmt">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="post">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="post_cmt">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="project">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    <table schema="linkode" tableName="users">
+    	<generatedKey column="id" sqlStatement="Mysql"/>
+    </table>
+    
+  </context>
+</generatorConfiguration>
