@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-01 11:04:38
+-- Generation Time: 2017-07-02 10:24:48
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -61,6 +61,27 @@ CREATE TABLE `chatlog` (
 
 INSERT INTO `chatlog` (`id`, `senderId`, `receiverId`, `time`, `content`) VALUES
 (1, 1, 2, '2017-06-07 00:00:00', 'jason是辣鸡');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `movie`
+--
+
+CREATE TABLE `movie` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `director` varchar(50) DEFAULT NULL,
+  `genre` varchar(50) DEFAULT NULL,
+  `language` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `movie`
+--
+
+INSERT INTO `movie` (`id`, `title`, `director`, `genre`, `language`) VALUES
+(1, 'Disney', 'Jason', 'History', 'English');
 
 -- --------------------------------------------------------
 
@@ -173,13 +194,13 @@ INSERT INTO `project` (`id`, `posterId`, `contractorId`, `title`, `requirement`,
 -- --------------------------------------------------------
 
 --
--- 表的结构 `users`
+-- 表的结构 `user`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `password` char(32) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `ratingNumber` int(11) DEFAULT NULL,
   `ratingTotal` int(11) DEFAULT NULL,
@@ -190,11 +211,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `users`
+-- 转存表中的数据 `user`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
-(1, 'admin', 'admin', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000);
 
 --
 -- Indexes for dumped tables
@@ -213,6 +234,12 @@ ALTER TABLE `chatlog`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Aid` (`senderId`),
   ADD KEY `Bid` (`receiverId`);
+
+--
+-- Indexes for table `movie`
+--
+ALTER TABLE `movie`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `portfolio`
@@ -251,9 +278,9 @@ ALTER TABLE `project`
   ADD KEY `posterId` (`posterId`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -269,6 +296,11 @@ ALTER TABLE `ad`
 -- 使用表AUTO_INCREMENT `chatlog`
 --
 ALTER TABLE `chatlog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- 使用表AUTO_INCREMENT `movie`
+--
+ALTER TABLE `movie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `portfolio`
@@ -296,9 +328,9 @@ ALTER TABLE `post_cmt`
 ALTER TABLE `project`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- 使用表AUTO_INCREMENT `users`
+-- 使用表AUTO_INCREMENT `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
