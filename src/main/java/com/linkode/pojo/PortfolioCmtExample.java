@@ -164,63 +164,63 @@ public class PortfolioCmtExample {
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidIsNull() {
+        public Criteria andPortfolioIdIsNull() {
             addCriterion("portfolioId is null");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidIsNotNull() {
+        public Criteria andPortfolioIdIsNotNull() {
             addCriterion("portfolioId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidEqualTo(Integer value) {
-            addCriterion("portfolioId =", value, "portfolioid");
+        public Criteria andPortfolioIdEqualTo(Integer value) {
+            addCriterion("portfolioId =", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidNotEqualTo(Integer value) {
-            addCriterion("portfolioId <>", value, "portfolioid");
+        public Criteria andPortfolioIdNotEqualTo(Integer value) {
+            addCriterion("portfolioId <>", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidGreaterThan(Integer value) {
-            addCriterion("portfolioId >", value, "portfolioid");
+        public Criteria andPortfolioIdGreaterThan(Integer value) {
+            addCriterion("portfolioId >", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("portfolioId >=", value, "portfolioid");
+        public Criteria andPortfolioIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("portfolioId >=", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidLessThan(Integer value) {
-            addCriterion("portfolioId <", value, "portfolioid");
+        public Criteria andPortfolioIdLessThan(Integer value) {
+            addCriterion("portfolioId <", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidLessThanOrEqualTo(Integer value) {
-            addCriterion("portfolioId <=", value, "portfolioid");
+        public Criteria andPortfolioIdLessThanOrEqualTo(Integer value) {
+            addCriterion("portfolioId <=", value, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidIn(List<Integer> values) {
-            addCriterion("portfolioId in", values, "portfolioid");
+        public Criteria andPortfolioIdIn(List<Integer> values) {
+            addCriterion("portfolioId in", values, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidNotIn(List<Integer> values) {
-            addCriterion("portfolioId not in", values, "portfolioid");
+        public Criteria andPortfolioIdNotIn(List<Integer> values) {
+            addCriterion("portfolioId not in", values, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidBetween(Integer value1, Integer value2) {
-            addCriterion("portfolioId between", value1, value2, "portfolioid");
+        public Criteria andPortfolioIdBetween(Integer value1, Integer value2) {
+            addCriterion("portfolioId between", value1, value2, "portfolioId");
             return (Criteria) this;
         }
 
-        public Criteria andPortfolioidNotBetween(Integer value1, Integer value2) {
-            addCriterion("portfolioId not between", value1, value2, "portfolioid");
+        public Criteria andPortfolioIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("portfolioId not between", value1, value2, "portfolioId");
             return (Criteria) this;
         }
 

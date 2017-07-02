@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-  <!-- 如果jar包版本过新会报错 -->
+  
   <classPathEntry location="F:\MyCodes\BookStore\target\BookStore\WEB-INF\lib\mysql-connector-java-5.1.13.jar" />
   <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
     <property name="beginningDelimiter" value="`"/>
@@ -16,38 +16,7 @@
     <sqlMapGenerator targetPackage="mapping" targetProject="Linkode/src/main/resources" />
     <javaClientGenerator targetPackage="com.linkode.dao" targetProject="Linkode/src/main/java" type="XMLMAPPER" />
     
-    <table schema="linkode" tableName="ad">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="chatlog">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="portfolio">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="portfolio_cmt">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="post">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="post_cmt">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="project">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
-    <table schema="linkode" tableName="user">
-    	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
+    
     <table schema="linkode" tableName="movie">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql"/>

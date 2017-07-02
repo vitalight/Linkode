@@ -5,9 +5,9 @@ import java.util.Date;
 public class Project {
     private Integer id;
 
-    private Integer posterid;
+    private Integer posterId;
 
-    private Integer contractorid;
+    private Integer contractorId;
 
     private String title;
 
@@ -15,9 +15,9 @@ public class Project {
 
     private String type;
 
-    private Date startdate;
+    private Date startDate;
 
-    private Date enddate;
+    private Date endDate;
 
     private String status;
 
@@ -31,20 +31,20 @@ public class Project {
         this.id = id;
     }
 
-    public Integer getPosterid() {
-        return posterid;
+    public Integer getPosterId() {
+        return posterId;
     }
 
-    public void setPosterid(Integer posterid) {
-        this.posterid = posterid;
+    public void setPosterId(Integer posterId) {
+        this.posterId = posterId;
     }
 
-    public Integer getContractorid() {
-        return contractorid;
+    public Integer getContractorId() {
+        return contractorId;
     }
 
-    public void setContractorid(Integer contractorid) {
-        this.contractorid = contractorid;
+    public void setContractorId(Integer contractorId) {
+        this.contractorId = contractorId;
     }
 
     public String getTitle() {
@@ -71,20 +71,20 @@ public class Project {
         this.type = type;
     }
 
-    public Date getStartdate() {
-        return startdate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnddate() {
-        return enddate;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnddate(Date enddate) {
-        this.enddate = enddate;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getStatus() {

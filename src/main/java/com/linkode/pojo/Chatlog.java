@@ -5,9 +5,9 @@ import java.util.Date;
 public class Chatlog {
     private Integer id;
 
-    private Integer senderid;
+    private Integer senderId;
 
-    private Integer receiverid;
+    private Integer receiverId;
 
     private Date time;
 
@@ -21,20 +21,20 @@ public class Chatlog {
         this.id = id;
     }
 
-    public Integer getSenderid() {
-        return senderid;
+    public Integer getSenderId() {
+        return senderId;
     }
 
-    public void setSenderid(Integer senderid) {
-        this.senderid = senderid;
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
     }
 
-    public Integer getReceiverid() {
-        return receiverid;
+    public Integer getReceiverId() {
+        return receiverId;
     }
 
-    public void setReceiverid(Integer receiverid) {
-        this.receiverid = receiverid;
+    public void setReceiverId(Integer receiverId) {
+        this.receiverId = receiverId;
     }
 
     public Date getTime() {

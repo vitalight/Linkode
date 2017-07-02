@@ -3,7 +3,7 @@ package com.linkode.pojo;
 public class PortfolioCmt {
     private Integer id;
 
-    private Integer portfolioid;
+    private Integer portfolioId;
 
     private String content;
 
@@ -17,12 +17,12 @@ public class PortfolioCmt {
         this.id = id;
     }
 
-    public Integer getPortfolioid() {
-        return portfolioid;
+    public Integer getPortfolioId() {
+        return portfolioId;
     }
 
-    public void setPortfolioid(Integer portfolioid) {
-        this.portfolioid = portfolioid;
+    public void setPortfolioId(Integer portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
     public String getContent() {

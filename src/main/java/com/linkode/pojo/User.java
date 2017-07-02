@@ -2,7 +2,7 @@ package com.linkode.pojo;
 
 import java.util.Date;
 
-public class Users {
+public class User {
     private Integer id;
 
     private String username;
@@ -11,9 +11,9 @@ public class Users {
 
     private String email;
 
-    private Integer ratingnumber;
+    private Integer ratingNumber;
 
-    private Integer ratingtotal;
+    private Integer ratingTotal;
 
     private String sex;
 
@@ -55,20 +55,20 @@ public class Users {
         this.email = email;
     }
 
-    public Integer getRatingnumber() {
-        return ratingnumber;
+    public Integer getRatingNumber() {
+        return ratingNumber;
     }
 
-    public void setRatingnumber(Integer ratingnumber) {
-        this.ratingnumber = ratingnumber;
+    public void setRatingNumber(Integer ratingNumber) {
+        this.ratingNumber = ratingNumber;
     }
 
-    public Integer getRatingtotal() {
-        return ratingtotal;
+    public Integer getRatingTotal() {
+        return ratingTotal;
     }
 
-    public void setRatingtotal(Integer ratingtotal) {
-        this.ratingtotal = ratingtotal;
+    public void setRatingTotal(Integer ratingTotal) {
+        this.ratingTotal = ratingTotal;
     }
 
     public String getSex() {

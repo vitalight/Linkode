@@ -1,18 +1,16 @@
 package com.linkode.pojo;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-public class AdExample {
+public class MovieExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AdExample() {
+    public MovieExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,32 +102,6 @@ public class AdExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -262,193 +234,213 @@ public class AdExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
+        public Criteria andDirectorIsNull() {
+            addCriterion("director is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
+        public Criteria andDirectorIsNotNull() {
+            addCriterion("director is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
+        public Criteria andDirectorEqualTo(String value) {
+            addCriterion("director =", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
+        public Criteria andDirectorNotEqualTo(String value) {
+            addCriterion("director <>", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
+        public Criteria andDirectorGreaterThan(String value) {
+            addCriterion("director >", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
+        public Criteria andDirectorGreaterThanOrEqualTo(String value) {
+            addCriterion("director >=", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
+        public Criteria andDirectorLessThan(String value) {
+            addCriterion("director <", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
+        public Criteria andDirectorLessThanOrEqualTo(String value) {
+            addCriterion("director <=", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+        public Criteria andDirectorLike(String value) {
+            addCriterion("director like", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
+        public Criteria andDirectorNotLike(String value) {
+            addCriterion("director not like", value, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
+        public Criteria andDirectorIn(List<String> values) {
+            addCriterion("director in", values, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
+        public Criteria andDirectorNotIn(List<String> values) {
+            addCriterion("director not in", values, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
+        public Criteria andDirectorBetween(String value1, String value2) {
+            addCriterion("director between", value1, value2, "director");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
+        public Criteria andDirectorNotBetween(String value1, String value2) {
+            addCriterion("director not between", value1, value2, "director");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateIsNull() {
-            addCriterion("startDate is null");
+        public Criteria andGenreIsNull() {
+            addCriterion("genre is null");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateIsNotNull() {
-            addCriterion("startDate is not null");
+        public Criteria andGenreIsNotNull() {
+            addCriterion("genre is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateEqualTo(Date value) {
-            addCriterionForJDBCDate("startDate =", value, "startDate");
+        public Criteria andGenreEqualTo(String value) {
+            addCriterion("genre =", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("startDate <>", value, "startDate");
+        public Criteria andGenreNotEqualTo(String value) {
+            addCriterion("genre <>", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("startDate >", value, "startDate");
+        public Criteria andGenreGreaterThan(String value) {
+            addCriterion("genre >", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("startDate >=", value, "startDate");
+        public Criteria andGenreGreaterThanOrEqualTo(String value) {
+            addCriterion("genre >=", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateLessThan(Date value) {
-            addCriterionForJDBCDate("startDate <", value, "startDate");
+        public Criteria andGenreLessThan(String value) {
+            addCriterion("genre <", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("startDate <=", value, "startDate");
+        public Criteria andGenreLessThanOrEqualTo(String value) {
+            addCriterion("genre <=", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateIn(List<Date> values) {
-            addCriterionForJDBCDate("startDate in", values, "startDate");
+        public Criteria andGenreLike(String value) {
+            addCriterion("genre like", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("startDate not in", values, "startDate");
+        public Criteria andGenreNotLike(String value) {
+            addCriterion("genre not like", value, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("startDate between", value1, value2, "startDate");
+        public Criteria andGenreIn(List<String> values) {
+            addCriterion("genre in", values, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andStartDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("startDate not between", value1, value2, "startDate");
+        public Criteria andGenreNotIn(List<String> values) {
+            addCriterion("genre not in", values, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateIsNull() {
-            addCriterion("endDate is null");
+        public Criteria andGenreBetween(String value1, String value2) {
+            addCriterion("genre between", value1, value2, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateIsNotNull() {
-            addCriterion("endDate is not null");
+        public Criteria andGenreNotBetween(String value1, String value2) {
+            addCriterion("genre not between", value1, value2, "genre");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateEqualTo(Date value) {
-            addCriterionForJDBCDate("endDate =", value, "endDate");
+        public Criteria andLanguageIsNull() {
+            addCriterion("language is null");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("endDate <>", value, "endDate");
+        public Criteria andLanguageIsNotNull() {
+            addCriterion("language is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("endDate >", value, "endDate");
+        public Criteria andLanguageEqualTo(String value) {
+            addCriterion("language =", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("endDate >=", value, "endDate");
+        public Criteria andLanguageNotEqualTo(String value) {
+            addCriterion("language <>", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateLessThan(Date value) {
-            addCriterionForJDBCDate("endDate <", value, "endDate");
+        public Criteria andLanguageGreaterThan(String value) {
+            addCriterion("language >", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("endDate <=", value, "endDate");
+        public Criteria andLanguageGreaterThanOrEqualTo(String value) {
+            addCriterion("language >=", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateIn(List<Date> values) {
-            addCriterionForJDBCDate("endDate in", values, "endDate");
+        public Criteria andLanguageLessThan(String value) {
+            addCriterion("language <", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("endDate not in", values, "endDate");
+        public Criteria andLanguageLessThanOrEqualTo(String value) {
+            addCriterion("language <=", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("endDate between", value1, value2, "endDate");
+        public Criteria andLanguageLike(String value) {
+            addCriterion("language like", value, "language");
             return (Criteria) this;
         }
 
-        public Criteria andEndDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("endDate not between", value1, value2, "endDate");
+        public Criteria andLanguageNotLike(String value) {
+            addCriterion("language not like", value, "language");
+            return (Criteria) this;
+        }
+
+        public Criteria andLanguageIn(List<String> values) {
+            addCriterion("language in", values, "language");
+            return (Criteria) this;
+        }
+
+        public Criteria andLanguageNotIn(List<String> values) {
+            addCriterion("language not in", values, "language");
+            return (Criteria) this;
+        }
+
+        public Criteria andLanguageBetween(String value1, String value2) {
+            addCriterion("language between", value1, value2, "language");
+            return (Criteria) this;
+        }
+
+        public Criteria andLanguageNotBetween(String value1, String value2) {
+            addCriterion("language not between", value1, value2, "language");
             return (Criteria) this;
         }
     }

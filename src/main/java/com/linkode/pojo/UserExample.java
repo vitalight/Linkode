@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class UsersExample {
+public class UserExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public UsersExample() {
+    public UserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -402,123 +402,123 @@ public class UsersExample {
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberIsNull() {
+        public Criteria andRatingNumberIsNull() {
             addCriterion("ratingNumber is null");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberIsNotNull() {
+        public Criteria andRatingNumberIsNotNull() {
             addCriterion("ratingNumber is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberEqualTo(Integer value) {
-            addCriterion("ratingNumber =", value, "ratingnumber");
+        public Criteria andRatingNumberEqualTo(Integer value) {
+            addCriterion("ratingNumber =", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberNotEqualTo(Integer value) {
-            addCriterion("ratingNumber <>", value, "ratingnumber");
+        public Criteria andRatingNumberNotEqualTo(Integer value) {
+            addCriterion("ratingNumber <>", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberGreaterThan(Integer value) {
-            addCriterion("ratingNumber >", value, "ratingnumber");
+        public Criteria andRatingNumberGreaterThan(Integer value) {
+            addCriterion("ratingNumber >", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ratingNumber >=", value, "ratingnumber");
+        public Criteria andRatingNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ratingNumber >=", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberLessThan(Integer value) {
-            addCriterion("ratingNumber <", value, "ratingnumber");
+        public Criteria andRatingNumberLessThan(Integer value) {
+            addCriterion("ratingNumber <", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberLessThanOrEqualTo(Integer value) {
-            addCriterion("ratingNumber <=", value, "ratingnumber");
+        public Criteria andRatingNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("ratingNumber <=", value, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberIn(List<Integer> values) {
-            addCriterion("ratingNumber in", values, "ratingnumber");
+        public Criteria andRatingNumberIn(List<Integer> values) {
+            addCriterion("ratingNumber in", values, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberNotIn(List<Integer> values) {
-            addCriterion("ratingNumber not in", values, "ratingnumber");
+        public Criteria andRatingNumberNotIn(List<Integer> values) {
+            addCriterion("ratingNumber not in", values, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberBetween(Integer value1, Integer value2) {
-            addCriterion("ratingNumber between", value1, value2, "ratingnumber");
+        public Criteria andRatingNumberBetween(Integer value1, Integer value2) {
+            addCriterion("ratingNumber between", value1, value2, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingnumberNotBetween(Integer value1, Integer value2) {
-            addCriterion("ratingNumber not between", value1, value2, "ratingnumber");
+        public Criteria andRatingNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("ratingNumber not between", value1, value2, "ratingNumber");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalIsNull() {
+        public Criteria andRatingTotalIsNull() {
             addCriterion("ratingTotal is null");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalIsNotNull() {
+        public Criteria andRatingTotalIsNotNull() {
             addCriterion("ratingTotal is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalEqualTo(Integer value) {
-            addCriterion("ratingTotal =", value, "ratingtotal");
+        public Criteria andRatingTotalEqualTo(Integer value) {
+            addCriterion("ratingTotal =", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalNotEqualTo(Integer value) {
-            addCriterion("ratingTotal <>", value, "ratingtotal");
+        public Criteria andRatingTotalNotEqualTo(Integer value) {
+            addCriterion("ratingTotal <>", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalGreaterThan(Integer value) {
-            addCriterion("ratingTotal >", value, "ratingtotal");
+        public Criteria andRatingTotalGreaterThan(Integer value) {
+            addCriterion("ratingTotal >", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ratingTotal >=", value, "ratingtotal");
+        public Criteria andRatingTotalGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ratingTotal >=", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalLessThan(Integer value) {
-            addCriterion("ratingTotal <", value, "ratingtotal");
+        public Criteria andRatingTotalLessThan(Integer value) {
+            addCriterion("ratingTotal <", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalLessThanOrEqualTo(Integer value) {
-            addCriterion("ratingTotal <=", value, "ratingtotal");
+        public Criteria andRatingTotalLessThanOrEqualTo(Integer value) {
+            addCriterion("ratingTotal <=", value, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalIn(List<Integer> values) {
-            addCriterion("ratingTotal in", values, "ratingtotal");
+        public Criteria andRatingTotalIn(List<Integer> values) {
+            addCriterion("ratingTotal in", values, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalNotIn(List<Integer> values) {
-            addCriterion("ratingTotal not in", values, "ratingtotal");
+        public Criteria andRatingTotalNotIn(List<Integer> values) {
+            addCriterion("ratingTotal not in", values, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalBetween(Integer value1, Integer value2) {
-            addCriterion("ratingTotal between", value1, value2, "ratingtotal");
+        public Criteria andRatingTotalBetween(Integer value1, Integer value2) {
+            addCriterion("ratingTotal between", value1, value2, "ratingTotal");
             return (Criteria) this;
         }
 
-        public Criteria andRatingtotalNotBetween(Integer value1, Integer value2) {
-            addCriterion("ratingTotal not between", value1, value2, "ratingtotal");
+        public Criteria andRatingTotalNotBetween(Integer value1, Integer value2) {
+            addCriterion("ratingTotal not between", value1, value2, "ratingTotal");
             return (Criteria) this;
         }
 
