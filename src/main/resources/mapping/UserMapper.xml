@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.linkode.pojo.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="password" jdbcType="CHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="ratingNumber" jdbcType="INTEGER" property="ratingNumber" />
     <result column="ratingTotal" jdbcType="INTEGER" property="ratingTotal" />
@@ -112,7 +112,7 @@
       email, ratingNumber, ratingTotal, 
       sex, birthday, role, money
       )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, 
       #{email,jdbcType=VARCHAR}, #{ratingNumber,jdbcType=INTEGER}, #{ratingTotal,jdbcType=INTEGER}, 
       #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{role,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}
       )
@@ -158,7 +158,7 @@
         #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+        #{password,jdbcType=CHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
         username = #{record.username,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=CHAR},
       </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
@@ -231,7 +231,7 @@
     update user
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=CHAR},
       email = #{record.email,jdbcType=VARCHAR},
       ratingNumber = #{record.ratingNumber,jdbcType=INTEGER},
       ratingTotal = #{record.ratingTotal,jdbcType=INTEGER},
@@ -250,7 +250,7 @@
         username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=CHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -279,7 +279,7 @@
   <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.User">
     update user
     set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
       email = #{email,jdbcType=VARCHAR},
       ratingNumber = #{ratingNumber,jdbcType=INTEGER},
       ratingTotal = #{ratingTotal,jdbcType=INTEGER},
