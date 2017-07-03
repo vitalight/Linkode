@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<!--
+<%--
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -18,35 +18,42 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <shiro:authenticated>
-                    <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
-                </shiro:authenticated>
-                <shiro:notAuthenticated>
-                    <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login">Log in</a></li>
-                </shiro:notAuthenticated>
-            </ul>
         </div>
     </div>
 </nav> 
- -->
-<nav class="white-nav navbar-fixed-top">
+ --%>
+ 	<% 
+ 	String headType = (String)request.getAttribute("headType");
+	String crud="", home="", project="", login="", chose="nav-btn-chose";
+	if (headType == null) {
+	} else if (headType.equals("crud")) {
+		crud = "nav-btn-chose";
+	} else if (headType.equals("home")) {
+		home = "nav-btn-chose";
+	} else if (headType.equals("project")) {
+		project = "nav-btn-chose";
+	} else {
+		login = "nav-btn-chose";
+	}
+ 	%>
+	<nav class="white-nav navbar-fixed-top">
 		<ul>
 			<li><a class="logo-btn" href=""><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
-			<li><a class="nav-btn" href="">CRUD</a></li>
-			<li><a class="nav-btn" href="${pageContext.request.contextPath}/explore">Home</a></li>
-			<li><a class="nav-btn" href="">Project</a></li>
+			<li><a class="nav-btn <%=crud %>" href="">增删改查</a></li>
+			<li><a class="nav-btn <%=home %>" href="">主页</a></li>
+			<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project/explore">项目众包</a></li>
 			<shiro:authenticated>
-				<li><a class="nav-btn nav-btn-chose" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/logout">登出</a></li>
 			</shiro:authenticated>
 			<shiro:notAuthenticated>
-				<li><a class="nav-btn nav-btn-chose" href="${pageContext.request.contextPath}/login">Login</a></li>
+				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/login">登录</a></li>
 			</shiro:notAuthenticated>
 		</ul>
 		<form>
 			<input type="text" class="form-control search" placeholder="Search..."/>
 		</form>
-		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
-		<a class="nav-btn user-btn" href="">Hi, Admin<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+		<c:if test="${!empty LOGIN_USER_ID}">
+			<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
+			<a class="nav-btn user-btn" href="">哈喽, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+		</c:if>
 	</nav>

@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if(session.getAttribute("login_user") != null){
 			return true;
 		}
-		
+		request.setAttribute("errormsg","请先登录。");
 		response.sendRedirect(request.getContextPath()+"/login");
 		
 		return false;

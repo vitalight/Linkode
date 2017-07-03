@@ -1,6 +1,7 @@
 package com.linkode.controller;
 
 import com.linkode.exception.CustomException;
+import com.linkode.pojo.User;
 import com.linkode.pojo.ViewModel.LoginViewModel;
 import com.linkode.service.UserService;
 import com.linkode.util.ControllerUtil;
@@ -15,15 +16,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-
+/**
+ * @author Vital
+ */
 @Controller
 public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-
+    
+    @GetMapping("/project/explore")
+    // for test
+    public String test() {
+    	return View("/project/explore");
+    }
+    
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model, String msg){
+    	if (msg!=null) {
+    		model.addAttribute("errormsg","请先登录。");
+    	}
         return View("login");
     }
 
@@ -32,7 +44,6 @@ public class AccountController extends BaseController {
         if(!bindingResult.hasErrors()){
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken usernamePasswordTokentoken = new UsernamePasswordToken(loginViewModel.getEmail().trim().toLowerCase(),loginViewModel.getPassword());
-            usernamePasswordTokentoken.setRememberMe(loginViewModel.getRemember());
             if(subject.isAuthenticated()){
                 subject.logout();
             }
@@ -40,9 +51,12 @@ public class AccountController extends BaseController {
                 subject.login(usernamePasswordTokentoken);
 
                 //登录成功，保存用户信息
-                Integer id = userService.findByEmail(loginViewModel.getEmail()).getId();
+                User user = userService.findByEmail(loginViewModel.getEmail());
+                Integer id = user.getId();
+                String username = user.getUsername();
                 subject.getSession().setAttribute("LOGIN_USER_ID",id);
-                return RedirectTo("/movie/list");
+                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
+                return RedirectTo("/project/explore");
             }catch (Exception e){
                 model.addAttribute("errormsg","用户名或密码错误。");
             }
@@ -61,5 +75,46 @@ public class AccountController extends BaseController {
             subject.logout();
         }
         return RedirectTo("/login");
+    }
+    
+    @GetMapping("/register")
+    public String register() {
+    	return View("register");
+    }
+    
+    @PostMapping("/register")
+    public String registerSubmit(Model model, @Valid LoginViewModel loginViewModel, BindingResult bindingResult) {
+    	if(!bindingResult.hasErrors()){
+    		if (userService.findByEmail(loginViewModel.getEmail()) == null) {
+	    		//邮箱未被注册，保存注册信息
+    			System.out.println("<point>1");
+	    		userService.insert(loginViewModel);
+	    		Subject subject = SecurityUtils.getSubject();
+	            UsernamePasswordToken usernamePasswordTokentoken = new UsernamePasswordToken(loginViewModel.getEmail().trim().toLowerCase(),loginViewModel.getPassword());
+	            if(subject.isAuthenticated()){
+	                subject.logout();
+	            }
+	    		try {
+	    			System.out.println("<point>2");
+	                subject.login(usernamePasswordTokentoken);
+	                User user = userService.findByEmail(loginViewModel.getEmail());
+	                Integer id = user.getId();
+	                String username = user.getUsername();
+	    			System.out.println("<point>3");
+	                subject.getSession().setAttribute("LOGIN_USER_ID",id);
+	                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
+	                return RedirectTo("/project/explore");
+	            }catch (Exception e){
+	                model.addAttribute("errormsg","注册意外错误。");
+	            }
+	    	}
+	    	else {
+	    		model.addAttribute("errormsg", "此邮箱已被注册。");
+	    	}
+    	}
+    	else {
+    		model.addAttribute("errors", ControllerUtil.ObjectErrorsToMap(bindingResult.getAllErrors()));
+    	}
+    	return View("register", model, loginViewModel);
     }
 }

@@ -10,7 +10,6 @@
 	<meta HTTP-EQUIV="Page-Enter" CONTENT="revealtrans(duration=6.0, transition=23)">
 	<meta HTTP-EQUIV="Page-Exit" CONTENT="revealtrans(duration=6.0, transition=23)">
 	<title>Linkode - ${title}</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/styles.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/share.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">

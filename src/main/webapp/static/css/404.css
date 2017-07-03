@@ -1,0 +1,22 @@
+body {
+	background-color:rgb(220,236,249);
+	background-image:url(../img/404.jpg);
+	background-repeat:no-repeat;
+	background-size:35em;
+	background-attachment:fixed;
+	background-position:center 30%;
+}
+.middle {
+	font-size:2em;
+	font-family:"STXiHei";
+	font-weight:700;
+	color:rgb(79,90,120);
+
+	position: absolute;
+	top: 65%;
+	left: 50%;
+	height: 30%;
+	width: 50%;
+	margin: 0 0 0 -25%;
+	text-align:center;
+}
