@@ -1,7 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% request.setAttribute("title","登录"); %>
-<%@ include  file="./modules/web-header.jsp"%>
-<%@ include  file="./modules/header.jsp"%>
+<% request.setAttribute("headType","login"); %>
+<%@ include file="./modules/web-header.jsp"%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
+</head>
+<body>
+<%@ include file="./modules/header.jsp"%>
 <!--
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
 	<h1>Log in.</h1>
@@ -60,7 +64,7 @@
 					<p class="show-error">${errors.password }</p>
 				</c:when>
 				<c:otherwise>
-					<p>Buy any kinds of books you like.</p>
+					<p>Enjoy the world of the art.</p>
 				</c:otherwise>
 			</c:choose>
 
@@ -72,7 +76,7 @@
 				<input type="submit" class="blue-green-bottom" value="Log in" />
 			</form>
 			<p>
-				Don't have a login? <a href="	" class="link">Register</a>
+				Don't have a login? <a href="${pageContext.request.contextPath}/register" class="link">Register</a>
 			</p>
 		</div>
 	</div>

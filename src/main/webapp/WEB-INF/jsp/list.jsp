@@ -2,6 +2,8 @@
 <% request.setAttribute("title","电影"); %>
 <%@ include  file="./modules/web-header.jsp"%>
 <%@ include  file="./modules/header.jsp"%>
+</head>
+<body>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
     <h1>List</h1>
     <a href="${pageContext.request.contextPath}/movie/create">Creat New</a>
