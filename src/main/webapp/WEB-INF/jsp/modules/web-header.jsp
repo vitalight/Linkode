@@ -14,5 +14,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/share.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
+	<style>body {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}</style>
 </head>
 <body>
