@@ -2,8 +2,9 @@
 <% request.setAttribute("title","登录"); %>
 <%@ include  file="./modules/web-header.jsp"%>
 <%@ include  file="./modules/header.jsp"%>
+<!--
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
-    <h1>Log in.</h1>
+	<h1>Log in.</h1>
     <h4>Use a local account to log in.</h4>
     <hr>
     <div class="row">
@@ -42,6 +43,40 @@
     <a href="${pageContext.request.contextPath}/register">Register as a new user?</a><br>
     <a href="${pageContext.request.contextPath}/forget">Forgot your password?</a>
     <hr> &copy;2017 - Linkode
+    -->
+    <div class="wrapper">
+		<img src="${pageContext.request.contextPath}/static/img/login-dec.gif" class="login-pic" />
+		<div class="login-form">
+			<br />
+			<h1>Login now</h1>
+			<c:choose>
+				<c:when test="${!empty errormsg }">
+					<p class="show-error">${errormsg }</p>
+				</c:when>
+				<c:when test="${!empty errors.email }">
+					<p class="show-error">${errors.email }</p>
+				</c:when>
+				<c:when test="${!empty errors.password }">
+					<p class="show-error">${errors.password }</p>
+				</c:when>
+				<c:otherwise>
+					<p>Buy any kinds of books you like.</p>
+				</c:otherwise>
+			</c:choose>
+
+			<form id="login-form" action="${pageContext.request.contextPath}/login" method="post">
+				<input placeholder="Email" class="login-input account"
+					id="email" name="email" /><br />
+				<input placeholder="Password" type="password"
+					class="login-input password" id="password" name="password" /><br /><br/>
+				<input type="submit" class="blue-green-bottom" value="Log in" />
+			</form>
+			<p>
+				Don't have a login? <a href="	" class="link">Register</a>
+			</p>
+		</div>
+	</div>
+    
 </div>
 <%@ include  file="./modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>

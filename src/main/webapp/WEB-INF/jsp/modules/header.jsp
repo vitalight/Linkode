@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<!--
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -28,4 +29,24 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> 
+ -->
+<nav class="white-nav navbar-fixed-top">
+		<ul>
+			<li><a class="logo-btn" href=""><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
+			<li><a class="nav-btn" href="">CRUD</a></li>
+			<li><a class="nav-btn" href="${pageContext.request.contextPath}/explore">Home</a></li>
+			<li><a class="nav-btn" href="">Project</a></li>
+			<shiro:authenticated>
+				<li><a class="nav-btn nav-btn-chose" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+			</shiro:authenticated>
+			<shiro:notAuthenticated>
+				<li><a class="nav-btn nav-btn-chose" href="${pageContext.request.contextPath}/login">Login</a></li>
+			</shiro:notAuthenticated>
+		</ul>
+		<form>
+			<input type="text" class="form-control search" placeholder="Search..."/>
+		</form>
+		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
+		<a class="nav-btn user-btn" href="">Hi, Admin<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+	</nav>

@@ -1,0 +1,58 @@
+/* type chose */
+.type-list {
+	margin:7em auto 1em;
+	width:22em;
+	font-size:0.9em;
+}
+.type-btn {
+	padding:0.5em;
+	margin:1em;
+	color:var(--Ldgrey);
+	border-radius:0.3em;
+	display:inline-block;
+}
+.type-btn:hover {
+	background-color:var(--Llgrey);
+}
+.type-chose {
+	background-color:var(--Lgreen);
+	color:white;
+}
+.type-chose:hover {
+	background-color:var(--Ldgreen);
+	color:white;
+}
+hr.type-hr {
+	background-color:var(--Ldgrey);
+}
+
+/* item display */
+.display {
+	margin:0 12.7em;
+}
+.display-card {
+	background-color:white;
+	border:rgb(231,233,235) 0.05em solid;
+	width:15em;
+	padding:0.9em;
+	margin:0.8em 0.7em;
+	display:inline-block;
+}
+.display-card:hover {
+	cursor:pointer;
+	background-color:rgb(248,249,250);
+}
+.display-img {
+	height:11em;
+	width:13em;
+	margin-bottom:0.8em;
+}
+.card-name {
+	margin-bottom:0em;
+	color:var(--Lblue);
+	font-size:1.05em;
+}
+.card-info {
+	color:var(--Ldgrey);
+	margin-bottom:0em;
+}
