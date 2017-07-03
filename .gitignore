@@ -4,10 +4,10 @@
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
 target
+jdbc.properties
 
 ### Eclipse template
 
