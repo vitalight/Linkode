@@ -1,0 +1,14 @@
+package com.linkode.service;
+
+import com.linkode.pojo.Project;
+import com.linkode.exception.CustomException;
+import com.linkode.util.DataPage;
+
+
+public interface ProjectService {
+    void insert(Project project);
+    void deleteByPrimaryKey(Integer id);
+    void updateByPrimaryKey(Integer id, Project project);
+    DataPage<Project> selectPage(Integer pagenum, Integer pageSize, Integer indexCount);
+    Project findByPrimaryKey(Integer id) throws CustomException;
+}

@@ -18,5 +18,6 @@
 
     <bean id="movieService" class="com.linkode.service.impl.MovieServiceImpl"/>
     <bean id="userService" class="com.linkode.service.impl.UserServiceImpl"/>
+    <bean id="projectService" class="com.linkode.service.impl.ProjectServiceImpl"/>
 
 </beans>

@@ -25,6 +25,7 @@ public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
     
+    /*
     @GetMapping("/project/explore")
     // for test
     public String test(Model model, Integer type) {
@@ -35,6 +36,7 @@ public class AccountController extends BaseController {
     	}
     	return View("/project/explore");
     }
+    */
     
     @GetMapping("/login")
     public String login(Model model, String msg){
