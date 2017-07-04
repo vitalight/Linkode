@@ -128,4 +128,38 @@ public class ProjectController extends BaseController {
         projectService.updateByPrimaryKey(id, project);
         return RedirectTo("/project/explore");
     }
+
+    @GetMapping("/myProject")
+    public String myProject(Model model, Integer p) {
+        p = p == null ? 1 : (p < 1 ? 1 : p);
+        DataPage<Project> page = projectService.selectPage(p, 10, 6);
+        return View("myProject", model, page);
+    }
+
+    @GetMapping("/myContract")
+    public String myContract(Model model, Integer p) {
+        p = p == null ? 1 : (p < 1 ? 1 : p);
+        DataPage<Project> page = projectService.selectPage(p, 10, 6);
+        return View("myContract", model, page);
+    }
+
+    @GetMapping("/submit/{id}")
+    public String submit(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH);
+        project.setEndDate(sdf.parse(date));
+        project.setStatus("unconfirmed");
+        projectService.updateByPrimaryKey(id, project);
+        return RedirectTo("/project/myContract");
+    }
+
+    @GetMapping("/confirm/{id}")
+    public String comfirm(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+        project.setStatus("finished");
+        projectService.updateByPrimaryKey(id, project);
+        return RedirectTo("/project/myProject");
+    }
 }
