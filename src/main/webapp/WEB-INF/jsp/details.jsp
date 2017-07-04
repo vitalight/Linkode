@@ -26,7 +26,7 @@
             <a href="${pageContext.request.contextPath}/project/contract/${model.id}">Contract</a>
         </c:when>
     </c:choose>
-    <a href="${pageContext.request.contextPath}/project/explore">Back to List</a>
+    | <a href="${pageContext.request.contextPath}/project/explore">Back to List</a>
     <hr> &copy;2017 - Linkode
 </div>
 <%@ include  file="./modules/javascript.jsp"%>
