@@ -19,7 +19,8 @@
     
     <table schema="linkode" tableName="movie">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<!-- identity="true"确保成功主键自增 -->
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     
   </context>

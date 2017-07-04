@@ -122,21 +122,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.linkode.pojo.Post">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post (id, type, title, 
-      content)
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
+    insert into post (type, title, content
+      )
+    values (#{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.Post">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into post
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
       <if test="type != null">
         type,
       </if>
@@ -148,7 +147,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>

@@ -100,21 +100,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.linkode.pojo.Chatlog">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into chatlog (id, senderId, receiverId, 
-      time, content)
-    values (#{id,jdbcType=INTEGER}, #{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, 
-      #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR})
+    insert into chatlog (senderId, receiverId, time, 
+      content)
+    values (#{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.Chatlog">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into chatlog
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
       <if test="senderId != null">
         senderId,
       </if>
@@ -129,7 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
       <if test="senderId != null">
         #{senderId,jdbcType=INTEGER},
       </if>

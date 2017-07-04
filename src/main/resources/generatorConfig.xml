@@ -18,39 +18,39 @@
     
     <table schema="linkode" tableName="ad">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="chatlog">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="portfolio">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="portfolio_cmt">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="post">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="post_cmt">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="project">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="user">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="movie">
     	<property name="useActualColumnNames" value="true" />
-    	<generatedKey column="id" sqlStatement="Mysql"/>
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     
   </context>

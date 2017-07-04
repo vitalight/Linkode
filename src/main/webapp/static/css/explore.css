@@ -1,8 +1,9 @@
 /* type chose */
 .type-list {
 	margin:7em auto 1em;
-	width:22em;
+	width:32em;
 	font-size:0.9em;
+	text-align:center;
 }
 .type-btn {
 	padding:0.5em;
@@ -22,15 +23,13 @@
 	background-color:var(--Ldgreen);
 	color:white;
 }
-hr.type-hr {
-	background-color:var(--Ldgrey);
-}
 
 /* item display */
 .display {
-	margin:0 12.7em;
+	width:60em;
+	margin:0 auto;
 }
-.display-card {
+.display-card, .display-bar {
 	background-color:white;
 	border:rgb(231,233,235) 0.05em solid;
 	width:15em;
@@ -42,7 +41,7 @@ hr.type-hr {
 	cursor:pointer;
 	background-color:rgb(248,249,250);
 }
-.display-img {
+.display-img, .display-bar-img{
 	height:11em;
 	width:13em;
 	margin-bottom:0.8em;
@@ -55,4 +54,83 @@ hr.type-hr {
 .card-info {
 	color:var(--Ldgrey);
 	margin-bottom:0em;
+}
+.display-bar {
+	margin:0 auto 1.5em;
+	width:60em;
+}
+.display-bar-img {
+	padding:0;
+	margin:0;
+	margin-left:-1em;
+	margin-right:-1em;
+	
+	height:12em;
+	width:14em;
+}
+.type-tag {
+	display:inline-block;
+	color:white;
+	background-color:var(--Lblue);
+	padding:0.4em;
+	font-size:0.5em;
+	border-radius:0.3em;
+	margin-top:-0.1em;
+	margin-left:1em;
+	vertical-align:middle;
+}
+.bar-text {
+	color:black;
+}
+.bar-text:hover {
+	color:var(--Ldwhite);
+}
+.ran-0 {background-color:var(--Lred)}
+.ran-1 {background-color:var(--Llgreen)}
+.ran-2 {}
+h3 {
+	margin-top:0;
+}
+.no-padding {
+	padding:0;
+}
+.bar-info {
+	margin-top:1.2em;
+}
+.bar-content {
+	margin-top:3.5em;	
+}
+.bar-avatar {
+	padding:0;
+	width:2em;
+	height:2em;
+	border-radius:50%;
+	overflow:hidden;
+	margin-top:-0.2em;
+}
+.author {
+	padding:0;
+}
+.contract-btn {
+	background-color:var(--Lblue);
+	border:none;
+	border-radius:0.3em;
+	color:white;
+	font-size:0.9em;
+	padding:0.4em 0;
+	margin-top:-0.2em;
+}
+.contract-btn:hover {
+	background-color:var(--Ldblue);
+}
+.red-bg{
+	background-color:var(--Lred);
+}
+.red-bg:hover {
+	background-color:var(--Ldred);
+}
+hr {
+	margin:2em;
+	border:black 1px solid;
+	color:black;
 }

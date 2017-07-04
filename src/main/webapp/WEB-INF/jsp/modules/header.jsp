@@ -24,12 +24,12 @@
  --%>
  	<% 
  	String headType = (String)request.getAttribute("headType");
-	String crud="", home="", project="", login="", chose="nav-btn-chose";
+	String crud="", portfolio="", project="", login="";
 	if (headType == null) {
 	} else if (headType.equals("crud")) {
 		crud = "nav-btn-chose";
-	} else if (headType.equals("home")) {
-		home = "nav-btn-chose";
+	} else if (headType.equals("portfolio")) {
+		portfolio = "nav-btn-chose";
 	} else if (headType.equals("project")) {
 		project = "nav-btn-chose";
 	} else {
@@ -39,8 +39,8 @@
 	<nav class="white-nav navbar-fixed-top">
 		<ul>
 			<li><a class="logo-btn" href=""><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
-			<li><a class="nav-btn <%=crud %>" href="">增删改查</a></li>
-			<li><a class="nav-btn <%=home %>" href="">主页</a></li>
+			<li><a class="nav-btn <%=crud %>">管理员界面</a></li>
+			<li><a class="nav-btn <%=portfolio %>">作品交流</a></li>
 			<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project/explore">项目众包</a></li>
 			<shiro:authenticated>
 				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/logout">登出</a></li>
@@ -49,11 +49,8 @@
 				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/login">登录</a></li>
 			</shiro:notAuthenticated>
 		</ul>
-		<form>
-			<input type="text" class="form-control search" placeholder="Search..."/>
-		</form>
 		<c:if test="${!empty LOGIN_USER_ID}">
 			<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
-			<a class="nav-btn user-btn" href="">哈喽, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+			<a class="nav-btn user-btn">哈喽, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
 		</c:if>
 	</nav>

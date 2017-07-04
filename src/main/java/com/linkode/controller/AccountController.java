@@ -27,7 +27,12 @@ public class AccountController extends BaseController {
     
     @GetMapping("/project/explore")
     // for test
-    public String test() {
+    public String test(Model model, Integer type) {
+    	if (type == null){
+    		return View("/project/explore");
+    	} else if (type == 1) {
+    		return View("/project/myProject");
+    	}
     	return View("/project/explore");
     }
     

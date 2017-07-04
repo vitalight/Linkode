@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","项目浏览"); %>
+<% request.setAttribute("title","我发布的项目"); %>
 <% request.setAttribute("headType","project"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
@@ -23,16 +23,14 @@
 	</div>
 	
 	<div class="display">
-		<%
-		String[] strs = {"摄影","平面", "音乐"};
-		for (int i=0;i<12;i++) { %>
+		
 		<div class="display-bar">
 			<div class="col-sm-3">
-				<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-<%=i%10+1%>.png"/>
+				<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-5.png"/>
 			</div>
 			<div class="col-sm-9">
 				<a class="bar-text" href="">
-					<h3><%=strs[i%3] %>师招募<span class="type-tag ran-<%=i%3%>"><%=strs[i%3] %></span></h3>
+					<h3>摄影师招募<span class="type-tag ran-0">摄影</span></h3>
 					<p class="bar-info">
 						<span class="col-sm-4 no-padding"><strong>酬金：</strong>￥1000</span>
 						<span class="col-sm-4 no-padding"><strong>开始日期：</strong>2017年6月1日 </span>
@@ -45,15 +43,13 @@
 						他不仅是演员、剧作家，还是宫内大臣剧团的合伙人之一...
 					</p>
 				</a>
-					<div class="col-sm-10 author">
-						<img class="bar-avatar" 
-							src="${pageContext.request.contextPath}/static/img/avatar-google.jpg"/>
-						Google
-					</div>
-					<button class="col-sm-2 contract-btn">承包</button>
+					<div class="col-sm-7"></div>
+					<button class="col-sm-2 contract-btn">修改项目</button>
+					<button class="col-sm-2 col-md-offset-1 contract-btn red-bg">删除项目</button>
 			</div>
+			<hr />
+			hello
 		</div>
-		<% } %>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
