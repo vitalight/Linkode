@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% request.setAttribute("title","电影"); %>
+<% request.setAttribute("headType","project"); %>
 <%@ include  file="./modules/web-header.jsp"%>
 <%@ include  file="./modules/header.jsp"%>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
@@ -23,7 +24,15 @@
                     <td>${project.title}</td>
                     <td>${project.requirement}</td>
                     <td>${project.money}</td>
-                    <th><a href="${pageContext.request.contextPath}/project/details/${project.id}">Check</a> | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
+                    <th><a href="${pageContext.request.contextPath}/project/details/${project.id}">Check</a>
+                        <c:choose>
+                        <c:when test="${LOGIN_USER_ID==project.posterId}">
+                        | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
+                    </c:when>
+                    <c:otherwise>
+                        | <a href="${pageContext.request.contextPath}/project/contract/${project.id}">Contract</a></th>
+                    </c:otherwise>
+                    </c:choose>
                 </tr>
             </c:if>
         </c:forEach>
