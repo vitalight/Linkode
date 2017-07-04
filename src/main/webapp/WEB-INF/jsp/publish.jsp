@@ -2,6 +2,19 @@
 <% request.setAttribute("title","发布项目"); %>
 <%@ include  file="./modules/web-header.jsp"%>
 <%@ include  file="./modules/header.jsp"%>
+<script type="text/javascript">
+    function checkNum(input) {
+        var re = /^[1-9]+[0-9]*]*$/
+        var number = document.getElementById(input).value;
+        if (!re.test(number)) {
+            $("#msg").text("输入不合法！");
+            return false;
+        } else {
+            $("#msg").text("");
+            return true;
+        }
+    }
+</script>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
     <h1>Publish</h1>
     <h4>Project</h4>
@@ -11,7 +24,7 @@
             <div class="form-group">
                 <label for="Title" class="col-sm-2 control-label">Title</label>
                 <div>
-                    <input type="hidden" id="postId" name="postId" value="${LOGIN_USER_ID}">
+                    <input type="hidden" id="posterId" name="posterId" value="${LOGIN_USER_ID}">
                 </div>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="title" name="title" value="${model.title}" placeholder="Title" required>
@@ -43,8 +56,9 @@
             <div class="form-group">
                 <label for="Money" class="col-sm-2 control-label">Money</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="money" name="money" value="${model.money}" placeholder="Money" required>
+                    <input type="text" class="form-control" id="money" name="money" value="${model.money}" onkeyup="checkNum(this.id)" placeholder="Money" required>
                     <span class="text-danger">${errors.money}</span>
+                    <label id="msg" style="color:red;">&nbsp;</label>
                 </div>
             </div>
             <div class="form-group">
