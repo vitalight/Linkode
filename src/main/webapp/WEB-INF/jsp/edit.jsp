@@ -4,11 +4,13 @@
 <%@ include  file="./modules/header.jsp"%>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
     <h1>Edit</h1>
-    <h4>Movie</h4>
+    <h4>Project</h4>
     <hr>
     <div class="row">
-        <form id="movie-edit-form" class="form-horizontal col-md-6" action="${pageContext.request.contextPath}/movie/update" method="post">
-            <input type="hidden" name="id" value="${model.id}">
+        <form id="movie-edit-form" class="form-horizontal col-md-6" action="${pageContext.request.contextPath}/project/edit" method="post">
+            <input type="hidden" id="id" name="id" value="${model.id}">
+            <input type="hidden" id="posterId" name="posterId" value="${model.posterId}">
+            <input type="hidden" id="status" name="status" value="${model.status}">
             <div class="form-group">
                 <label for="Title" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
@@ -17,24 +19,31 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="Director" class="col-sm-2 control-label">Director</label>
+                <label for="Requirement" class="col-sm-2 control-label">Requirement</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="director" name="director" value="${model.director}" placeholder="Director">
-                    <span class="text-danger">${errors.director}</span>
+                    <input type="text" class="form-control" id="requirement" name="requirement" value="${model.requirement}" placeholder="Requirement">
+                    <span class="text-danger">${errors.requirement}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="Genre" class="col-sm-2 control-label">Genre</label>
+                <label for="Type" class="col-sm-2 control-label">Type</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="genre" name="genre" value="${model.genre}" placeholder="Genre">
-                    <span class="text-danger">${errors.genre}</span>
+                    <input type="text" class="form-control" id="type" name="type" value="${model.type}" placeholder="Type">
+                    <span class="text-danger">${errors.type}</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="Language" class="col-sm-2 control-label">Language</label>
+                <label for="endDate" class="col-sm-2 control-label">End Date</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="language" name="language" value="${model.language}" placeholder="Language">
-                    <span class="text-danger">${errors.language}</span>
+                    <input type="date" class="form-control" id="time" name="time" value="${model.endDate}">
+                    <span class="text-danger">${errors.endDate}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Money" class="col-sm-2 control-label">Money</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="money" name="money" value="${model.money}" placeholder="Money">
+                    <span class="text-danger">${errors.money}</span>
                 </div>
             </div>
             <div class="form-group">

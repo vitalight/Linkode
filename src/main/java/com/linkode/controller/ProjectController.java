@@ -57,10 +57,7 @@ public class ProjectController extends BaseController {
             }
         }
         if(!bindingResult.hasErrors()) {
-            //Subject subject = SecurityUtils.getSubject();
-            //String posterId = (String)subject.getSession().getAttribute("LOGIN_USER_ID");
-            System.out.println("test");
-            String pid = req.getParameter("postId");
+            String pid = req.getParameter("posterId");
             String date = req.getParameter("time");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
             java.util.Date endDate = sdf.parse(date);
@@ -68,11 +65,9 @@ public class ProjectController extends BaseController {
             project.setPosterId(postId);
             project.setEndDate(endDate);
             project.setStatus("uncontracted");
-            //System.out.println(posterId);
             projectService.insert(project);
             return RedirectTo("/project/explore");
         } else {
-            System.out.println("error");
             model.addAttribute("errors", ControllerUtil.ObjectErrorsToMap(bindingResult.getAllErrors()));
         }
         return RedirectTo("/project/explore");
@@ -95,5 +90,42 @@ public class ProjectController extends BaseController {
     public String check(Model model, @PathVariable("id") Integer id) throws CustomException {
         Project project = projectService.findByPrimaryKey(id);
         return View("details", model, project);
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable("id") Integer id) throws CustomException {
+        Project project = projectService.findByPrimaryKey(id);
+        return View("edit", model, project);
+    }
+
+    @PostMapping("/edit")
+    public String update(Model model, HttpServletRequest req, @Validated Project project, BindingResult bindingResult) throws CustomException, ParseException {
+        if (!bindingResult.hasErrors()) {
+            String date = req.getParameter("time");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date endDate = sdf.parse(date);
+            project.setEndDate(endDate);
+            projectService.updateByPrimaryKey(project.getId(), project);
+            return RedirectTo("/project/explore");
+        } else {
+            model.addAttribute("errors", ControllerUtil.ObjectErrorsToMap(bindingResult.getAllErrors()));
+        }
+
+        return View("edit", model, project);
+    }
+
+    @GetMapping("/contract/{id}")
+    public String contract(Model model, HttpServletRequest req, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Subject subject = SecurityUtils.getSubject();
+        Integer uid = (Integer) subject.getSession().getAttribute("LOGIN_USER_ID");
+        Project project = projectService.findByPrimaryKey(id);
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH);
+        project.setStartDate(sdf.parse(date));
+        project.setContractorId(uid);
+        project.setStatus("unfinished");
+        projectService.updateByPrimaryKey(id, project);
+        return RedirectTo("/project/explore");
     }
 }

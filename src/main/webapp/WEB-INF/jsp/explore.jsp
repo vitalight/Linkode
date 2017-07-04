@@ -16,14 +16,16 @@
         </thead>
         <tbody>
         <c:forEach items="${model.data}" var="project">
-            <tr>
-                <td>${project.id}</td>
-                <td>${project.posterId}</td>
-                <td>${project.title}</td>
-                <td>${project.requirement}</td>
-                <td>${project.money}</td>
-                <th><a href="${pageContext.request.contextPath}/project/details/${project.id}">Check</a> | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
-            </tr>
+            <c:if test="${project.status=='uncontracted' }">
+                <tr>
+                    <td>${project.id}</td>
+                    <td>${project.posterId}</td>
+                    <td>${project.title}</td>
+                    <td>${project.requirement}</td>
+                    <td>${project.money}</td>
+                    <th><a href="${pageContext.request.contextPath}/project/details/${project.id}">Check</a> | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
+                </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
