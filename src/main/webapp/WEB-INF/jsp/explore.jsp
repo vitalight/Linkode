@@ -9,7 +9,7 @@
     <table class="table table-hover">
         <thead>
         <th>Id</th>
-        <th>PosterID</th>
+        <th>Poster</th>
         <th>Title</th>
         <th>Requirement</th>
         <th>Money</th>
@@ -20,17 +20,17 @@
             <c:if test="${project.status=='uncontracted' }">
                 <tr>
                     <td>${project.id}</td>
-                    <td>${project.posterId}</td>
+                    <td>${project.username}</td>
                     <td>${project.title}</td>
                     <td>${project.requirement}</td>
                     <td>${project.money}</td>
                     <th><a href="${pageContext.request.contextPath}/project/details/${project.id}">Check</a>
-                        <c:choose>
-                        <c:when test="${LOGIN_USER_ID==project.posterId}">
-                        | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
+                    <c:choose>
+                    <c:when test="${LOGIN_USER_ID==project.posterId}">
+                     | <a href="${pageContext.request.contextPath}/project/delete/${project.id}">Delete</a></th>
                     </c:when>
                     <c:otherwise>
-                        | <a href="${pageContext.request.contextPath}/project/contract/${project.id}">Contract</a></th>
+                     | <a href="${pageContext.request.contextPath}/project/contract/${project.id}">Contract</a></th>
                     </c:otherwise>
                     </c:choose>
                 </tr>

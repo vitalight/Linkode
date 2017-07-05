@@ -1,11 +1,13 @@
 package com.linkode.controller;
 
 import java.text.ParseException;
+import com.linkode.pojo.ViewModel.ProjectViewModel;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.service.ProjectService;
+import com.linkode.service.UserService;
 import com.linkode.util.ControllerUtil;
 import com.linkode.util.DataPage;
 import com.sun.tools.internal.ws.processor.model.Request;
@@ -33,11 +35,35 @@ public class ProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/explore")
     public String explore(Model model, Integer p) {
         p = p == null ? 1 : (p < 1 ? 1 : p);
-        DataPage<Project> page = projectService.selectPage(p, 10, 6);
+        DataPage<ProjectViewModel> page = projectService.selectPVMPage(p, 10, 6);
+        /*for (int i = 0; i < pl.size(); i++) {
+        	System.out.println("project "+i+": "+pl.get(i).getTitle());
+        }*/
+        /*
+        for (int i = 0; i < pl.size(); i++) {
+        	ProjectViewModel temp = new ProjectViewModel();
+        	Project proj = pl.get(i);
+        	temp.setId(proj.getId());
+        	temp.setPosterId(proj.getPosterId());
+        	temp.setMoney(proj.getMoney());
+        	temp.setTitle(proj.getTitle());
+        	temp.setStatus(proj.getStatus());
+        	temp.setRequirement(proj.getRequirement());
+        	String name = userService.findById(proj.getPosterId()).getUsername();
+        	temp.setUsername(name);
+        	pvm.add(temp);
+        }*/
+        /*System.out.println("pvm:");
+        for (int j = 0; j < pvm.size(); j++) {
+        	System.out.println(j+": "+pvm.get(j).getTitle());
+        }*/
+        
         return View("explore", model, page);
     }
 
@@ -128,21 +154,21 @@ public class ProjectController extends BaseController {
         projectService.updateByPrimaryKey(id, project);
         return RedirectTo("/project/explore");
     }
-
+    
     @GetMapping("/myProject")
     public String myProject(Model model, Integer p) {
-        p = p == null ? 1 : (p < 1 ? 1 : p);
+    	p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("myProject", model, page);
     }
-
+    
     @GetMapping("/myContract")
     public String myContract(Model model, Integer p) {
-        p = p == null ? 1 : (p < 1 ? 1 : p);
+    	p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("myContract", model, page);
     }
-
+    
     @GetMapping("/submit/{id}")
     public String submit(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
@@ -154,7 +180,7 @@ public class ProjectController extends BaseController {
         projectService.updateByPrimaryKey(id, project);
         return RedirectTo("/project/myContract");
     }
-
+    
     @GetMapping("/confirm/{id}")
     public String comfirm(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
