@@ -5,10 +5,21 @@ package com.linkode.controller;
  */
 
 import com.linkode.exception.CustomException;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class BaseController {
@@ -32,4 +43,21 @@ public class BaseController {
         return "redirect:" + url;
     }
 
+    protected Session session() {
+    	Subject subject = SecurityUtils.getSubject();
+    	return subject.getSession();
+    }
+    
+    protected Date getDate(HttpServletRequest request, String attr) throws ParseException {
+    	String dateString = request.getParameter(attr);
+    	if (dateString == null)
+    		return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = sdf.parse(dateString);
+        Calendar calendar = new GregorianCalendar(); 
+        calendar.setTime(date); 
+        calendar.add(calendar.DATE,1);
+        date=calendar.getTime();
+        return date;
+    }
 }

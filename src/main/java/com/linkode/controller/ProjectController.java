@@ -2,23 +2,16 @@ package com.linkode.controller;
 
 import java.text.ParseException;
 import com.linkode.pojo.ViewModel.ProjectViewModel;
-import java.text.SimpleDateFormat;
-import java.util.*;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.service.ProjectService;
-import com.linkode.service.UserService;
-import com.linkode.util.ControllerUtil;
 import com.linkode.util.DataPage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,125 +27,103 @@ public class ProjectController extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping("/explore")
-    public String explore(Model model, Integer p) {
+    /*======== 查 ========*/
+    @GetMapping("")
+    public String exploreView(Model model, Integer p) {
         p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<ProjectViewModel> page = projectService.selectPVMPage(p, 10, 6);
         
-        return View("/project/explore", model, page);
+        return View("/project/all", model, page);
     }
 
-    @GetMapping("/publish")
-    public String publish() {
-        return View("/project/publish");
-    }
-
-    @PostMapping("/publish")
-    public String publishProject(Model model, HttpServletRequest req, @Valid Project project, BindingResult bindingResult) throws CustomException, ParseException {
-        if(bindingResult.hasErrors()){
-            List<ObjectError> ls = bindingResult.getAllErrors();
-            for (int i = 0; i < ls.size(); i++) {
-                System.out.print("这是错误");
-                System.out.println(i);
-                System.out.println("error:"+ls.get(i));
-            }
-        }
-        if(!bindingResult.hasErrors()) {
-            String pid = req.getParameter("posterId");
-            String date = req.getParameter("time");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-            java.util.Date endDate = sdf.parse(date);
-            project.setStartDate(new java.util.Date());
-            project.setEndDate(endDate);
-            project.setStatus("uncontracted");
-            projectService.insert(project);
-            return RedirectTo("/project/explore");
-        } else {
-            model.addAttribute("errors", ControllerUtil.ObjectErrorsToMap(bindingResult.getAllErrors()));
-        }
-        return RedirectTo("/project/explore");
-        //return View("explore", model, project);
-    }
-
-    @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable("id") Integer id) throws CustomException {
-        Project project = projectService.findByPrimaryKey(id);
-        return View("delete", model, project);
-    }
-
-    @GetMapping("/deleteSubmit/{id}")
-    public String deleteSubmit(@PathVariable("id") Integer id) {
-        projectService.deleteByPrimaryKey(id);
-        return RedirectTo("/project/explore");
+    @GetMapping("/create")
+    public String createView() {
+        return View("/project/create");
     }
 
     @GetMapping("/details/{id}")
-    public String check(Model model, @PathVariable("id") Integer id) throws CustomException {
+    public String detailView(Model model, @PathVariable("id") Integer id) throws CustomException {
         Project project = projectService.findByPrimaryKey(id);
         return View("details", model, project);
     }
 
-    @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable("id") Integer id) throws CustomException {
+    @GetMapping("/update/{id}")
+    public String updateView(Model model, @PathVariable("id") Integer id) throws CustomException {
         Project project = projectService.findByPrimaryKey(id);
-        return View("edit", model, project);
-    }
-
-    @PostMapping("/edit")
-    public String update(Model model, HttpServletRequest req, @Validated Project project, BindingResult bindingResult) throws CustomException, ParseException {
-        if (!bindingResult.hasErrors()) {
-            String date = req.getParameter("time");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date endDate = sdf.parse(date);
-            project.setEndDate(endDate);
-            projectService.updateByPrimaryKey(project.getId(), project);
-            return RedirectTo("/project/explore");
-        } else {
-            model.addAttribute("errors", ControllerUtil.ObjectErrorsToMap(bindingResult.getAllErrors()));
-        }
-
-        return View("edit", model, project);
-    }
-
-    @GetMapping("/contract/{id}")
-    public String contract(Model model, HttpServletRequest req, @PathVariable("id") Integer id) throws CustomException, ParseException {
-        Subject subject = SecurityUtils.getSubject();
-        Integer uid = (Integer) subject.getSession().getAttribute("LOGIN_USER_ID");
-        Project project = projectService.findByPrimaryKey(id);
-        project.setContractorId(uid);
-        project.setStatus("unfinished");
-        projectService.updateByPrimaryKey(id, project);
-        return RedirectTo("/project/explore");
+        return View("/project/update", model, project);
     }
     
     @GetMapping("/myProject")
-    public String myProject(Model model, Integer p) {
+    public String myProjectView(Model model, Integer p) {
     	p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("/project/myProject", model, page);
     }
     
     @GetMapping("/myContract")
-    public String myContract(Model model, Integer p) {
+    public String myContractView(Model model, Integer p) {
     	p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("/project/myContract", model, page);
     }
     
-    @GetMapping("/submit/{id}")
-    public String submit(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+    /*======== 改 ========*/
+    @PostMapping("/update")
+    public String updateAction(Model model, HttpServletRequest req, @Validated Project newProject, BindingResult bindingResult) throws CustomException, ParseException {
+    	Project project = projectService.findByPrimaryKey(newProject.getId());
+        project.setEndDate(getDate(req, "time"));
+        project.setMoney(newProject.getMoney());
+        project.setRequirement(newProject.getRequirement());
+        project.setType(newProject.getType());
+        project.setTitle(newProject.getTitle());
+        project.setStartDate(new java.util.Date());
+        projectService.updateByPrimaryKey(project);
+        return RedirectTo("/project/myProject");
+    }
+
+    @GetMapping("/contract/{id}")
+    public String contractAction(Model model, HttpServletRequest req, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         Project project = projectService.findByPrimaryKey(id);
-        project.setEndDate(new java.util.Date());
-        project.setStatus("unconfirmed");
-        projectService.updateByPrimaryKey(id, project);
+        project.setContractorId(userid);
+        project.setStatus("unfinished");
+        projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myContract");
     }
     
+    @GetMapping("/submit/{id}")
+    public String submitAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+        project.setStatus("unconfirmed");
+        projectService.updateByPrimaryKey(project);
+        return RedirectTo("/project/myContract");
+    }
+
     @GetMapping("/confirm/{id}")
-    public String comfirm(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+    public String comfirmAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
         project.setStatus("finished");
-        projectService.updateByPrimaryKey(id, project);
+        projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myProject");
     }
+    
+    /*======== 增删 ========*/
+    @PostMapping("/create")
+    public String createAction(Model model, HttpServletRequest request, @Valid Project project, BindingResult bindingResult) throws CustomException, ParseException {
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+        
+        project.setPosterId(userid);
+        project.setStartDate(new java.util.Date());
+        project.setEndDate(getDate(request,"time"));
+        project.setStatus("uncontracted");
+        projectService.insert(project);
+        return RedirectTo("/project/myProject");
+    }
+   
+    @GetMapping("/delete/{id}")
+    public String deleteAction(@PathVariable("id") Integer id) {
+        projectService.deleteByPrimaryKey(id);
+        return RedirectTo("/project/myProject");
+    }
+
 }

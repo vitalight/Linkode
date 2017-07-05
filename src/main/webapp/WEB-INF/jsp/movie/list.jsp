@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% request.setAttribute("title","电影"); %>
-<%@ include  file="./modules/web-header.jsp"%>
-<%@ include  file="./modules/header.jsp"%>
+<%@ include  file="../modules/web-header.jsp"%>
+<%@ include  file="../modules/header.jsp"%>
 </head>
 <body>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
@@ -29,8 +29,8 @@
         </c:forEach>
         </tbody>
     </table>
-    <%@ include  file="./modules/page-toolkit.jsp"%>
+    <%@ include  file="../modules/page-toolkit.jsp"%>
     <hr> &copy;2017 - Linkode
 </div>
-<%@ include  file="./modules/javascript.jsp"%>
-<%@ include  file="./modules/web-footer.jsp"%>
+<%@ include  file="../modules/javascript.jsp"%>
+<%@ include  file="../modules/web-footer.jsp"%>

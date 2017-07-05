@@ -20,7 +20,7 @@
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
-    <table schema="linkode" tableName="chatlog">
+    <table schema="linkode" tableName="chat_log">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
@@ -41,6 +41,10 @@
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
     <table schema="linkode" tableName="project">
+    	<property name="useActualColumnNames" value="true" />
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
+    <table schema="linkode" tableName="project_app">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>

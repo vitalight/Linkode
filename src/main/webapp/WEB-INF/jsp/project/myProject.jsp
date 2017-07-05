@@ -7,10 +7,10 @@
 <body>
 <%@ include file="../modules/header.jsp"%>
 	<div class="type-list">
-		<a class="type-btn" href="${pageContext.request.contextPath}/project/explore">所有项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project">可接项目</a>
 		<a class="type-btn type-chose" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
 		<a class="type-btn" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
-		<a class="type-btn" href="${pageContext.request.contextPath}/project/publish">发布项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>
 	
 	<div class="display">
@@ -36,33 +36,42 @@
 								${project.requirement}
 							</div>
 								<div class="col-sm-7"></div>
-								<button class="col-sm-2 contract-btn">修改项目</button>
-								<button class="col-sm-2 col-sm-offset-1 contract-btn">删除项目</button>
+								<form action="${pageContext.request.contextPath}/project/update/${project.id}" method="GET">
+									<button class="col-sm-2 contract-btn">修改项目</button>
+								</form>
+								
+								<form action="${pageContext.request.contextPath}/project/delete/${project.id}" method="GET">
+									<button class="col-sm-2 col-sm-offset-1 contract-btn">删除项目</button>
+								</form>
 						</div>
 					</div>
 						<hr />
 						<div class="row some-margin">
-							<div class="col-sm-1">
-								<img class="request-img" src="${pageContext.request.contextPath}/static/img/avatar.png" />
-							</div>
-							<div class="col-sm-8 request">
-								<div class="row request-name">${project.contractorId}</div>
-								<div class="row request-time">1 minutes ago</div>
-							</div>
 							<c:choose>
 								<c:when test="${project.status=='uncontracted'}">
-									<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">未被承包</button>
-								</c:when>
-								<c:when test="${project.status=='unfinished' }">
-									<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">未提交</button>
-								</c:when>
-								<c:when test="${project.status=='unconfirmed'}">
-									<form action="${pageContext.request.contextPath}/project/confirm/${project.id}" method="get">
-										<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">通过提交</button>
-									</form>
+									<button class="col-sm-2 col-sm-offset-10 contract-btn yellow-bg center">未被承包</button>
 								</c:when>
 								<c:otherwise>
-									<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center" disabled>已完成</button>
+									<div class="col-sm-1">
+										<img class="request-img" src="${pageContext.request.contextPath}/static/img/avatar.png" />
+									</div>
+									<div class="col-sm-8 request">
+										<div class="row request-name">${project.contractorId}</div>
+										<div class="row request-time">1 minutes ago</div>
+									</div>
+									<c:choose>
+										<c:when test="${project.status=='unfinished' }">
+											<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">未提交</button>
+										</c:when>
+										<c:when test="${project.status=='unconfirmed'}">
+											<form action="${pageContext.request.contextPath}/project/confirm/${project.id}" method="get">
+												<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">通过提交</button>
+											</form>
+										</c:when>
+										<c:otherwise>
+											<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center" disabled>已完成</button>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</div>

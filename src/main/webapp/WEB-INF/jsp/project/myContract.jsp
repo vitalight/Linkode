@@ -7,10 +7,10 @@
 <body>
 <%@ include file="../modules/header.jsp"%>
 	<div class="type-list">
-		<a class="type-btn " href="${pageContext.request.contextPath}/project/explore">所有项目</a>
+		<a class="type-btn " href="${pageContext.request.contextPath}/project">可接项目</a>
 		<a class="type-btn " href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
 		<a class="type-btn type-chose" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
-		<a class="type-btn" href="${pageContext.request.contextPath}/project/publish">发布项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>
 	
 	<div class="display">

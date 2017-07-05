@@ -43,8 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void updateByPrimaryKey(Integer id, Project project) {
-        project.setId(id);
+    public void updateByPrimaryKey(Project project) {
         projectMapper.updateByPrimaryKey(project);
     }
 

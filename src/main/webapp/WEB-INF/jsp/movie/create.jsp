@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% request.setAttribute("title","添加电影"); %>
-<%@ include  file="./modules/web-header.jsp"%>
-<%@ include  file="./modules/header.jsp"%>
+<%@ include  file="../modules/web-header.jsp"%>
+<%@ include  file="../modules/header.jsp"%>
 <div class="container" style="margin-top: 60px;margin-bottom: 20px;">
     <h1>Create</h1>
     <h4>Movie</h4>
@@ -46,7 +46,7 @@
     <a href="${pageContext.request.contextPath}/movie/list">Back to List</a>
     <hr> &copy;2017 - Linkode
 </div>
-<%@ include  file="./modules/javascript.jsp"%>
+<%@ include  file="../modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/form-validate.js"></script>
-<%@ include  file="./modules/web-footer.jsp"%>
+<%@ include  file="../modules/web-footer.jsp"%>
