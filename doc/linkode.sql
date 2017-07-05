@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-02 10:24:48
+-- Generation Time: 2017-07-05 15:32:56
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -44,10 +44,10 @@ INSERT INTO `ad` (`id`, `title`, `content`, `startDate`, `endDate`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `chatlog`
+-- 表的结构 `chat_log`
 --
 
-CREATE TABLE `chatlog` (
+CREATE TABLE `chat_log` (
   `id` int(11) NOT NULL,
   `senderId` int(11) DEFAULT NULL,
   `receiverId` int(11) DEFAULT NULL,
@@ -56,10 +56,10 @@ CREATE TABLE `chatlog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `chatlog`
+-- 转存表中的数据 `chat_log`
 --
 
-INSERT INTO `chatlog` (`id`, `senderId`, `receiverId`, `time`, `content`) VALUES
+INSERT INTO `chat_log` (`id`, `senderId`, `receiverId`, `time`, `content`) VALUES
 (1, 1, 2, '2017-06-07 00:00:00', 'jason是辣鸡');
 
 -- --------------------------------------------------------
@@ -81,7 +81,8 @@ CREATE TABLE `movie` (
 --
 
 INSERT INTO `movie` (`id`, `title`, `director`, `genre`, `language`) VALUES
-(1, 'Disney', 'Jason', 'History', 'English');
+(1, 'Disney', 'Jason', 'History', 'English'),
+(3, '中文测试', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -189,7 +190,22 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `posterId`, `contractorId`, `title`, `requirement`, `type`, `startDate`, `endDate`, `status`, `money`) VALUES
-(1, 0, 2, '画圆给我', '要很圆', 'img', '2017-06-01', '2017-06-28', 'unfinished', 1000);
+(35, 2, 1, '搞事情', '生命在于搞事情。', 'literature', '2017-07-05', '2017-08-04', 'finished', 10000),
+(38, 1, 2, '啦啦啦', '嘿哟 马昭', 'music', '2017-07-05', '2017-07-11', 'finished', 6666);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `project_app`
+--
+
+CREATE TABLE `project_app` (
+  `id` int(11) NOT NULL,
+  `projectId` int(11) DEFAULT NULL,
+  `applicantId` int(11) DEFAULT NULL,
+  `content` varchar(100) DEFAULT NULL,
+  `time` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -215,7 +231,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000);
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000),
+(2, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@qq.com', NULL, NULL, NULL, NULL, 'admin', 666666),
+(3, 'vital', 'c32add6b67bd0c26c50f1716849bfae9', 'vital@q', NULL, NULL, NULL, NULL, 'guest', NULL);
 
 --
 -- Indexes for dumped tables
@@ -228,9 +246,9 @@ ALTER TABLE `ad`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chatlog`
+-- Indexes for table `chat_log`
 --
-ALTER TABLE `chatlog`
+ALTER TABLE `chat_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Aid` (`senderId`),
   ADD KEY `Bid` (`receiverId`);
@@ -278,6 +296,12 @@ ALTER TABLE `project`
   ADD KEY `posterId` (`posterId`);
 
 --
+-- Indexes for table `project_app`
+--
+ALTER TABLE `project_app`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -293,15 +317,15 @@ ALTER TABLE `user`
 ALTER TABLE `ad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- 使用表AUTO_INCREMENT `chatlog`
+-- 使用表AUTO_INCREMENT `chat_log`
 --
-ALTER TABLE `chatlog`
+ALTER TABLE `chat_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `movie`
 --
 ALTER TABLE `movie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- 使用表AUTO_INCREMENT `portfolio`
 --
@@ -326,12 +350,17 @@ ALTER TABLE `post_cmt`
 -- 使用表AUTO_INCREMENT `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
+-- 使用表AUTO_INCREMENT `project_app`
+--
+ALTER TABLE `project_app`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
