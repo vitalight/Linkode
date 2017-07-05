@@ -1,14 +1,15 @@
 package com.linkode.controller;
 
 import java.text.ParseException;
+import com.linkode.pojo.ViewModel.ProjectViewModel;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.service.ProjectService;
+import com.linkode.service.UserService;
 import com.linkode.util.ControllerUtil;
 import com.linkode.util.DataPage;
-import com.sun.tools.internal.ws.processor.model.Request;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.support.RequestContext;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +37,14 @@ public class ProjectController extends BaseController {
     @GetMapping("/explore")
     public String explore(Model model, Integer p) {
         p = p == null ? 1 : (p < 1 ? 1 : p);
-        DataPage<Project> page = projectService.selectPage(p, 10, 6);
-        return View("explore", model, page);
+        DataPage<ProjectViewModel> page = projectService.selectPVMPage(p, 10, 6);
+        
+        return View("/project/explore", model, page);
     }
 
     @GetMapping("/publish")
     public String publish() {
-        return View("publish");
+        return View("/project/publish");
     }
 
     @PostMapping("/publish")
@@ -61,8 +62,7 @@ public class ProjectController extends BaseController {
             String date = req.getParameter("time");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
             java.util.Date endDate = sdf.parse(date);
-            Integer postId = Integer.parseInt(pid);
-            project.setPosterId(postId);
+            project.setStartDate(new java.util.Date());
             project.setEndDate(endDate);
             project.setStatus("uncontracted");
             projectService.insert(project);
@@ -119,13 +119,40 @@ public class ProjectController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         Integer uid = (Integer) subject.getSession().getAttribute("LOGIN_USER_ID");
         Project project = projectService.findByPrimaryKey(id);
-        Calendar now = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = "" + now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH)+1) + "-" + now.get(Calendar.DAY_OF_MONTH);
-        project.setStartDate(sdf.parse(date));
         project.setContractorId(uid);
         project.setStatus("unfinished");
         projectService.updateByPrimaryKey(id, project);
         return RedirectTo("/project/explore");
+    }
+    
+    @GetMapping("/myProject")
+    public String myProject(Model model, Integer p) {
+    	p = p == null ? 1 : (p < 1 ? 1 : p);
+        DataPage<Project> page = projectService.selectPage(p, 10, 6);
+        return View("/project/myProject", model, page);
+    }
+    
+    @GetMapping("/myContract")
+    public String myContract(Model model, Integer p) {
+    	p = p == null ? 1 : (p < 1 ? 1 : p);
+        DataPage<Project> page = projectService.selectPage(p, 10, 6);
+        return View("/project/myContract", model, page);
+    }
+    
+    @GetMapping("/submit/{id}")
+    public String submit(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+        project.setEndDate(new java.util.Date());
+        project.setStatus("unconfirmed");
+        projectService.updateByPrimaryKey(id, project);
+        return RedirectTo("/project/myContract");
+    }
+    
+    @GetMapping("/confirm/{id}")
+    public String comfirm(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+        project.setStatus("finished");
+        projectService.updateByPrimaryKey(id, project);
+        return RedirectTo("/project/myProject");
     }
 }

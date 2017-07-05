@@ -44,5 +44,18 @@ public class UserServiceImpl implements UserService {
     	
     	return userMapper.insert(user);
     }
+    
+    @Override
+    public User findById(Integer id) {
+    	UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andIdEqualTo(id);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users.isEmpty()) {
+        	return null;
+        }
+        User user = users.get(0);
+        return user;
+    }
 }
 

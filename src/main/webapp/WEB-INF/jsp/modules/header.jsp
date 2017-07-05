@@ -38,8 +38,8 @@
  	%>
 	<nav class="white-nav navbar-fixed-top">
 		<ul>
-			<li><a class="logo-btn" href=""><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
-			<li><a class="nav-btn <%=crud %>">管理员界面</a></li>
+			<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
+			<li><a class="nav-btn <%=crud %>" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
 			<li><a class="nav-btn <%=portfolio %>">作品交流</a></li>
 			<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project/explore">项目众包</a></li>
 			<shiro:authenticated>
@@ -51,6 +51,6 @@
 		</ul>
 		<c:if test="${!empty LOGIN_USER_ID}">
 			<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
-			<a class="nav-btn user-btn">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+			<a class="nav-btn user-btn">哈喽, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
 		</c:if>
 	</nav>

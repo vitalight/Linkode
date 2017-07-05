@@ -1,10 +1,14 @@
 /* navigation */
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 :root {
 	--Lblue:rgb(22,152,245);
 	--Lred:rgb(242,99,75);
 	--Ldred:rgb(212,89,65);
 	--Llgreen:rgb(146,206,70);
 	--Lyellow:rgb(251,175,24);
+	--Ldyellow:rgb(231,165,20);
 	
 	--Ldblue:rgb(10,133,224);
 	--Lbg:rgb(245,246,247);
