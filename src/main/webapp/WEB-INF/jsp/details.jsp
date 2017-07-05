@@ -18,15 +18,15 @@
         <dt>Money</dt>
         <dd>${model.money}</dd>
     </dl>
-    <c:choose>
+    <!--<c:choose>
         <c:when test="${LOGIN_USER_ID==model.posterId }">
             <a href="${pageContext.request.contextPath}/project/edit/${model.id}">Edit</a>
         </c:when>
         <c:when test="${LOGIN_USER_ID!=model.posterId }">
             <a href="${pageContext.request.contextPath}/project/contract/${model.id}">Contract</a>
         </c:when>
-    </c:choose>
-     | <a href="${pageContext.request.contextPath}/project/explore">Back to List</a>
+    </c:choose>-->
+    <a href="${pageContext.request.contextPath}/project/explore">Back to List</a>
     <hr> &copy;2017 - Linkode
 </div>
 <%@ include  file="./modules/javascript.jsp"%>

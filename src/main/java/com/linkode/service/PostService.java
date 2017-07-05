@@ -1,9 +1,7 @@
 package com.linkode.service;
 
-import com.linkode.pojo.Post;
-import com.linkode.exception.CustomException;
-import com.linkode.util.DataPage;
-
+/**
+ * Created by gaoshiqi on 2017/7/4.
+ */
 public interface PostService {
-
 }
