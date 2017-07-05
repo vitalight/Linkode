@@ -57,6 +57,4 @@
     <hr> &copy;2017 - Linkode
 </div>
 <%@ include  file="../modules/javascript.jsp"%>
-<script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/form-validate.js"></script>
 <%@ include  file="../modules/web-footer.jsp"%>

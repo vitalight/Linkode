@@ -32,7 +32,7 @@ public class ProjectController extends BaseController {
     public String exploreView(Model model, Integer p) {
         p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<ProjectViewModel> page = projectService.selectPVMPage(p, 10, 6);
-        
+
         return View("/project/all", model, page);
     }
 
@@ -52,25 +52,25 @@ public class ProjectController extends BaseController {
         Project project = projectService.findByPrimaryKey(id);
         return View("/project/update", model, project);
     }
-    
+
     @GetMapping("/myProject")
     public String myProjectView(Model model, Integer p) {
-    	p = p == null ? 1 : (p < 1 ? 1 : p);
+        p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("/project/myProject", model, page);
     }
-    
+
     @GetMapping("/myContract")
     public String myContractView(Model model, Integer p) {
-    	p = p == null ? 1 : (p < 1 ? 1 : p);
+        p = p == null ? 1 : (p < 1 ? 1 : p);
         DataPage<Project> page = projectService.selectPage(p, 10, 6);
         return View("/project/myContract", model, page);
     }
-    
+
     /*======== 改 ========*/
     @PostMapping("/update")
     public String updateAction(Model model, HttpServletRequest req, @Validated Project newProject, BindingResult bindingResult) throws CustomException, ParseException {
-    	Project project = projectService.findByPrimaryKey(newProject.getId());
+        Project project = projectService.findByPrimaryKey(newProject.getId());
         project.setEndDate(getDate(req, "time"));
         project.setMoney(newProject.getMoney());
         project.setRequirement(newProject.getRequirement());
@@ -90,7 +90,7 @@ public class ProjectController extends BaseController {
         projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myContract");
     }
-    
+
     @GetMapping("/submit/{id}")
     public String submitAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
@@ -106,12 +106,12 @@ public class ProjectController extends BaseController {
         projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myProject");
     }
-    
+
     /*======== 增删 ========*/
     @PostMapping("/create")
     public String createAction(Model model, HttpServletRequest request, @Valid Project project, BindingResult bindingResult) throws CustomException, ParseException {
-    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
-        
+        Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+
         project.setPosterId(userid);
         project.setStartDate(new java.util.Date());
         project.setEndDate(getDate(request,"time"));
@@ -119,7 +119,7 @@ public class ProjectController extends BaseController {
         projectService.insert(project);
         return RedirectTo("/project/myProject");
     }
-   
+
     @GetMapping("/delete/{id}")
     public String deleteAction(@PathVariable("id") Integer id) {
         projectService.deleteByPrimaryKey(id);
