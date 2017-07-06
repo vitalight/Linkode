@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-05 15:32:56
+-- Generation Time: 2017-07-06 08:58:54
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -190,8 +190,10 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `posterId`, `contractorId`, `title`, `requirement`, `type`, `startDate`, `endDate`, `status`, `money`) VALUES
-(35, 2, 1, '搞事情', '生命在于搞事情。', 'literature', '2017-07-05', '2017-08-04', 'finished', 10000),
-(38, 1, 2, '啦啦啦', '嘿哟 马昭', 'music', '2017-07-05', '2017-07-11', 'finished', 6666);
+(35, 2, 1, 'Jason搞事情', '生命在于搞事情。', 'literature', '2017-07-05', '2017-08-04', 'finished', 10000),
+(38, 1, 2, '啦啦啦', '嘿哟 马昭', 'music', '2017-07-05', '2017-07-11', 'finished', 6666),
+(39, 2, 1, 'jasonSB', 'warweawewrarwr', 'music', '2017-07-05', '2017-07-27', 'finished', 6666),
+(40, 1, NULL, 'test-1', '2017.1.31 给你 6666元', 'music', '2017-07-06', '2017-01-31', 'uncontracted', 6666);
 
 -- --------------------------------------------------------
 
@@ -206,6 +208,25 @@ CREATE TABLE `project_app` (
   `content` varchar(100) DEFAULT NULL,
   `time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tutorial`
+--
+
+CREATE TABLE `tutorial` (
+  `id` int(11) NOT NULL,
+  `content` text,
+  `type` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `tutorial`
+--
+
+INSERT INTO `tutorial` (`id`, `content`, `type`) VALUES
+(1, '<div>\r\n    hello!\r\n</div>', 'image');
 
 -- --------------------------------------------------------
 
@@ -302,6 +323,12 @@ ALTER TABLE `project_app`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tutorial`
+--
+ALTER TABLE `tutorial`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -325,7 +352,7 @@ ALTER TABLE `chat_log`
 -- 使用表AUTO_INCREMENT `movie`
 --
 ALTER TABLE `movie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- 使用表AUTO_INCREMENT `portfolio`
 --
@@ -350,17 +377,22 @@ ALTER TABLE `post_cmt`
 -- 使用表AUTO_INCREMENT `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- 使用表AUTO_INCREMENT `project_app`
 --
 ALTER TABLE `project_app`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- 使用表AUTO_INCREMENT `tutorial`
+--
+ALTER TABLE `tutorial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
