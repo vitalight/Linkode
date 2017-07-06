@@ -1,29 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%--
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-            <span class="sr-only">切换导航</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/list">SSM-Demo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="example-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-</nav> 
- --%>
- 	<% 
- 	String headType = (String)request.getAttribute("headType");
+<%
+	String headType = (String)request.getAttribute("headType");
 	String crud="", portfolio="", project="", login="";
 	if (headType == null) {
 	} else if (headType.equals("crud")) {
@@ -35,22 +13,22 @@
 	} else {
 		login = "nav-btn-chose";
 	}
- 	%>
-	<nav class="white-nav navbar-fixed-top">
-		<ul>
-			<li><a class="logo-btn" href=""><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
-			<li><a class="nav-btn <%=crud %>" href="${pageContext.request.contextPath}/project/myContract">众包</a></li>
-			<li><a class="nav-btn <%=portfolio %>" href="${pageContext.request.contextPath}/project/myProject">我的项目</a></li>
-			<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project/explore">项目众包</a></li>
-			<shiro:authenticated>
-				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/logout">登出</a></li>
-			</shiro:authenticated>
-			<shiro:notAuthenticated>
-				<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/login">登录</a></li>
-			</shiro:notAuthenticated>
-		</ul>
-		<c:if test="${!empty LOGIN_USER_ID}">
-			<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
-			<a class="nav-btn user-btn">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
-		</c:if>
-	</nav>
+%>
+<nav class="white-nav navbar-fixed-top">
+	<ul>
+		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
+		<li><a class="nav-btn <%=crud %>" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
+		<li><a class="nav-btn <%=portfolio %>">作品交流</a></li>
+		<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project">项目众包</a></li>
+		<shiro:authenticated>
+			<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/logout">登出</a></li>
+		</shiro:authenticated>
+		<shiro:notAuthenticated>
+			<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/login">登录</a></li>
+		</shiro:notAuthenticated>
+	</ul>
+	<c:if test="${!empty LOGIN_USER_ID}">
+		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
+		<a class="nav-btn user-btn">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+	</c:if>
+</nav>

@@ -2,7 +2,7 @@ package com.linkode.pojo;
 
 import java.util.Date;
 
-public class Chatlog {
+public class ChatLog {
     private Integer id;
 
     private Integer senderId;

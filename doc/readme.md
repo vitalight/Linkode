@@ -1,7 +1,7 @@
 # 数据库sql文档
 ## 前言
 都省略了id  
-
+app是application缩写
 cmt是comment缩写
 
 ## ad 广告 
@@ -9,7 +9,7 @@ cmt是comment缩写
 * content 内容
 * startDate 开始日期
 * endDate 截止日期
-## chatlog 聊天记录
+## chat_log 聊天记录 `RENAME`
 * senderId 发送者id
 * receiverId 接受者id
 * time 发送时间
@@ -42,6 +42,11 @@ cmt是comment缩写
 * endDate 截止日期
 * status 状态
 * money 酬金
+## project_app 项目申请 `NEW`
+* projectId 项目id
+* applicantId 申请者id
+* content 申请内容
+* time 申请时间戳
 ## user 用户 
 * username 用户名
 * password 密码

@@ -24,20 +24,7 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-    
-    /*
-    @GetMapping("/project/explore")
-    // for test
-    public String test(Model model, Integer type) {
-    	if (type == null){
-    		return View("/project/explore");
-    	} else if (type == 1) {
-    		return View("/project/myProject");
-    	}
-    	return View("/project/explore");
-    }
-    */
-    
+
     @GetMapping("/login")
     public String login(Model model, String msg){
     	if (msg!=null) {
@@ -63,7 +50,7 @@ public class AccountController extends BaseController {
                 String username = user.getUsername();
                 subject.getSession().setAttribute("LOGIN_USER_ID",id);
                 subject.getSession().setAttribute("LOGIN_USER_NAME",username);
-                return RedirectTo("/project/explore");
+                return RedirectTo("/project");
             }catch (Exception e){
                 model.addAttribute("errormsg","用户名或密码错误。");
             }
@@ -110,7 +97,7 @@ public class AccountController extends BaseController {
 	    			System.out.println("<point>3");
 	                subject.getSession().setAttribute("LOGIN_USER_ID",id);
 	                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
-	                return RedirectTo("/project/explore");
+	                return RedirectTo("/project");
 	            }catch (Exception e){
 	                model.addAttribute("errormsg","注册意外错误。");
 	            }

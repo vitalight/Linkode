@@ -1,7 +1,6 @@
 package com.linkode.service.impl;
 
 import com.linkode.pojo.ViewModel.ProjectViewModel;
-
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.linkode.dao.ProjectMapper;
@@ -43,8 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void updateByPrimaryKey(Integer id, Project project) {
-        project.setId(id);
+    public void updateByPrimaryKey(Project project) {
         projectMapper.updateByPrimaryKey(project);
     }
 
@@ -65,31 +63,34 @@ public class ProjectServiceImpl implements ProjectService {
 
         return page;
     }
-    
+
     @Override
     public DataPage<ProjectViewModel> selectPVMPage(Integer pageNum, Integer pageSize, Integer indexCount) {
-    	PageHelper.startPage(pageNum, pageSize);
-    	List<Project> projects = projectMapper.selectByExample(null);
-    	List<ProjectViewModel> pvms = new ArrayList<ProjectViewModel>();
-    	
-    	// 初始化
-    	for (int i = 0; i < projects.size(); i++) {
-    		Project project = projects.get(i);
-    		ProjectViewModel pvm = new ProjectViewModel();
-    		pvm.setId(project.getId());
-    		pvm.setPosterId(project.getPosterId());
-    		pvm.setTitle(project.getTitle());
-    		pvm.setRequirement(project.getRequirement());
-    		pvm.setMoney(project.getMoney());
-    		pvm.setStatus(project.getStatus());
-    		pvm.setUsername(userService.findById(project.getPosterId()).getUsername());
-    		pvms.add(pvm);
-    	}
-    	
-    	Integer pageCount = ((Page)projects).getPages();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Project> projects = projectMapper.selectByExample(null);
+        List<ProjectViewModel> pvms = new ArrayList<ProjectViewModel>();
+
+        // 初始化
+        for (int i = 0; i < projects.size(); i++) {
+            Project project = projects.get(i);
+            ProjectViewModel pvm = new ProjectViewModel();
+            pvm.setId(project.getId());
+            pvm.setPosterId(project.getPosterId());
+            pvm.setTitle(project.getTitle());
+            pvm.setRequirement(project.getRequirement());
+            pvm.setMoney(project.getMoney());
+            pvm.setStatus(project.getStatus());
+            pvm.setUsername(userService.findById(project.getPosterId()).getUsername());
+            pvm.setStartDate(project.getStartDate());
+            pvm.setEndDate(project.getEndDate());
+            pvm.setType(project.getType());
+            pvms.add(pvm);
+        }
+
+        Integer pageCount = ((Page)projects).getPages();
         pageNum = pageNum > pageCount ? pageCount : pageNum;
-    	
-    	DataPage<ProjectViewModel> page = new DataPage<ProjectViewModel>();
+
+        DataPage<ProjectViewModel> page = new DataPage<ProjectViewModel>();
         page.setData(pvms);
         page.setIndexCount(indexCount);
         page.setPageCount(pageCount);

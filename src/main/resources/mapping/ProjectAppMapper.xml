@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.linkode.dao.ChatLogMapper">
-  <resultMap id="BaseResultMap" type="com.linkode.pojo.ChatLog">
+<mapper namespace="com.linkode.dao.ProjectAppMapper">
+  <resultMap id="BaseResultMap" type="com.linkode.pojo.ProjectApp">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="senderId" jdbcType="INTEGER" property="senderId" />
-    <result column="receiverId" jdbcType="INTEGER" property="receiverId" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="projectId" jdbcType="INTEGER" property="projectId" />
+    <result column="applicantId" jdbcType="INTEGER" property="applicantId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, senderId, receiverId, time, content
+    id, projectId, applicantId, content, time
   </sql>
-  <select id="selectByExample" parameterType="com.linkode.pojo.ChatLogExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.linkode.pojo.ProjectAppExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from chat_log
+    from project_app
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from chat_log
+    from project_app
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from chat_log
+    delete from project_app
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.linkode.pojo.ChatLogExample">
-    delete from chat_log
+  <delete id="deleteByExample" parameterType="com.linkode.pojo.ProjectAppExample">
+    delete from project_app
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.linkode.pojo.ChatLog">
+  <insert id="insert" parameterType="com.linkode.pojo.ProjectApp">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into chat_log (senderId, receiverId, time, 
-      content)
-    values (#{senderId,jdbcType=INTEGER}, #{receiverId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=VARCHAR})
+    insert into project_app (projectId, applicantId, content, 
+      time)
+    values (#{projectId,jdbcType=INTEGER}, #{applicantId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.linkode.pojo.ChatLog">
+  <insert id="insertSelective" parameterType="com.linkode.pojo.ProjectApp">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into chat_log
+    insert into project_app
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="senderId != null">
-        senderId,
+      <if test="projectId != null">
+        projectId,
       </if>
-      <if test="receiverId != null">
-        receiverId,
-      </if>
-      <if test="time != null">
-        time,
+      <if test="applicantId != null">
+        applicantId,
       </if>
       <if test="content != null">
         content,
       </if>
+      <if test="time != null">
+        time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="senderId != null">
-        #{senderId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="receiverId != null">
-        #{receiverId,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+      <if test="applicantId != null">
+        #{applicantId,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.linkode.pojo.ChatLogExample" resultType="java.lang.Long">
-    select count(*) from chat_log
+  <select id="countByExample" parameterType="com.linkode.pojo.ProjectAppExample" resultType="java.lang.Long">
+    select count(*) from project_app
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update chat_log
+    update project_app
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.senderId != null">
-        senderId = #{record.senderId,jdbcType=INTEGER},
+      <if test="record.projectId != null">
+        projectId = #{record.projectId,jdbcType=INTEGER},
       </if>
-      <if test="record.receiverId != null">
-        receiverId = #{record.receiverId,jdbcType=INTEGER},
-      </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
+      <if test="record.applicantId != null">
+        applicantId = #{record.applicantId,jdbcType=INTEGER},
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,40 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update chat_log
+    update project_app
     set id = #{record.id,jdbcType=INTEGER},
-      senderId = #{record.senderId,jdbcType=INTEGER},
-      receiverId = #{record.receiverId,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=VARCHAR}
+      projectId = #{record.projectId,jdbcType=INTEGER},
+      applicantId = #{record.applicantId,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.ChatLog">
-    update chat_log
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.ProjectApp">
+    update project_app
     <set>
-      <if test="senderId != null">
-        senderId = #{senderId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=INTEGER},
       </if>
-      <if test="receiverId != null">
-        receiverId = #{receiverId,jdbcType=INTEGER},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
+      <if test="applicantId != null">
+        applicantId = #{applicantId,jdbcType=INTEGER},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.ChatLog">
-    update chat_log
-    set senderId = #{senderId,jdbcType=INTEGER},
-      receiverId = #{receiverId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.ProjectApp">
+    update project_app
+    set projectId = #{projectId,jdbcType=INTEGER},
+      applicantId = #{applicantId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

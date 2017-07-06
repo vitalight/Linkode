@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +11,8 @@
 	<meta HTTP-EQUIV="Page-Enter" CONTENT="revealtrans(duration=6.0, transition=23)">
 	<meta HTTP-EQUIV="Page-Exit" CONTENT="revealtrans(duration=6.0, transition=23)">
 	<title>Linkode - ${title}</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/styles.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/share.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
-	<style>body {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}</style>
 </head>
 <body>

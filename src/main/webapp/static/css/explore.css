@@ -1,7 +1,6 @@
-/* type chose */
+/*=========== type chose ===========*/
 .type-list {
 	margin:7em auto 1em;
-	width:32em;
 	font-size:0.9em;
 	text-align:center;
 }
@@ -23,8 +22,17 @@
 	background-color:var(--Ldgreen);
 	color:white;
 }
+.add-btn {
+	background-color:var(--Lyellow);
+	color:white;
+	font-weight:700;
+}
+.add-btn:hover {
+	background-color:var(--Ldyellow);
+	color:white;
+}
+/*=========== 作品卡片 =============*/
 
-/* item display */
 .display {
 	width:60em;
 	margin:0 auto;
@@ -34,6 +42,7 @@
 	border:rgb(231,233,235) 0.05em solid;
 	width:15em;
 	padding:0.9em;
+	padding-right:1.9em;
 	margin:0.8em 0.7em;
 	display:inline-block;
 }
@@ -55,6 +64,9 @@
 	color:var(--Ldgrey);
 	margin-bottom:0em;
 }
+
+/*============== 我的项目条==========*/
+
 .display-bar {
 	margin:0 auto 1.5em;
 	width:60em;
@@ -62,8 +74,6 @@
 .display-bar-img {
 	padding:0;
 	margin:0;
-	margin-left:-1em;
-	margin-right:-1em;
 	
 	height:12em;
 	width:14em;
@@ -94,11 +104,16 @@ h3 {
 .no-padding {
 	padding:0;
 }
+.bar-info, .bar-content {
+	margin-left:1em;
+	font-size:1.05em;
+}
 .bar-info {
-	margin-top:1.2em;
+	margin-top:0;
 }
 .bar-content {
-	margin-top:3.5em;	
+	margin-top:0.6em;
+	height:5.5em;	
 }
 .bar-avatar {
 	padding:0;
@@ -129,8 +144,42 @@ h3 {
 .red-bg:hover {
 	background-color:var(--Ldred);
 }
-hr {
-	margin:2em;
-	border:black 1px solid;
-	color:black;
+/*=============== 项目承包请求 ===============*/
+.some-margin {
+	margin-left:1em;
+}
+.request-img {
+	height:4em;
+	width:4em;
+	border-radius:50%;
+	margin-top:-0.5em;
+}
+.request {
+	font-size:1.2em;
+}
+.request-name, .request-time {
+	margin-left:1em;
+}
+.request-time {
+	color:var(--Ldgrey);
+}
+.yellow-bg {
+	background-color:var(--Lyellow);
+	margin-top:1em;
+	height:2em;
+	width:8em;
+}
+.yellow-bg:hover {
+	background-color:var(--Ldyellow);
+}
+/*=============== 项目创建 ===============*/
+textarea {
+	resize:none;
+}
+textarea.requirement {
+	height:10em;
+}
+.more-padding {
+	padding:2em;
+	padding-bottom:1em;
 }

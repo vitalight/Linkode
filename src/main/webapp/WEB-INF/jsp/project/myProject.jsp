@@ -6,50 +6,78 @@
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>
-	<%  
-	String typeStr = request.getParameter("type");
-	String[] classes = {"", "", ""};
-	if (typeStr!=null) {
-		int type = Integer.parseInt(typeStr);
-		classes[type]="type-chose";
-	} else {
-		classes[0]="type-chose";
-	}
-	%>
 	<div class="type-list">
-		<a class="type-btn <%=classes[0] %>" href="${pageContext.request.contextPath}/project/explore?type=0">所有项目</a>
-		<a class="type-btn <%=classes[1] %>" href="${pageContext.request.contextPath}/project/explore?type=1">我发布的项目</a>
-		<a class="type-btn <%=classes[2] %>" href="${pageContext.request.contextPath}/project/explore?type=2">我承包的项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project">可接项目</a>
+		<a class="type-btn type-chose" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
+		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>
 	
 	<div class="display">
-		
-		<div class="display-bar">
-			<div class="col-sm-3">
-				<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-5.png"/>
-			</div>
-			<div class="col-sm-9">
-				<a class="bar-text" href="">
-					<h3>摄影师招募<span class="type-tag ran-0">摄影</span></h3>
-					<p class="bar-info">
-						<span class="col-sm-4 no-padding"><strong>酬金：</strong>￥1000</span>
-						<span class="col-sm-4 no-padding"><strong>开始日期：</strong>2017年6月1日 </span>
-						<span class="col-sm-4 no-padding"><strong>截止日期：</strong>2017年9月1日</span>
-					</p>
-					<p class="bar-content">
-						莎士比亚在埃文河畔斯特拉特福出生长大，18岁时与安妮·海瑟薇结婚，两人共生育了三个孩子：
-						苏珊娜、双胞胎哈姆尼特和朱迪思。
-						16世纪末到17世纪初的20多年期间莎士比亚在伦敦开始了成功的职业生涯，
-						他不仅是演员、剧作家，还是宫内大臣剧团的合伙人之一...
-					</p>
-				</a>
-					<div class="col-sm-7"></div>
-					<button class="col-sm-2 contract-btn">修改项目</button>
-					<button class="col-sm-2 col-md-offset-1 contract-btn red-bg">删除项目</button>
-			</div>
-			<hr />
-			hello
-		</div>
+		<c:forEach items="${model.data}" var="project">
+			<c:if test="${LOGIN_USER_ID == project.posterId }">
+				<div class="display-bar">
+					<div class="row">
+						<div class="col-sm-3">
+							<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-${project.id%10+1}.png"/>
+						</div>
+						<div class="col-sm-9">
+							<h3>${project.title }<span class="type-tag ran-${project.id%3}">${project.type}</span></h3>
+							<div class="row bar-info">
+								<span class="col-sm-3 no-padding"><strong>酬金：</strong>￥${project.money }</span>
+								<span class="col-sm-4 no-padding"><strong>开始日期：</strong>
+									<fmt:formatDate type="date" value="${project.startDate}" />
+								</span>
+								<span class="col-sm-4 no-padding"><strong>截止日期：</strong>
+									<fmt:formatDate type="date" value="${project.endDate}" />
+								</span>
+							</div>
+							<div class="row bar-content">
+								${project.requirement}
+							</div>
+								<div class="col-sm-7"></div>
+								<form action="${pageContext.request.contextPath}/project/update/${project.id}" method="GET">
+									<button class="col-sm-2 contract-btn">修改项目</button>
+								</form>
+								
+								<form action="${pageContext.request.contextPath}/project/delete/${project.id}" method="GET">
+									<button class="col-sm-2 col-sm-offset-1 contract-btn">删除项目</button>
+								</form>
+						</div>
+					</div>
+						<hr />
+						<div class="row some-margin">
+							<c:choose>
+								<c:when test="${project.status=='uncontracted'}">
+									<button class="col-sm-2 col-sm-offset-10 contract-btn yellow-bg center">未被承包</button>
+								</c:when>
+								<c:otherwise>
+									<div class="col-sm-1">
+										<img class="request-img" src="${pageContext.request.contextPath}/static/img/avatar.png" />
+									</div>
+									<div class="col-sm-8 request">
+										<div class="row request-name">${project.contractorId}</div>
+										<div class="row request-time">1 minutes ago</div>
+									</div>
+									<c:choose>
+										<c:when test="${project.status=='unfinished' }">
+											<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">未提交</button>
+										</c:when>
+										<c:when test="${project.status=='unconfirmed'}">
+											<form action="${pageContext.request.contextPath}/project/confirm/${project.id}" method="get">
+												<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center">通过提交</button>
+											</form>
+										</c:when>
+										<c:otherwise>
+											<button class="col-sm-2 col-sm-offset-1 contract-btn yellow-bg center" disabled>已完成</button>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</div>
+				</div>
+			</c:if>
+		</c:forEach>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
