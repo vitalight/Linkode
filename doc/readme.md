@@ -9,7 +9,10 @@ cmt是comment缩写
 * content 内容
 * startDate 开始日期
 * endDate 截止日期
-## chat_log 聊天记录 `RENAME`
+## chat_log 聊天记录 
+
+`Rename`
+
 * senderId 发送者id
 * receiverId 接受者id
 * time 发送时间
@@ -42,7 +45,9 @@ cmt是comment缩写
 * endDate 截止日期
 * status 状态
 * money 酬金
-## project_app 项目申请 `NEW`
+## project_app 项目申请
+`New Table`
+
 * projectId 项目id
 * applicantId 申请者id
 * content 申请内容
@@ -57,3 +62,10 @@ cmt是comment缩写
 * birthday 生日
 * role 角色
 * money 余额
+
+## tutorial 教程
+
+`New Table`
+
+* content 教程内容(html格式)
+* type 教程类别
