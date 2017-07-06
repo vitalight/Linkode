@@ -52,7 +52,7 @@ public class ProjectTest {
     	project.setRequirement("我不是测试");
     	project.setTitle("测试");
     	project.setPosterId(1);
-    	projectService.updateByPrimaryKey(3, project);
+    	projectService.updateByPrimaryKey(project);
     }
     
     private void selectpage(){
