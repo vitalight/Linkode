@@ -25,6 +25,23 @@ public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/portfolio")
+    public String test(Model model, String type) {
+    	if (type==null) {
+    		model.addAttribute("type", "all");
+    	}
+    	else {
+    		model.addAttribute("type", type);
+    	}
+    	System.out.println("<!>"+type);
+    	if (type.equals("create")) {
+    		return View("/portfolio/create");
+    	} else if (type.equals("my")) {
+    		return View("/portfolio/my");
+    	}
+    	return View("/portfolio/all");
+    }
+    
     @GetMapping("/login")
     public String login(Model model, String msg){
     	if (msg!=null) {

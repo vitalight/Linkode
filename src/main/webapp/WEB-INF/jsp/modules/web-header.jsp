@@ -13,6 +13,5 @@
 	<title>Linkode - ${title}</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/share.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/login.css">
 </head>
 <body>

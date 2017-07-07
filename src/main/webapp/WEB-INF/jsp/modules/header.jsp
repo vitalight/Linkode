@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
 	String headType = (String)request.getAttribute("headType");
@@ -18,7 +19,7 @@
 	<ul>
 		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
 		<li><a class="nav-btn <%=crud %>" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
-		<li><a class="nav-btn <%=portfolio %>">作品交流</a></li>
+		<li><a class="nav-btn <%=portfolio %>" href="${pageContext.request.contextPath}/portfolio">作品交流</a></li>
 		<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project">项目众包</a></li>
 		<shiro:authenticated>
 			<li><a class="nav-btn <%=login %>" href="${pageContext.request.contextPath}/logout">登出</a></li>

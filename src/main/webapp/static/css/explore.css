@@ -50,7 +50,7 @@
 	cursor:pointer;
 	background-color:rgb(248,249,250);
 }
-.display-img, .display-bar-img{
+.display-img, .display-bar-img, .display-text{
 	height:11em;
 	width:13em;
 	margin-bottom:0.8em;
@@ -182,4 +182,17 @@ textarea.requirement {
 .more-padding {
 	padding:2em;
 	padding-bottom:1em;
+}
+/*=============== 作品 ==============*/
+.bigger {
+	width:83.5em;
+}
+.more-margin-left {
+	margin-left:5em;
+}
+.display-text {
+	border:var(--Ldgreen) 0.01em solid;
+	background-color:var(--Lgreen);
+	color:white;
+	padding:0.8em;
 }
