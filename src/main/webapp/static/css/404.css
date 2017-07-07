@@ -13,10 +13,24 @@ body {
 	color:rgb(79,90,120);
 
 	position: absolute;
-	top: 65%;
+	top: 50%;
 	left: 50%;
 	height: 30%;
 	width: 50%;
-	margin: 0 0 0 -25%;
+	margin: 4em 0 0 -25%;
 	text-align:center;
+}
+.login-btn {
+	font-size:0.65em;
+	margin-top:1.5em;
+	padding:0.2em 3em;
+	border-radius:0.2em;
+	border:rgb(79,90,120) 0.08em solid;
+	background-color:transparent;
+}
+.login-btn:hover {
+	background-color:rgb(79,90,120);
+	color:white;
+	-webkit-transition: background-color 0.5s, color 0.5s;
+	-moz-transition: background-color 0.5s, color 0.5s;
 }

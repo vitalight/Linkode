@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public int insert(User user) {
-    	return userMapper.insert(user);
+    	userMapper.insert(user);
+    	return user.getId();
     }
     
     @Override
@@ -41,8 +42,8 @@ public class UserServiceImpl implements UserService {
     	user.setPassword(loginViewModel.getPassword());
     	user.setRole("guest");
     	user.setUsername(loginViewModel.getEmail().split("@")[0]);
-    	
-    	return userMapper.insert(user);
+    	userMapper.insert(user);
+    	return user.getId();
     }
     
     @Override
