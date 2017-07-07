@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+    <title>Article Editor</title>
+    <style type="text/css">
+        /* Minimal styling to add some padding around the editor in this sample */
+        body {
+            padding: 30px;
+        }
+        .container {
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2><label for="editor1">Article Editor</label></h2>
+    <textarea id="editor1"></textarea>
+</div>
+<script>
+    CKEDITOR.replace( 'editor1', {
+        customConfig: 'static/js/config.js'
+    });
+</script>
+</body>
+</html>
