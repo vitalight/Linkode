@@ -17,13 +17,12 @@
 	
 	<div class="display bigger">
 		<div class="display-card">
-			
-			<div class="display-text">
+			<div class="display-text ran-1">
 				少年听雨歌楼上，红烛昏罗帐。壮年听雨客舟中，江阔云低，断雁叫西风。
 				而今听雨僧庐下，鬓已星星也。悲欢离合总无情，一任阶前，点滴到天明。
 			</div>
 			<p class="card-name">文章示范</p>
-			<p class="card-info">30分钟前</p>
+			<p class="card-info"><span class=""></span>
 		</div>
 		<%
 		for (int i=0;i<3;i++) { %>

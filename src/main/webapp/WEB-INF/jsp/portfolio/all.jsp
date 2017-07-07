@@ -16,21 +16,23 @@
 	</div>
 	
 	<div class="display bigger">
+		<%for (int i=0;i<3;i++) {%>
 		<div class="display-card">
-			
-			<div class="display-text">
+			<div class=" ran-<%=i%3%> display-text">
 				少年听雨歌楼上，红烛昏罗帐。壮年听雨客舟中，江阔云低，断雁叫西风。
 				而今听雨僧庐下，鬓已星星也。悲欢离合总无情，一任阶前，点滴到天明。
 			</div>
 			<p class="card-name">文章示范</p>
-			<p class="card-info">30分钟前</p>
+			<span class="card-info">
+				达芬奇
+			</span>
 		</div>
-		<%
+		<%}
 		for (int i=0;i<20;i++) { %>
 		<div class="display-card">
 			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-<%=i%10+1%>.png"/>
 			<p class="card-name">苟利国家</p>
-			<p class="card-info">1秒前</p>
+			<p class="card-info">某位学长</p>
 		</div>
 		<% } %>
 	</div>

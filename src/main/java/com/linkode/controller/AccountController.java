@@ -29,15 +29,15 @@ public class AccountController extends BaseController {
     public String test(Model model, String type) {
     	if (type==null) {
     		model.addAttribute("type", "all");
+    		return View("/portfolio/all");
     	}
     	else {
     		model.addAttribute("type", type);
     	}
-    	System.out.println("<!>"+type);
     	if (type.equals("create")) {
     		return View("/portfolio/create");
     	} else if (type.equals("my")) {
-    		return View("/portfolio/my");
+    		return View("/portfolio/myPortfolio");
     	}
     	return View("/portfolio/all");
     }

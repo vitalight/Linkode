@@ -7,7 +7,7 @@ import com.linkode.util.DataPage;
 
 
 public interface ProjectService {
-    void insert(Project project);
+    int insert(Project project);
     void deleteByPrimaryKey(Integer id);
     void updateByPrimaryKey(Project project);
     DataPage<Project> selectPage(Integer pagenum, Integer pageSize, Integer indexCount);
