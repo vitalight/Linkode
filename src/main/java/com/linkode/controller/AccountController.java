@@ -24,7 +24,8 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-    /* for portfolio test
+    //for portfolio test
+    /*
     @GetMapping("/portfolio")
     public String test(Model model, String type) {
     	if (type==null) {
