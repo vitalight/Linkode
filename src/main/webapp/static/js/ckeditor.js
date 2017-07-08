@@ -19,9 +19,9 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'tools', items: [ 'Maximize' ] },
         { name: 'editing', items: [ 'Scayt' ] }
     ];
-    //config.extraPlugins = 'tableresize, tabletools';
 
-    config.contentsCss = [ 'https://cdn.ckeditor.com/4.7.1/standard-all/contents.css' ];
+    //config.extraPlugins = 'autoembed,embedsemantic,image2,uploadimage,uploadfile';
+    config.contentsCss = [ 'https://cdn.ckeditor.com/4.7.1/standard-all/contents.css', 'mystyles.css' ];
     config.language = 'zh-cn';
     config.removePlugins = 'image';
     config.height = 461;

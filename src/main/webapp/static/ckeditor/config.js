@@ -13,18 +13,21 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
         { name: 'styles', items: [ 'Styles', 'Format' ] },
         { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+        { name: 'CKAwesome', items: [ 'ckawesome' ] },
         { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
         { name: 'links', items: [ 'Link', 'Unlink' ] },
         { name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
         { name: 'tools', items: [ 'Maximize' ] },
         { name: 'editing', items: [ 'Scayt' ] }
     ];
-    //config.extraPlugins = 'tableresize, tabletools';
+    //config.extraPlugins = 'ckawesome';
 
-    config.contentsCss = [ 'https://cdn.ckeditor.com/4.7.1/standard-all/contents.css' ];
+    config.contentsCss = [ 'https://cdn.ckeditor.com/4.7.1/standard-all/contents.css', 'mystyle.css'];
     config.language = 'zh-cn';
     config.removePlugins = 'image';
     config.height = 461;
+    config.bodyClass = 'article-editor';
+    config.fontawesomePath = '../font-awesome/css/font-awesome.min.css';
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
