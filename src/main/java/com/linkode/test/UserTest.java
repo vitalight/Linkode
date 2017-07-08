@@ -12,7 +12,7 @@ import com.linkode.pojo.User;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)       
-@ContextConfiguration(locations = {"file:src/main/resources/spring/applicationContext-service.xml","classpath:spring/applicationContext-dao.xml"})
+@ContextConfiguration(locations = {"file:../resources/spring/applicationContext-service.xml","classpath:spring/applicationContext-dao.xml"})
 public class UserTest {
     @Autowired
     private UserService userService;
