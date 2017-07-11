@@ -5,7 +5,7 @@
 	String headType = (String)request.getAttribute("headType");
 	String crud="", portfolio="", project="", login="";
 	if (headType == null) {
-	} else if (headType.equals("crud")) {
+	} else if (headType.equals("admin")) {
 		crud = "nav-btn-chose";
 	} else if (headType.equals("portfolio")) {
 		portfolio = "nav-btn-chose";
@@ -18,6 +18,7 @@
 <nav class="white-nav navbar-fixed-top">
 	<ul>
 		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
+		<li><a class="nav-btn">主页</a></li>
 		<li><a class="nav-btn <%=crud %>" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
 		<li><a class="nav-btn <%=portfolio %>" href="${pageContext.request.contextPath}/portfolio">作品交流</a></li>
 		<li><a class="nav-btn <%=project %>" href="${pageContext.request.contextPath}/project">项目众包</a></li>

@@ -4,10 +4,8 @@
   <resultMap id="BaseResultMap" type="com.linkode.pojo.PostCmt">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="postid" jdbcType="INTEGER" property="postid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="floor" jdbcType="INTEGER" property="floor" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.linkode.pojo.PostCmt">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,27 +66,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, postid, floor
+    id, postid, content, floor
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.linkode.pojo.PostCmtExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from post_cmt
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.linkode.pojo.PostCmtExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -103,11 +82,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from post_cmt
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -125,9 +102,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_cmt (postid, floor, content
+    insert into post_cmt (postid, content, floor
       )
-    values (#{postid,jdbcType=INTEGER}, #{floor,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.PostCmt">
@@ -139,22 +116,22 @@
       <if test="postid != null">
         postid,
       </if>
-      <if test="floor != null">
-        floor,
-      </if>
       <if test="content != null">
         content,
+      </if>
+      <if test="floor != null">
+        floor,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postid != null">
         #{postid,jdbcType=INTEGER},
       </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
       <if test="floor != null">
         #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -173,23 +150,13 @@
       <if test="record.postid != null">
         postid = #{record.postid,jdbcType=INTEGER},
       </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
       <if test="record.floor != null">
         floor = #{record.floor,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update post_cmt
-    set id = #{record.id,jdbcType=INTEGER},
-      postid = #{record.postid,jdbcType=INTEGER},
-      floor = #{record.floor,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,6 +165,7 @@
     update post_cmt
     set id = #{record.id,jdbcType=INTEGER},
       postid = #{record.postid,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
       floor = #{record.floor,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,25 +177,19 @@
       <if test="postid != null">
         postid = #{postid,jdbcType=INTEGER},
       </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
       <if test="floor != null">
         floor = #{floor,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.linkode.pojo.PostCmt">
-    update post_cmt
-    set postid = #{postid,jdbcType=INTEGER},
-      floor = #{floor,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.PostCmt">
     update post_cmt
     set postid = #{postid,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
       floor = #{floor,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

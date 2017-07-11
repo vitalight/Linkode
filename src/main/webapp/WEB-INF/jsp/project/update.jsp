@@ -50,7 +50,7 @@
 					</div>
 					<div class="col-sm-4 col-sm-offset-1">
 						<fmt:formatDate pattern="yyyy-MM-dd" value='${model.endDate}' var="time"/>
-						截止日期:<input class="form-control" type="date" name="time" 
+						截止日期:<input class="form-control" type="date" name="endDate" 
 									value="${time}" required/>
 					</div>
 				</div><br/><br/>

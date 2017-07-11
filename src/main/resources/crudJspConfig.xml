@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- com.linkode.generator.CrudJspGenerator配置文件 -->
+<generatorConfig>
+	<!-- 生成的js和jsp放置路径 -->
+	<location jsPath="src/main/webapp/static/js/crud" jspPath="src/main/webapp/WEB-INF/jsp/crud" />
+	<!-- overwrite 是否覆盖已存在文件 ; verbose 是否输出详细运行信息 -->
+	<config overwrite="false" verbose="false" />
+	<!-- 需要生成的表 -->
+	<tables>
+		<table-no name="chatLog">
+			<field name="id" type="pk" />
+			<field name="senderId" type="int" />
+			<!--  Datetime is not supported yet -->
+			<field name="receiverId" type="datetime" />
+			<field name="content" type="string" />
+		</table-no>
+	
+		<table name="postCmt">
+			<field name="id" type="pk" />
+			<field name="postid" type="int" />
+			<field name="content" type="string" />
+			<field name="floor" type="int" />
+		</table> 
+	
+		<table name="post">
+			<field name="id" type="pk" />
+			<field name="type" type="string" />
+			<field name="title" type="string" />
+			<field name="content" type="string" />
+		</table>
+	
+		<table name="project">
+			<field name="id" type="pk" />
+			<field name="posterId" type="int" />
+			<field name="contractorId" type="int" />
+			<field name="title" type="string" />
+			<field name="requirement" type="string" />
+			<field name="type" type="string" />
+			<field name="startDate" type="date" />
+			<field name="endDate" type="date" />
+			<field name="status" type="string" />
+			<field name="money" type="int" />
+		</table>
+	
+		<table name="user">
+			<field name="id" type="pk" />
+			<field name="username" type="string" />
+			<field name="password" type="string"/>
+			<field name="email" type="string"/>
+			<field name="ratingNumber" type="int"/>
+			<field name="ratingTotal" type="int"/>
+			<field name="sex" type="string"/>
+			<field name="birthday" type="date"/>
+			<field name="role" type="string"/>
+			<field name="money" type="int"/>
+		</table>
+	
+		<table name="projectApp">
+			<field name="id" type="pk" />
+			<field name="projectId" type="int" />
+			<field name="applicantId" type="int" />
+			<field name="content" type="string" />
+			<field name="time" type="date" />
+		</table>
+		
+		<table name="ad">
+			<field name="id" type="pk" />
+			<field name="title" type="string" />
+			<field name="content" type="string" />
+			<field name="startDate" type="date" />
+			<field name="endDate" type="date" />
+		</table>
+	</tables>
+</generatorConfig>

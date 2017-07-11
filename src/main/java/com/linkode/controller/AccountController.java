@@ -24,7 +24,7 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-    /* for portfolio test
+    
     @GetMapping("/portfolio")
     public String test(Model model, String type) {
     	if (type==null) {
@@ -40,7 +40,7 @@ public class AccountController extends BaseController {
     		return View("/portfolio/myPortfolio");
     	}
     	return View("/portfolio/all");
-    }*/
+    }
     
     @GetMapping("/login")
     public String login(Model model, String msg){
