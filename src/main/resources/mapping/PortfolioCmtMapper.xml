@@ -5,7 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="portfolioId" jdbcType="INTEGER" property="portfolioId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="floor" jdbcType="INTEGER" property="floor" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, portfolioId, content, floor
+    id, portfolioId, content, userId, time
   </sql>
   <select id="selectByExample" parameterType="com.linkode.pojo.PortfolioCmtExample" resultMap="BaseResultMap">
     select
@@ -102,10 +103,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into portfolio_cmt (portfolioId, content, floor
-      )
-    values (#{portfolioId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}
-      )
+    insert into portfolio_cmt (portfolioId, content, userId, 
+      time)
+    values (#{portfolioId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.PortfolioCmt">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -119,8 +120,11 @@
       <if test="content != null">
         content,
       </if>
-      <if test="floor != null">
-        floor,
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="time != null">
+        time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -130,8 +134,11 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="floor != null">
-        #{floor,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -153,8 +160,11 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.floor != null">
-        floor = #{record.floor,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        userId = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       portfolioId = #{record.portfolioId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
-      floor = #{record.floor,jdbcType=INTEGER}
+      userId = #{record.userId,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,8 +191,11 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="floor != null">
-        floor = #{floor,jdbcType=INTEGER},
+      <if test="userId != null">
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -190,7 +204,8 @@
     update portfolio_cmt
     set portfolioId = #{portfolioId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
-      floor = #{floor,jdbcType=INTEGER}
+      userId = #{userId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

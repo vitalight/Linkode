@@ -15,7 +15,8 @@ public class CrudJspGenerator {
 	private static String jsPath, jspPath;
 	private static List<Table> tables;
 	private static boolean verbose=false;
-	private static boolean overwrite=false;
+	private static boolean overwriteJs=false;
+	private static boolean overwriteJsp=false;
 	
 	private static boolean loadXML() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -32,7 +33,8 @@ public class CrudJspGenerator {
 			Element config = (Element)doc.getElementsByTagName("config").item(0);
 			
 			verbose = config.getAttribute("verbose").equals("true") ? true : false ;
-			overwrite = config.getAttributeNode("overwrite").equals("true") ? true : false;
+			overwriteJs = config.getAttribute("overwriteJs").equals("true") ? true : false;
+			overwriteJsp = config.getAttribute("overwriteJsp").equals("true") ? true : false;
 			
 			if (jsPath=="") {
 				System.out.println("<ERROR> XML contains no information for jsPath.");
@@ -75,8 +77,10 @@ public class CrudJspGenerator {
 	
 	private static void test() {
 		System.out.println("============================================\n"
-							+ "JS PATH : " + jsPath + "\n"
-							+ "JSP PATH: " + jspPath + "\n");
+							+ "JS PATH :   " + jsPath + "\n"
+							+ "JSP PATH:   " + jspPath + "\n"
+							+ "OverwriteJs:" + (overwriteJs?"True":"False") + "\n"
+							+ "OverwriteJsp:" + (overwriteJsp?"True":"False") + "\n");
 		for (Table table:tables) {
 			System.out.println("  * "+table.name);
 			for (int i=0; i<table.fieldNames.size(); i++) {
@@ -100,7 +104,7 @@ public class CrudJspGenerator {
 			if (verbose) {
 				System.out.println("Existing File ["+filename+"]");
 			}
-			if (!overwrite) {
+			if (!overwriteJs) {
 				return;
 			}
 		}
@@ -247,7 +251,7 @@ public class CrudJspGenerator {
 			if (verbose) {
 				System.out.println("Existing File ["+filename+"]");
 			}
-			if (!overwrite) {
+			if (!overwriteJsp) {
 				return;
 			}
 		}
@@ -256,10 +260,11 @@ public class CrudJspGenerator {
 			fw = new FileWriter(file);
 			/*======== 下面是生成内容 ========*/
 			fw.write("<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\n" +
-				"<% request.setAttribute(\"title\",\"" + table.name + "\"); %><% request.setAttribute(\"headType\",\"admin\"); %>\n" +
+				"<% request.setAttribute(\"title\",\"" + table.name + "\"); %>\n" +
 				"<%@ include file=\"../modules/web-header.jsp\"%><%@ include file=\"../modules/crud-header.jsp\" %>\n" +
 				"</head><body><%@ include file=\"../modules/header.jsp\"%>\n" +
-					"<c:set var=\"type\" value=\"" + table.name + "\"/><%@ include file=\"./crud-head.jsp\" %>\n" +
+					"<c:set var=\"type\" value=\"" + table.name + "\"/>" + "<c:set var=\"headType\" value=\"admin\"/>"
+							+ "<%@ include file=\"./crud-head.jsp\" %>\n" +
 					"<div class=\"panel panel-default display bigger\">\n" +
 						"<div class=\"panel-heading\">\n");
 			fw.write(table.name);
@@ -359,5 +364,6 @@ public class CrudJspGenerator {
 			generateJs(table);
 			generateJsp(table);
 		}
+		System.out.println("Generating Over.");
 	}
 }

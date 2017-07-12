@@ -49,7 +49,7 @@ a:focus {
 }
 .nav-btn {
 	color:black;
-	margin:0 0.3em;
+	margin:0 0.3em -0.1em;
 	color:grey;
 	padding:1.7em 2em;
 	text-align:center;

@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","postCmt"); %><% request.setAttribute("headType","admin"); %>
+<% request.setAttribute("title","postCmt"); %>
 <%@ include file="../modules/web-header.jsp"%><%@ include file="../modules/crud-header.jsp" %>
 </head><body><%@ include file="../modules/header.jsp"%>
-<c:set var="type" value="postCmt"/><%@ include file="./crud-head.jsp" %>
+<c:set var="type" value="postCmt"/><c:set var="headType" value="admin"/><%@ include file="./crud-head.jsp" %>
 <div class="panel panel-default display bigger">
 <div class="panel-heading">
 postCmt<button class="btn btn-default" type="button" id="add">

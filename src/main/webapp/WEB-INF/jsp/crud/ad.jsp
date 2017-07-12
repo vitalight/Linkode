@@ -1,65 +1,67 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","Ad"); %>
-<% request.setAttribute("headType","admin"); %>
-<%@ include file="../modules/web-header.jsp"%>
-<%@ include file="../modules/crud-header.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%
+	request.setAttribute("title", "ad");
+%>
+<%@ include file="../modules/web-header.jsp"%><%@ include
+	file="../modules/crud-header.jsp"%>
 </head>
-<body>
-<%@ include file="../modules/header.jsp"%>
-	<c:set var="type" value="ad"/>
-	<%@ include file="./crud-head.jsp" %>
-	
+<body><%@ include file="../modules/header.jsp"%>
+	<c:set var="type" value="ad" />
+	<c:set var="headType" value="admin" /><%@ include
+		file="./crud-head.jsp"%>
 	<div class="panel panel-default display bigger">
 		<div class="panel-heading">
-			Ad
+			ad
 			<button class="btn btn-default" type="button" id="add">
 				<i class="fa fa-plus"></i>
 			</button>
-		</div> <!-- /.panel-heading -->
+		</div>
+		<!-- /.panel-heading -->
 		<div class="panel-body">
 			<div class="dataTable_wrapper">
-				<table class="table table-striped table-bordered table-hover" id="dataTables">
+				<table class="table table-striped table-bordered table-hover"
+					id="dataTables">
 					<thead>
 						<tr>
-						    <th>ID</th>
-							<th>Title</th>
-							<th>Content</th>
-							<th>StartDate</th>
-							<th>EndDate</th>
+							<th>id</th>
+							<th>title</th>
+							<th>content</th>
+							<th>startDate</th>
+							<th>endDate</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${model}" var="ad">
-						<fmt:formatDate pattern="yyyy-MM-dd" value="${ad.startDate}" var="startDate"/>
-						<fmt:formatDate pattern="yyyy-MM-dd" value="${ad.endDate}" var="endDate"/>
-						<tr>
-						    <td>${ad.id}</td><td>${ad.title}</td>
-						    <td>${ad.content}</td>
-						    <td>${startDate}</td>
-						    <td>${endDate}</td>
-							<td>
-								<button class="btn btn-default delete" type="button"
-									data-id="${ad.id }">
-									<i class="fa fa-trash"></i>
-								</button>
-								<button class="btn btn-default edit" type="button"
-									data-id="${ad.id }"
-									data-title="${ad.title }"
-									data-content="${ad.content }"
-									data-startdate="${startDate }"
-									data-enddate="${endDate }">
-									<i class="fa fa-edit"></i>
-								</button>
-							</td>
-						</tr>
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${ad.startDate}"
+								var="startDate" />
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${ad.endDate}"
+								var="endDate" />
+							<tr>
+								<td>${ad.id}</td>
+								<td>${ad.title}</td>
+								<td>${ad.content}</td>
+								<td>${startDate}</td>
+								<td>${endDate}</td>
+								<td><button class="btn btn-default delete" type="button"
+										data-id="${ad.id}">
+										<i class="fa fa-trash"></i>
+									</button>
+									<button class="btn btn-default edit" type="button"
+										data-id="${ad.id}" data-title="${ad.title}"
+										data-content="${ad.content}" data-startdate="${startDate}"
+										data-enddate="${endDate}">
+										<i class="fa fa-edit"></i>
+									</button></td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-		</div> <!-- /.panel-body -->
-	</div> <!-- panel -->
-	
+		</div>
+		<!-- /.panel-body -->
+	</div>
+	<!-- panel -->
 	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -75,16 +77,19 @@
 						<div class="col-lg-12">
 							<form role="form">
 								<div class="form-group">
-									<label>Title</label> <input class="form-control" name="title" />
+									<label>title</label><input class="form-control" name="title" />
 								</div>
 								<div class="form-group">
-									<label>Content</label> <input class="form-control" name="content" />
+									<label>content</label><input class="form-control"
+										name="content" />
 								</div>
 								<div class="form-group">
-									<label>StartDate</label> <input class="form-control" type="date" name="startdate" />
+									<label>startDate</label><input class="form-control" type="date"
+										name="startdate" />
 								</div>
 								<div class="form-group">
-									<label>EndDate</label> <input class="form-control" type="date" name="enddate" />
+									<label>endDate</label><input class="form-control" type="date"
+										name="enddate" />
 								</div>
 							</form>
 						</div>
@@ -97,8 +102,7 @@
 			</div>
 		</div>
 	</div>
-	
-<%@ include file="../modules/javascript.jsp"%>
-<%@ include file="../modules/crud-footer.jsp" %>
-<script src="${pageContext.request.contextPath}/static/js/crud/ad.js"></script>
-<%@ include  file="../modules/web-footer.jsp"%>
+	<%@ include file="../modules/javascript.jsp"%>
+	<%@ include file="../modules/crud-footer.jsp"%>
+	<script src="${pageContext.request.contextPath}/static/js/crud/ad.js"></script>
+	<%@ include file="../modules/web-footer.jsp"%>

@@ -17,7 +17,7 @@
     <javaClientGenerator targetPackage="com.linkode.dao" targetProject="Linkode/src/main/java" type="XMLMAPPER" />
     
     
-    <table schema="linkode" tableName="post_cmt">
+    <table schema="linkode" tableName="portfolio_cmt">
     	<property name="useActualColumnNames" value="true" />
     	<!-- identity="true"确保成功主键自增 -->
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>

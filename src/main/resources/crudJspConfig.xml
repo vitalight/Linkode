@@ -4,7 +4,7 @@
 	<!-- 生成的js和jsp放置路径 -->
 	<location jsPath="src/main/webapp/static/js/crud" jspPath="src/main/webapp/WEB-INF/jsp/crud" />
 	<!-- overwrite 是否覆盖已存在文件 ; verbose 是否输出详细运行信息 -->
-	<config overwrite="false" verbose="false" />
+	<config overwriteJsp="false" overwriteJs="false" verbose="false" />
 	<!-- 需要生成的表 -->
 	<tables>
 		<table-no name="chatLog">
