@@ -22,7 +22,8 @@
 				而今听雨僧庐下，鬓已星星也。悲欢离合总无情，一任阶前，点滴到天明。
 			</div>
 			<p class="card-name">文章示范</p>
-			<p class="card-info"><span class=""></span>
+			<p class="card-info"><span class="">2秒前</span>
+			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/1"></a>
 		</div>
 		<%
 		for (int i=0;i<3;i++) { %>
@@ -30,6 +31,7 @@
 			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-<%=i%10+1%>.png"/>
 			<p class="card-name">苟利国家</p>
 			<p class="card-info">1秒前</p>
+			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/1"></a>
 		</div>
 		<% } %>
 	</div>

@@ -45,6 +45,10 @@ public class AccountController extends BaseController {
     	}
     	return View("/portfolio/all");
     }
+    @GetMapping("/portfolio/1")
+    public String test0(Model model) {
+    	return View("/portfolio/detail");
+    }
     @GetMapping("/tutorial")
     public String test2(Model model) {
     	return View("/tutorial/main");
@@ -114,7 +118,6 @@ public class AccountController extends BaseController {
     	if(!bindingResult.hasErrors()){
     		if (userService.findByEmail(loginViewModel.getEmail()) == null) {
 	    		//邮箱未被注册，保存注册信息
-    			System.out.println("<point>1");
 	    		userService.insert(loginViewModel);
 	    		Subject subject = SecurityUtils.getSubject();
 	            UsernamePasswordToken usernamePasswordTokentoken = new UsernamePasswordToken(loginViewModel.getEmail().trim().toLowerCase(),loginViewModel.getPassword());
@@ -122,12 +125,10 @@ public class AccountController extends BaseController {
 	                subject.logout();
 	            }
 	    		try {
-	    			System.out.println("<point>2");
 	                subject.login(usernamePasswordTokentoken);
 	                User user = userService.findByEmail(loginViewModel.getEmail());
 	                Integer id = user.getId();
 	                String username = user.getUsername();
-	    			System.out.println("<point>3");
 	                subject.getSession().setAttribute("LOGIN_USER_ID",id);
 	                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
 	                return RedirectTo("/project");
