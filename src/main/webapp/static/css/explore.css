@@ -45,10 +45,21 @@
 	padding-right:1.9em;
 	margin:0.8em 0.7em;
 	display:inline-block;
+	position:relative;
 }
 .display-card:hover {
-	cursor:pointer;
-	background-color:rgb(248,249,250);
+}
+a.card-over {
+	position: absolute;
+    top: 0;
+    bottom: 30px;
+    right: 1px;
+    height: 100%;
+    width: 100%;
+}
+a.card-over:hover {
+    background-color: black;
+    opacity: 0.03;
 }
 .display-img, .display-bar-img, .display-text{
 	height:11em;
@@ -359,4 +370,28 @@ h1.special {
 	margin-top:-0.1em;
 	margin-right:1em;
 	vertical-align:middle;
+}
+img.avatar {
+	padding:0;
+	width:4em;
+	height:4em;
+	border-radius:50%;
+	overflow:hidden;
+	margin-top:-0.2em;
+}
+.cmt-line {
+	margin-left:0em;
+	padding-top:2em;
+	padding-bottom:1em;
+	border-top:var(--Lgrey) 1px solid;
+}
+.cmt-name {
+	font-weight:700;
+	font-size:1.1em;
+}
+.cmt-time {
+	font-size:0.9em;
+	color:var(--Ldgrey);
+	margin-left:1em;
+	font-weight:100;
 }
