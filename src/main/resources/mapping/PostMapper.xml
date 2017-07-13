@@ -5,9 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.linkode.pojo.Post">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,27 +66,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, title
+    id, type, title, content
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.linkode.pojo.PostExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from post
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.linkode.pojo.PostExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -103,11 +82,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from post
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -127,7 +104,7 @@
     </selectKey>
     insert into post (type, title, content
       )
-    values (#{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+    values (#{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.Post">
@@ -154,7 +131,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
+        #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -177,19 +154,9 @@
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update post
-    set id = #{record.id,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,7 +165,8 @@
     update post
     set id = #{record.id,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR}
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,22 +181,16 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
+        content = #{content,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.linkode.pojo.Post">
-    update post
-    set type = #{type,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Post">
     update post
     set type = #{type,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR}
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

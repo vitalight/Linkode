@@ -47,17 +47,4 @@ public class BaseController {
     	Subject subject = SecurityUtils.getSubject();
     	return subject.getSession();
     }
-    
-    protected Date getDate(HttpServletRequest request, String attr) throws ParseException {
-    	String dateString = request.getParameter(attr);
-    	if (dateString == null)
-    		return null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = sdf.parse(dateString);
-        Calendar calendar = new GregorianCalendar(); 
-        calendar.setTime(date); 
-        calendar.add(calendar.DATE,1);
-        date=calendar.getTime();
-        return date;
-    }
 }

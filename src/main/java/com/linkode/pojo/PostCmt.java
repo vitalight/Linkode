@@ -5,9 +5,9 @@ public class PostCmt {
 
     private Integer postid;
 
-    private Integer floor;
-
     private String content;
+
+    private Integer floor;
 
     public Integer getId() {
         return id;
@@ -25,19 +25,19 @@ public class PostCmt {
         this.postid = postid;
     }
 
-    public Integer getFloor() {
-        return floor;
-    }
-
-    public void setFloor(Integer floor) {
-        this.floor = floor;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Integer floor) {
+        this.floor = floor;
     }
 }

@@ -1,6 +1,10 @@
 package com.linkode.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import com.linkode.pojo.ViewModel.ProjectViewModel;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
@@ -8,11 +12,14 @@ import com.linkode.service.ProjectService;
 import com.linkode.util.DataPage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +33,17 @@ public class ProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
+    
+    /**
+     * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
+     * 若不setTimeZone，则存入数据库中的日期会缺一天。
+     */
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 
     /*======== 查 ========*/
     @GetMapping("")
@@ -71,7 +89,7 @@ public class ProjectController extends BaseController {
     @PostMapping("/update")
     public String updateAction(Model model, HttpServletRequest req, @Validated Project newProject, BindingResult bindingResult) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(newProject.getId());
-        project.setEndDate(getDate(req, "time"));
+        project.setEndDate(newProject.getEndDate());
         project.setMoney(newProject.getMoney());
         project.setRequirement(newProject.getRequirement());
         project.setType(newProject.getType());
@@ -114,7 +132,6 @@ public class ProjectController extends BaseController {
 
         project.setPosterId(userid);
         project.setStartDate(new java.util.Date());
-        project.setEndDate(getDate(request,"time"));
         project.setStatus("uncontracted");
         projectService.insert(project);
         return RedirectTo("/project/myProject");

@@ -16,21 +16,15 @@ public interface PostCmtMapper {
 
     int insertSelective(PostCmt record);
 
-    List<PostCmt> selectByExampleWithBLOBs(PostCmtExample example);
-
     List<PostCmt> selectByExample(PostCmtExample example);
 
     PostCmt selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") PostCmt record, @Param("example") PostCmtExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") PostCmt record, @Param("example") PostCmtExample example);
-
     int updateByExample(@Param("record") PostCmt record, @Param("example") PostCmtExample example);
 
     int updateByPrimaryKeySelective(PostCmt record);
-
-    int updateByPrimaryKeyWithBLOBs(PostCmt record);
 
     int updateByPrimaryKey(PostCmt record);
 }

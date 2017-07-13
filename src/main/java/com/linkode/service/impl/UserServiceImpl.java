@@ -58,5 +58,25 @@ public class UserServiceImpl implements UserService {
         User user = users.get(0);
         return user;
     }
+    
+    @Override
+    public int update(User user) {
+    	return userMapper.updateByPrimaryKey(user);
+    }
+    
+    @Override
+	public int deleteById(int id) {
+    	return userMapper.deleteByPrimaryKey(id);
+    }
+	
+    @Override
+	public User getById(int id) {
+    	return userMapper.selectByPrimaryKey(id);
+    }
+    
+    @Override
+	public List<User> getAll() {
+    	return userMapper.selectByExample(null);
+    }
 }
 

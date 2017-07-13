@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.linkode.dao.ProjectMapper;
 import com.linkode.exception.CustomException;
+import com.linkode.pojo.Ad;
 import com.linkode.pojo.Project;
 import com.linkode.service.ProjectService;
 import com.linkode.service.UserService;
@@ -100,4 +101,18 @@ public class ProjectServiceImpl implements ProjectService {
 
         return page;
     }
+    
+    public int update(Project project) {
+    	return projectMapper.updateByPrimaryKey(project);
+    }
+	public int deleteById(int id) {
+		return projectMapper.deleteByPrimaryKey(id);
+	}
+	
+	public Project getById(int id) {
+		return projectMapper.selectByPrimaryKey(id);
+	}
+	public List<Project> getAll() {
+		return projectMapper.selectByExample(null);
+	}
 }

@@ -47,7 +47,7 @@
 						酬金：<input class="form-control" type="number" step="1" name="money" required/>
 					</div>
 					<div class="col-sm-4 col-sm-offset-1">
-						截止日期:<input class="form-control" type="date" name="time" required/>
+						截止日期:<input class="form-control" type="date" name="endDate" required/>
 					</div>
 				</div><br/><br/>
 				<div class="row">

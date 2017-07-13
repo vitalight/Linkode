@@ -1,5 +1,7 @@
 package com.linkode.pojo;
 
+import java.util.Date;
+
 public class PortfolioCmt {
     private Integer id;
 
@@ -7,7 +9,9 @@ public class PortfolioCmt {
 
     private String content;
 
-    private Integer floor;
+    private Integer userId;
+
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -33,11 +37,19 @@ public class PortfolioCmt {
         this.content = content;
     }
 
-    public Integer getFloor() {
-        return floor;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }
