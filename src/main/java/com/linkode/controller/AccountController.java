@@ -25,10 +25,6 @@ public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
     
-    /**
-     * This function is used for test 
-     * and should be deleted after merging.
-     */
     @GetMapping("/portfolio")
     public String test(Model model, String type) {
     	if (type==null) {
