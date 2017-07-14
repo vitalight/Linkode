@@ -7,13 +7,30 @@
 	<config overwriteJsp="false" overwriteJs="false" verbose="false" />
 	<!-- 需要生成的表 -->
 	<tables>
-		<table-no name="chatLog">
+		<table name="portfolio">
+			<field name="id" type="pk" />
+			<field name="userId" type="int" />
+			<!--  Datetime is not supported yet -->
+			<field name="title" type="string" />
+			<field name="content" type="string" />
+			<field name="type" type="string" />
+			<field name="likes" type="int" />
+		</table>
+		<table name="portfolioCmt">
+			<field name="id" type="pk" />
+			<field name="portfolioId" type="int" />
+			<field name="content" type="string" />
+			<field name="userId" type="int" />
+			<field name="time" type="datetime" />
+		</table>
+		<table name="chatLog">
 			<field name="id" type="pk" />
 			<field name="senderId" type="int" />
+			<field name="receiverId" type="int" />
 			<!--  Datetime is not supported yet -->
-			<field name="receiverId" type="datetime" />
+			<field name="time" type="datetime" />
 			<field name="content" type="string" />
-		</table-no>
+		</table>
 	
 		<table name="postCmt">
 			<field name="id" type="pk" />

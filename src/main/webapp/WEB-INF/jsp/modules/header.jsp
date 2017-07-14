@@ -19,6 +19,6 @@
 	</ul>
 	<c:if test="${!empty LOGIN_USER_ID}">
 		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
-		<a class="nav-btn user-btn">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
+		<a class="nav-btn user-btn" href="/user/${LOGIN_USER_ID}">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
 	</c:if>
 </nav>

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","作品浏览"); %>
+<% request.setAttribute("title","发布作品"); %>
 <% request.setAttribute("headType","portfolio"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
@@ -15,27 +15,35 @@
 		<a class="type-btn" id="create" href="${pageContext.request.contextPath}/portfolio/create">发布作品</a>
 	</div>
 	
-	<div class="display bigger">
-		<c:forEach items="${model}" var="pvm">
-		<div class="display-card">
-		
-			<c:if test="${pvm.type == 'literature'}">
-			<div class=" ran-${pvm.id%3} display-text">
-				${pvm.content}
+	<div class="display">
+		<form action="${pageContext.request.contextPath}/portfolio/update" method="post">
+			<div class="display-bar more-padding">
+				<div class="row">
+						<input class="form-control" name="id" value="${model.id}" type="hidden" />
+						<div class="col-sm-4">
+							作品名称：<input class="form-control" type="text" name="title" value="${model.title}" required/>
+						</div>
+						<div class="col-sm-4 col-sm-offset-1">
+							作品类别:
+							<select class="form-control" name="type" required>
+								<option value=""></option>
+								<option id="update-image" value="image">平面</option>
+								<option id="update-video" value="video">视频</option>
+								<option id="update-literature" value="literature">文学</option>
+							</select>
+						</div>
+				</div><br/><br/>
+				<div class="row">
+					<div class="col-sm-12">
+						作品介绍：
+						<textarea name="content" class="form-control requirement" maxlength="90" name="requirement"required>
+${model.content}</textarea>
+					</div>
+				</div>
+				<br/>
+				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">发布项目</button>
 			</div>
-			</c:if>
-			<c:if test="${pvm.type != 'literature'}">
-			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-${pvm.id%10+1}.png"/>
-			</c:if>
-			
-			<p class="card-name">${pvm.title}</p>
-			<span class="card-info">
-				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar-${pvm.userId%6+1}.jpg" />
-				${pvm.username}
-			</span>
-			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
-		</div>
-		</c:forEach>
+		</form>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
@@ -44,12 +52,7 @@
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	if (${type == null}) {
-		$("#all").addClass("type-chose");
-	}
-	else {
-		$("#${type}").addClass("type-chose");
-	}
+	$("#update-${model.type}").attr("selected","selected"); 
 }); 
 </script>
 <%@ include  file="../modules/web-footer.jsp"%>

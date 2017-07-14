@@ -23,5 +23,8 @@
     <bean id="projectAppService" class="com.linkode.service.impl.ProjectAppServiceImpl"/>
     <bean id="postService" class="com.linkode.service.impl.PostServiceImpl"/>
     <bean id="postCmtService" class="com.linkode.service.impl.PostCmtServiceImpl"/>
+    <bean id="tutorialService" class="com.linkode.service.impl.TutorialServiceImpl"/>
+    <bean id="portfolioService" class="com.linkode.service.impl.PortfolioServiceImpl"/>
+    <bean id="portfolioCmtService" class="com.linkode.service.impl.PortfolioCmtServiceImpl"/>
 
 </beans>
