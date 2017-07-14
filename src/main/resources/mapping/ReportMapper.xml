@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.linkode.dao.PostCmtMapper">
-  <resultMap id="BaseResultMap" type="com.linkode.pojo.PostCmt">
+<mapper namespace="com.linkode.dao.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.linkode.pojo.Report">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="postid" jdbcType="INTEGER" property="postid" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="portfolioId" jdbcType="INTEGER" property="portfolioId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, postid, content, time
+    id, portfolioId, type, userId, time, result, content
   </sql>
-  <select id="selectByExample" parameterType="com.linkode.pojo.PostCmtExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.linkode.pojo.ReportExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from post_cmt
+    from report
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +88,105 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from post_cmt
+    from report
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from post_cmt
+    delete from report
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.linkode.pojo.PostCmtExample">
-    delete from post_cmt
+  <delete id="deleteByExample" parameterType="com.linkode.pojo.ReportExample">
+    delete from report
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.linkode.pojo.PostCmt">
+  <insert id="insert" parameterType="com.linkode.pojo.Report">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_cmt (postid, content, time
+    insert into report (portfolioId, type, userId, 
+      time, result, content
       )
-    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+    values (#{portfolioId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{result,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.linkode.pojo.PostCmt">
+  <insert id="insertSelective" parameterType="com.linkode.pojo.Report">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_cmt
+    insert into report
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="postid != null">
-        postid,
+      <if test="portfolioId != null">
+        portfolioId,
       </if>
-      <if test="content != null">
-        content,
+      <if test="type != null">
+        type,
+      </if>
+      <if test="userId != null">
+        userId,
       </if>
       <if test="time != null">
         time,
       </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="postid != null">
-        #{postid,jdbcType=INTEGER},
+      <if test="result != null">
+        result,
       </if>
       <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="portfolioId != null">
+        #{portfolioId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.linkode.pojo.PostCmtExample" resultType="java.lang.Long">
-    select count(*) from post_cmt
+  <select id="countByExample" parameterType="com.linkode.pojo.ReportExample" resultType="java.lang.Long">
+    select count(*) from report
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update post_cmt
+    update report
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.postid != null">
-        postid = #{record.postid,jdbcType=INTEGER},
+      <if test="record.portfolioId != null">
+        portfolioId = #{record.portfolioId,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        userId = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.result != null">
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,35 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update post_cmt
+    update report
     set id = #{record.id,jdbcType=INTEGER},
-      postid = #{record.postid,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      portfolioId = #{record.portfolioId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      userId = #{record.userId,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      result = #{record.result,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.PostCmt">
-    update post_cmt
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.Report">
+    update report
     <set>
-      <if test="postid != null">
-        postid = #{postid,jdbcType=INTEGER},
+      <if test="portfolioId != null">
+        portfolioId = #{portfolioId,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=INTEGER},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.PostCmt">
-    update post_cmt
-    set postid = #{postid,jdbcType=INTEGER},
-      content = #{content,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Report">
+    update report
+    set portfolioId = #{portfolioId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

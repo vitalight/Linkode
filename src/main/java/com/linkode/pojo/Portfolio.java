@@ -1,5 +1,7 @@
 package com.linkode.pojo;
 
+import java.util.Date;
+
 public class Portfolio {
     private Integer id;
 
@@ -11,7 +13,11 @@ public class Portfolio {
 
     private String type;
 
+    private Date time;
+
     private Integer likes;
+
+    private Integer comments;
 
     public Integer getId() {
         return id;
@@ -53,11 +59,27 @@ public class Portfolio {
         this.type = type;
     }
 
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
     public Integer getLikes() {
         return likes;
     }
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public Integer getComments() {
+        return comments;
+    }
+
+    public void setComments(Integer comments) {
+        this.comments = comments;
     }
 }

@@ -2,14 +2,14 @@ package com.linkode.pojo;
 
 import java.util.Date;
 
-public class PostCmt {
+public class ProjectCommit {
     private Integer id;
 
-    private Integer postid;
+    private Date time;
 
     private String content;
 
-    private Date time;
+    private String result;
 
     public Integer getId() {
         return id;
@@ -19,12 +19,12 @@ public class PostCmt {
         this.id = id;
     }
 
-    public Integer getPostid() {
-        return postid;
+    public Date getTime() {
+        return time;
     }
 
-    public void setPostid(Integer postid) {
-        this.postid = postid;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getContent() {
@@ -35,11 +35,11 @@ public class PostCmt {
         this.content = content;
     }
 
-    public Date getTime() {
-        return time;
+    public String getResult() {
+        return result;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setResult(String result) {
+        this.result = result;
     }
 }

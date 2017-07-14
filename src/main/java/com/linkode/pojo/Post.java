@@ -1,5 +1,7 @@
 package com.linkode.pojo;
 
+import java.util.Date;
+
 public class Post {
     private Integer id;
 
@@ -8,6 +10,8 @@ public class Post {
     private String title;
 
     private String content;
+
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -39,5 +43,13 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

@@ -55,10 +55,9 @@ public class AccountController extends BaseController {
 
                 //登录成功，保存用户信息
                 User user = userService.findByEmail(loginViewModel.getEmail());
-                Integer id = user.getId();
-                String username = user.getUsername();
-                subject.getSession().setAttribute("LOGIN_USER_ID",id);
-                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
+                subject.getSession().setAttribute("LOGIN_USER_ID",user.getId());
+                subject.getSession().setAttribute("LOGIN_USER_NAME",user.getUsername());
+                subject.getSession().setAttribute("LOGIN_USER_ROLE",user.getRole());
                 return RedirectTo("/project");
             }catch (Exception e){
                 model.addAttribute("errormsg","用户名或密码错误。");

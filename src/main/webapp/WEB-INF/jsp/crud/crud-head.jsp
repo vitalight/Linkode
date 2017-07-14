@@ -5,5 +5,4 @@
 	<a class="type-btn" id="project" href="${pageContext.request.contextPath}/admin/project">project</a>
 	<a class="type-btn" id="projectApp" href="${pageContext.request.contextPath}/admin/projectApp">project_app</a>
 	<a class="type-btn" id="post" href="${pageContext.request.contextPath}/admin/post">post</a>
-	<a class="type-btn" id="postCmt" href="${pageContext.request.contextPath}/admin/postCmt">post_cmt</a>
 </div>

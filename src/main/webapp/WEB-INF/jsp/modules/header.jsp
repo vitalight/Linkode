@@ -5,7 +5,9 @@
 	<ul>
 		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
 		<li><a class="nav-btn">主页</a></li>
+		<c:if test="${LOGIN_USER_ROLE == 'admin'}">
 		<li><a class="nav-btn" id="head-admin" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
+		</c:if>
 		<li><a class="nav-btn" id="head-portfolio" href="${pageContext.request.contextPath}/portfolio">作品交流</a></li>
 		<li><a class="nav-btn" id="head-tutorial" href="${pageContext.request.contextPath}/tutorial">教程</a></li>
 		<li><a class="nav-btn" id="head-post" href="${pageContext.request.contextPath}/post">讨论区</a></li>
