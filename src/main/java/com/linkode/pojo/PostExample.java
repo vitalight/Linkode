@@ -1,6 +1,7 @@
 package com.linkode.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PostExample {
@@ -301,6 +302,136 @@ public class PostExample {
 
         public Criteria andTitleNotBetween(String value1, String value2) {
             addCriterion("title not between", value1, value2, "title");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeIsNull() {
+            addCriterion("time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeIsNotNull() {
+            addCriterion("time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeEqualTo(Date value) {
+            addCriterion("time =", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeNotEqualTo(Date value) {
+            addCriterion("time <>", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeGreaterThan(Date value) {
+            addCriterion("time >", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("time >=", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeLessThan(Date value) {
+            addCriterion("time <", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeLessThanOrEqualTo(Date value) {
+            addCriterion("time <=", value, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeIn(List<Date> values) {
+            addCriterion("time in", values, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeNotIn(List<Date> values) {
+            addCriterion("time not in", values, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeBetween(Date value1, Date value2) {
+            addCriterion("time between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andTimeNotBetween(Date value1, Date value2) {
+            addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
     }

@@ -32,6 +32,10 @@
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
+    <table schema="linkode" tableName="portfolio_like">
+    	<property name="useActualColumnNames" value="true" />
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
     <table schema="linkode" tableName="post">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
@@ -48,11 +52,23 @@
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
-    <table schema="linkode" tableName="user">
+    <table schema="linkode" tableName="project_commit">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
-    <table schema="linkode" tableName="movie">
+    <table schema="linkode" tableName="rating">
+    	<property name="useActualColumnNames" value="true" />
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
+    <table schema="linkode" tableName="report">
+    	<property name="useActualColumnNames" value="true" />
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
+    <table schema="linkode" tableName="tutorial">
+    	<property name="useActualColumnNames" value="true" />
+    	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+    </table>
+    <table schema="linkode" tableName="user">
     	<property name="useActualColumnNames" value="true" />
     	<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>

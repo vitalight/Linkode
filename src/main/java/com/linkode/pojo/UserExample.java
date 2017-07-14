@@ -781,6 +781,76 @@ public class UserExample {
             addCriterion("money not between", value1, value2, "money");
             return (Criteria) this;
         }
+
+        public Criteria andIntroIsNull() {
+            addCriterion("intro is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroIsNotNull() {
+            addCriterion("intro is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroEqualTo(String value) {
+            addCriterion("intro =", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroNotEqualTo(String value) {
+            addCriterion("intro <>", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroGreaterThan(String value) {
+            addCriterion("intro >", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroGreaterThanOrEqualTo(String value) {
+            addCriterion("intro >=", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroLessThan(String value) {
+            addCriterion("intro <", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroLessThanOrEqualTo(String value) {
+            addCriterion("intro <=", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroLike(String value) {
+            addCriterion("intro like", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroNotLike(String value) {
+            addCriterion("intro not like", value, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroIn(List<String> values) {
+            addCriterion("intro in", values, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroNotIn(List<String> values) {
+            addCriterion("intro not in", values, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroBetween(String value1, String value2) {
+            addCriterion("intro between", value1, value2, "intro");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroNotBetween(String value1, String value2) {
+            addCriterion("intro not between", value1, value2, "intro");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

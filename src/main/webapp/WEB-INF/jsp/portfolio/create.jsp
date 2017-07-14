@@ -11,12 +11,12 @@
 		<a class="type-btn" id="literature" href="${pageContext.request.contextPath}/portfolio?type=literature">文章</a>
 		<a class="type-btn" id="image" href="${pageContext.request.contextPath}/portfolio?type=image">平面</a>
 		<a class="type-btn" id="video" href="${pageContext.request.contextPath}/portfolio?type=video">视频</a>
-		<a class="type-btn more-margin-left" id="my" href="${pageContext.request.contextPath}/portfolio?type=my">我的作品</a>
-		<a class="type-btn" id="create" href="${pageContext.request.contextPath}/portfolio?type=create">发布作品</a>
+		<a class="type-btn more-margin-left" id="my" href="${pageContext.request.contextPath}/portfolio/mine">我的作品</a>
+		<a class="type-btn type-chose" id="create" href="${pageContext.request.contextPath}/portfolio/create">发布作品</a>
 	</div>
 	
 	<div class="display">
-		<form action="${pageContext.request.contextPath}/portfolio/create method="post">
+		<form action="${pageContext.request.contextPath}/portfolio/create" method="post">
 			<div class="display-bar more-padding">
 				<div class="row">
 						<div class="col-sm-4">
@@ -34,7 +34,7 @@
 				</div><br/><br/>
 				<div class="row">
 					<div class="col-sm-12">
-						作品介绍：<textarea class="form-control requirement" maxlength="190" name="requirement" required></textarea>
+						作品介绍：<textarea name="content" class="form-control requirement" maxlength="50" name="requirement" required></textarea>
 					</div>
 				</div>
 				<br/>
@@ -47,14 +47,4 @@
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	if (${type == null}) {
-		$("#all").addClass("type-chose");
-	}
-	else {
-		$("#${type}").addClass("type-chose");
-	}
-}); 
-</script>
 <%@ include  file="../modules/web-footer.jsp"%>

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="postid" jdbcType="INTEGER" property="postid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="floor" jdbcType="INTEGER" property="floor" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, postid, content, floor
+    id, postid, content, time
   </sql>
   <select id="selectByExample" parameterType="com.linkode.pojo.PostCmtExample" resultMap="BaseResultMap">
     select
@@ -102,9 +102,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_cmt (postid, content, floor
+    insert into post_cmt (postid, content, time
       )
-    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}
+    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.PostCmt">
@@ -119,8 +119,8 @@
       <if test="content != null">
         content,
       </if>
-      <if test="floor != null">
-        floor,
+      <if test="time != null">
+        time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -130,8 +130,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="floor != null">
-        #{floor,jdbcType=INTEGER},
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -153,8 +153,8 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.floor != null">
-        floor = #{record.floor,jdbcType=INTEGER},
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -166,7 +166,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       postid = #{record.postid,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
-      floor = #{record.floor,jdbcType=INTEGER}
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -180,8 +180,8 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="floor != null">
-        floor = #{floor,jdbcType=INTEGER},
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -190,7 +190,7 @@
     update post_cmt
     set postid = #{postid,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
-      floor = #{floor,jdbcType=INTEGER}
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

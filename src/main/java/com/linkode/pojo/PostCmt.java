@@ -1,5 +1,7 @@
 package com.linkode.pojo;
 
+import java.util.Date;
+
 public class PostCmt {
     private Integer id;
 
@@ -7,7 +9,7 @@ public class PostCmt {
 
     private String content;
 
-    private Integer floor;
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -33,11 +35,11 @@ public class PostCmt {
         this.content = content;
     }
 
-    public Integer getFloor() {
-        return floor;
+    public Date getTime() {
+        return time;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

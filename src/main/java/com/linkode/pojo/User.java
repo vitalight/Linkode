@@ -23,6 +23,8 @@ public class User {
 
     private Integer money;
 
+    private String intro;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class User {
 
     public void setMoney(Integer money) {
         this.money = money;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 }

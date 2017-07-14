@@ -57,7 +57,7 @@ public class CrudJspGenerator {
 					String name = fieldElem.getAttribute("name"),
 							type = fieldElem.getAttribute("type");
 					if ((name == "" || type == "") || 
-							(!(type.equals("int") || type.equals("pk") || type.equals("string") || type.equals("date")))) {
+							(!(type.equals("int") || type.equals("pk") || type.equals("string") || type.equals("datetime") || type.equals("date")))) {
 						System.out.println("<ERROR> ["+table.name+"] has a field with illegal input ["+name+", "+type+"]");
 						return false;
 					}
@@ -285,11 +285,14 @@ public class CrudJspGenerator {
 				if (table.fieldTypes.get(i).equals("date")) {
 					fw.write("<fmt:formatDate pattern=\"yyyy-MM-dd\" value=\"${" + table.name + 
 							"." + table.originalNames.get(i) + "}\"" + " var=\"" + table.originalNames.get(i)+ "\"/>\n");
+				} else if (table.fieldTypes.get(i).equals("datetime")) {
+					fw.write("<fmt:formatDate pattern=\"yyyy-MM-dd hh:mm:ss\" value=\"${" + table.name + 
+							"." + table.originalNames.get(i) + "}\"" + " var=\"" + table.originalNames.get(i)+ "\"/>\n");
 				}
 			}
 			fw.write("<tr>\n");
 			for (int i=0; i<table.fieldTypes.size(); i++) {
-				if (table.fieldTypes.get(i).equals("date")) {
+				if (table.fieldTypes.get(i).equals("date") || table.fieldTypes.get(i).equals("datetime")) {
 					fw.write("<td>${"+table.originalNames.get(i)+"}</td>\n");
 				} else {
 					fw.write("<td>${" + table.name + "." + table.originalNames.get(i) + "}</td>");
@@ -299,7 +302,7 @@ public class CrudJspGenerator {
 					"<i class=\"fa fa-trash\"></i></button><button class=\"btn btn-default edit\" type=\"button\"\n");
 			for (int i=0; i<table.fieldTypes.size(); i++) {
 				fw.write("data-" + table.fieldNames.get(i) + "=\"${");
-				if (table.fieldTypes.get(i).equals("date")) {
+				if (table.fieldTypes.get(i).equals("date") || table.fieldTypes.get(i).equals("datetime")) {
 					fw.write(table.originalNames.get(i) + "}\"\n");
 				} else {
 					fw.write(table.name + "." + table.originalNames.get(i) + "}\"\n");
@@ -323,8 +326,9 @@ public class CrudJspGenerator {
 						"</label><input class=\"form-control\""); 
 				if (table.fieldTypes.get(i).equals("date")) {
 					fw.write(" type=\"date\" ");
-				}
-				else if (table.fieldTypes.get(i).equals("int")) {
+				} else if (table.fieldTypes.get(i).equals("datetime")) {
+					fw.write(" type=\"datetime\" ");
+				} else if (table.fieldTypes.get(i).equals("int")) {
 					fw.write(" type=\"number\" step=\"1\" ");
 				}
 				fw.write(" name=\"" + table.fieldNames.get(i) + "\" /></div>\n");

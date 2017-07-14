@@ -24,37 +24,13 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-    
-    @GetMapping("/portfolio")
-    public String test(Model model, String type) {
-    	if (type==null) {
-    		model.addAttribute("type", "all");
-    		return View("/portfolio/all");
-    	}
-    	else {
-    		model.addAttribute("type", type);
-    	}
-    	if (type.equals("create")) {
-    		return View("/portfolio/create");
-    	} else if (type.equals("my")) {
-    		return View("/portfolio/myPortfolio");
-    	}
-    	return View("/portfolio/all");
-    }
-    @GetMapping("/portfolio/1")
-    public String test0(Model model) {
-    	return View("/portfolio/detail");
-    }
-    @GetMapping("/tutorial")
-    public String test2(Model model) {
-    	return View("/tutorial/main");
-    }
-    @GetMapping("/tutorial/edit")
-    public String test3(Model model) {
-    	return View("/tutorial/edit");
-    }
+  
+    /**
+     * This is for test and should be DELETED
+     * after merging with master.
+     */
     @GetMapping("/post")
-    public String test4(Model model) {
+    public String test(Model model) {
     	return View("/post/main");
     }
     
@@ -79,10 +55,9 @@ public class AccountController extends BaseController {
 
                 //登录成功，保存用户信息
                 User user = userService.findByEmail(loginViewModel.getEmail());
-                Integer id = user.getId();
-                String username = user.getUsername();
-                subject.getSession().setAttribute("LOGIN_USER_ID",id);
-                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
+                subject.getSession().setAttribute("LOGIN_USER_ID",user.getId());
+                subject.getSession().setAttribute("LOGIN_USER_NAME",user.getUsername());
+                subject.getSession().setAttribute("LOGIN_USER_ROLE",user.getRole());
                 return RedirectTo("/project");
             }catch (Exception e){
                 model.addAttribute("errormsg","用户名或密码错误。");

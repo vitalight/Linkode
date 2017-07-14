@@ -11,43 +11,35 @@
 		<a class="type-btn" id="literature" href="${pageContext.request.contextPath}/portfolio?type=literature">文章</a>
 		<a class="type-btn" id="image" href="${pageContext.request.contextPath}/portfolio?type=image">平面</a>
 		<a class="type-btn" id="video" href="${pageContext.request.contextPath}/portfolio?type=video">视频</a>
-		<a class="type-btn more-margin-left" id="my" href="${pageContext.request.contextPath}/portfolio?type=my">我的作品</a>
-		<a class="type-btn" id="create" href="${pageContext.request.contextPath}/portfolio?type=create">发布作品</a>
+		<a class="type-btn more-margin-left type-chose" id="my" href="${pageContext.request.contextPath}/portfolio/mine">我的作品</a>
+		<a class="type-btn" id="create" href="${pageContext.request.contextPath}/portfolio/create">发布作品</a>
 	</div>
 	
 	<div class="display bigger">
+		<c:forEach items="${model}" var="pvm">
 		<div class="display-card">
-			<div class="display-text ran-1">
-				少年听雨歌楼上，红烛昏罗帐。壮年听雨客舟中，江阔云低，断雁叫西风。
-				而今听雨僧庐下，鬓已星星也。悲欢离合总无情，一任阶前，点滴到天明。
+		
+			<c:if test="${pvm.type == 'literature'}">
+			<div class=" ran-${pvm.id%3} display-text">
+				${pvm.content}
 			</div>
-			<p class="card-name">文章示范</p>
-			<p class="card-info"><span class="">2秒前</span>
-			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/1"></a>
+			</c:if>
+			<c:if test="${pvm.type != 'literature'}">
+			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-${pvm.id%10+1}.png"/>
+			</c:if>
+			
+			<p class="card-name">${pvm.title}</p>
+			<span class="card-info">
+				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar-${pvm.userId%6+1}.jpg" />
+				${pvm.username}
+			</span>
+			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
 		</div>
-		<%
-		for (int i=0;i<3;i++) { %>
-		<div class="display-card">
-			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-<%=i%10+1%>.png"/>
-			<p class="card-name">苟利国家</p>
-			<p class="card-info">1秒前</p>
-			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/1"></a>
-		</div>
-		<% } %>
+		</c:forEach>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	if (${type == null}) {
-		$("#all").addClass("type-chose");
-	}
-	else {
-		$("#${type}").addClass("type-chose");
-	}
-}); 
-</script>
 <%@ include  file="../modules/web-footer.jsp"%>
