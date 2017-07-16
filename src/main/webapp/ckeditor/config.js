@@ -13,10 +13,10 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
         { name: 'styles', items: [ 'Font', 'FontSize' ] },
         { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', 'Underline', '-', 'RemoveFormat' ] },
-        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', /*'-', 'Outdent', 'Indent', */'-', 'Blockquote' ] },
         { name: 'links', items: [ 'Link', 'Unlink' ] },
         { name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
-        { name: 'editing', items: [ 'AutoCorrect' ] },
+        //{ name: 'editing', items: [ 'AutoCorrect' ] },
         { name: 'mode', items: [ 'Source' ] }
         //{ name: 'tools', items: [ 'Maximize' ] },
     ];
@@ -28,6 +28,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.language = 'zh-cn';
     config.removePlugins = 'image';
     config.height = 461;
+    //config.width = 812;
     config.bodyClass = 'article-editor';
 
 	// Remove some buttons provided by the standard plugins, which are
