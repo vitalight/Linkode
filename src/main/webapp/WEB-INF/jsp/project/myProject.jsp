@@ -19,7 +19,7 @@
 				<div class="display-bar">
 					<div class="row">
 						<div class="col-sm-3">
-							<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-${project.id%10+1}.png"/>
+							<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${project.id%16}.png"/>
 						</div>
 						<div class="col-sm-9">
 							<h3>${project.title }<span class="type-tag ran-${project.id%3}">${project.type}</span></h3>
@@ -53,7 +53,7 @@
 								</c:when>
 								<c:otherwise>
 									<div class="col-sm-1">
-										<img class="request-img" src="${pageContext.request.contextPath}/static/img/avatar.png" />
+										<img class="request-img" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.png" />
 									</div>
 									<div class="col-sm-8 request">
 										<div class="row request-name">${project.contractorId}</div>

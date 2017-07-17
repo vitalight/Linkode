@@ -22,7 +22,7 @@
 				</div>
 				<div class="info-right col-sm-10">
 					<c:if test="${model.type=='literature'}">
-					用文字体现生命的力量。	
+					苟利国家生死以。	
 					</c:if>
 					<c:if test="${model.type!='literature'}">
 					${model.content }
@@ -36,7 +36,7 @@
 				${model.content }
 				</c:if>
 				<c:if test="${model.type!='literature'}">
-				<img src="../static/img/big-img.jpg" />
+				<img src="../static/img/pic/pic-${model.id%13}.png" />
 				</c:if>
 				
 				<h3>评论(${cmts.size()})</h3>
@@ -51,7 +51,7 @@
 				<c:forEach items="${cmts}" var="cmt">
 				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${cmt.time}" var="time" />
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar-${cmt.userId%6+1}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
 					<div class="col-sm-11">
 						<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
 						<div class="cmt-content">${cmt.content }</div>

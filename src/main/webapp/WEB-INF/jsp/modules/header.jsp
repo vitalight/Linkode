@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<nav class="white-nav navbar-fixed-top">
+<nav class="white-nav navbar-fixed-top" id="nav">
 	<ul>
 		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
-		<li><a class="nav-btn">主页</a></li>
+		<li><a class="nav-btn" id="head-main" href="${pageContext.request.contextPath}/home">主页</a></li>
 		<c:if test="${LOGIN_USER_ROLE == 'admin'}">
 		<li><a class="nav-btn" id="head-admin" href="${pageContext.request.contextPath}/admin">管理员界面</a></li>
 		</c:if>
@@ -20,7 +20,7 @@
 		</shiro:notAuthenticated>
 	</ul>
 	<c:if test="${!empty LOGIN_USER_ID}">
-		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar.png"/>
+		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${LOGIN_USER_ID%7}.jpg"/>
 		<a class="nav-btn user-btn" href="/user/${LOGIN_USER_ID}">Hello, ${LOGIN_USER_NAME}<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span></a>
 	</c:if>
 </nav>

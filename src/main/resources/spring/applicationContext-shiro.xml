@@ -34,6 +34,7 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon 表示匿名访问，不需要认证以及授权 -->
+                /home=anon
                 /login=anon
                 /register=anon
                 /static/**=anon

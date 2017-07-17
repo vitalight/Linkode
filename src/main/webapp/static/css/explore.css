@@ -260,6 +260,9 @@ img.size-15 {
     margin-top: -0.2em;
 }
 /*=============== 教程 ==============*/
+.sheet-content p {
+	padding-bottom:1em;
+}
 div.margin-top {
 	margin:7em auto 0;
 }
@@ -428,4 +431,88 @@ img.avatar.col-sm-1 {
 	border-radius:50%;
 	overflow:hidden;
 	margin-top:-0.2em;
+}
+/*======== Homepage ==========*/
+.home-main {
+	margin-top:5em;
+}
+.bg-container {
+	overflow:hidden;
+	height:25em;
+	width:100%;
+	margin:0 auto;
+}
+.home-bg {
+	width:109em;
+}
+.display-container {
+	width:75em;
+	margin:1em auto;
+}
+.display-type {
+	font-size:1.2em;
+	font-weight:700;
+	margin:1em 0;
+}
+
+.display-item {
+	background-color:white;
+	border:var(--Lgrey) 1px solid;
+	display:inline-block;
+	height:23em;
+	width:17em;
+	padding:0.5em;
+	position:relative;
+	margin-right:1.5em;
+	margin-bottom:1.5em;
+	overflow:hidden;
+}
+.item-img {
+	width:16em;
+	height:11.5em;
+	margin-bottom:2em;
+}
+.user-avatar {
+	position:absolute;
+	top:10em;
+	left:6.5em;
+	height:4em;
+	width:4em;
+	border-radius:50%;
+	border:white 0.2em solid;
+}
+.item-title {
+	margin-top:0.5em;
+	text-align:center;
+	font-weight:700;
+	letter-spacing:1px;
+}
+.grey {
+	color:var(--Ldgrey);
+	font-size:0.9em;
+}
+.item-user {
+	text-align:center;
+	color:var(--Lblue);
+}
+.item-intro {
+	padding:1em;
+	font-size:0.9em;
+	color:var(--Ldgrey);
+}
+.display-ad {
+	position:relative;
+}
+.display-ad img {
+	width:73.4em;
+	height:12em;
+	border:var(--Lgrey) 1px solid;
+	padding:0.5em;
+	background-color:white;
+}
+.display-container .tail {
+	text-align:center;
+	margin-top:2em;
+	margin-bottom:2em;
+	color:var(--Ldgrey);
 }

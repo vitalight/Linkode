@@ -18,7 +18,7 @@
 			<div class="display-bar">
 				<div class="row">
 					<div class="col-sm-3">
-						<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-${project.id%10+1}.png"/>
+						<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${project.id%10+1}.png"/>
 					</div>
 					<div class="col-sm-9">
 						<h3>${project.title }<span class="type-tag ran-${project.id%3}">${project.type}</span></h3>
@@ -38,7 +38,7 @@
 						</div>
 						<div class="col-sm-10 author">
 							<img class="bar-avatar" 
-								src="${pageContext.request.contextPath}/static/img/avatar-google.jpg"/>
+								src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.jpg"/>
 							${project.username}
 						</div>
 						<c:choose>

@@ -25,12 +25,12 @@
 			</div>
 			</c:if>
 			<c:if test="${pvm.type != 'literature'}">
-			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-${pvm.id%10+1}.png"/>
+			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${pvm.id%16}.png"/>
 			</c:if>
 			
 			<p class="card-name">${pvm.title}</p>
 			<span class="card-info">
-				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar-${pvm.userId%6+1}.jpg" />
+				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${pvm.userId%6}.jpg" />
 				${pvm.username}
 			</span>
 			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
