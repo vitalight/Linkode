@@ -26,7 +26,7 @@
 	
 	<div class="display">
 		<form action="${pageContext.request.contextPath}/project/update" method="post">
-			<div class="display-bar more-padding">
+			<div class="display-bar more-padding  create-bar">
 				<div class="row">
 					<input type="hidden" value="${model.id}" name="id"/>
 					<input type="hidden" value="${model.posterId}" name="posterId"/>

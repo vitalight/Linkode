@@ -11,7 +11,7 @@
 		<img src="${pageContext.request.contextPath}/static/img/login-dec.gif" class="login-pic" />
 		<div class="login-form">
 			<br />
-			<h1>Login now</h1>
+			<h1>用户登录</h1>
 			<c:choose>
 				<c:when test="${!empty errormsg }">
 					<p class="show-error">${errormsg }</p>
@@ -23,19 +23,19 @@
 					<p class="show-error">${errors.password }</p>
 				</c:when>
 				<c:otherwise>
-					<p>Enjoy the world of the art.</p>
+					<p>享受世界顶尖的艺术盛宴</p>
 				</c:otherwise>
 			</c:choose>
 
 			<form id="login-form" action="${pageContext.request.contextPath}/login" method="post">
-				<input placeholder="Email" class="login-input account"
+				<input placeholder="邮箱" class="login-input account"
 					id="email" name="email" /><br />
-				<input placeholder="Password" type="password"
+				<input placeholder="密码" type="password"
 					class="login-input password" id="password" name="password" /><br /><br/>
-				<input type="submit" class="blue-green-bottom" value="Log in" />
+				<input type="submit" class="blue-green-bottom" value="登录" />
 			</form>
 			<p>
-				Don't have a login? <a href="${pageContext.request.contextPath}/register" class="link">Register</a>
+				还没有账号？ <a href="${pageContext.request.contextPath}/register" class="link">注册</a>
 			</p>
 		</div>
 	</div>

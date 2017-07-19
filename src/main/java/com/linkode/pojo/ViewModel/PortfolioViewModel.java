@@ -10,6 +10,7 @@ public class PortfolioViewModel {
 	private String content;
 	private String type;
 	private int likes;
+	private int comments;
 
 	public PortfolioViewModel(Portfolio portfolio) {
 		id = portfolio.getId();
@@ -18,6 +19,7 @@ public class PortfolioViewModel {
 		content = portfolio.getContent();
 		type = portfolio.getType();
 		likes = portfolio.getLikes();
+		comments = portfolio.getComments();
 	}
 	
 	public String getUsername() {
@@ -75,5 +77,11 @@ public class PortfolioViewModel {
 	public void setLikes(int likes){
 		this.likes=likes;
 	}
+	public int getComments() {
+		return comments;
+	}
 	
+	public void setComments(int comments) {
+		this.comments = comments;
+	}
 }

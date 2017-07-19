@@ -13,6 +13,8 @@ public class Post {
 
     private Date time;
 
+    private Integer userId;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class Post {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

@@ -39,7 +39,7 @@
 				<img src="../static/img/pic/pic-${model.id%13}.png" />
 				</c:if>
 				
-				<h3>评论(${cmts.size()})</h3>
+				<h3>评论(${model.comments})</h3>
 				<form action="${pageContext.request.contextPath}/portfolio/${model.id}/comment" method="post">
 					<textarea name="content" class="form-control requirement" placeholder="正文" maxlength="90" name="requirement" required></textarea>
 					<br/>

@@ -4,6 +4,7 @@ body {
 }
 :root {
 	--Lblue:rgb(22,152,245);
+	--Llblue:rgb(225,233,241);
 	--Lred:rgb(242,99,75);
 	--Ldred:rgb(212,89,65);
 	--Llgreen:rgb(146,206,70);
@@ -46,7 +47,7 @@ a:focus {
 }
 .white-nav {
 	border-bottom:var(--Lgrey) 1px solid;
-	height:5em;
+	height:5.1em;
 	padding:0 1.7em;
 	background-color:white;
 	overflow:hidden;

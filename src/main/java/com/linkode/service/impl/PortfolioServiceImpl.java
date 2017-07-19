@@ -21,13 +21,10 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Autowired
     private UserService userService;
     @Override
-    public Portfolio findByPrimaryKey(Integer id) throws CustomException {
+    public Portfolio findByPrimaryKey(Integer id) {
 
-        Portfolio Portfolio = portfolioMapper.selectByPrimaryKey(id);
-        if(Portfolio == null) {
-            throw new CustomException("记录不存在！");
-        }
-        return Portfolio;
+        return portfolioMapper.selectByPrimaryKey(id);
+        
     }
 
     @Override

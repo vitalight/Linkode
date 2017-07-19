@@ -26,7 +26,7 @@
 	
 	<div class="display">
 		<form action="${pageContext.request.contextPath}/project/create" method="post">
-			<div class="display-bar more-padding">
+			<div class="display-bar more-padding create-bar">
 				<div class="row">
 						<div class="col-sm-4">
 							项目名称：<input class="form-control" type="text" name="title" required/>

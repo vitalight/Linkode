@@ -6,6 +6,8 @@
     <result column="postid" jdbcType="INTEGER" property="postid" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="postCmtId" jdbcType="INTEGER" property="postCmtId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, postid, content, time
+    id, postid, content, time, userId, postCmtId
   </sql>
   <select id="selectByExample" parameterType="com.linkode.pojo.PostCmtExample" resultMap="BaseResultMap">
     select
@@ -102,10 +104,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_cmt (postid, content, time
-      )
-    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
-      )
+    insert into post_cmt (postid, content, time, 
+      userId, postCmtId)
+    values (#{postid,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER}, #{postCmtId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.PostCmt">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -122,6 +124,12 @@
       <if test="time != null">
         time,
       </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="postCmtId != null">
+        postCmtId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postid != null">
@@ -132,6 +140,12 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="postCmtId != null">
+        #{postCmtId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -156,6 +170,12 @@
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.userId != null">
+        userId = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postCmtId != null">
+        postCmtId = #{record.postCmtId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +186,9 @@
     set id = #{record.id,jdbcType=INTEGER},
       postid = #{record.postid,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      userId = #{record.userId,jdbcType=INTEGER},
+      postCmtId = #{record.postCmtId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +205,12 @@
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="postCmtId != null">
+        postCmtId = #{postCmtId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +218,9 @@
     update post_cmt
     set postid = #{postid,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP}
+      time = #{time,jdbcType=TIMESTAMP},
+      userId = #{userId,jdbcType=INTEGER},
+      postCmtId = #{postCmtId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -31,8 +31,8 @@
 	<h3>小标题</h3>
 	默认脚部链接
 	<hr />
-		<a href="#">赞助Linkode</a>
-		<a href="#">回到顶部</a>
+		<a class="bottom" href="#">赞助Linkode</a>
+		<a class="bottom" href="#">回到顶部</a>
 </div>
 				</textarea>
 			</form>

@@ -22,4 +22,13 @@ public interface ProjectService {
 	
 	Project getById(int id);
 	List<Project> getAll();
+	List<Project> getByPosterId(int id);
+	List<Project> getByContractorId(int id);
+	
+	List<ProjectViewModel> transfer(List<Project> projects);
+	public ProjectViewModel findPVMByPrimaryKey(int id)  throws CustomException;
+	List<ProjectViewModel> getAllPVM();
+	List<ProjectViewModel> getUncontractedPVM();
+	List<ProjectViewModel> getPVMByPosterId(int id);
+	List<ProjectViewModel> getPVMByContractorId(int id);
 }

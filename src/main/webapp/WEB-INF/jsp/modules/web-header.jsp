@@ -15,5 +15,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/share.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/linkode-ico.ico" >
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/font-awesome/css/font-awesome.css">
 </head>
 <body>

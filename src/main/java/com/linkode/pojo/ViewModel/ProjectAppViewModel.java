@@ -1,8 +1,10 @@
-package com.linkode.pojo;
+package com.linkode.pojo.ViewModel;
 
 import java.util.Date;
 
-public class ProjectApp {
+import com.linkode.pojo.ProjectApp;
+
+public class ProjectAppViewModel {
     private Integer id;
 
     private Integer projectId;
@@ -12,9 +14,36 @@ public class ProjectApp {
     private String content;
 
     private Date time;
+    
+    private String username;
+    
+    private int result;
 
-    private Integer result;
-
+    public ProjectAppViewModel(ProjectApp projectApp) {
+    	this.id = projectApp.getApplicantId();
+    	this.projectId = projectApp.getProjectId();
+    	this.applicantId = projectApp.getApplicantId();
+    	this.content = projectApp.getContent();
+    	this.time = projectApp.getTime();
+    	this.result = projectApp.getResult();
+    }
+    
+    public int getResult() {
+    	return result;
+    }
+    
+    public void setResult(int result) {
+    	this.result = result;
+    }
+    
+    public String getUsername() {
+    	return username;
+    }
+    
+    public void setUsername(String username) {
+    	this.username = username;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -53,13 +82,5 @@ public class ProjectApp {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public Integer getResult() {
-        return result;
-    }
-
-    public void setResult(Integer result) {
-        this.result = result;
     }
 }

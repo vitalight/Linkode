@@ -47,19 +47,21 @@
 	display:inline-block;
 	position:relative;
 }
-.display-card:hover {
+.height-17 {
+	height:17em;
+	overflow:hidden;
 }
 a.card-over {
 	position: absolute;
     top: 0;
     bottom: 30px;
-    right: 1px;
+    right: 0px;
     height: 100%;
     width: 100%;
 }
 a.card-over:hover {
-    background-color: black;
-    opacity: 0.03;
+    border:var(--Lblue) 2px solid;
+    opacity:0.5;
 }
 .display-img, .display-bar-img, .display-text{
 	height:11em;
@@ -72,6 +74,8 @@ a.card-over:hover {
 .display-bar {
 	margin:0 auto 1.5em;
 	width:60em;
+	height:14em;
+	overflow:hidden;
 }
 .display-bar-img {
 	padding:0;
@@ -79,6 +83,13 @@ a.card-over:hover {
 	
 	height:12em;
 	width:14em;
+	float:left;
+}
+.bar-main {
+	float:left;
+	margin-left:1em;
+	width:43em;
+	margin-right:-1em;
 }
 .type-tag {
 	display:inline-block;
@@ -88,35 +99,31 @@ a.card-over:hover {
 	font-size:0.5em;
 	border-radius:0.3em;
 	margin-top:-0.1em;
-	margin-left:1em;
-	margin-right:1em;
+	margin-left:0.5em;
 	vertical-align:middle;
 }
 .bar-text {
 	color:black;
-}
-.bar-text:hover {
-	color:var(--Ldwhite);
+	margin-right:2em;
 }
 .ran-0 {background-color:var(--Lred)}
 .ran-1 {background-color:var(--Llgreen)}
 .ran-2 {background-color:var(--Lblue)}
+
 h3 {
 	margin-top:0;
+	margin-bottom:0.5em;
 }
 .no-padding {
 	padding:0;
-}
-.bar-info, .bar-content {
-	margin-left:1em;
-	font-size:1.05em;
 }
 .bar-info {
 	margin-top:0;
 }
 .bar-content {
-	margin-top:0.6em;
-	height:5.5em;	
+	margin-top:0.8em;
+	height:5em;
+	color:var(--Ldgrey);
 }
 .bar-avatar {
 	padding:0;
@@ -125,9 +132,10 @@ h3 {
 	border-radius:50%;
 	overflow:hidden;
 	margin-top:-0.2em;
+	margin-right:0.5em;
 }
-.author {
-	padding:0;
+.author-info {
+	float:left;
 }
 .contract-btn {
 	background-color:var(--Lblue);
@@ -136,7 +144,10 @@ h3 {
 	color:white;
 	font-size:0.9em;
 	padding:0.4em 0;
+	width:8em;
 	margin-top:-0.2em;
+	
+	float:right;
 }
 .contract-btn:hover {
 	background-color:var(--Ldblue);
@@ -146,6 +157,18 @@ h3 {
 }
 .red-bg:hover {
 	background-color:var(--Ldred);
+}
+.bar-price, .hollow-btn {
+	float: right;
+    border: var(--Lblue) 1px solid;
+    border-radius: 0.3em;
+    padding: 0.3em 1em;
+    color: var(--Lblue);
+    text-align: center;
+    margin-left:1em;
+}
+.create-bar {
+	height:30em;
 }
 /*=============== 项目承包请求 ===============*/
 .some-margin {
@@ -174,6 +197,14 @@ h3 {
 }
 .yellow-bg:hover {
 	background-color:var(--Ldyellow);
+}
+.cmt-line a {
+	margin-top:0.5em;
+	width:7.5em;
+}
+.hollow-btn:hover {
+	background-color:rgba(0,0,0,0.03);
+	color:var(--Ldblue);
 }
 /*=============== 项目创建 ===============*/
 textarea {
@@ -214,6 +245,19 @@ textarea.requirement {
 .card-info {
 	color:var(--Ldgrey);
 	margin-bottom:0em;
+	width:4.5em;
+	display:inline-block;
+}
+.likes, .comments {
+	color:var(--Ldgrey);
+	margin-left:1em;
+	font-size:0.85em;
+	display:inline-block;
+	width:3.5em;
+	text-align:right;
+}
+.comments {
+	margin-right:-1em;
 }
 
 .cmt-line {
@@ -253,8 +297,8 @@ h3.input-title {
 	float:right;
 }
 img.size-15 {
-	height: 1.5em;
-    width: 1.5em;
+	height: 1.1em;
+    width: 1.1em;
     display: inline-block;
     text-align: center;
     margin-top: -0.2em;
@@ -335,7 +379,7 @@ div.margin-top {
 div.margin-bottom {
 	margin-bottom:6em;
 }
-.content-text a {
+a.bottom {
 	float:right;
 	margin-left:2em;
 }
@@ -443,7 +487,9 @@ img.avatar.col-sm-1 {
 	margin:0 auto;
 }
 .home-bg {
-	width:109em;
+	width:109em;    
+	position: relative;
+    left: calc(50% - 54.5em);
 }
 .display-container {
 	width:75em;
@@ -502,6 +548,7 @@ img.avatar.col-sm-1 {
 }
 .display-ad {
 	position:relative;
+	width:73.4em;
 }
 .display-ad img {
 	width:73.4em;

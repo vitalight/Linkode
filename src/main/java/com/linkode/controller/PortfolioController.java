@@ -81,6 +81,8 @@ public class PortfolioController extends BaseController {
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         portfolio.setUserId(userid);
         portfolio.setLikes(0);
+        portfolio.setComments(0);
+        portfolio.setTime(new Date());
         portfolioService.insert(portfolio);
         return RedirectTo("/portfolio/mine");
     }
@@ -92,6 +94,10 @@ public class PortfolioController extends BaseController {
         portfolioCmt.setPortfolioId(id);
         portfolioCmt.setTime(new Date());
         portfolioCmtService.insert(portfolioCmt);
+        
+        Portfolio portfolio = portfolioService.findByPrimaryKey(portfolioCmt.getPortfolioId());
+        portfolio.setComments(portfolio.getComments()+1);
+        portfolioService.updateByPrimaryKey(portfolio);
     	return RedirectTo("/portfolio/"+id);
     }
     

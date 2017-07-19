@@ -4,11 +4,11 @@ import com.linkode.pojo.ViewModel.ProjectViewModel;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.linkode.dao.ProjectMapper;
+import com.linkode.dao.UserMapper;
 import com.linkode.exception.CustomException;
-import com.linkode.pojo.Ad;
 import com.linkode.pojo.Project;
+import com.linkode.pojo.ProjectExample;
 import com.linkode.service.ProjectService;
-import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,7 +20,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
 
     @Override
     public Project findByPrimaryKey(Integer id) throws CustomException {
@@ -70,25 +70,7 @@ public class ProjectServiceImpl implements ProjectService {
     public DataPage<ProjectViewModel> selectPVMPage(Integer pageNum, Integer pageSize, Integer indexCount) {
         PageHelper.startPage(pageNum, pageSize);
         List<Project> projects = projectMapper.selectByExample(null);
-        List<ProjectViewModel> pvms = new ArrayList<ProjectViewModel>();
-
-        // 初始化
-        for (int i = 0; i < projects.size(); i++) {
-            Project project = projects.get(i);
-            ProjectViewModel pvm = new ProjectViewModel();
-            pvm.setId(project.getId());
-            pvm.setPosterId(project.getPosterId());
-            pvm.setTitle(project.getTitle());
-            pvm.setRequirement(project.getRequirement());
-            pvm.setMoney(project.getMoney());
-            pvm.setStatus(project.getStatus());
-            pvm.setUsername(userService.findById(project.getPosterId()).getUsername());
-            pvm.setStartDate(project.getStartDate());
-            pvm.setEndDate(project.getEndDate());
-            pvm.setType(project.getType());
-            pvms.add(pvm);
-        }
-
+        List<ProjectViewModel> pvms = transfer(projects);
         Integer pageCount = ((Page)projects).getPages();
         pageNum = pageNum > pageCount ? pageCount : pageNum;
 
@@ -114,5 +96,68 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	public List<Project> getAll() {
 		return projectMapper.selectByExample(null);
+	}
+	public List<Project> getByPosterId(int id) {
+        ProjectExample projectExample = new ProjectExample();
+        ProjectExample.Criteria criteria = projectExample.createCriteria();
+        criteria.andPosterIdEqualTo(id);
+        List<Project> projects = projectMapper.selectByExample(projectExample);
+        if (projects.isEmpty()) {
+        	return null;
+        }
+        return projects;
+	}
+	public List<Project> getByContractorId(int id) {
+        ProjectExample projectExample = new ProjectExample();
+        ProjectExample.Criteria criteria = projectExample.createCriteria();
+        criteria.andContractorIdEqualTo(id);
+        List<Project> projects = projectMapper.selectByExample(projectExample);
+        if (projects.isEmpty()) {
+        	return null;
+        }
+        return projects;
+	}
+
+	public List<ProjectViewModel> transfer(List<Project> projects) {
+		if(projects == null) {
+			return null;
+		}
+		List<ProjectViewModel> pvms = new ArrayList<ProjectViewModel>();
+		for (Project project:projects) {
+            ProjectViewModel pvm = new ProjectViewModel(project);
+            pvm.setUsername(userMapper.selectByPrimaryKey(project.getPosterId()).getUsername());
+            pvms.add(pvm);
+        }
+		return pvms;
+	}
+	
+	public ProjectViewModel findPVMByPrimaryKey(int id) throws CustomException {
+		Project project = findByPrimaryKey(id);
+		ProjectViewModel pvm = new ProjectViewModel(project);
+		pvm.setUsername(userMapper.selectByPrimaryKey(project.getPosterId()).getUsername());
+		return pvm;
+	}
+	
+	public List<ProjectViewModel> getUncontractedPVM() {
+		List<ProjectViewModel> pvms = getAllPVM();
+		List<ProjectViewModel> ret = new ArrayList<ProjectViewModel>();
+		for (ProjectViewModel pvm:pvms) {
+			if (pvm.getStatus().equals("post")) {
+				ret.add(pvm);
+			}
+		}
+		return ret;
+	}
+
+	public List<ProjectViewModel> getPVMByPosterId(int id) {
+		return transfer(getByPosterId(id));
+	}
+	
+	public List<ProjectViewModel> getPVMByContractorId(int id) {
+		return transfer(getByContractorId(id));
+	}
+
+	public List<ProjectViewModel> getAllPVM() {
+		return transfer(getAll());
 	}
 }
