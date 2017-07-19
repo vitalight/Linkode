@@ -18,7 +18,8 @@
 			
 			<div class="content-info row">
 				<div class="info-left col-sm-2">
-					${model.type}
+				<fmt:setBundle basename="messages" var="lang"/>
+				<fmt:message bundle="${lang}" key="${model.type}"/>
 				</div>
 				<div class="info-right col-sm-10">
 					<c:if test="${model.type=='literature'}">
