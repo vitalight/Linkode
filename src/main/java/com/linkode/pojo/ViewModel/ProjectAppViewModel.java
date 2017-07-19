@@ -17,7 +17,7 @@ public class ProjectAppViewModel {
     
     private String username;
     
-    private int result;
+    private Integer result;
 
     public ProjectAppViewModel(ProjectApp projectApp) {
     	this.id = projectApp.getApplicantId();
