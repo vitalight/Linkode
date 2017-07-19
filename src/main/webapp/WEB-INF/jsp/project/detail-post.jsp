@@ -54,8 +54,8 @@
 						<a class="col-sm-offset-2 col-sm-2 hollow-btn">待处理</a>
 						</c:when>
 						<c:when test="${LOGIN_USER_ID==model.posterId}">
-						<a class="col-sm-2 hollow-btn" href="${pageContext.request.contextPath}/apply/${app.id}/accept">通过</a>
-						<a class="col-sm-2 hollow-btn" href="${pageContext.request.contextPath}/apply/${app.id}/deny">拒绝</a>
+						<a class="col-sm-2 hollow-btn" href="${pageContext.request.contextPath}/project/apply/${app.id}/accept">通过</a>
+						<a class="col-sm-2 hollow-btn" href="${pageContext.request.contextPath}/project/apply/${app.id}/deny">拒绝</a>
 						</c:when>
 					</c:choose>
 				</div>

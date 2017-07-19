@@ -20,7 +20,7 @@ public class ProjectAppViewModel {
     private Integer result;
 
     public ProjectAppViewModel(ProjectApp projectApp) {
-    	this.id = projectApp.getApplicantId();
+    	this.id = projectApp.getId();
     	this.projectId = projectApp.getProjectId();
     	this.applicantId = projectApp.getApplicantId();
     	this.content = projectApp.getContent();

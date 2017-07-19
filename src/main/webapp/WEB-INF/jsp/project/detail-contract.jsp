@@ -29,17 +29,7 @@
 				
 				${model.requirement }
 				
-				<h3>报名(${apps.size()})</h3>
-				<c:if test="${ hasApplied==0 }">
-				<form action="${pageContext.request.contextPath}/project/${model.id}/application" method="post">
-					<textarea name="content" class="form-control requirement" placeholder="正文" maxlength="90" name="content" required></textarea>
-					<br/>
-					<div class="row">
-						<button class="blue-btn col-sm-2 col-sm-offset-5">发送申请</button>
-					</div>
-				</form>
-				<br/>
-				</c:if>
+				<h3>提交(${0})</h3>
 				<c:forEach items="${apps}" var="app">
 				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${app.time}" var="time" />
 				

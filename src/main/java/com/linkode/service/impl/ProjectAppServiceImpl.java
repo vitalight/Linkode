@@ -75,7 +75,8 @@ public class ProjectAppServiceImpl implements ProjectAppService {
 	@Override
 	public List<ProjectAppViewModel> getPAVMByProjectId(int id) {
 		List<ProjectAppViewModel> ret = new ArrayList<ProjectAppViewModel>();
-		for (ProjectApp projectApp:getByProjectId(id)) {
+		List<ProjectApp> projectApps = getByProjectId(id);
+		for (ProjectApp projectApp:projectApps) {
 			ProjectAppViewModel pavm = new ProjectAppViewModel(projectApp);
 			pavm.setUsername(userMapper.selectByPrimaryKey(pavm.getApplicantId()).getUsername());
 			ret.add(pavm);
@@ -88,9 +89,6 @@ public class ProjectAppServiceImpl implements ProjectAppService {
         ProjectAppExample.Criteria criteria = projectAppExample.createCriteria();
         criteria.andProjectIdEqualTo(id);
         List<ProjectApp> projectApps = projectAppMapper.selectByExample(projectAppExample);
-        if (projectApps.isEmpty()) {
-        	return null;
-        }
         return projectApps;
 	}
 }

@@ -65,17 +65,21 @@ public class ProjectController extends BaseController {
     @GetMapping("/{id}")
     public String detailView(Model model, @PathVariable("id") Integer id) throws CustomException {
         ProjectViewModel project = projectService.findPVMByPrimaryKey(id);
-        model.addAttribute("apps",projectAppService.getPAVMByProjectId(id));
         Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
         
-        int hasApplied = 0;
-        if (project.getPosterId().equals(userid)) {
-        	hasApplied = 1;
-        } else {
-        	hasApplied = projectAppService.hasApplied(id,userid);
+        if (project.getStatus().equals("post")) {
+	        int hasApplied = 0;
+	        if (project.getPosterId().equals(userid)) {
+	        	hasApplied = 1;
+	        } else {
+	        	hasApplied = projectAppService.hasApplied(id,userid);
+	        }
+	        model.addAttribute("apps",projectAppService.getPAVMByProjectId(id));
+	        model.addAttribute("hasApplied", hasApplied);
+        	return View("/project/detail-post", model, project);
         }
-        model.addAttribute("hasApplied", hasApplied);
-        return View("/project/detail-post", model, project);
+    	return View("/project/detail-contract", model, project);
+        
     }
 
     @GetMapping("/update/{id}")
@@ -130,7 +134,7 @@ public class ProjectController extends BaseController {
     	return RedirectTo("/project/"+id);
     }
     
-    @GetMapping("/apply/{id}/accpet")
+    @GetMapping("/apply/{id}/accept")
     public String acceptAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException{
     	ProjectApp projectApp = projectAppService.getById(id);
     	projectApp.setResult(1);
@@ -141,7 +145,7 @@ public class ProjectController extends BaseController {
     	project.setContractorId(projectApp.getApplicantId());
     	project.setStartDate(new Date());
     	projectService.update(project);
-    	return RedirectTo("/project/"+id);
+    	return RedirectTo("/project/"+project.getId());
     }
     
     @GetMapping("/apply/{id}/deny")
