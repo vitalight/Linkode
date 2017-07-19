@@ -47,6 +47,20 @@
 	display:inline-block;
 	position:relative;
 }
+div.empty-bar {
+	height:36em;
+	background-color:transparent;
+	border:none;
+}
+.empty-bar img {
+	width:17.6em;
+	margin:5em calc(50% - 8.8em) 1em;
+}
+.empty-text{
+	text-align:center;
+	font-size:2em;
+	color:rgb(161,173,188);
+}
 .height-17 {
 	height:17em;
 	overflow:hidden;
@@ -169,7 +183,7 @@ h3 {
     margin-left:1em;
 }
 .create-bar {
-	height:30em;
+	height:auto;
 }
 /*=============== 项目承包请求 ===============*/
 .some-margin {
@@ -528,6 +542,10 @@ img.avatar.col-sm-1 {
 	margin-right:1.5em;
 	margin-bottom:1.5em;
 	overflow:hidden;
+}
+.item-empty {
+	width:12em;
+	margin:2em 2em 1em;
 }
 .item-img {
 	width:16em;

@@ -6,19 +6,9 @@
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>
-	<%  
-	String typeStr = request.getParameter("type");
-	String[] classes = {"", "", "", ""};
-	if (typeStr!=null) {
-		int type = Integer.parseInt(typeStr);
-		classes[type]="type-chose";
-	} else {
-		classes[0]="type-chose";
-	}
-	%>
 	<div class="type-list">
 		<a class="type-btn " href="${pageContext.request.contextPath}/project">可接项目</a>
-		<a class="type-btn type-chose" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
+		<a class="type-btn " href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
 		<a class="type-btn " href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
 		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>

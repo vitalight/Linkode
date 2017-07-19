@@ -17,7 +17,7 @@
 	
 	<div class="display">
 		<form action="${pageContext.request.contextPath}/portfolio/update" method="post">
-			<div class="display-bar more-padding">
+			<div class="display-bar more-padding create-bar">
 				<div class="row">
 						<input class="form-control" name="id" value="${model.id}" type="hidden" />
 						<div class="col-sm-4">

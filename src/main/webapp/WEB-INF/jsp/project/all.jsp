@@ -50,6 +50,12 @@
 			<a class="card-over" href="${pageContext.request.contextPath}/project/${project.id}"></a>
 		</div>
 		</c:forEach>
+		<c:if test="${model==null}">
+		<div class="display-bar empty-bar">
+			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">此地无银三百两...</div>
+		</div>
+		</c:if>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>

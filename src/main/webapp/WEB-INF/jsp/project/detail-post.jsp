@@ -11,8 +11,8 @@
 		<div class="sheet-content">
 			<div class="row">
 				<h1>${model.title}
-				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除项目</a>
-				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑项目</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/project/delete/${model.id}">删除项目</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/project/update/${model.id}">编辑项目</a>
 				</h1>
 			</div>
 			
