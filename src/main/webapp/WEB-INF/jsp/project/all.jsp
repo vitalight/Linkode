@@ -22,6 +22,12 @@
 				<c:if test="${project.posterId==LOGIN_USER_ID}">
 				<span class="type-tag ran-0">你的发布</span>
 				</c:if>
+				<c:if test="${project.status=='contract'}">
+				<span class="type-tag ran-3">待完成</span>
+				</c:if>
+				<c:if test="${project.status=='confirm'}">
+				<span class="type-tag ran-1">已完成</span>
+				</c:if>
 				</h3>
 				<div class="bar-info">
 					<span class="bar-text">开始日期：

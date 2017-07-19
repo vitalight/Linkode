@@ -22,7 +22,7 @@ public class MainController extends BaseController {
 	@GetMapping("/home")
 	String home(Model model) {
 		model.addAttribute("portfolios", portfolioService.getAllPVM(null));
-		model.addAttribute("projects",projectService.getAll());
+		model.addAttribute("projects",projectService.getUncontractedPVM());
 		model.addAttribute("ads",adService.getAll());
 		return View("/home");
 	}

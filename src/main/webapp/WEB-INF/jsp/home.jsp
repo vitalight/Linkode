@@ -34,7 +34,7 @@
 				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%6}.jpg" />
 				<div class="item-title">${project.title }</div>
 				<div class="item-intro">${project.requirement}</div>
-				<a class="card-over" href="${pageContext.request.contextPath}/project"></a>
+				<a class="card-over" href="${pageContext.request.contextPath}/project/${project.id}"></a>
 			</div>
 			</c:forEach>
 			

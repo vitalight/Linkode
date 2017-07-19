@@ -28,7 +28,7 @@ public class ProjectAppViewModel {
     	this.result = projectApp.getResult();
     }
     
-    public int getResult() {
+    public Integer getResult() {
     	return result;
     }
     

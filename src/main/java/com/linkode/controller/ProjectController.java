@@ -10,8 +10,11 @@ import com.linkode.pojo.ViewModel.ProjectViewModel;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.pojo.ProjectApp;
+import com.linkode.pojo.ProjectCommit;
 import com.linkode.service.ProjectAppService;
+import com.linkode.service.ProjectCommitService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,10 @@ public class ProjectController extends BaseController {
     private ProjectService projectService;
     @Autowired
     private ProjectAppService projectAppService;
+    @Autowired
+    private ProjectCommitService projectCommitService;
+    @Autowired
+    private UserService userService;
     
     /**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
@@ -78,6 +85,8 @@ public class ProjectController extends BaseController {
 	        model.addAttribute("hasApplied", hasApplied);
         	return View("/project/detail-post", model, project);
         }
+        model.addAttribute("commits", projectCommitService.getByProjectId(id));
+        model.addAttribute("user", userService.getById(project.getContractorId()));
     	return View("/project/detail-contract", model, project);
         
     }
@@ -148,28 +157,44 @@ public class ProjectController extends BaseController {
     	return RedirectTo("/project/"+project.getId());
     }
     
-    @GetMapping("/apply/{id}/deny")
+    @GetMapping("/apply/{id}/reject")
     public String denyAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException{
     	ProjectApp projectApp = projectAppService.getById(id);
     	projectApp.setResult(0);
     	projectAppService.update(projectApp);
-    	return RedirectTo("/project/"+id);
+    	return RedirectTo("/project/"+projectApp.getProjectId());
     }
 
-    @GetMapping("/{id}/commit")
-    public String submitAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
-        Project project = projectService.findByPrimaryKey(id);
-        project.setStatus("commit");
-        projectService.updateByPrimaryKey(project);
+    @PostMapping("/{id}/commit")
+    public String submitAction(Model model, @PathVariable("id") Integer id, ProjectCommit pc) throws CustomException, ParseException {
+    	pc.setTime(new Date());
+    	pc.setProjectId(id);
+        projectCommitService.insert(pc);
         return RedirectTo("/project/"+id);
     }
 
+    @GetMapping("/commit/{id}/accept")
+    public String commitAcceptAction(Model model, @PathVariable("id") Integer id) {
+    	ProjectCommit pc = projectCommitService.getById(id);
+    	pc.setResult("accept");
+    	projectCommitService.update(pc);
+    	return RedirectTo("/project/"+pc.getProjectId());
+    }
+    
+    @GetMapping("/commit/{id}/reject")
+    public String commitRejectAction(Model model, @PathVariable("id") Integer id ){
+    	ProjectCommit pc = projectCommitService.getById(id);
+    	pc.setResult("reject");
+    	projectCommitService.update(pc);
+    	return RedirectTo("/project/"+pc.getProjectId());
+    }
+    
     @GetMapping("/{id}/confirm")
     public String comfirmAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
         project.setStatus("confirm");
         projectService.updateByPrimaryKey(project);
-        return RedirectTo("/project/myProject");
+        return RedirectTo("/project/"+id);
     }
 
     /*======== 增删 ========*/

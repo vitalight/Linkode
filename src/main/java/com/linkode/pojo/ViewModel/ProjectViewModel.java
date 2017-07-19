@@ -8,6 +8,7 @@ public class ProjectViewModel {
 	private String username;
 	private Integer id;
 	private Integer posterId;
+	private Integer contractorId;
 	private String title;
 	private String requirement;
 	private Integer money;
@@ -19,6 +20,7 @@ public class ProjectViewModel {
 	public ProjectViewModel(Project project) {
 		this.id = project.getId();
 		this.posterId = project.getPosterId();
+		this.contractorId = project.getContractorId();
 		this.title = project.getTitle();
 		this.requirement = project.getRequirement();
 		this.money = project.getMoney();
@@ -106,5 +108,13 @@ public class ProjectViewModel {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public int getContractorId() {
+		return contractorId;
+	}
+
+	public void setContractorId(Integer contractorId) {
+		this.contractorId = contractorId;
 	}
 }

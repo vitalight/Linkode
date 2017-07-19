@@ -25,5 +25,6 @@
     <bean id="tutorialService" class="com.linkode.service.impl.TutorialServiceImpl"/>
     <bean id="portfolioService" class="com.linkode.service.impl.PortfolioServiceImpl"/>
     <bean id="portfolioCmtService" class="com.linkode.service.impl.PortfolioCmtServiceImpl"/>
+    <bean id="projectCommitService" class="com.linkode.service.impl.ProjectCommitServiceImpl"/>
 
 </beans>

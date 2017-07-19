@@ -109,6 +109,7 @@ a.card-over:hover {
 .ran-0 {background-color:var(--Lred)}
 .ran-1 {background-color:var(--Llgreen)}
 .ran-2 {background-color:var(--Lblue)}
+.ran-3 {background-color:var(--Lyellow)}
 
 h3 {
 	margin-top:0;
@@ -206,6 +207,20 @@ h3 {
 	background-color:rgba(0,0,0,0.03);
 	color:var(--Ldblue);
 }
+.hollow-red {
+	border-color:var(--Lred);
+	color:red;
+}
+.hollow-red:hover {
+	color:var(--Lred);
+}
+.hollow-grey {
+	border-color:var(--Ldgrey);
+	color:var(--Ldgrey);
+}
+.hollow-grey:hover {
+	color:black;
+}
 /*=============== 项目创建 ===============*/
 textarea {
 	resize:none;
@@ -288,6 +303,7 @@ h3.input-title {
 	border:none;
 	border-radius:0.2em;
 	color:white;
+	text-align:center;
 }
 .blue-btn:hover {
 	color:white;

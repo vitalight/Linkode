@@ -60,6 +60,7 @@ public class ProjectAppServiceImpl implements ProjectAppService {
         ProjectAppExample.Criteria criteria = projectAppExample.createCriteria();
         criteria.andProjectIdEqualTo(id);
         criteria.andApplicantIdEqualTo(userid);
+        criteria.andResultIsNull();
         List<ProjectApp> projectApps = projectAppMapper.selectByExample(projectAppExample);
         if (projectApps.isEmpty()) {
         	return 0;
