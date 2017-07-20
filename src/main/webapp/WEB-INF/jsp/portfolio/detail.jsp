@@ -50,7 +50,7 @@
 				</form>
 				<br/>
 				<c:forEach items="${cmts}" var="cmt">
-				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${cmt.time}" var="time" />
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
 					<div class="col-sm-11">

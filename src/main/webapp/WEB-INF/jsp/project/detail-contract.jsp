@@ -59,7 +59,7 @@
 				</c:if>
 				
 				<c:forEach items="${commits}" var="commit">
-				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${commit.time}" var="time" />
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${commit.time}" var="time" />
 				
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />

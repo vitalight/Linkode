@@ -72,9 +72,11 @@ a.card-over {
     right: 0px;
     height: 100%;
     width: 100%;
+	transition: border-color 1s ease;
+    border:transparent 2px solid;
 }
 a.card-over:hover {
-    border:var(--Lblue) 2px solid;
+    border-color:var(--Lblue);
     opacity:0.5;
 }
 .display-img, .display-bar-img, .display-text{
@@ -249,6 +251,9 @@ textarea.requirement {
 /*=============== 作品 ==============*/
 .bigger {
 	width:83.5em;
+}
+.bigger-empty {
+	margin:0 11.75em;
 }
 .more-margin-left {
 	margin-left:5em;

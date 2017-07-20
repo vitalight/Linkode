@@ -41,7 +41,7 @@
 				<br/>
 				</c:if>
 				<c:forEach items="${apps}" var="app">
-				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${app.time}" var="time" />
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${app.time}" var="time" />
 				
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${app.applicantId%7}.jpg" />

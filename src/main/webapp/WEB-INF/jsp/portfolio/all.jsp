@@ -43,6 +43,12 @@
 			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
 		</div>
 		</c:forEach>
+		<c:if test="${model==null || model.size()==0}">
+		<div class="display-bar empty-bar bigger-empty">
+			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">空空如也...</div>
+		</div>
+		</c:if>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>

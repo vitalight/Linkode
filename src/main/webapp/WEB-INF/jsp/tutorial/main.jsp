@@ -9,23 +9,22 @@
 	<c:set var="cuteType" value="${id}" />
 	<div class="margin-top display-sheet">
 		<div class="cute-list">
-			<c:forEach items="${model.tutorials}" var="tutorial">
-				<a class="cute-btn" id="cute-${tutorial.id}" href="${pageContext.request.contextPath}/tutorial/${tutorial.id}">${tutorial.type}</a>
-			</c:forEach>
-			<a class="cute-btn" href="${pageContext.request.contextPath}/tutorial/updateNavigator">编辑导航</a>
+			${nav.content}
+			<a class="cute-btn" href="${pageContext.request.contextPath}/tutorial/update/6">编辑导航</a>
 		</div>
 	</div>
 	<div class="margin-bottom display-sheet">
 		<div class="sheet-content">
 			<div class="row">
 				<h1>教程中心
-				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/delete/${model.tutorial.id}">删除教程</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/delete/${model.id}">删除教程</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/create">新建教程</a>
-				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/update/${model.tutorial.id}">编辑教程</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/update/${model.id}">编辑教程</a>
 				</h1>
 			</div>
-			${model.tutorial.content}	
+			${model.content}	
 		</div>
+		
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
