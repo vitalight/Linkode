@@ -10,6 +10,7 @@
 		<a class="type-btn" id="all" href="${pageContext.request.contextPath}/project">可接项目</a>
 		<a class="type-btn" id="myProject" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
 		<a class="type-btn" id="myContract" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
+		<a class="type-btn" id="myApplication" href="${pageContext.request.contextPath}/project/myApplication">我申请的项目</a>
 		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>
 	

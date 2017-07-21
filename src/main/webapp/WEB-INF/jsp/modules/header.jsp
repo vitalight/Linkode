@@ -26,9 +26,9 @@
 	</ul>
 	<c:if test="${!empty LOGIN_USER_ID}">
 		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${LOGIN_USER_ID%7}.jpg"/>
-		<a class="nav-btn user-btn" href="/user/${LOGIN_USER_ID}">
-			你好呀， ${LOGIN_USER_NAME}
-			<span class="glyphicon glyphicon glyphicon-chevron-down myicon"></span>
+		<a class="nav-btn user-btn" id="head-user" href="${pageContext.request.contextPath}/user/${LOGIN_USER_ID}"> 
+			<i class="fa fa-user-o"></i>
+			${LOGIN_USER_NAME}
 		</a>
 	</c:if>
 </nav>

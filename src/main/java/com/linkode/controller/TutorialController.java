@@ -93,6 +93,9 @@ public class TutorialController extends BaseController {
 	/*======== 查 ========*/
 	@GetMapping("/{id}")
 	public String show(Model model, @PathVariable("id") Integer id) throws CustomException {
+		if (id == NAV_ID) {
+			return RedirectTo("/tutorial/"+FIRST_ID);
+		}
 		Tutorial tutorial = tutorialService.findByPrimaryKey(id),
 				navigator = tutorialService.findByPrimaryKey(NAV_ID);
 		model.addAttribute("nav", navigator);

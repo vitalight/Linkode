@@ -43,7 +43,7 @@ a:focus {
 }
 #nav {
 	transition: border 0.5s linear;
-	width:109em;
+	width:110em;
 }
 .white-nav {
 	border-bottom:var(--Lgrey) 1px solid;
@@ -84,8 +84,9 @@ a:focus {
 .user-btn {
 	float:right;
 	color:black;
-	padding-right:1em;
-	padding-left:1em;
+	padding-right:2em;
+	padding-left:2em;
+	margin-right:1em;
 }
 .glyphicon.myicon {
 	margin-left:0.5em;
@@ -98,7 +99,7 @@ a:focus {
 	border-radius:50%;
 	overflow:hidden;
 	display:table;
-	margin-top:0.9em;	
+	margin-top:0.9em;
 }
 .nav-btn:hover, .logo-btn:hover {
 	background-color:rgb(248,249,250);

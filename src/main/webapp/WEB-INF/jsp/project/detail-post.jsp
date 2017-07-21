@@ -54,6 +54,7 @@
 						<a class="col-sm-offset-2 col-sm-2 hollow-btn hollow-grey">被拒绝</a>
 						</c:when>
 						<c:when test="${LOGIN_USER_ID==app.applicantId}">
+						<a class="col-sm-offset-2 col-sm-2 hollow-btn hollow-red" href="${pageContext.request.contextPath}/project/apply/${app.id}/delete">取消申请</a>
 						<a class="col-sm-offset-2 col-sm-2 hollow-btn">待处理</a>
 						</c:when>
 						<c:when test="${LOGIN_USER_ID==model.posterId}">

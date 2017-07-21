@@ -12,9 +12,11 @@
 				<h1 class="special">讨论区</h1>
 			</div>
 			<div class="type-list special">
-				<a class="type-btn type-chose" id="literature" href="">文章</a>
-				<a class="type-btn" id="image" href="">平面</a>
-				<a class="type-btn" id="video" href="">视频</a>
+				<a class="type-btn type-chose" href="">所有帖子</a>
+				<a class="type-btn" href="">我的帖子</a>
+				<a class="type-btn" href="">我回复的帖子</a>
+				<a class="type-btn" href="">发布帖子</a>
+				
 			</div>
 			<br/>
 			<% for (int i=0; i<2; i++) {%>
@@ -30,6 +32,7 @@
 					<span class="glyphicon glyphicon-comment"></span>
 					200
 				</div>
+				<a class="card-over" href="${pageContext.request.contextPath}/post/1"></a>
 			</div>
 			<%} %>
 			
@@ -46,6 +49,7 @@
 					<span class="glyphicon glyphicon-comment"></span>
 					5
 				</div>
+				<a class="card-over" href="${pageContext.request.contextPath}/post/1"></a>
 			</div>
 			<%} %>
 		</div>

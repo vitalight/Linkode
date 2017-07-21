@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.linkode.dao.PortfolioMapper;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Portfolio;
+import com.linkode.pojo.PortfolioExample;
 import com.linkode.service.UserService;
 import com.linkode.service.PortfolioService;
 import com.linkode.pojo.ViewModel.PortfolioViewModel;
@@ -105,7 +106,10 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
     
     public List<PortfolioViewModel> getAllPVM(String type) {
-    	List<Portfolio> portfolios = portfolioMapper.selectByExample(null);
+    	PortfolioExample pe = new PortfolioExample();
+    	pe.setOrderByClause("id desc");
+    	
+    	List<Portfolio> portfolios = portfolioMapper.selectByExample(pe);
     	List<PortfolioViewModel> ret = new ArrayList<PortfolioViewModel>();
     	for (Portfolio portfolio:portfolios) {
     		if (portfolio.getType().equals(type) || (type==null)) {

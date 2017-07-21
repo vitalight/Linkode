@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.linkode.service.AdService;
 import com.linkode.service.PortfolioService;
@@ -18,6 +19,16 @@ public class MainController extends BaseController {
 	private ProjectService projectService;
 	@Autowired
 	private AdService adService;
+	
+	@GetMapping("/user/{id}")
+	String test(Model model, @PathVariable("id") Integer id) {
+		return View("/user/main");
+	}
+	
+	@GetMapping("/post/{id}")
+	String postTest(Model model, @PathVariable("id") Integer id) {
+		return View("/post/detail");
+	}
 	
 	@GetMapping("/home")
 	String home(Model model) {

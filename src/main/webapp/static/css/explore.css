@@ -215,7 +215,7 @@ h3 {
 .yellow-bg:hover {
 	background-color:var(--Ldyellow);
 }
-.cmt-line a {
+.cmt-line .hollow-btn {
 	margin-top:0.5em;
 	width:7.5em;
 }
@@ -295,7 +295,7 @@ textarea.requirement {
 }
 
 .cmt-line {
-	margin-left:0em;
+	margin-left:15px;
 	padding-top:2em;
 	padding-bottom:1em;
 	border-top:var(--Lgrey) 1px solid;
@@ -477,13 +477,14 @@ h1.special {
 }
 .type-list.special {
 	margin-top:-6em;
-	margin-left:46em;
+	margin-left:30em;
 }
 .post-line {
 	font-size:1.1em;
 	padding:1.5em 0;
 	border-top:var(--Llgrey) 1px solid;
 	border-bottom:var(--Llgrey) 1px solid;
+	position:relative;
 }
 .post-line:hover {
 	background-color:rgb(248,249,250);
@@ -511,6 +512,31 @@ img.avatar.col-sm-1 {
 	overflow:hidden;
 	margin-top:-0.2em;
 }
+.cmt-tag {
+	color:white;
+	background-color:var(--Lgreen);
+	font-size:0.8em;
+	padding:0.3em 0.7em;
+	font-weight:100;
+	border-radius:0.2em;
+	margin-left:0.5em;
+}
+.floor-cmt {
+	margin-top:1em;
+	background-color:rgb(247,248,250);
+	margin-left:4.5em;
+	padding-right:45px;
+	padding-left:30px;
+	font-size:0.85em;
+}
+.floor-cmt .cmt-line {
+	border:none;
+}
+.a-text {
+	margin:0 1em;
+	float:right;
+	font-weight:100;
+}
 /*======== Homepage ==========*/
 .home-main {
 	margin-top:5em;
@@ -522,7 +548,7 @@ img.avatar.col-sm-1 {
 	margin:0 auto;
 }
 .home-bg {
-	width:109em;    
+	width:110em;    
 	position: relative;
     left: calc(50% - 54.5em);
 }

@@ -3,17 +3,22 @@ package com.linkode.service.impl;
 import com.linkode.pojo.ViewModel.ProjectViewModel;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.linkode.dao.ProjectAppMapper;
 import com.linkode.dao.ProjectMapper;
 import com.linkode.dao.UserMapper;
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
+import com.linkode.pojo.ProjectApp;
+import com.linkode.pojo.ProjectAppExample;
 import com.linkode.pojo.ProjectExample;
 import com.linkode.service.ProjectService;
 import com.linkode.util.DataPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProjectServiceImpl implements ProjectService {
 
@@ -21,6 +26,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ProjectAppMapper projectAppMapper;
 
     @Override
     public Project findByPrimaryKey(Integer id) throws CustomException {
@@ -95,12 +102,15 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectByPrimaryKey(id);
 	}
 	public List<Project> getAll() {
-		return projectMapper.selectByExample(null);
+		ProjectExample projectExample = new ProjectExample();
+        projectExample.setOrderByClause("id desc");
+		return projectMapper.selectByExample(projectExample);
 	}
 	public List<Project> getByPosterId(int id) {
         ProjectExample projectExample = new ProjectExample();
         ProjectExample.Criteria criteria = projectExample.createCriteria();
         criteria.andPosterIdEqualTo(id);
+        projectExample.setOrderByClause("id desc");
         List<Project> projects = projectMapper.selectByExample(projectExample);
         if (projects.isEmpty()) {
         	return null;
@@ -111,6 +121,7 @@ public class ProjectServiceImpl implements ProjectService {
         ProjectExample projectExample = new ProjectExample();
         ProjectExample.Criteria criteria = projectExample.createCriteria();
         criteria.andContractorIdEqualTo(id);
+        projectExample.setOrderByClause("id desc");
         List<Project> projects = projectMapper.selectByExample(projectExample);
         if (projects.isEmpty()) {
         	return null;
@@ -118,6 +129,31 @@ public class ProjectServiceImpl implements ProjectService {
         return projects;
 	}
 
+	@Override
+	public List<Project> getByApplicantId(int id) {
+		// to optimize
+		ProjectAppExample projectAppExample = new ProjectAppExample();
+		ProjectAppExample.Criteria criteria = projectAppExample.createCriteria();
+		criteria.andApplicantIdEqualTo(id);
+		criteria.andResultIsNull();
+		List<ProjectApp> projectApps = projectAppMapper.selectByExample(projectAppExample);
+		if (projectApps.isEmpty()) {
+			return null;
+		}
+		Set<Integer> set = new HashSet<Integer>();
+		List<Integer> list = new ArrayList<Integer>();
+		for (ProjectApp projectApp:projectApps) {
+			set.add(projectApp.getProjectId());
+		}
+		
+		ProjectExample projectExample = new ProjectExample();
+		ProjectExample.Criteria pCriteria = projectExample.createCriteria();
+		list.addAll(set);
+		pCriteria.andIdIn(list);
+        projectExample.setOrderByClause("id desc");
+        return projectMapper.selectByExample(projectExample);
+	}
+	
 	public List<ProjectViewModel> transfer(List<Project> projects) {
 		if(projects == null) {
 			return null;
@@ -160,4 +196,10 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectViewModel> getAllPVM() {
 		return transfer(getAll());
 	}
+
+	@Override
+	public List<ProjectViewModel> getPVMByApplicantId(int id) {
+		return transfer(getByApplicantId(id));
+	}
+
 }

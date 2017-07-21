@@ -118,6 +118,17 @@ public class ProjectController extends BaseController {
         List<ProjectViewModel> pvms = projectService.getPVMByContractorId(userId);
         return View("/project/all", model, pvms);
     }
+    
+    @GetMapping("/myApplication")
+    public String myApplicationView(Model model) {
+    	Integer userId = (Integer)session().getAttribute("LOGIN_USER_ID");
+    	if (userId == null) {
+    		return RedirectTo("/login");
+    	}
+    	model.addAttribute("type","myApplication");
+    	List<ProjectViewModel> pvms = projectService.getPVMByApplicantId(userId);
+    	return View("/project/all",model,pvms);
+    }
 
     /*======== 改 ========*/
     @PostMapping("/update")
@@ -163,6 +174,14 @@ public class ProjectController extends BaseController {
     	projectApp.setResult(0);
     	projectAppService.update(projectApp);
     	return RedirectTo("/project/"+projectApp.getProjectId());
+    }
+    
+    @GetMapping("/apply/{id}/delete")
+    public String deleteApplyAction(Model model, @PathVariable("id") Integer id) {
+    	ProjectApp projectApp = projectAppService.getById(id);
+    	int projectId = projectApp.getProjectId();
+    	projectAppService.deleteById(id);
+    	return RedirectTo("/project/"+projectId);
     }
 
     @PostMapping("/{id}/commit")
