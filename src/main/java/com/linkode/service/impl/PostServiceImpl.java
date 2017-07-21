@@ -1,12 +1,15 @@
 package com.linkode.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.linkode.dao.PostCmtMapper;
 import com.linkode.dao.PostMapper;
 import com.linkode.pojo.Portfolio;
 import com.linkode.pojo.Post;
@@ -27,6 +30,8 @@ public class PostServiceImpl implements PostService {
 	private UserService userService;
 	@Autowired
 	private PostCmtService postCmtService;
+	@Autowired
+	private PostCmtMapper postCmtMapper;
 
 	public int insert(Post post) {
 		postMapper.insert(post);
@@ -115,6 +120,7 @@ public class PostServiceImpl implements PostService {
 		return page;
 	}
 	
+	@Override
 	public List<PostViewModel> transfer(List<Post> posts) {
 		List<PostViewModel> pvms = new ArrayList<PostViewModel>();
 		for (Post post:posts) {
@@ -137,8 +143,23 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostViewModel> getPVMByCommentUserid(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		PostCmtExample postCmtExample = new PostCmtExample();
+		PostCmtExample.Criteria criteria = postCmtExample.createCriteria();
+		criteria.andUserIdEqualTo(id);
+		List<PostCmt> postCmts = postCmtMapper.selectByExample(postCmtExample);
+		
+		Set<Integer> set = new HashSet<Integer>();
+		for (PostCmt postCmt:postCmts) {
+			set.add(postCmt.getPostid());
+		}
+		List<Integer> list = new ArrayList<Integer>();
+		list.addAll(set);
+		
+		PostExample postExample = new PostExample();
+		PostExample.Criteria postCriteria = postExample.createCriteria();
+		postCriteria.andIdIn(list);
+		List<Post> posts = postMapper.selectByExample(postExample);
+		return transfer(posts);
 	}
 
 }

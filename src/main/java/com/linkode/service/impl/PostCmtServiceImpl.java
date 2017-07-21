@@ -36,6 +36,10 @@ public class PostCmtServiceImpl implements PostCmtService {
 	}
 
 	public int deleteById(int id) {
+		PostCmtExample postCmtExample = new PostCmtExample();
+		PostCmtExample.Criteria criteria = postCmtExample.createCriteria();
+		criteria.andPostCmtIdEqualTo(id);
+		postCmtMapper.deleteByExample(postCmtExample);
 		return postCmtMapper.deleteByPrimaryKey(id);
 	}
 
@@ -105,11 +109,6 @@ public class PostCmtServiceImpl implements PostCmtService {
 		for (PostCmt postCmt : pcs) {
 			PostCmtViewModel pvm = new PostCmtViewModel(postCmt);
 			pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
-			Integer postCmtid = postCmt.getPostCmtId();
-			if (postCmtid!=null) {
-				int postCmtUid = postCmtMapper.selectByPrimaryKey(postCmtid).getUserId();
-				pvm.setRespondName(userService.getById(postCmtUid).getUsername());
-			}
 			ret.add(pvm);
 		}
 		return ret;

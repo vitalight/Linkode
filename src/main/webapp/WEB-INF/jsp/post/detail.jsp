@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","作品浏览"); %>
+<% request.setAttribute("title","发布帖子"); %>
 <% request.setAttribute("headType","post"); %>
 <%@ include file="../modules/web-header.jsp"%>
 </head>
@@ -8,14 +8,16 @@
 	<div class="margin-top margin-bottom display-sheet">
 		<div class="sheet-content">
 			<div class="row">
-				<h1 class="special">怎么写小学生作文</h1>
+				<h1 class="special">${model.title}
+				<a class="edit-link" href="${pageContext.request.contextPath}/post/delete/${model.id}">删除帖子</a>
+				</h1>
 			</div>
 			<br/>
 			
 			<div class="row content-text">
 				<div class="cmt-line post-special">
 					<div class="row">
-						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.id%7}.jpg" />
+						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.userId%7}.jpg" />
 						<div class="col-sm-9">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${model.time}" var="time" />
 							<div class="cmt-name">${model.username}<span class="cmt-tag ran-2">楼主</span><span class="cmt-time">${time}</span></div>
@@ -26,12 +28,13 @@
 				<c:forEach items="${cmts}" var="cmt">
 				<div class="cmt-line post-special">
 					<div class="row">
-						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.id%7}.jpg" />
-						<div class="col-sm-9">
+						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
+						<div class="col-sm-7">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
 							<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
 							<div class="cmt-content">${cmt.content}</div>
 						</div>
+						<a class="col-sm-2 hollow-btn hollow-red" href="${pageContext.request.contextPath}/post/comment/delete/${cmt.id}">删除</a>
 						<a class="col-sm-2 hollow-btn cmt-btn" id="${cmt.id}">回复</a>
 					</div>
 					
@@ -45,7 +48,7 @@
 											${cmtCmt.username}
 											<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmtCmt.time}" var="time" />
 											<span class="cmt-time">${time}</span>
-											<a class="a-text">删除</a>
+											<a class="a-text" href="${pageContext.request.contextPath}/post/comment/delete/${cmtCmt.id}">删除</a>
 										</div>
 										<div class="cmt-content">${cmtCmt.content}</div>
 									</div>

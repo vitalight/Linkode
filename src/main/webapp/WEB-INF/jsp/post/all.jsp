@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","作品浏览"); %>
+<% request.setAttribute("title","讨论区"); %>
 <% request.setAttribute("headType","post"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">

@@ -61,7 +61,7 @@ public class PostController extends BaseController {
 	
 	@GetMapping("/create")
 	public String createView() {
-		return View("/post/create");
+		return View("/post/all");
 	}
 
 	@GetMapping("/{id}")
@@ -86,7 +86,7 @@ public class PostController extends BaseController {
 		post.setType(newPost.getType());
 		post.setTitle(newPost.getTitle());
 		postService.update(post);
-		return RedirectTo("/post/mypost");
+		return RedirectTo("/post/all");
 	}
 
 	/* ======== 增删 ======== */
@@ -110,6 +110,12 @@ public class PostController extends BaseController {
         postCmtService.insert(postCmt);
         return RedirectTo("/post/"+postid);
 	}
+	@GetMapping("/comment/delete/{id}")
+	public String commentDeleteAction(Model model, @PathVariable("id") Integer id) {
+    	Integer postid = postCmtService.getById(id).getPostid();
+    	postCmtService.deleteById(id);
+		return RedirectTo("/post/"+postid);
+	}
 	
 	@PostMapping("/create")
 	public String createAction(Model model, HttpServletRequest request, @Valid Post post, BindingResult bindingResult)
@@ -119,12 +125,12 @@ public class PostController extends BaseController {
 		Date date = new Date();
 		post.setTime(date);
 		postService.insert(post);
-		return RedirectTo("/post/mypost");
+		return RedirectTo("/post/all");
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteAction(@PathVariable("id") Integer id) {
 		postService.deleteById(id);
-		return RedirectTo("/post/mypost");
+		return RedirectTo("/post/all");
 	}
 }
