@@ -531,11 +531,19 @@ img.avatar.col-sm-1 {
 }
 .floor-cmt .cmt-line {
 	border:none;
+	padding-left:0;
 }
 .a-text {
 	margin:0 1em;
 	float:right;
 	font-weight:100;
+}
+.post-special{
+	padding-left:1em;
+	padding-right:1em;
+}
+.cmt-btn {
+	cursor:pointer;
 }
 /*======== Homepage ==========*/
 .home-main {

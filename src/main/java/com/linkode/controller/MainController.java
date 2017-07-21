@@ -25,11 +25,6 @@ public class MainController extends BaseController {
 		return View("/user/main");
 	}
 	
-	@GetMapping("/post/{id}")
-	String postTest(Model model, @PathVariable("id") Integer id) {
-		return View("/post/detail");
-	}
-	
 	@GetMapping("/home")
 	String home(Model model) {
 		model.addAttribute("portfolios", portfolioService.getAllPVM(null));

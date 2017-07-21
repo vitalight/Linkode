@@ -24,15 +24,6 @@ public class AccountController extends BaseController {
 
     @Autowired
     private UserService userService;
-  
-    /**
-     * This is for test and should be DELETED
-     * after merging with master.
-     */
-    @GetMapping("/post")
-    public String test(Model model) {
-    	return View("/post/main");
-    }
     
     @GetMapping("/login")
     public String login(Model model, String msg){

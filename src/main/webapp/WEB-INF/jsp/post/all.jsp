@@ -12,46 +12,29 @@
 				<h1 class="special">讨论区</h1>
 			</div>
 			<div class="type-list special">
-				<a class="type-btn type-chose" href="">所有帖子</a>
-				<a class="type-btn" href="">我的帖子</a>
-				<a class="type-btn" href="">我回复的帖子</a>
-				<a class="type-btn" href="">发布帖子</a>
-				
+				<a class="type-btn" id="all" href="${pageContext.request.contextPath}/post">所有帖子</a>
+				<a class="type-btn" id="mine" href="${pageContext.request.contextPath}/post/mine">我的帖子</a>
+				<a class="type-btn" id="myComment" href="${pageContext.request.contextPath}/post/myComment">我回复的帖子</a>
+				<a class="type-btn" id="create" href="${pageContext.request.contextPath}/post/create">发布帖子</a>
 			</div>
 			<br/>
-			<% for (int i=0; i<2; i++) {%>
-			<div class="row post-line">
-				<div class="col-sm-8">
-					<span class="tag ran-0">精品</span>怎么写小学作文?
-				</div>
-				<div class="col-sm-2 poster-info">
-					<span class="glyphicon glyphicon-user"></span>
-					LadygaGa &nbsp &nbsp
-				</div>
-				<div class="col-sm-2 poster-info">
-					<span class="glyphicon glyphicon-comment"></span>
-					200
-				</div>
-				<a class="card-over" href="${pageContext.request.contextPath}/post/1"></a>
-			</div>
-			<%} %>
 			
-			<% for (int i=0; i<5; i++) {%>
+			<c:forEach items="${model}" var="post">
 			<div class="row post-line">
 				<div class="col-sm-8">
-					怎么写毕业论文
+					<span class="tag ran-0">精品</span>${post.title}
 				</div>
 				<div class="col-sm-2 poster-info">
 					<span class="glyphicon glyphicon-user"></span>
-					Alien &nbsp &nbsp
+					${post.username} &nbsp &nbsp
 				</div>
 				<div class="col-sm-2 poster-info">
 					<span class="glyphicon glyphicon-comment"></span>
-					5
+					?
 				</div>
-				<a class="card-over" href="${pageContext.request.contextPath}/post/1"></a>
+				<a class="card-over" href="${pageContext.request.contextPath}/post/${post.id}"></a>
 			</div>
-			<%} %>
+			</c:forEach>
 		</div>
 	</div>
 
