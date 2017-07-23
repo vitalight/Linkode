@@ -354,6 +354,126 @@ public class PostCmtExample {
             addCriterion("time not between", value1, value2, "time");
             return (Criteria) this;
         }
+
+        public Criteria andUserIdIsNull() {
+            addCriterion("userId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("userId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("userId =", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("userId <>", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("userId >", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("userId >=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("userId <", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("userId <=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("userId in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("userId not in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("userId between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("userId not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdIsNull() {
+            addCriterion("postCmtId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdIsNotNull() {
+            addCriterion("postCmtId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdEqualTo(Integer value) {
+            addCriterion("postCmtId =", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdNotEqualTo(Integer value) {
+            addCriterion("postCmtId <>", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdGreaterThan(Integer value) {
+            addCriterion("postCmtId >", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("postCmtId >=", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdLessThan(Integer value) {
+            addCriterion("postCmtId <", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdLessThanOrEqualTo(Integer value) {
+            addCriterion("postCmtId <=", value, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdIn(List<Integer> values) {
+            addCriterion("postCmtId in", values, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdNotIn(List<Integer> values) {
+            addCriterion("postCmtId not in", values, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdBetween(Integer value1, Integer value2) {
+            addCriterion("postCmtId between", value1, value2, "postCmtId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostCmtIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("postCmtId not between", value1, value2, "postCmtId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

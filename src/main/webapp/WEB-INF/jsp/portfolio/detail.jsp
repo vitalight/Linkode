@@ -18,11 +18,12 @@
 			
 			<div class="content-info row">
 				<div class="info-left col-sm-2">
-					${model.type}
+				<fmt:setBundle basename="messages" var="lang"/>
+				<fmt:message bundle="${lang}" key="${model.type}"/>
 				</div>
 				<div class="info-right col-sm-10">
 					<c:if test="${model.type=='literature'}">
-					用文字体现生命的力量。	
+					苟利国家生死以。	
 					</c:if>
 					<c:if test="${model.type!='literature'}">
 					${model.content }
@@ -36,10 +37,10 @@
 				${model.content }
 				</c:if>
 				<c:if test="${model.type!='literature'}">
-				<img src="../static/img/big-img.jpg" />
+				<img src="../static/img/pic/pic-${model.id%13}.png" />
 				</c:if>
 				
-				<h3>评论(${cmts.size()})</h3>
+				<h3>评论(${model.comments})</h3>
 				<form action="${pageContext.request.contextPath}/portfolio/${model.id}/comment" method="post">
 					<textarea name="content" class="form-control requirement" placeholder="正文" maxlength="90" name="requirement" required></textarea>
 					<br/>
@@ -49,9 +50,9 @@
 				</form>
 				<br/>
 				<c:forEach items="${cmts}" var="cmt">
-				<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${cmt.time}" var="time" />
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar-${cmt.userId%6+1}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
 					<div class="col-sm-11">
 						<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
 						<div class="cmt-content">${cmt.content }</div>

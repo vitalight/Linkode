@@ -16,7 +16,7 @@ public interface PortfolioService {
     
     DataPage<Portfolio> selectPageById(Integer pagenum, Integer pageSize, Integer indexCount,Integer id);
     DataPage<PortfolioViewModel> selectPVMPage(Integer pageNum, Integer pageSize, Integer indexCount,String type);
-    Portfolio findByPrimaryKey(Integer id) throws CustomException;
+    Portfolio findByPrimaryKey(Integer id);
     
     List<PortfolioViewModel> getAllPVM(String type);
     List<PortfolioViewModel> getByUserId(Integer userid);

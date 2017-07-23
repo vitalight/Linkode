@@ -13,6 +13,8 @@ public class ProjectApp {
 
     private Date time;
 
+    private Integer result;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class ProjectApp {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
     }
 }

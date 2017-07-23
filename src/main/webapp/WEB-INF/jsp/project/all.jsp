@@ -7,61 +7,74 @@
 <body>
 <%@ include file="../modules/header.jsp"%>
 	<div class="type-list">
-		<a class="type-btn type-chose" href="${pageContext.request.contextPath}/project">可接项目</a>
-		<a class="type-btn" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
-		<a class="type-btn" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
+		<a class="type-btn" id="all" href="${pageContext.request.contextPath}/project">可接项目</a>
+		<a class="type-btn" id="myProject" href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
+		<a class="type-btn" id="myContract" href="${pageContext.request.contextPath}/project/myContract">我承包的项目</a>
+		<a class="type-btn" id="myApplication" href="${pageContext.request.contextPath}/project/myApplication">我申请的项目</a>
 		<a class="type-btn" href="${pageContext.request.contextPath}/project/create">发布项目</a>
 	</div>
 	
 	<div class="display">
-		<c:forEach items="${model.data}" var="project" ><c:if test="${project.status=='uncontracted' }">
-			<div class="display-bar">
-				<div class="row">
-					<div class="col-sm-3">
-						<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic-${project.id%10+1}.png"/>
-					</div>
-					<div class="col-sm-9">
-						<h3>${project.title }<span class="type-tag ran-${project.id%3}">${project.type}</span></h3>
-						<div class="row bar-info">
-							<span class="col-sm-3 no-padding"><strong>酬金：</strong>￥${project.money }</span>
-							<span class="col-sm-4 no-padding"><strong>开始日期：</strong>
-								<fmt:formatDate type="date" value="${project.startDate}" />
-							</span>
-							<span class="col-sm-4 no-padding"><strong>截止日期：</strong>
-								<fmt:formatDate type="date" value="${project.endDate}" />
-							</span>
-						</div>
-						<div class="row">
-							<div class="bar-content">
-								${project.requirement}
-							</div>
-						</div>
-						<div class="col-sm-10 author">
-							<img class="bar-avatar" 
-								src="${pageContext.request.contextPath}/static/img/avatar-google.jpg"/>
-							${project.username}
-						</div>
-						<c:choose>
-							<c:when test="${LOGIN_USER_ID==project.posterId}">
-								<button class="col-sm-2 contract-btn red-bg" disabled>你的发布</button>
-							</c:when>
-							<c:when test="${project.status!='uncontracted' }">
-								<button class="col-sm-2 contract-btn red-bg" disabled>已被承包</button>
-							</c:when>
-							<c:otherwise>
-								<form action="${pageContext.request.contextPath}/project/contract/${project.id}" method="get">
-									<button class="col-sm-2 contract-btn" type="submit">承包</button>
-								</form>
-							</c:otherwise>
-						</c:choose>
-					</div>
+		<c:forEach items="${model}" var="project" >
+		<div class="display-bar">
+			<img class="display-bar-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${project.id%13}.png"/>
+			<div class="bar-main">
+				<h3>${project.title }
+				<span class="type-tag">
+				<fmt:setBundle basename="messages" var="lang"/>
+				<fmt:message bundle="${lang}" key="${project.type}"/></span>
+				
+				<c:if test="${project.posterId==LOGIN_USER_ID}">
+				<span class="type-tag ran-0">你的发布</span>
+				</c:if>
+				<c:if test="${project.status=='contract'}">
+				<span class="type-tag ran-3">待完成</span>
+				</c:if>
+				<c:if test="${project.status=='confirm'}">
+				<span class="type-tag ran-1">已完成</span>
+				</c:if>
+				</h3>
+				<div class="bar-info">
+					<span class="bar-text">开始日期：
+						<fmt:formatDate type="date" value="${project.startDate}" />
+					</span>
+					<span class="bar-text">截止日期：
+						<fmt:formatDate type="date" value="${project.endDate}" />
+					</span>
 				</div>
+				<div class="bar-content">
+					${project.requirement}
+				</div>
+				<div class="author-info">
+					<img class="bar-avatar" 
+						src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.jpg"/>
+					${project.username}
+				</div>
+				<span class="bar-price">￥${project.money}</span>
 			</div>
-		</c:if></c:forEach>
+			<a class="card-over" href="${pageContext.request.contextPath}/project/${project.id}"></a>
+		</div>
+		</c:forEach>
+		<c:if test="${model==null}">
+		<div class="display-bar empty-bar">
+			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">空空如也...</div>
+		</div>
+		</c:if>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	if (${type == null}) {
+		$("#all").addClass("type-chose");
+	}
+	else {
+		$("#${type}").addClass("type-chose");
+	}
+}); 
+</script>
 <%@ include  file="../modules/web-footer.jsp"%>

@@ -6,16 +6,6 @@
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>
-	<%  
-	String typeStr = request.getParameter("type");
-	String[] classes = {"", "", "", ""};
-	if (typeStr!=null) {
-		int type = Integer.parseInt(typeStr);
-		classes[type]="type-chose";
-	} else {
-		classes[0]="type-chose";
-	}
-	%>
 	<div class="type-list">
 		<a class="type-btn " href="${pageContext.request.contextPath}/project">可接项目</a>
 		<a class="type-btn " href="${pageContext.request.contextPath}/project/myProject">我发布的项目</a>
@@ -26,7 +16,7 @@
 	
 	<div class="display">
 		<form action="${pageContext.request.contextPath}/project/create" method="post">
-			<div class="display-bar more-padding">
+			<div class="display-bar more-padding create-bar">
 				<div class="row">
 						<div class="col-sm-4">
 							项目名称：<input class="form-control" type="text" name="title" required/>

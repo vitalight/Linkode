@@ -17,7 +17,7 @@
 	
 	<div class="display bigger">
 		<c:forEach items="${model}" var="pvm">
-		<div class="display-card">
+		<div class="display-card height-17">
 		
 			<c:if test="${pvm.type == 'literature'}">
 			<div class=" ran-${pvm.id%3} display-text">
@@ -25,17 +25,29 @@
 			</div>
 			</c:if>
 			<c:if test="${pvm.type != 'literature'}">
-			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic-${pvm.id%10+1}.png"/>
+			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${pvm.id%16}.png"/>
 			</c:if>
 			
 			<p class="card-name">${pvm.title}</p>
 			<span class="card-info">
-				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar-${pvm.userId%6+1}.jpg" />
+				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${pvm.userId%6}.jpg" />
 				${pvm.username}
+			</span>
+			<span class="likes">
+				<i class="fa fa-heart" aria-hidden="true"></i> ${pvm.likes}
+			</span>
+			<span class="comments">
+				<i class="fa fa-comment" aria-hidden="true"></i> ${pvm.comments}
 			</span>
 			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
 		</div>
 		</c:forEach>
+		<c:if test="${model==null || model.size()==0}">
+		<div class="display-bar empty-bar bigger-empty">
+			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">空空如也...</div>
+		</div>
+		</c:if>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>

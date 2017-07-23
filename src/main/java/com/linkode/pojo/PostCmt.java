@@ -11,6 +11,10 @@ public class PostCmt {
 
     private Date time;
 
+    private Integer userId;
+
+    private Integer postCmtId;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +45,21 @@ public class PostCmt {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getPostCmtId() {
+        return postCmtId;
+    }
+
+    public void setPostCmtId(Integer postCmtId) {
+        this.postCmtId = postCmtId;
     }
 }

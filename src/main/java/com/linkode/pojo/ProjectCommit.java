@@ -11,6 +11,8 @@ public class ProjectCommit {
 
     private String result;
 
+    private Integer projectId;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class ProjectCommit {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 }

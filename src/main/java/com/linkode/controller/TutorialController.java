@@ -1,13 +1,10 @@
 package com.linkode.controller;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Tutorial;
 import com.linkode.service.TutorialService;
-import com.linkode.pojo.ViewModel.TutorialViewModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,13 +22,15 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/tutorial")
 public class TutorialController extends BaseController {
+	final static int FIRST_ID = 1;
+	final static int NAV_ID = 6;
 	
 	@Autowired
 	TutorialService tutorialService;
 	
 	@GetMapping("")
 	public String check() {
-		return RedirectTo("/tutorial/1");
+		return RedirectTo("/tutorial/"+FIRST_ID);
 	}
 	
 	/*======== 编辑导航栏 =========*/
@@ -93,31 +92,21 @@ public class TutorialController extends BaseController {
 	
 	/*======== 查 ========*/
 	@GetMapping("/{id}")
-	public String show(Model model, HttpServletRequest req, @PathVariable("id") Integer id) throws CustomException {
-		Tutorial tutorial = tutorialService.findByPrimaryKey(id);
-		List<Tutorial> tutorials = tutorialService.selectAllTutorial();
-		int lastId = 0, nextId = 0;
-		for (int i = 0; i < tutorials.size(); i++) {
-			if (tutorials.get(i).getId() == id) {
-				lastId = i == 0 ? 0 : tutorials.get(i-1).getId();
-				nextId = i == tutorials.size() - 1 ? 0 : tutorials.get(i+1).getId();
-			}
+	public String show(Model model, @PathVariable("id") Integer id) throws CustomException {
+		if (id == NAV_ID) {
+			return RedirectTo("/tutorial/"+FIRST_ID);
 		}
-		TutorialViewModel TVM = new TutorialViewModel();
-		TVM.setTutorial(tutorial);
-		TVM.setTutorials(tutorials);
-		TVM.setSize(tutorials.size());
-		TVM.setLastId(lastId);
-		TVM.setNextId(nextId);
-		req.setAttribute("tutNum", id.toString());
-		return View("/tutorial/main", model, TVM);
+		Tutorial tutorial = tutorialService.findByPrimaryKey(id),
+				navigator = tutorialService.findByPrimaryKey(NAV_ID);
+		model.addAttribute("nav", navigator);
+		return View("/tutorial/main", model, tutorial);
 	}
 	
 	/*======== 删 ========*/
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
 		tutorialService.deleteByPrimaryKey(id);
-		return RedirectTo("/tutorial");
+		return RedirectTo("/tutorial/update/"+NAV_ID);
 	}
 	
 	/*======== 改 ========*/
@@ -130,6 +119,9 @@ public class TutorialController extends BaseController {
 	@PostMapping("/update/{id}")
 	public String modify(Model model, @PathVariable("id") Integer id, @Validated Tutorial tutorial, BindingResult bindingResult) throws CustomException {
 		tutorialService.updateByPrimaryKey(tutorial);
+		if (tutorial.getId()==NAV_ID) {
+			return RedirectTo("/tutorial/"+FIRST_ID);
+		}
 		return RedirectTo("/tutorial/"+id);
 	}
 	
@@ -142,6 +134,9 @@ public class TutorialController extends BaseController {
 	@PostMapping("/create")
 	public String createTutorial(Model model, @Valid Tutorial tutorial, BindingResult bindingResult) throws CustomException {
 		int id=tutorialService.insert(tutorial);
+		Tutorial nav = tutorialService.findByPrimaryKey(NAV_ID);
+		nav.setContent(nav.getContent()+"\n<a class=\"cute-btn\" id=\"cute-"+id+"\" href=\"../tutorial/"+id+"\">"+tutorial.getType()+"</a>");
+		tutorialService.updateByPrimaryKey(nav);
 		return RedirectTo("/tutorial/"+id);
 	}
 	

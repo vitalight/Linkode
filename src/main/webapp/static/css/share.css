@@ -4,6 +4,7 @@ body {
 }
 :root {
 	--Lblue:rgb(22,152,245);
+	--Llblue:rgb(225,233,241);
 	--Lred:rgb(242,99,75);
 	--Ldred:rgb(212,89,65);
 	--Llgreen:rgb(146,206,70);
@@ -40,8 +41,19 @@ a:focus {
 	text-decoration:none;
 	color:black;
 }
+#nav {
+	transition: border 0.5s linear;
+	width:110em;
+}
 .white-nav {
 	border-bottom:var(--Lgrey) 1px solid;
+	height:5.1em;
+	padding:0 1.7em;
+	background-color:white;
+	overflow:hidden;
+}
+.toggle-nav {
+	border-bottom:white 1px solid;
 	height:5em;
 	padding:0 1.7em;
 	background-color:white;
@@ -53,11 +65,14 @@ a:focus {
 	color:grey;
 	padding:1.7em 2em;
 	text-align:center;
+	transition: all 0.5s ease;
+	border-bottom:transparent 0.2em solid;
 }
 .logo-btn {
 	margin-right:5em;
 	padding:1.7em 2.2em;
 	padding-bottom:0.2em;
+	transition: all 0.5s ease;
 }
 .search {
 	float:left;
@@ -69,8 +84,9 @@ a:focus {
 .user-btn {
 	float:right;
 	color:black;
-	padding-right:1em;
-	padding-left:1em;
+	padding-right:2em;
+	padding-left:2em;
+	margin-right:1em;
 }
 .glyphicon.myicon {
 	margin-left:0.5em;
@@ -83,16 +99,17 @@ a:focus {
 	border-radius:50%;
 	overflow:hidden;
 	display:table;
-	margin-top:0.9em;	
+	margin-top:0.9em;
 }
 .nav-btn:hover, .logo-btn:hover {
-	background-color:rgb(250,251,252);
+	background-color:rgb(248,249,250);
 	color:black;
 }
 .nav-btn-chose {
-	border-bottom:var(--Lblue) 0.2em solid;
 	color:black;
-	font-weight:bold;
+	font-weight:700;
+	transition:border-color 0.5s linear;
+	border-color:var(--Lblue);
 }
 .nav-logo {
 	height:3em;
