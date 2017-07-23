@@ -21,9 +21,11 @@
 				<h3 class="input-title">标题</h3>
 				<input class="form-control my-input" name="type" value="${model.type}"/>
 				<h3 class="input-title">正文</h3>
-				<textarea class="form-control my-textarea" name="content">
-${model.content}</textarea>
+				<textarea class="form-control my-textarea" id="editor1" name="content">
+					${model.content}
+				</textarea>
 			</form>
+			<ckeditor:replace replace="editor1" basePath="/ckeditor/" />
 		</div>
 	</div>
 

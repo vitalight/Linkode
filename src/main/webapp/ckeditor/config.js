@@ -13,14 +13,15 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
         { name: 'styles', items: [ 'Font', 'FontSize' ] },
         { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', 'Underline', '-', 'RemoveFormat' ] },
-        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', /*'-', 'Outdent', 'Indent', */'-', 'Blockquote' ] },
         { name: 'links', items: [ 'Link', 'Unlink' ] },
         { name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
-        { name: 'editing', items: [ 'AutoCorrect' ] },
+        //{ name: 'editing', items: [ 'AutoCorrect' ] },
         { name: 'mode', items: [ 'Source' ] }
         //{ name: 'tools', items: [ 'Maximize' ] },
     ];
 
+    config.filebrowserImageUploadUrl = "/CKEditor/imgUpload";
     config.contentsCss = [ 'https://cdn.ckeditor.com/4.7.1/standard-all/contents.css', 'mystyle.css'];
     config.fontawesomePath = '././font-awesome/css/font-awesome.min.css';
     config.font_names = '宋体/宋体;黑体/黑体;仿宋/仿宋_GB2312;楷体/楷体_GB2312;隶书/隶书;幼圆/幼圆;微软雅黑/微软雅黑;'+ config.font_names;
