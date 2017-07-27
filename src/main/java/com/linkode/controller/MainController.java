@@ -20,11 +20,6 @@ public class MainController extends BaseController {
 	@Autowired
 	private AdService adService;
 	
-	@GetMapping("/user/{id}")
-	String test(Model model, @PathVariable("id") Integer id) {
-		return View("/user/main");
-	}
-	
 	@GetMapping("/home")
 	String home(Model model) {
 		model.addAttribute("portfolios", portfolioService.getAllPVM(null));

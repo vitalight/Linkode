@@ -14,7 +14,7 @@
 			<c:forEach items="${portfolios}" end="7" var="portfolio">
 			<div class="display-item">
 				<img class="item-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${portfolio.id%13}.png" />
-				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${portfolio.userId%6+1}.jpg" />
+				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${portfolio.userId%7}.jpg" />
 				<div class="item-title">${portfolio.title}</div>
 				<div class="item-intro">${portfolio.content }</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${portfolio.id}"></a>
@@ -38,7 +38,7 @@
 			<c:forEach items="${projects}" end="7" var="project">
 			<div class="display-item">
 				<img class="item-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${project.id%13 }.png" />
-				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%6}.jpg" />
+				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.jpg" />
 				<div class="item-title">${project.title }</div>
 				<div class="item-intro">${project.requirement}</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/project/${project.id}"></a>
