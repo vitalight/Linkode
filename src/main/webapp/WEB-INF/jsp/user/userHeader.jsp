@@ -1,27 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="margin-top display-sheet sheet-special">
-	<div class="user-img">
-		<img
-			src="${pageContext.request.contextPath}/static/img/avatar/avatar-${id % 7}.jpg"
-			class="radius-circle" width="100" height="100" />
-		<p>
-			<span class="icon-${user.sex}"></span> ${user.username}
-		</p>
+<div class="home-main">
+	<div class="bg-container special">
+		<img class="user-bg" src="${pageContext.request.contextPath}/static/img/banner.jpg" />
 	</div>
-	<div class="cute-list">
-		<a class="cute-btn" id="info"
-			href="${pageContext.request.contextPath}/user/${id}/info">个人信息</a> <a
-			class="cute-btn" id="portfolio"
-			href="${pageContext.request.contextPath}/user/${id}/portfolio">个人作品</a>
-		<a class="cute-btn" id="project"
-			href="${pageContext.request.contextPath}/user/${id}/project">个人项目</a>
-		<c:if test="${LOGIN_USER_ID == id}">
-			<a class="cute-btn" id="chatlog"
-				href="${pageContext.request.contextPath}/user/${id}/chatlog">我的私信</a>
-		</c:if>
-		<c:if test="${LOGIN_USER_ID != id}">
-			<a class="cute-btn" id="chatlog"
-				href="${pageContext.request.contextPath}/chat/${LOGIN_USER_ID}/${id}">私聊</a>
-		</c:if>
+	<div class="user-info">
+		<img class="info-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id}.jpg" />
+		<div class="info">
+			<div class="username">${user.username}</div>
+			<div class="grey-info">${user.sex} | 设计爱好者</div>
+			<c:if test="${LOGIN_USER_ID != id}">
+			<a class="hollow-btn" href="${pageContext.request.contextPath}/chat/${LOGIN_USER_ID}/${id}">私信</a>
+			<a class="hollow-btn">关注</a>
+			</c:if>
+		</div>
+		<div class="info-nav">
+			<a class="nav-btn" id="info" href="${pageContext.request.contextPath}/user/${id}/info">资料</a>
+			<a class="nav-btn" id="portfolio" href="${pageContext.request.contextPath}/user/${id}/portfolio">作品</a>
+			<a class="nav-btn" id="project" href="${pageContext.request.contextPath}/user/${id}/project">项目</a>
+			<a class="nav-btn" id="chatlog" href="${pageContext.request.contextPath}/user/${id}/chatlog">私信箱</a>
+		</div>
+		
 	</div>
 </div>

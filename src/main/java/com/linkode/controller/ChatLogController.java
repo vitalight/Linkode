@@ -51,7 +51,7 @@ public class ChatLogController extends BaseController {
 				}
 			}
 		}
-		
+		model.addAttribute("user", userService.getById(id2));
 		List<ChatViewModel> chats = chatLogService.transform(chatLogs);
 		return View("/chatlog/chat", model, chats);
 	}
