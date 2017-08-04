@@ -19,6 +19,7 @@
     <bean id="userService" class="com.linkode.service.impl.UserServiceImpl"/>
     <bean id="projectService" class="com.linkode.service.impl.ProjectServiceImpl"/>
     <bean id="adService" class="com.linkode.service.impl.AdServiceImpl"/>
+    <bean id="chatLogService" class="com.linkode.service.impl.ChatLogServiceImpl"/>
     <bean id="projectAppService" class="com.linkode.service.impl.ProjectAppServiceImpl"/>
     <bean id="postService" class="com.linkode.service.impl.PostServiceImpl"/>
     <bean id="postCmtService" class="com.linkode.service.impl.PostCmtServiceImpl"/>

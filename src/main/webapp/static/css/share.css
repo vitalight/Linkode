@@ -108,11 +108,14 @@ a:focus {
 .nav-btn-chose {
 	color:black;
 	font-weight:700;
-	transition:border-color 0.5s linear;
+	transition:border-color,background-color 0.5s linear;
 	border-color:var(--Lblue);
 }
 .nav-logo {
 	height:3em;
 	position:relative;
 	bottom:0.7em;
+}
+.user-btn.nav-btn-chose {
+	font-weight:400;
 }
