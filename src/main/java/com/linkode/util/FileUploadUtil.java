@@ -1,6 +1,5 @@
 package com.linkode.util;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -19,7 +18,7 @@ import java.util.Iterator;
 /**
  * Created by gaoshiqi on 2017/7/17.
  */
-public class ImageUploadUtil {
+public class FileUploadUtil {
 
     private static List<String> fileTypes = new ArrayList<String>();
 
@@ -46,9 +45,9 @@ public class ImageUploadUtil {
                     if(myFileName.trim() != "") {
                         String originFilename = file.getOriginalFilename();
                         String suffix = originFilename.substring(originFilename.lastIndexOf(".")).toLowerCase();
-                        if(!fileTypes.contains(suffix)) {
+                        /*if(!fileTypes.contains(suffix)) {
                             continue;
-                        }
+                        }*/
                         String realPath = request.getSession().getServletContext().getRealPath(DirectoryName);
                         System.out.println(realPath);
                         File realPathDirectory = new File(realPath);
@@ -70,14 +69,21 @@ public class ImageUploadUtil {
 
     public static void ckeditor(HttpServletRequest request, HttpServletResponse response, String DirectoryName) throws IOException {
         String fileName = upload(request, DirectoryName);
+        String suffix = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
         String imageContextPath = request.getContextPath() + "/" + DirectoryName + "/" + fileName;
         response.setContentType("text/html;charset=UTF-8");
         String callback = request.getParameter("CKEditorFuncNum");
         PrintWriter out = response.getWriter();
-        out.println("<script type=\"text/javascript\">");
-        out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + imageContextPath + "',''" + ")");
-        out.println("</script>");
-        out.flush();
-        out.close();
+        if(!fileTypes.contains(suffix)) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + "文件格式不正确" + "',''" + ")");
+            out.println("</script>");
+        } else {
+            out.println("<script type=\"text/javascript\">");
+            out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + imageContextPath + "',''" + ")");
+            out.println("</script>");
+            out.flush();
+            out.close();
+            }
+        }
     }
-}
