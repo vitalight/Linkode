@@ -13,13 +13,25 @@ import java.io.IOException;
  * Created by gaoshiqi on 2017/7/17.
  */
 @Controller
-@RequestMapping("/CKEditor")
-public class ImageController {
-    @PostMapping("/imgUpload")
+@RequestMapping("/upload")
+public class FileController {
+    @PostMapping("/CKEditor")
     public void imageUpload(HttpServletRequest request, HttpServletResponse response) {
-        String DirectoryName = "static/upload";
+        String DirectoryName = "static/upload/img";
         try {
-            ImageUploadUtil.ckeditor(request, response, DirectoryName);
+            FileUploadUtil.ckeditor(request, response, DirectoryName);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/File")
+    public void fileUpload(HttpServletRequest request) {
+        String DirectoryName = "static/upload/file";
+        try{
+            FileUploadUtil.upload(request, DirectoryName);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
