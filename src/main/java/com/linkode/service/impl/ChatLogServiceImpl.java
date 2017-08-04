@@ -1,7 +1,9 @@
 package com.linkode.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,41 +58,18 @@ public class ChatLogServiceImpl implements ChatLogService {
 	
 	@Override
 	public List<ChatLog> findBetween(Integer id1, Integer id2) {
-		ChatLogExample chatLogExample1 = new ChatLogExample();
-		ChatLogExample.Criteria criteria1 = chatLogExample1.createCriteria();
-		criteria1.andSenderIdEqualTo(id1);
-		criteria1.andReceiverIdEqualTo(id2);
-		List<ChatLog> chatLogs1 = chatLogMapper.selectByExample(chatLogExample1);
+		ChatLogExample chatLogExample = new ChatLogExample();
+		ChatLogExample.Criteria criteria1 = chatLogExample.createCriteria();
+		criteria1.andSenderIdEqualTo(id2);
+		criteria1.andReceiverIdEqualTo(id1);
+
+		ChatLogExample.Criteria criteria2 = chatLogExample.createCriteria();
+		criteria2.andSenderIdEqualTo(id1);
+		criteria2.andReceiverIdEqualTo(id2);
+		chatLogExample.or(criteria2);
 		
-		ChatLogExample chatLogExample2 = new ChatLogExample();
-		ChatLogExample.Criteria criteria2 = chatLogExample2.createCriteria();
-		criteria2.andSenderIdEqualTo(id2);
-		criteria2.andReceiverIdEqualTo(id1);
-		List<ChatLog> chatLogs2 = chatLogMapper.selectByExample(chatLogExample2);
+		List<ChatLog> chatLogs = chatLogMapper.selectByExample(chatLogExample);
 		
-		int i = chatLogs1.size() - 1, j = chatLogs2.size() - 1;
-		List<ChatLog> chatLogs = new ArrayList<ChatLog>();
-		while(i >= 0 || j >= 0) {
-			if (i < 0) {
-				chatLogs.add(chatLogs2.get(j--));
-			} else if (j < 0) {
-				chatLogs.add(chatLogs1.get(i--));
-			} else {
-				ChatLog chat1 = chatLogs1.get(i), chat2 = chatLogs2.get(j);
-				if (chat1.getId() > chat2.getId()) {
-					chatLogs.add(chat1);
-					i--;
-				} else {
-					chatLogs.add(chat2);
-					j--;
-				}
-			}
-		}
-		
-		for (int k = 0; k < chatLogs.size(); k++) {
-			System.out.println("chat "+k+": "+chatLogs.get(k).getId());
-			System.out.println("   content: "+chatLogs.get(k).getContent());
-		}
 		return chatLogs;
 	}
 	
@@ -122,5 +101,34 @@ public class ChatLogServiceImpl implements ChatLogService {
 	@Override
 	public void update(ChatLog chatLog) {
 		chatLogMapper.updateByPrimaryKey(chatLog);
+	}
+
+	@Override
+	public List<ChatViewModel> getByReceiverId(int id) {
+		ChatLogExample chatLogExample = new ChatLogExample();
+		ChatLogExample.Criteria criteria = chatLogExample.createCriteria();
+		ChatLogExample.Criteria orCriteria = chatLogExample.createCriteria();
+		criteria.andReceiverIdEqualTo(id);
+		orCriteria.andSenderIdEqualTo(id);
+		chatLogExample.or(orCriteria);
+		List<ChatLog> chatLogs = chatLogMapper.selectByExample(chatLogExample);
+		
+		List<ChatLog> firstChatLogs = new ArrayList<ChatLog>();
+		Set<Integer> senderIds = new HashSet<Integer>();
+		for (int i=chatLogs.size()-1; i>=0; i--) {
+			ChatLog chatLog = chatLogs.get(i);
+			if (!senderIds.contains(chatLog.getSenderId()) 
+					&& !senderIds.contains(chatLog.getReceiverId())) {
+				firstChatLogs.add(chatLog);
+				if (chatLog.getSenderId()!=id) {
+					senderIds.add(chatLog.getSenderId());
+				}
+				if (chatLog.getReceiverId()!=id) {
+					senderIds.add(chatLog.getReceiverId());
+				}
+			}
+		}
+		
+		return transform(firstChatLogs);
 	}
 }

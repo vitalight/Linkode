@@ -1,21 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%
-	request.setAttribute("title", "个人主页");
-%>
-<%
-	request.setAttribute("headType", "user");
-%>
-<%@ include file="../modules/web-header.jsp"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/css/pintuer.css">
-</head>
-<body>
-	<%@ include file="../modules/header.jsp"%>
-	<%@ include file="./userHeader.jsp"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<div class="display-container">
 
-		<c:forEach items="${portfolios}" end="7" var="portfolio">
+		<c:forEach items="${portfolios}" var="portfolio">
 			<div class="display-item">
 				<img class="item-img"
 					src="${pageContext.request.contextPath}/static/img/pic/pic-${portfolio.id%13}.png" />
@@ -27,20 +15,10 @@
 					href="${pageContext.request.contextPath}/portfolio/${portfolio.id}"></a>
 			</div>
 		</c:forEach>
+		<c:if test="${portfolios==null}">
+		<div class="display-bar empty-bar">
+			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">空空如也...</div>
+		</div>
+		</c:if>
 	</div>
-
-
-	<%@ include file="../modules/javascript.jsp"%>
-	<script
-		src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$("#${field}").addClass("cute-btn-chose");
-		})
-	</script>
-
-	<%@ include file="../modules/web-footer.jsp"%>

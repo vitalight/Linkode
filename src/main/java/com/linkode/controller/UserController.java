@@ -51,8 +51,9 @@ public class UserController extends BaseController {
 	
 	// 默认进入个人信息
 	@GetMapping("/{id}")
-	public String checkUser() {
-		return RedirectTo("/user/{id}/info");
+	public String checkUser(Model model, @PathVariable("id") Integer id) {
+		model.addAttribute("user", userService.findById(id));
+		return View("/user/main");
 	}
 	
 	@GetMapping("/{id}/{field}")
@@ -66,8 +67,8 @@ public class UserController extends BaseController {
 			model.addAttribute("portfolios", portfolios);
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
+			/*
 			List<ChatLog> chatLogs = chatLogService.findTo(id);
-			
 			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 			Map<Integer, Integer> map2 = new HashMap<Integer, Integer>();
 			for (int i = chatLogs.size() - 1; i >= 0; i--) {
@@ -101,8 +102,9 @@ public class UserController extends BaseController {
 			    chats.add(chatLogService.findByPrimaryKey(key));
 			}
 			List<ChatViewModel> chatlogs = chatLogService.transform(chats);
+			*/
 			
-			return View("/user/chatlog", model, chatlogs);
+			return View("/user/chatlog", model, chatLogService.getByReceiverId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
 		}

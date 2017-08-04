@@ -14,10 +14,12 @@
 			</c:if>
 		</div>
 		<div class="info-nav">
-			<a class="nav-btn" id="info" href="${pageContext.request.contextPath}/user/${id}/info">资料</a>
-			<a class="nav-btn" id="portfolio" href="${pageContext.request.contextPath}/user/${id}/portfolio">作品</a>
-			<a class="nav-btn" id="project" href="${pageContext.request.contextPath}/user/${id}/project">项目</a>
-			<a class="nav-btn" id="chatlog" href="${pageContext.request.contextPath}/user/${id}/chatlog">私信箱</a>
+			<a class="nav-btn js-trigger" id="info" >资料</a>
+			<a class="nav-btn js-trigger" id="portfolio" >作品</a>
+			<a class="nav-btn js-trigger" id="project">项目</a>
+			<c:if test="${LOGIN_USER_ID == id}">
+			<a class="nav-btn js-trigger" id="chatlog">私信箱</a>
+			</c:if>
 		</div>
 		
 	</div>

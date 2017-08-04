@@ -29,31 +29,17 @@ public class ChatLogController extends BaseController {
 	
 	/*======== 用户id1查看自己和id2的对话 ========*/
 	@GetMapping("/{id1}/{id2}")
-	public String checkChat(Model model, @PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
-		List<ChatLog> chatLogs1 = chatLogService.findBetween(id1, id2);
-		List<ChatLog> chatLogs2 = chatLogService.findBetween(id1, -1*id2);
-		List<ChatLog> chatLogs = new ArrayList<ChatLog>();
-		
-		int i = 0, j = 0;
-		while(i < chatLogs1.size() || j < chatLogs2.size()) {
-			if (i >= chatLogs1.size()) {
-				chatLogs.add(chatLogs2.get(j++));
-			} else if (j >= chatLogs2.size()) {
-				chatLogs.add(chatLogs1.get(i++));
-			} else {
-				ChatLog chat1 = chatLogs1.get(i), chat2 = chatLogs2.get(j);
-				if (chat1.getId() > chat2.getId()) {
-					chatLogs.add(chat1);
-					i++;
-				} else {
-					chatLogs.add(chat2);
-					j++;
-				}
-			}
-		}
+	public String chatView(Model model, @PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
 		model.addAttribute("user", userService.getById(id2));
+		return View("/chatlog/chat");
+	}
+	
+	@GetMapping("/content/{id1}/{id2}")
+	public String checkChat(Model model, @PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
+		model.addAttribute("user", userService.getById(id2));
+		List<ChatLog> chatLogs = chatLogService.findBetween(id1, id2);
 		List<ChatViewModel> chats = chatLogService.transform(chatLogs);
-		return View("/chatlog/chat", model, chats);
+		return View("/chatlog/content", model, chats);
 	}
 	
 	@PostMapping("/{id1}/{id2}")
