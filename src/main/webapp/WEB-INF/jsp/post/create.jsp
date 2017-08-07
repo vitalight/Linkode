@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% request.setAttribute("title","发帖"); %>
-<% request.setAttribute("headType","portfolio"); %>
+<% request.setAttribute("headType","post"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
 </head>
@@ -27,7 +27,4 @@
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
-<script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <%@ include  file="../modules/web-footer.jsp"%>

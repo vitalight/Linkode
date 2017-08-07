@@ -61,7 +61,7 @@ public class PostController extends BaseController {
 	
 	@GetMapping("/create")
 	public String createView() {
-		return View("/post/all");
+		return View("/post/create");
 	}
 
 	@GetMapping("/{id}")
@@ -86,7 +86,7 @@ public class PostController extends BaseController {
 		post.setType(newPost.getType());
 		post.setTitle(newPost.getTitle());
 		postService.update(post);
-		return RedirectTo("/post/all");
+		return RedirectTo("/post");
 	}
 
 	/* ======== 增删 ======== */
@@ -125,7 +125,7 @@ public class PostController extends BaseController {
 		Date date = new Date();
 		post.setTime(date);
 		postService.insert(post);
-		return RedirectTo("/post/all");
+		return RedirectTo("/post");
 	}
 
 	@GetMapping("/delete/{id}")

@@ -25,7 +25,7 @@
 		<img src="${pageContext.request.contextPath}/static/img/avatar/avatar-${LOGIN_USER_ID % 7}.jpg" />
 		<div class="detail">
 			<div class="time">
-				<fmt:formatDate pattern="MM月dd日 HH:mm"  value="${chat.time}"></fmt:formatDate>
+				<fmt:formatDate pattern="M月d日 H:mm"  value="${chat.time}"></fmt:formatDate>
 			</div>
 			<div class="triangle-right"></div>
 			<div class="bubble">

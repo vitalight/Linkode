@@ -10,16 +10,8 @@
 <body>
 	<%@ include file="../modules/header.jsp"%>
 	<%@ include file="./userHeader.jsp" %>
-	<div id="js-placeholder" name="content">
-	<c:if test="${type=='info'}">
-		<%@ include file="./info.jsp" %>
-	</c:if>
-	<c:if test="${type=='chatlog'}">
-		<%@ include file="./chatlog.jsp" %>
-	</c:if>
-	<c:if test="${type=='edit'}">
+	<div id="js-placeholder">
 		<%@ include file="./edit.jsp" %>
-	</c:if>
 	</div>
 	<div class="info-tail">
 		© 2017 Linkode
@@ -28,9 +20,7 @@
 <%@ include file="../modules/javascript.jsp"%>
 <script type="text/javascript">
 $(document).ready(function() {
-	if ("${type}"!="info") {
-		$(document).scrollTop($(document).height());
-	}
+	$(document).scrollTop($(document).height());
 	$("#${type}").addClass("cute-btn-chose");
 	$(".js-trigger").click(function() {
 		var type = $(this).attr("id");

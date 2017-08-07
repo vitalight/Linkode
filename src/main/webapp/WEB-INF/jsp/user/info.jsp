@@ -39,6 +39,6 @@
 	</table>
 	<br/>
 	<c:if test="${LOGIN_USER_ID == id}">
-	<a class="hollow-btn js-trigger" href="javascript:;" id="edit">修改资料</a>
+	<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
 	</c:if>
 </div>
