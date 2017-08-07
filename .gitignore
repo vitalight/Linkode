@@ -8,6 +8,7 @@ out
 gen
 target
 *.iml
+jdbc.properties
 
 ### Eclipse template
 
