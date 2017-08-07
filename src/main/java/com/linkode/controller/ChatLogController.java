@@ -63,7 +63,8 @@ public class ChatLogController extends BaseController {
 	}
 	
 	/*======== 删除对话 ========*/
-	@GetMapping("/delete/{id1}/{id2}")	// 用户id1删除对话id2
+	/*@GetMapping("/delete/{id1}/{id2}")	// 用户id1删除对话id2
+	
 	public String deleteChat(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
 		ChatLog chatLog = chatLogService.findByPrimaryKey(id2);
 		Integer id = 0;
@@ -97,5 +98,5 @@ public class ChatLogController extends BaseController {
 		chat.setSenderName(userService.findById(chatLog.getSenderId()).getUsername());
 		model.addAttribute("id", id);
 		return View("/chatlog/view", model, chat);
-	}
+	}*/
 }

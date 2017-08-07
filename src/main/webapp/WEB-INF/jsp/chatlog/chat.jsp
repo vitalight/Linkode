@@ -12,7 +12,7 @@
 			
 			<div class="row">
 				<h1>与${user.username}聊天
-				<a class="edit-link" href="${pageContext.request.contextPath}/user/${id1}/chatlog">返回私信箱</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/user/${id1}?type=chatlog">返回私信箱</a>
 				</h1>
 			</div>
 			
@@ -43,9 +43,12 @@ $(document).ready(function() {
 	refresh();
 	setInterval(refresh,2000);
 	function refresh(){
-	  $("#js-placeholder").load("${pageContext.request.contextPath}/chat/content/${id1}/${id2}", function() {
-		  $('.chat-window').scrollTop($('.chat-window')[0].scrollHeight);
-	  });
+		var height = $('.chat-window')[0].scrollHeight;
+		$("#js-placeholder").load("${pageContext.request.contextPath}/chat/content/${id1}/${id2}", function() {
+			if (height < $('.chat-window')[0].scrollHeight) {
+				$('.chat-window').scrollTop($('.chat-window')[0].scrollHeight);
+			}
+		});
 	};
 });
 </script>

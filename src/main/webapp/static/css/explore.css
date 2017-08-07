@@ -183,6 +183,14 @@ h3 {
     color: var(--Lblue);
     text-align: center;
     margin-left:1em;
+    background-color:white;
+}
+.hollow-btn.cute-btn-chose {
+	
+	color:var(--Lblue);
+	border-bottom:var(--Lblue) 1px solid;
+	font-weight:400;
+	
 }
 .create-bar {
 	height:auto;

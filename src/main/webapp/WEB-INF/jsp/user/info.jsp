@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="display-info">
 	<table class="info-table">
 		<tbody>
@@ -36,5 +37,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<a class="hollow-btn">修改资料</a>
+	<br/>
+	<c:if test="${LOGIN_USER_ID == id}">
+	<a class="hollow-btn js-trigger" href="javascript:;" id="edit">修改资料</a>
+	</c:if>
 </div>

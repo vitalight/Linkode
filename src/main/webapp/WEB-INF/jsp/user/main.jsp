@@ -11,7 +11,12 @@
 	<%@ include file="../modules/header.jsp"%>
 	<%@ include file="./userHeader.jsp" %>
 	<div id="js-placeholder">
-	<%@ include file="./info.jsp" %>
+	<c:if test="${type=='info'}">
+		<%@ include file="./info.jsp" %>
+	</c:if>
+	<c:if test="${type!='info'}">
+		<%@ include file="./chatlog.jsp" %>
+	</c:if>
 	</div>
 	<div class="info-tail">
 		© 2017 Linkode
@@ -27,13 +32,14 @@
 <script src="${pageContext.request.contextPath}/static/js/pintuer.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#info").addClass("cute-btn-chose");
+	$("#${type}").addClass("cute-btn-chose");
 	$(".js-trigger").click(function() {
 		var type = $(this).attr("id");
 		var targetUrl = "${pageContext.request.contextPath}/user/${id}/"+type;
-		$("#js-placeholder").load(targetUrl);
-		$(".js-trigger").removeClass("cute-btn-chose");
-		$(this).addClass("cute-btn-chose");
+		$("#js-placeholder").load(targetUrl, function() {
+			$(".js-trigger").removeClass("cute-btn-chose");
+			$("#"+type).addClass("cute-btn-chose");
+		});
 	});
 });
 </script>

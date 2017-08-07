@@ -8,15 +8,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +51,29 @@ public class UserController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 	
+	/**
+     * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
+     * 若不setTimeZone，则存入数据库中的日期会缺一天。
+     */
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+	
 	/*======== 根据ID查看用户信息 ========*/
 	
 	// 默认进入个人信息
 	@GetMapping("/{id}")
-	public String checkUser(Model model, @PathVariable("id") Integer id) {
+	public String checkUser(Model model, @PathVariable("id") Integer id, String type) {
 		model.addAttribute("user", userService.findById(id));
+		model.addAttribute("type",type);
+		if (type!=null) {
+			model.addAttribute("type",type);
+			return View("/user/main", model, chatLogService.getByReceiverId(id));
+		}
+		model.addAttribute("type","info");
 		return View("/user/main");
 	}
 	
@@ -67,43 +88,6 @@ public class UserController extends BaseController {
 			model.addAttribute("portfolios", portfolios);
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
-			/*
-			List<ChatLog> chatLogs = chatLogService.findTo(id);
-			Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-			Map<Integer, Integer> map2 = new HashMap<Integer, Integer>();
-			for (int i = chatLogs.size() - 1; i >= 0; i--) {
-				Integer uid = chatLogs.get(i).getSenderId();
-				Integer cid = chatLogs.get(i).getId();
-				if (map.get(uid) == null) {
-					map.put(uid, cid);
-					map2.put(cid, uid);
-				}
-			}
-			
-			chatLogs = chatLogService.findFrom(id);
-			for (int i = chatLogs.size() - 1; i >= 0; i--) {
-				Integer uid = chatLogs.get(i).getReceiverId();
-				Integer cid = chatLogs.get(i).getId();
-				if (map.get(uid) == null) {
-					map.put(uid, cid);
-					map2.put(cid, uid);
-				} else if (map.get(uid).compareTo(cid) < 0) {
-					map2.remove(map.get(uid));
-					map2.put(cid, uid);
-				}
-			}
-			
-			List<ChatLog> chats = new ArrayList<ChatLog>();
-			
-			for (Entry<Integer, Integer> item : map2.entrySet()){
-			    Integer key = item.getKey();
-			    Integer val = item.getValue();
-			    System.out.println("key: "+key+"; value: "+val);
-			    chats.add(chatLogService.findByPrimaryKey(key));
-			}
-			List<ChatViewModel> chatlogs = chatLogService.transform(chats);
-			*/
-			
 			return View("/user/chatlog", model, chatLogService.getByReceiverId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
@@ -111,30 +95,28 @@ public class UserController extends BaseController {
 	}
 	
 	/*======== 编辑个人信息 ========*/
-	@GetMapping("/{id}/info/edit")
+	@GetMapping("/{id}/edit")
 	public String editInfo(Model model, @PathVariable("id") Integer id) {
 		User user = userService.findById(id);
-		String name = user.getUsername();
-		model.addAttribute("username", name);
-		return View("/user/edit", model, user);
+		model.addAttribute("user",user);
+		return View("/user/edit");
 	}
 	
-	@PostMapping("/{id}/info/edit")
-	public String submitEdit(Model model, HttpServletRequest request, @Valid User user, @PathVariable("id") Integer id) throws ParseException {
+	@PostMapping("/{id}/edit")
+	public String submitEdit(Model model, User user, @PathVariable("id") Integer id) throws ParseException {
 		User old = userService.findById(user.getId());
-		String birthdayString = (String)request.getParameter("date");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date birthday = sdf.parse(birthdayString);
-		old.setBirthday(birthday);
+		old.setBirthday(user.getBirthday());
 		old.setSex(user.getSex());
 		old.setUsername(user.getUsername());
+
+        session().setAttribute("LOGIN_USER_NAME",user.getUsername());
 		old.setIntro(user.getIntro());
 		String pwd = user.getPassword();
 		if (pwd != null) {
 			old.setPassword(MD5.GetMD5Code(pwd));
 		}
 		userService.update(old);
-		return RedirectTo("/user/{id}/info");
+		return RedirectTo("/user/{id}");
 	}
 	
 	/*======== 删除私信 ========*/

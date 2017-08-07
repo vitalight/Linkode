@@ -18,9 +18,6 @@
 		<li><a class="nav-btn" id="head-project" href="${pageContext.request.contextPath}/project">项目</a></li>
 		</c:if>
 		
-		<shiro:authenticated>
-			<li><a class="nav-btn" id="head-login" href="${pageContext.request.contextPath}/logout">登出</a></li>
-		</shiro:authenticated>
 		<shiro:notAuthenticated>
 			<li><a class="nav-btn" id="head-login" href="${pageContext.request.contextPath}/login">登录</a></li>
 		</shiro:notAuthenticated>
