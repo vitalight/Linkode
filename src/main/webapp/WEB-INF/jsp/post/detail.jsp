@@ -81,9 +81,6 @@
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
-<script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$(".cmt-btn").click(function(){
