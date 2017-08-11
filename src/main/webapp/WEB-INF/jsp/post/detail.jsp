@@ -9,7 +9,10 @@
 		<div class="sheet-content">
 			<div class="row">
 				<h1 class="special">${model.title}
+				
+				<c:if test="${LOGIN_USER_ROLE == 'admin' || LOGIN_USER_ID == model.userId}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/post/delete/${model.id}">删除帖子</a>
+				</c:if>
 				</h1>
 			</div>
 			<br/>
@@ -17,10 +20,19 @@
 			<div class="row content-text">
 				<div class="cmt-line post-special">
 					<div class="row">
+						<a class="img-a" href="${pageContext.request.contextPath}/user/${model.userId}">
 						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.userId%7}.jpg" />
+						</a>
 						<div class="col-sm-9">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${model.time}" var="time" />
-							<div class="cmt-name">${model.username}<span class="cmt-tag ran-2">楼主</span><span class="cmt-time">${time}</span></div>
+							
+							
+							<div class="cmt-name">
+								<a href="${pageContext.request.contextPath}/user/${model.userId}">
+									${model.username}
+								</a>
+								<span class="cmt-tag ran-2">楼主</span><span class="cmt-time">${time}</span>
+							</div>
 							<div class="cmt-content">${model.content}</div>
 						</div>
 					</div>
@@ -28,13 +40,24 @@
 				<c:forEach items="${cmts}" var="cmt">
 				<div class="cmt-line post-special">
 					<div class="row">
+						
+						<a class="img-a" href="${pageContext.request.contextPath}/user/${cmt.userId}">
 						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
+						</a>
 						<div class="col-sm-7">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
-							<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
+							<div class="cmt-name">
+								<a href="${pageContext.request.contextPath}/user/${cmt.userId}">
+									${cmt.username}
+								</a>
+								<span class="cmt-time">${time}</span>
+							</div>
 							<div class="cmt-content">${cmt.content}</div>
 						</div>
+						
+						<c:if test="${LOGIN_USER_ROLE == 'admin' || LOGIN_USER_ID == cmt.userId}">
 						<a class="col-sm-2 hollow-btn hollow-red" href="${pageContext.request.contextPath}/post/comment/delete/${cmt.id}">删除</a>
+						</c:if>
 						<a class="col-sm-2 hollow-btn cmt-btn" id="${cmt.id}">回复</a>
 					</div>
 					
@@ -42,13 +65,21 @@
 						<c:forEach items="${cmtCmts[cmt.id]}" var="cmtCmt">
 							<div class="cmt-line">
 								<div class="row">
+									<a class="img-a" href="${pageContext.request.contextPath}/user/${cmtCmt.userId}">
 									<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmtCmt.userId%7 }.jpg" />
+									</a>
 									<div class="col-sm-11">
 										<div class="cmt-name">
+											
+											<a class="img-a" href="${pageContext.request.contextPath}/user/${cmtCmt.userId}">
 											${cmtCmt.username}
+											</a>
 											<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmtCmt.time}" var="time" />
 											<span class="cmt-time">${time}</span>
+											
+											<c:if test="${LOGIN_USER_ROLE == 'admin' || LOGIN_USER_ID == cmtCmt.userId}">
 											<a class="a-text" href="${pageContext.request.contextPath}/post/comment/delete/${cmtCmt.id}">删除</a>
+											</c:if>
 										</div>
 										<div class="cmt-content">${cmtCmt.content}</div>
 									</div>

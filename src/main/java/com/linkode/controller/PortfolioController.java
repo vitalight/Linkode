@@ -58,9 +58,8 @@ public class PortfolioController extends BaseController {
 
     @GetMapping("/{id}")
     public String detailView(Model model, @PathVariable("id") Integer id) throws CustomException {
-        Portfolio portfolio = portfolioService.findByPrimaryKey(id);
         model.addAttribute("cmts", portfolioCmtService.getAllPCVMById(id));
-        return View("/portfolio/detail", model, portfolio);
+        return View("/portfolio/detail", model, portfolioService.getPVMByPrimaryKey(id));
     }
 
     @GetMapping("/update/{id}")

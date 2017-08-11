@@ -1,5 +1,7 @@
 package com.linkode.pojo.ViewModel;
 
+import java.util.Date;
+
 import com.linkode.pojo.Portfolio;
 
 public class PortfolioViewModel {
@@ -9,6 +11,7 @@ public class PortfolioViewModel {
 	private String title;
 	private String content;
 	private String type;
+	private Date time;
 	private int likes;
 	private int comments;
 
@@ -20,6 +23,7 @@ public class PortfolioViewModel {
 		type = portfolio.getType();
 		likes = portfolio.getLikes();
 		comments = portfolio.getComments();
+		time = portfolio.getTime();
 	}
 	
 	public String getUsername() {
@@ -83,5 +87,13 @@ public class PortfolioViewModel {
 	
 	public void setComments(int comments) {
 		this.comments = comments;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }
