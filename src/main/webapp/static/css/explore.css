@@ -32,6 +32,9 @@
 	color:white;
 }
 /*=========== 作品卡片 =============*/
+div.auto-height {
+	height:auto;
+}
 
 .display {
 	width:60em;
@@ -262,6 +265,10 @@ textarea.requirement {
 /*=============== 作品 ==============*/
 .bigger {
 	width:83.5em;
+}
+.middle-img {
+	display:block;
+	margin:0 auto;
 }
 .bigger-empty {
 	margin:0 11.75em;

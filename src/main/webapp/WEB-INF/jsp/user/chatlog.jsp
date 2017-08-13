@@ -41,5 +41,10 @@
 			</c:if>
 		</div>
 		</c:forEach>
+		
+		<c:if test="${model==null || model.size()==0}">
+			<img class="middle-img" src="${pageContext.request.contextPath}/static/img/empty.png" />
+			<div class="empty-text">空空如也...</div>
+		</c:if>
 	</div>
 </div>
