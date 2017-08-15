@@ -135,5 +135,12 @@ public class PortfolioServiceImpl implements PortfolioService {
     	System.out.println("<DEBUG COUNT> " +ret.size());
     	return ret;
     }
+
+	@Override
+	public PortfolioViewModel getPVMByPrimaryKey(Integer id) {
+		PortfolioViewModel pvm = new PortfolioViewModel(findByPrimaryKey(id));
+		pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
+		return pvm;
+	}
   
 }

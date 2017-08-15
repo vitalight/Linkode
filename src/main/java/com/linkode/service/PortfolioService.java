@@ -20,4 +20,5 @@ public interface PortfolioService {
     
     List<PortfolioViewModel> getAllPVM(String type);
     List<PortfolioViewModel> getByUserId(Integer userid);
+	PortfolioViewModel getPVMByPrimaryKey(Integer id);
 }

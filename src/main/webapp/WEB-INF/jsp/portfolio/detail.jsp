@@ -11,31 +11,27 @@
 		<div class="sheet-content">
 			<div class="row">
 				<h1>${model.title}
+				
+				<c:if test="${LOGIN_USER_ID == model.userId || LOGIN_USER_ROLE == 'admin'}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除作品</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑作品</a>
+				</c:if>
 				</h1>
 			</div>
-			
 			<div class="content-info row">
 				<div class="info-left col-sm-2">
-				<fmt:setBundle basename="messages" var="lang"/>
-				<fmt:message bundle="${lang}" key="${model.type}"/>
+					信息
 				</div>
 				<div class="info-right col-sm-10">
-					<c:if test="${model.type=='literature'}">
-					苟利国家生死以。	
-					</c:if>
-					<c:if test="${model.type!='literature'}">
-					${model.content }
-					</c:if>
+					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.time}" var="time"/>
+					<a href="${pageContext.request.contextPath}/user/${model.userId}">
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.userId}.jpg" />
+					${model.username}</a> 发布于 ${time}
 				</div>
 			</div>
-			
 			<div class="row content-text">
 			
-				<c:if test="${model.type=='literature'}">
 				${model.content }
-				</c:if>
 				<c:if test="${model.type!='literature'}">
 				<img src="../static/img/pic/pic-${model.id%13}.png" />
 				</c:if>

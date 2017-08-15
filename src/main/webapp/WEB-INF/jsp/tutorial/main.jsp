@@ -10,16 +10,21 @@
 	<div class="margin-top display-sheet">
 		<div class="cute-list">
 			${nav.content}
+			<c:if test="${LOGIN_USER_ROLE == 'admin'}">
 			<a class="cute-btn" href="${pageContext.request.contextPath}/tutorial/update/6">编辑导航</a>
+			</c:if>
 		</div>
 	</div>
 	<div class="margin-bottom display-sheet">
 		<div class="sheet-content">
 			<div class="row">
 				<h1>教程中心
+				
+				<c:if test="${LOGIN_USER_ROLE == 'admin'}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/delete/${model.id}">删除教程</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/create">新建教程</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/tutorial/update/${model.id}">编辑教程</a>
+				</c:if>
 				</h1>
 			</div>
 			${model.content}	

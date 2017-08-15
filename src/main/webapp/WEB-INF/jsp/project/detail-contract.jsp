@@ -11,17 +11,23 @@
 		<div class="sheet-content">
 			<div class="row">
 				<h1>${model.title}
+				
+				<c:if test="${LOGIN_USER_ROLE == 'admin' || LOGIN_USER_ID == model.posterId}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/project/delete/${model.id}">删除项目</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/project/update/${model.id}">编辑项目</a>
+				</c:if>
 				</h1>
 			</div>
 			
 			<div class="content-info row">
 				<div class="info-left col-sm-2">
-					发布者
+					信息
 				</div>
 				<div class="info-right col-sm-10">
-					${model.username}
+					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.startDate}" var="time"/>
+					<a href="${pageContext.request.contextPath}/user/${model.posterId}">
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId}.jpg" />
+					${model.username}</a> 发布于 ${time}
 				</div>
 			</div>
 			

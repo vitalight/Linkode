@@ -7,9 +7,19 @@
 <body>
 <%@ include file="../modules/header.jsp"%>
 	
-	<div class="margin-top margin-bottom display">
+	<div class="margin-top margin-bottom display-sheet">
 		<form action="${pageContext.request.contextPath}/post/create" method="post">
-			<div class="display-bar more-padding create-bar">
+			<div class="sheet-content">
+				<div class="row">
+					<h1 class="special">讨论区</h1>
+				</div>
+				<div class="type-list special">
+					<a class="type-btn" id="all" href="${pageContext.request.contextPath}/post">所有帖子</a>
+					<a class="type-btn" id="mine" href="${pageContext.request.contextPath}/post/mine">我的帖子</a>
+					<a class="type-btn" id="myComment" href="${pageContext.request.contextPath}/post/myComment">我回复的帖子</a>
+					<a class="type-btn type-chose" id="create" href="${pageContext.request.contextPath}/post/create">发布帖子</a>
+				</div>
+				<br/>
 				<div class="row">
 					<div class="col-sm-4">
 						帖子标题：<input class="form-control" type="text" name="title" required/>
@@ -22,6 +32,7 @@
 				</div>
 				<br/>
 				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">发贴</button>
+				<br/>
 			</div>
 		</form>
 	</div>

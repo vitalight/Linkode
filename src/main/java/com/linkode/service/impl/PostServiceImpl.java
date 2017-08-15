@@ -152,6 +152,9 @@ public class PostServiceImpl implements PostService {
 		for (PostCmt postCmt:postCmts) {
 			set.add(postCmt.getPostid());
 		}
+		if (set.size()==0) {
+			return new ArrayList<PostViewModel>();
+		}
 		List<Integer> list = new ArrayList<Integer>();
 		list.addAll(set);
 		

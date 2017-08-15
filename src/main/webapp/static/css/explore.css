@@ -32,6 +32,9 @@
 	color:white;
 }
 /*=========== 作品卡片 =============*/
+div.auto-height {
+	height:auto;
+}
 
 .display {
 	width:60em;
@@ -85,6 +88,9 @@ a.card-over:hover {
 	margin-bottom:0.8em;
 }
 
+.info-right a {
+	display:inline;
+}
 /*============== 我的项目条==========*/
 
 .display-bar {
@@ -260,6 +266,10 @@ textarea.requirement {
 .bigger {
 	width:83.5em;
 }
+.middle-img {
+	display:block;
+	margin:0 auto;
+}
 .bigger-empty {
 	margin:0 11.75em;
 }
@@ -346,6 +356,14 @@ img.size-15 {
     text-align: center;
     margin-top: -0.2em;
 }
+
+img.size-mid {
+	height: 2em;
+    width: 2em;
+    display: inline-block;
+    text-align: center;
+    margin-top: -0.2em;
+}
 /*=============== 教程 ==============*/
 .sheet-content p {
 	padding-bottom:1em;
@@ -401,7 +419,8 @@ div.margin-top {
 }
 .info-right {
 	font-size:1.1em;
-	padding:1em 3em;
+	padding:1em 3em 0;
+	vertical-align:center;
 	color:var(--Lblue);
 	font-weight:700;
 }
@@ -461,6 +480,8 @@ input.my-input {
 	background-color:var(--Ldblue);
 	color:white;
 }
+
+/*============ 发贴讨论区 =============*/
 .post-type {
 	font-size:1.1em;
 	padding:1em;
@@ -553,7 +574,16 @@ img.avatar.col-sm-1 {
 .cmt-btn {
 	cursor:pointer;
 }
-/*======== Homepage ==========*/
+.cmt-name a {
+	color:#58606a;
+}
+.cmt-name a:hover {
+	color:var(--Lblue);
+}
+.img-a {
+	display:inline;
+}
+/*======== 主页 ==========*/
 .home-main {
 	margin-top:5em;
 }
@@ -644,7 +674,7 @@ img.avatar.col-sm-1 {
 	margin-bottom:2em;
 	color:var(--Ldgrey);
 }
-/*========= user info============*/
+/*========= 用户信息 ============*/
 .js-trigger {
 	cursor:pointer;
 }
