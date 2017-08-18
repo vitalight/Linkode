@@ -201,5 +201,19 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectViewModel> getPVMByApplicantId(int id) {
 		return transfer(getByApplicantId(id));
 	}
+	/*
+	 * 
+	 */
+	@Override
+	public List<ProjectViewModel> search(String string) {
+    	ProjectExample projectExample = new ProjectExample();
+    	ProjectExample.Criteria criteria = projectExample.createCriteria(), criteria2 = projectExample.createCriteria();
+    	criteria.andTitleLike("%"+string+"%");
+    	criteria2.andRequirementLike("%" + string + "%");
+    	projectExample.or(criteria2);
+    	
+    	List<Project> projects = projectMapper.selectByExample(projectExample);
+		return transfer(projects);
+	}
 
 }

@@ -54,10 +54,12 @@ div.empty-bar {
 	height:36em;
 	background-color:transparent;
 	border:none;
+	display:block;
 }
 .empty-bar img {
 	width:17.6em;
-	margin:5em calc(50% - 8.8em) 1em;
+	display:block;
+	margin:5em auto 1em;
 }
 .empty-text{
 	text-align:center;

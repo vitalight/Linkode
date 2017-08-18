@@ -27,4 +27,12 @@ public class MainController extends BaseController {
 		model.addAttribute("ads",adService.getAll());
 		return View("/home");
 	}
+	
+	@GetMapping("/search")
+	String search(Model model, String keyword) {
+		model.addAttribute("keyword",keyword);
+		model.addAttribute("projects", projectService.search(keyword));
+		model.addAttribute("portfolios", portfolioService.search(keyword));
+		return View("/search");
+	}
 }

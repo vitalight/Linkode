@@ -53,14 +53,14 @@ public class PortfolioServiceImpl implements PortfolioService {
        for (int i = 0; i < Portfolios.size(); i++) {
             Portfolio Portfolio = Portfolios.get(i);
         	if(Portfolio.getUserId().equals(id)){
-            Portfolio portfolio = new Portfolio();
-            portfolio.setId(Portfolio.getId());
-            portfolio.setUserId(Portfolio.getUserId());
-            portfolio.setTitle(Portfolio.getTitle());
-            portfolio.setContent(Portfolio.getContent());
-            portfolio.setType(Portfolio.getType());
-            portfolio.setLikes(Portfolio.getLikes());
-            pvms.add(portfolio);
+	            Portfolio portfolio = new Portfolio();
+	            portfolio.setId(Portfolio.getId());
+	            portfolio.setUserId(Portfolio.getUserId());
+	            portfolio.setTitle(Portfolio.getTitle());
+	            portfolio.setContent(Portfolio.getContent());
+	            portfolio.setType(Portfolio.getType());
+	            portfolio.setLikes(Portfolio.getLikes());
+	            pvms.add(portfolio);
         	}
          }
         Integer pageCount = ((Page)Portfolios).getPages();
@@ -107,33 +107,22 @@ public class PortfolioServiceImpl implements PortfolioService {
     
     public List<PortfolioViewModel> getAllPVM(String type) {
     	PortfolioExample pe = new PortfolioExample();
+    	PortfolioExample.Criteria criteria = pe.createCriteria();
+    	if (type!=null) {
+    		criteria.andTypeEqualTo(type);
+    	}
     	pe.setOrderByClause("id desc");
     	
     	List<Portfolio> portfolios = portfolioMapper.selectByExample(pe);
-    	List<PortfolioViewModel> ret = new ArrayList<PortfolioViewModel>();
-    	for (Portfolio portfolio:portfolios) {
-    		if (portfolio.getType().equals(type) || (type==null)) {
-    			PortfolioViewModel pvm = new PortfolioViewModel(portfolio);
-    			pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
-    			ret.add(pvm);
-    		}
-    	}
-    	return ret;
+    	return transform(portfolios);
     }
     
     public List<PortfolioViewModel> getByUserId(Integer userid) {
-    	List<Portfolio> portfolios = portfolioMapper.selectByExample(null);
-    	List<PortfolioViewModel> ret = new ArrayList<PortfolioViewModel>();
-    	for (Portfolio portfolio:portfolios) {
-    		System.out.println("<DEBUG> " + portfolio.getUserId() + ", " + userid);
-    		if (portfolio.getUserId().equals(userid)) {
-    			PortfolioViewModel pvm = new PortfolioViewModel(portfolio);
-    			pvm.setUsername(userService.getById(userid).getUsername());
-    			ret.add(pvm);
-    		}
-    	}
-    	System.out.println("<DEBUG COUNT> " +ret.size());
-    	return ret;
+    	PortfolioExample pe = new PortfolioExample();
+    	PortfolioExample.Criteria criteria = pe.createCriteria();
+    	criteria.andUserIdEqualTo(userid);
+    	List<Portfolio> portfolios = portfolioMapper.selectByExample(pe);
+    	return transform(portfolios);
     }
 
 	@Override
@@ -141,6 +130,29 @@ public class PortfolioServiceImpl implements PortfolioService {
 		PortfolioViewModel pvm = new PortfolioViewModel(findByPrimaryKey(id));
 		pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
 		return pvm;
+	}
+
+	@Override
+	public List<PortfolioViewModel> search(String string) {
+    	PortfolioExample pe = new PortfolioExample();
+    	PortfolioExample.Criteria criteria = pe.createCriteria(), criteria2 = pe.createCriteria();
+    	criteria.andTitleLike("%"+string+"%");
+    	criteria2.andContentLike("%" + string + "%");
+    	pe.or(criteria2);
+    	
+    	List<Portfolio> portfolios = portfolioMapper.selectByExample(pe);
+		return transform(portfolios);
+	}
+
+	@Override
+	public List<PortfolioViewModel> transform(List<Portfolio> portfolios) {
+		List<PortfolioViewModel> ret = new ArrayList<PortfolioViewModel>();
+    	for (Portfolio portfolio:portfolios) {
+			PortfolioViewModel pvm = new PortfolioViewModel(portfolio);
+			pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
+			ret.add(pvm);
+    	}
+    	return ret;
 	}
   
 }
