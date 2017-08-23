@@ -2,7 +2,6 @@
 <% request.setAttribute("title","作品浏览"); %>
 <% request.setAttribute("headType","portfolio"); %>
 <%@ include file="../modules/web-header.jsp"%>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>

@@ -407,6 +407,20 @@ div.margin-top {
 	font-size:3em;
 	margin:1.5em 0 0.6em;
 }
+h1 .likes {
+	font-size:0.4em;
+	vertical-align:middle;
+	width:auto;	
+}
+.likes a {
+	color:var(--Ldgrey);
+}
+a.hasLiked {
+	color:var(--Lred);
+}
+.likes a:hover {
+	color:var(--Lred);
+}
 
 .content-info {
 	border:var(--Lblue) 0.2em solid;
