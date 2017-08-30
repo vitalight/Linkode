@@ -19,6 +19,8 @@ public class Portfolio {
 
     private Integer comments;
 
+    private String url;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Portfolio {
 
     public void setComments(Integer comments) {
         this.comments = comments;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

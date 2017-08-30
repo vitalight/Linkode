@@ -10,6 +10,7 @@
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="likes" jdbcType="INTEGER" property="likes" />
     <result column="comments" jdbcType="INTEGER" property="comments" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userId, title, content, type, time, likes, comments
+    id, userId, title, content, type, time, likes, comments, url
   </sql>
   <select id="selectByExample" parameterType="com.linkode.pojo.PortfolioExample" resultMap="BaseResultMap">
     select
@@ -108,10 +109,10 @@
     </selectKey>
     insert into portfolio (userId, title, content, 
       type, time, likes, 
-      comments)
+      comments, url)
     values (#{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{likes,jdbcType=INTEGER}, 
-      #{comments,jdbcType=INTEGER})
+      #{comments,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.Portfolio">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -140,6 +141,9 @@
       <if test="comments != null">
         comments,
       </if>
+      <if test="url != null">
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -162,6 +166,9 @@
       </if>
       <if test="comments != null">
         #{comments,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +205,9 @@
       <if test="record.comments != null">
         comments = #{record.comments,jdbcType=INTEGER},
       </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +222,8 @@
       type = #{record.type,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=TIMESTAMP},
       likes = #{record.likes,jdbcType=INTEGER},
-      comments = #{record.comments,jdbcType=INTEGER}
+      comments = #{record.comments,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +252,9 @@
       <if test="comments != null">
         comments = #{comments,jdbcType=INTEGER},
       </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -252,7 +266,8 @@
       type = #{type,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
       likes = #{likes,jdbcType=INTEGER},
-      comments = #{comments,jdbcType=INTEGER}
+      comments = #{comments,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
