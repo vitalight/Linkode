@@ -52,7 +52,12 @@
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
 					<div class="col-sm-11">
-						<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
+						<div class="cmt-name">
+							<a href="${pageContext.request.contextPath}/user/${cmt.userId}">
+								${cmt.username}
+							</a>
+							<span class="cmt-time">${time}</span>
+						</div>
 						<div class="cmt-content">${cmt.content }</div>
 					</div>
 				</div>

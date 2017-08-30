@@ -27,7 +27,10 @@
 					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.startDate}" var="time"/>
 					<a href="${pageContext.request.contextPath}/user/${model.posterId}">
 					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId}.jpg" />
-					${model.username}</a> 发布于 ${time}
+					${model.username}</a> 发布于 ${time}，已被
+					<a href="${pageContext.request.contextPath}/user/${user.id}">
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id}.jpg" />
+					${user.username}</a>承包。
 				</div>
 			</div>
 			
@@ -46,7 +49,12 @@
 				<c:if test="${LOGIN_USER_ID==model.posterId}">
 					<br/>
 					<c:if test="${model.status!='confirm' }">
-						<a class="blue-btn col-sm-2 col-sm-offset-5" href="${pageContext.request.contextPath}/project/${model.id}/confirm">确认完成</a>	
+						<form id="form-${cmt.id}" action="${pageContext.request.contextPath}/project/${model.id}/confirm" method="post">
+							<br/>
+							评分：<input name="rating" type="number" class="form-control" placeholder="5分制"  required/><br/>
+							<textarea name="content" class="form-control requirement" placeholder="评价(选填)" maxlength="90"></textarea><br/>
+							<button class="blue-btn col-sm-2 col-sm-offset-5" href="javascript:;">确认完成</button>
+						</form>
 						<br/>
 						<br/>
 					</c:if>

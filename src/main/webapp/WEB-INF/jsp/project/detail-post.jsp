@@ -51,7 +51,12 @@
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${app.applicantId%7}.jpg" />
 					<div class="col-sm-7">
-						<div class="cmt-name">${app.username}<span class="cmt-time">${time}</span></div>
+						<div class="cmt-name">
+							<a href="${pageContext.request.contextPath}/user/${app.applicantId}">
+								${app.username}
+							</a>
+							<span class="cmt-time">${time}</span>
+						</div>
 						<div class="cmt-content">${app.content }</div>
 					</div>
 					<c:choose>
