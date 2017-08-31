@@ -43,7 +43,8 @@ a:focus {
 }
 #nav {
 	transition: border 0.5s linear;
-	width:110em;
+	width:100%;
+	min-width:88em;
 }
 .white-nav {
 	border-bottom:var(--Lgrey) 1px solid;
@@ -76,10 +77,10 @@ a:focus {
 }
 .search {
 	float:left;
-	width:23em;
+	width:13em;
 	position:relative;
 	bottom:0.5em;
-	margin:1.7em 5em;
+	margin:1.7em 0 0 5em;
 }
 .user-btn {
 	float:right;

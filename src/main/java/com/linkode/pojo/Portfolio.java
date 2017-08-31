@@ -21,6 +21,8 @@ public class Portfolio {
 
     private String url;
 
+    private Integer status;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class Portfolio {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

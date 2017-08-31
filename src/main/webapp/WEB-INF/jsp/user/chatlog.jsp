@@ -25,10 +25,10 @@
 				<span class="cmt-time">${time}</span></div>
 				</c:if>
 				<div class="cmt-content">
-	             	<c:if test="${fn:length(chatlog.content)>20}">
+	             	<c:if test="${fn:length(chatlog.content)>40}">
 	             		${fn:substring(chatlog.content,0,20)}...
 	             	</c:if>
-	             	<c:if test="${fn:length(chatlog.content)<=20}">
+	             	<c:if test="${fn:length(chatlog.content)<=40}">
 	             		${chatlog.content}
 	             	</c:if>
 				</div>
