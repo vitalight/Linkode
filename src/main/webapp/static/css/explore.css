@@ -610,11 +610,12 @@ img.avatar.col-sm-1 {
 	height:25em;
 	width:100%;
 	margin:0 auto;
+		
+	position: relative;
+    background: url("../img/homebg.jpg") center top no-repeat;
+    background-size: cover;
 }
 .home-bg {
-	width:110em;    
-	position: relative;
-    left: calc(50% - 54.5em);
 }
 .display-container {
 	width:75em;

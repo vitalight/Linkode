@@ -6,7 +6,6 @@
 	
 	<div class="home-main">
 		<div class="bg-container">
-			<img class="home-bg" src="${pageContext.request.contextPath}/static/img/homebg.jpg" />
 		</div>
 		<div class="display-container">
 			<div class="display-type">热门作品<span class="grey glyphicon glyphicon-chevron-right"></span></div>
