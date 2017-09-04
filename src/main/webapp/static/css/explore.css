@@ -94,7 +94,25 @@ a.card-over:hover {
 	display:inline;
 }
 /*============== 我的项目条==========*/
-
+.rate-star {
+	color:var(--Lyellow);
+}
+.rate-star-in {
+	width:6em;
+	display:inline-block;
+}
+.rate-star-out {
+	color:var(--Lyellow);
+	display:inline-block;
+	overflow:hidden;
+	position:relative;
+	right:6em;
+	top:0.4em;
+}
+.rating-number {
+	position:relative;
+	right:6em;
+}
 .display-bar {
 	margin:0 auto 1.5em;
 	width:60em;

@@ -2,7 +2,6 @@
 <% request.setAttribute("title","项目信息"); %>
 <% request.setAttribute("headType","project"); %>
 <%@ include file="../modules/web-header.jsp"%>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>
@@ -64,6 +63,10 @@
 							<span class="cmt-time">
 								<c:forEach begin="1" end="${rating.rating}" var="i">
 									<i class="fa fa-star" aria-hidden="true"></i>
+								</c:forEach>
+								
+								<c:forEach begin="${rating.rating}" end="4" var="i">
+									<i class="fa fa-star-o" aria-hidden="true"></i>
 								</c:forEach>
 							</span>
 						</div>

@@ -12,6 +12,7 @@ import com.linkode.pojo.Project;
 import com.linkode.pojo.ProjectApp;
 import com.linkode.pojo.ProjectCommit;
 import com.linkode.pojo.ProjectRating;
+import com.linkode.pojo.User;
 import com.linkode.service.ProjectAppService;
 import com.linkode.service.ProjectCommitService;
 import com.linkode.service.ProjectService;
@@ -224,6 +225,11 @@ public class ProjectController extends BaseController {
         projectRating.setPosterId(project.getPosterId());
         projectRating.setContractorId(project.getContractorId());
         projectRatingService.insert(projectRating);
+        
+        User user = userService.findById(project.getContractorId());
+        user.setRatingNumber(user.getRatingNumber()+1);
+        user.setRatingTotal(user.getRatingTotal()+projectRating.getRating());
+        userService.update(user);
         return RedirectTo("/project/"+id);
     }
 

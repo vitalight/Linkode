@@ -17,8 +17,24 @@
 			<tr>
 				<th>评分</th>
 				<td>
-					<fmt:formatNumber value="${user.ratingTotal/user.ratingNumber}" pattern="0.0">
-					</fmt:formatNumber>
+					<fmt:formatNumber value="${user.ratingTotal/user.ratingNumber}" pattern="0.0" var="rating" />
+					<span class="rate-star">
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+					</span>
+					<span style="width:${user.ratingTotal*1.2/user.ratingNumber}em; margin-right:${6-user.ratingTotal*1.2/user.ratingNumber}em" class="rate-star-out">
+						<span class="rate-star-in">
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						</span>
+					</span>
+					<span class="rating-number">(${rating}分)</span>
 				</td>
 			</tr>
 			<tr>
