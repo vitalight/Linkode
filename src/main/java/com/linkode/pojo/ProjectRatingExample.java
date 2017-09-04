@@ -3,14 +3,14 @@ package com.linkode.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RatingExample {
+public class ProjectRatingExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public RatingExample() {
+    public ProjectRatingExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,63 +164,63 @@ public class RatingExample {
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdIsNull() {
-            addCriterion("posterId is null");
+        public Criteria andProjectIdIsNull() {
+            addCriterion("projectId is null");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdIsNotNull() {
-            addCriterion("posterId is not null");
+        public Criteria andProjectIdIsNotNull() {
+            addCriterion("projectId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdEqualTo(Integer value) {
-            addCriterion("posterId =", value, "posterId");
+        public Criteria andProjectIdEqualTo(Integer value) {
+            addCriterion("projectId =", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdNotEqualTo(Integer value) {
-            addCriterion("posterId <>", value, "posterId");
+        public Criteria andProjectIdNotEqualTo(Integer value) {
+            addCriterion("projectId <>", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdGreaterThan(Integer value) {
-            addCriterion("posterId >", value, "posterId");
+        public Criteria andProjectIdGreaterThan(Integer value) {
+            addCriterion("projectId >", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("posterId >=", value, "posterId");
+        public Criteria andProjectIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("projectId >=", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdLessThan(Integer value) {
-            addCriterion("posterId <", value, "posterId");
+        public Criteria andProjectIdLessThan(Integer value) {
+            addCriterion("projectId <", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdLessThanOrEqualTo(Integer value) {
-            addCriterion("posterId <=", value, "posterId");
+        public Criteria andProjectIdLessThanOrEqualTo(Integer value) {
+            addCriterion("projectId <=", value, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdIn(List<Integer> values) {
-            addCriterion("posterId in", values, "posterId");
+        public Criteria andProjectIdIn(List<Integer> values) {
+            addCriterion("projectId in", values, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdNotIn(List<Integer> values) {
-            addCriterion("posterId not in", values, "posterId");
+        public Criteria andProjectIdNotIn(List<Integer> values) {
+            addCriterion("projectId not in", values, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdBetween(Integer value1, Integer value2) {
-            addCriterion("posterId between", value1, value2, "posterId");
+        public Criteria andProjectIdBetween(Integer value1, Integer value2) {
+            addCriterion("projectId between", value1, value2, "projectId");
             return (Criteria) this;
         }
 
-        public Criteria andPosterIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("posterId not between", value1, value2, "posterId");
+        public Criteria andProjectIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("projectId not between", value1, value2, "projectId");
             return (Criteria) this;
         }
 
@@ -284,63 +284,193 @@ public class RatingExample {
             return (Criteria) this;
         }
 
-        public Criteria andRateIsNull() {
-            addCriterion("rate is null");
+        public Criteria andPosterIdIsNull() {
+            addCriterion("posterId is null");
             return (Criteria) this;
         }
 
-        public Criteria andRateIsNotNull() {
-            addCriterion("rate is not null");
+        public Criteria andPosterIdIsNotNull() {
+            addCriterion("posterId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRateEqualTo(Integer value) {
-            addCriterion("rate =", value, "rate");
+        public Criteria andPosterIdEqualTo(Integer value) {
+            addCriterion("posterId =", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateNotEqualTo(Integer value) {
-            addCriterion("rate <>", value, "rate");
+        public Criteria andPosterIdNotEqualTo(Integer value) {
+            addCriterion("posterId <>", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateGreaterThan(Integer value) {
-            addCriterion("rate >", value, "rate");
+        public Criteria andPosterIdGreaterThan(Integer value) {
+            addCriterion("posterId >", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateGreaterThanOrEqualTo(Integer value) {
-            addCriterion("rate >=", value, "rate");
+        public Criteria andPosterIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("posterId >=", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateLessThan(Integer value) {
-            addCriterion("rate <", value, "rate");
+        public Criteria andPosterIdLessThan(Integer value) {
+            addCriterion("posterId <", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateLessThanOrEqualTo(Integer value) {
-            addCriterion("rate <=", value, "rate");
+        public Criteria andPosterIdLessThanOrEqualTo(Integer value) {
+            addCriterion("posterId <=", value, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateIn(List<Integer> values) {
-            addCriterion("rate in", values, "rate");
+        public Criteria andPosterIdIn(List<Integer> values) {
+            addCriterion("posterId in", values, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateNotIn(List<Integer> values) {
-            addCriterion("rate not in", values, "rate");
+        public Criteria andPosterIdNotIn(List<Integer> values) {
+            addCriterion("posterId not in", values, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateBetween(Integer value1, Integer value2) {
-            addCriterion("rate between", value1, value2, "rate");
+        public Criteria andPosterIdBetween(Integer value1, Integer value2) {
+            addCriterion("posterId between", value1, value2, "posterId");
             return (Criteria) this;
         }
 
-        public Criteria andRateNotBetween(Integer value1, Integer value2) {
-            addCriterion("rate not between", value1, value2, "rate");
+        public Criteria andPosterIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("posterId not between", value1, value2, "posterId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingIsNull() {
+            addCriterion("rating is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingIsNotNull() {
+            addCriterion("rating is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingEqualTo(Integer value) {
+            addCriterion("rating =", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingNotEqualTo(Integer value) {
+            addCriterion("rating <>", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingGreaterThan(Integer value) {
+            addCriterion("rating >", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingGreaterThanOrEqualTo(Integer value) {
+            addCriterion("rating >=", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingLessThan(Integer value) {
+            addCriterion("rating <", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingLessThanOrEqualTo(Integer value) {
+            addCriterion("rating <=", value, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingIn(List<Integer> values) {
+            addCriterion("rating in", values, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingNotIn(List<Integer> values) {
+            addCriterion("rating not in", values, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingBetween(Integer value1, Integer value2) {
+            addCriterion("rating between", value1, value2, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andRatingNotBetween(Integer value1, Integer value2) {
+            addCriterion("rating not between", value1, value2, "rating");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
     }

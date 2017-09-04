@@ -11,9 +11,11 @@ import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.pojo.ProjectApp;
 import com.linkode.pojo.ProjectCommit;
+import com.linkode.pojo.ProjectRating;
 import com.linkode.service.ProjectAppService;
 import com.linkode.service.ProjectCommitService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.ProjectRatingService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 
@@ -45,6 +47,8 @@ public class ProjectController extends BaseController {
     private ProjectCommitService projectCommitService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProjectRatingService projectRatingService;
     
     /**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
@@ -84,6 +88,8 @@ public class ProjectController extends BaseController {
 	        model.addAttribute("apps",projectAppService.getPAVMByProjectId(id));
 	        model.addAttribute("hasApplied", hasApplied);
         	return View("/project/detail-post", model, project);
+        } else if (project.getStatus().equals("confirm")) {
+        	model.addAttribute("rating", projectRatingService.getByProjectId(id));
         }
         model.addAttribute("commits", projectCommitService.getByProjectId(id));
         model.addAttribute("user", userService.getById(project.getContractorId()));
@@ -208,11 +214,16 @@ public class ProjectController extends BaseController {
     	return RedirectTo("/project/"+pc.getProjectId());
     }
     
-    @GetMapping("/{id}/confirm")
-    public String comfirmAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+    @PostMapping("/{id}/confirm")
+    public String comfirmAction(Model model, @PathVariable("id") Integer id, ProjectRating projectRating) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
         project.setStatus("confirm");
         projectService.updateByPrimaryKey(project);
+
+        projectRating.setProjectId(id);
+        projectRating.setPosterId(project.getPosterId());
+        projectRating.setContractorId(project.getContractorId());
+        projectRatingService.insert(projectRating);
         return RedirectTo("/project/"+id);
     }
 

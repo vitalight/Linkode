@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.linkode.dao.RatingMapper">
-  <resultMap id="BaseResultMap" type="com.linkode.pojo.Rating">
+<mapper namespace="com.linkode.dao.ProjectRatingMapper">
+  <resultMap id="BaseResultMap" type="com.linkode.pojo.ProjectRating">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="posterId" jdbcType="INTEGER" property="posterId" />
+    <result column="projectId" jdbcType="INTEGER" property="projectId" />
     <result column="contractorId" jdbcType="INTEGER" property="contractorId" />
-    <result column="rate" jdbcType="INTEGER" property="rate" />
+    <result column="posterId" jdbcType="INTEGER" property="posterId" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, posterId, contractorId, rate
+    id, projectId, contractorId, posterId, rating, content
   </sql>
-  <select id="selectByExample" parameterType="com.linkode.pojo.RatingExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.linkode.pojo.ProjectRatingExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rating
+    from project_rating
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +87,94 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from rating
+    from project_rating
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from rating
+    delete from project_rating
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.linkode.pojo.RatingExample">
-    delete from rating
+  <delete id="deleteByExample" parameterType="com.linkode.pojo.ProjectRatingExample">
+    delete from project_rating
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.linkode.pojo.Rating">
+  <insert id="insert" parameterType="com.linkode.pojo.ProjectRating">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into rating (posterId, contractorId, rate
-      )
-    values (#{posterId,jdbcType=INTEGER}, #{contractorId,jdbcType=INTEGER}, #{rate,jdbcType=INTEGER}
-      )
+    insert into project_rating (projectId, contractorId, posterId, 
+      rating, content)
+    values (#{projectId,jdbcType=INTEGER}, #{contractorId,jdbcType=INTEGER}, #{posterId,jdbcType=INTEGER}, 
+      #{rating,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.linkode.pojo.Rating">
+  <insert id="insertSelective" parameterType="com.linkode.pojo.ProjectRating">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into rating
+    insert into project_rating
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="posterId != null">
-        posterId,
+      <if test="projectId != null">
+        projectId,
       </if>
       <if test="contractorId != null">
         contractorId,
       </if>
-      <if test="rate != null">
-        rate,
+      <if test="posterId != null">
+        posterId,
+      </if>
+      <if test="rating != null">
+        rating,
+      </if>
+      <if test="content != null">
+        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="posterId != null">
-        #{posterId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
       </if>
       <if test="contractorId != null">
         #{contractorId,jdbcType=INTEGER},
       </if>
-      <if test="rate != null">
-        #{rate,jdbcType=INTEGER},
+      <if test="posterId != null">
+        #{posterId,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.linkode.pojo.RatingExample" resultType="java.lang.Long">
-    select count(*) from rating
+  <select id="countByExample" parameterType="com.linkode.pojo.ProjectRatingExample" resultType="java.lang.Long">
+    select count(*) from project_rating
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update rating
+    update project_rating
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.posterId != null">
-        posterId = #{record.posterId,jdbcType=INTEGER},
+      <if test="record.projectId != null">
+        projectId = #{record.projectId,jdbcType=INTEGER},
       </if>
       <if test="record.contractorId != null">
         contractorId = #{record.contractorId,jdbcType=INTEGER},
       </if>
-      <if test="record.rate != null">
-        rate = #{record.rate,jdbcType=INTEGER},
+      <if test="record.posterId != null">
+        posterId = #{record.posterId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rating != null">
+        rating = #{record.rating,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,35 +182,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update rating
+    update project_rating
     set id = #{record.id,jdbcType=INTEGER},
-      posterId = #{record.posterId,jdbcType=INTEGER},
+      projectId = #{record.projectId,jdbcType=INTEGER},
       contractorId = #{record.contractorId,jdbcType=INTEGER},
-      rate = #{record.rate,jdbcType=INTEGER}
+      posterId = #{record.posterId,jdbcType=INTEGER},
+      rating = #{record.rating,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.Rating">
-    update rating
+  <update id="updateByPrimaryKeySelective" parameterType="com.linkode.pojo.ProjectRating">
+    update project_rating
     <set>
-      <if test="posterId != null">
-        posterId = #{posterId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=INTEGER},
       </if>
       <if test="contractorId != null">
         contractorId = #{contractorId,jdbcType=INTEGER},
       </if>
-      <if test="rate != null">
-        rate = #{rate,jdbcType=INTEGER},
+      <if test="posterId != null">
+        posterId = #{posterId,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.Rating">
-    update rating
-    set posterId = #{posterId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.linkode.pojo.ProjectRating">
+    update project_rating
+    set projectId = #{projectId,jdbcType=INTEGER},
       contractorId = #{contractorId,jdbcType=INTEGER},
-      rate = #{rate,jdbcType=INTEGER}
+      posterId = #{posterId,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

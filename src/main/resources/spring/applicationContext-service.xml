@@ -32,5 +32,6 @@
     <bean id="projectService" class="com.linkode.service.impl.ProjectServiceImpl"/>
     <bean id="projectAppService" class="com.linkode.service.impl.ProjectAppServiceImpl"/>
     <bean id="projectCommitService" class="com.linkode.service.impl.ProjectCommitServiceImpl"/>
+    <bean id="projectRatingService" class="com.linkode.service.impl.ProjectRatingServiceImpl"/>
 
 </beans>

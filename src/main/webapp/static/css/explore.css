@@ -335,7 +335,7 @@ h3.input-title {
 	margin:1em;
 	margin-left:-15px;
 }
-.blue-btn {
+.blue-btn, .grey-btn {
 	padding-left:1em;
 	padding-right:1em;
 	background-color:var(--Lblue);
@@ -344,9 +344,15 @@ h3.input-title {
 	color:white;
 	text-align:center;
 }
-.blue-btn:hover {
+.grey-btn {
+	background-color:var(--Ldgrey);
+}
+.blue-btn:hover{
 	color:white;
 	background-color:var(--Ldblue);
+}
+.grey-btn:hover {
+	color:white;
 }
 .float-right {
 	float:right;
