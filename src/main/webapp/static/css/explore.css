@@ -94,7 +94,10 @@ a.card-over:hover {
 	display:inline;
 }
 /*============== 我的项目条==========*/
-.rate-star {
+.test-length {
+	border-bottom:blue 1px solid;
+}
+.rate-star, .rate-star-out {
 	color:var(--Lyellow);
 }
 .rate-star-in {
@@ -102,7 +105,6 @@ a.card-over:hover {
 	display:inline-block;
 }
 .rate-star-out {
-	color:var(--Lyellow);
 	display:inline-block;
 	overflow:hidden;
 	position:relative;
@@ -798,10 +800,12 @@ img.avatar.col-sm-1 {
 	font-size: 1.1em;
     float: none;
     width: 8em;
-    display:block;
     margin:0 auto;
     padding:0.5em;
     
+}
+.middle {
+	text-align:center;
 }
 .chatlog.display-sheet {
 	margin-top:2em;

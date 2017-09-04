@@ -17,7 +17,10 @@
 			<tr>
 				<th>评分</th>
 				<td>
+					<fmt:formatNumber value="${(user.ratingTotal+0.5)/user.ratingNumber-1}" pattern="0" var="ratingInt" />
 					<fmt:formatNumber value="${user.ratingTotal/user.ratingNumber}" pattern="0.0" var="rating" />
+					<c:set var="width" value="${user.ratingTotal/user.ratingNumber+0.2*ratingInt}" />
+					<c:set var="margin" value="${6-width }" />
 					<span class="rate-star">
 						<i class="fa fa-star-o" aria-hidden="true"></i>
 						<i class="fa fa-star-o" aria-hidden="true"></i>
@@ -25,7 +28,7 @@
 						<i class="fa fa-star-o" aria-hidden="true"></i>
 						<i class="fa fa-star-o" aria-hidden="true"></i>
 					</span>
-					<span style="width:${user.ratingTotal*1.2/user.ratingNumber}em; margin-right:${6-user.ratingTotal*1.2/user.ratingNumber}em" class="rate-star-out">
+					<span style="width:${width}em; margin-right:${margin}em" class="rate-star-out">
 						<span class="rate-star-in">
 						<i class="fa fa-star" aria-hidden="true"></i>
 						<i class="fa fa-star" aria-hidden="true"></i>
@@ -55,6 +58,8 @@
 	</table>
 	<br/>
 	<c:if test="${LOGIN_USER_ID == id}">
-	<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
+	<div class="middle">
+		<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
+	</div>
 	</c:if>
 </div>
