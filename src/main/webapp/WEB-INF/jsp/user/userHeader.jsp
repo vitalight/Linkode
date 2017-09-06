@@ -5,7 +5,7 @@
 		<img class="user-bg" src="${pageContext.request.contextPath}/static/img/banner.jpg" />
 	</div>
 	<div class="user-info">
-		<img class="info-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id}.jpg" />
+		<img class="info-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
 		<div class="info">
 			<div class="username">${user.username}</div>
 			<div class="grey-info">${user.sex} | 设计爱好者</div>

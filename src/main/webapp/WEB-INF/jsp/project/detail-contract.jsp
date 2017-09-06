@@ -157,10 +157,10 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<form role="form">
+							<form role="form" id="form-rate">
 								<div class="form-group">
-									<label>评分</label>
-									<input class="form-control" name="rating" type="number"/>
+									<label>评分</label><span id="rating-error" hidden="hidden">(评分需为0-5之间整数)</span>
+									<input class="form-control" name="rating" type="number" min="0" max="5" step="1"/>
 									<label>评价</label>
 									<input name="content" class="form-control" placeholder="(选填)" maxlength="90" />
 								</div>
@@ -175,12 +175,13 @@
 			</div>
 		</div>
 	</div>
-
 <%@ include  file="../modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/static/js/crud/bootbox.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#confirm").click(function(e) {
+		$("#rating-error").hide();
 		$('#modal').modal('show');
 	});
 	
@@ -188,6 +189,11 @@ $(document).ready(function() {
 		var rating = $("input[name='rating']").val();
 		var content = $("input[name='content']").val();
 		var url= "/Linkode/project/${model.id}/confirm";
+		var ex = /^\d+$/;// 检验整数
+		if (rating<0 | rating>5 | rating=="" | !ex.test(rating)) {
+			$("#rating-error").show();
+			return false;
+		}
 		
 		jQuery.ajax({
 			type:"POST",

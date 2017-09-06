@@ -13,6 +13,7 @@ import com.linkode.pojo.ProjectApp;
 import com.linkode.pojo.ProjectCommit;
 import com.linkode.pojo.ProjectRating;
 import com.linkode.pojo.User;
+import com.linkode.service.ChatLogService;
 import com.linkode.service.ProjectAppService;
 import com.linkode.service.ProjectCommitService;
 import com.linkode.service.ProjectService;
@@ -50,7 +51,8 @@ public class ProjectController extends BaseController {
     private UserService userService;
     @Autowired
     private ProjectRatingService projectRatingService;
-    
+    @Autowired
+    private ChatLogService chatLogService;
     /**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
      * 若不setTimeZone，则存入数据库中的日期会缺一天。
@@ -158,6 +160,10 @@ public class ProjectController extends BaseController {
     	projectApp.setProjectId(id);
     	projectApp.setTime(new Date());
     	projectAppService.insert(projectApp);
+    	
+    	Project project = projectService.getById(id);
+    	chatLogService.systemMessage(project.getPosterId(), 
+    			"您的项目<a href='../../project/" + id + "'>[" + project.getTitle()+"]</a>有新的申请");
     	return RedirectTo("/project/"+id);
     }
     

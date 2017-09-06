@@ -224,6 +224,10 @@ h3 {
 	height:auto;
 }
 /*=============== 项目承包请求 ===============*/
+#rating-error {
+	color:var(--Lred);
+	margin-left:1em;
+}
 .some-margin {
 	margin-left:1em;
 }
@@ -254,6 +258,9 @@ h3 {
 .cmt-line .hollow-btn {
 	margin-top:0.5em;
 	width:7.5em;
+}
+.cmt-line a {
+	display:initial;
 }
 .hollow-btn:hover {
 	background-color:rgba(0,0,0,0.03);

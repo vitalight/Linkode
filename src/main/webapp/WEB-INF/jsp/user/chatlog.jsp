@@ -8,28 +8,55 @@
 		<fmt:formatDate pattern="M月d日 H:m" value="${chatlog.time}" var="time" />
 		
 		<div class="cmt-line row">
-		    <c:if test="${LOGIN_USER_ID != chatlog.senderId}">
-			<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.senderId%7}.jpg" />
-			</c:if>
+			<c:choose>
+				<c:when test="${chatlog.senderId == 0 || chatlog.receiverId == 0}">
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-0.jpg" />
+				</c:when>
+				
+				<c:when test="${LOGIN_USER_ID != chatlog.senderId}">
+				<a href="${pageContext.request.contextPath}/user/${chatlog.senderId}">
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.senderId%7}.jpg" />
+			    </a>
+				</c:when>
+				
+				<c:when test="${LOGIN_USER_ID == chatlog.senderId}">
+				<a href="${pageContext.request.contextPath}/user/${chatlog.receiverId}">
+				<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.receiverId%7}.jpg" />
+				</a>
+				</c:when>
+			</c:choose>
 		    
-		    <c:if test="${LOGIN_USER_ID == chatlog.senderId}">
-			<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.receiverId%7}.jpg" />
-		    </c:if>
 			<div class="col-sm-7">
-		    	<c:if test="${LOGIN_USER_ID != chatlog.senderId}">
-				<div class="cmt-name">${chatlog.senderName}
-				<span class="cmt-time">${time}</span></div>
-				</c:if>
-		           <c:if test="${LOGIN_USER_ID == chatlog.senderId}">
-				<div class="cmt-name">${chatlog.receiverName}
-				<span class="cmt-time">${time}</span></div>
-				</c:if>
+				<c:choose>
+					<c:when test="${chatlog.senderId == 0 || chatlog.receiverId == 0}">
+					<div class="cmt-name">
+						${chatlog.receiverName}
+						<span class="cmt-time">${time}</span>
+					</div>
+					</c:when>
+					
+					<c:when test="${LOGIN_USER_ID != chatlog.senderId}">
+					<div class="cmt-name">
+						<a href="${pageContext.request.contextPath}/user/${chatlog.senderId}">${chatlog.senderName}</a>
+						<span class="cmt-time">${time}</span>
+					</div>
+					</c:when>
+					
+					<c:when test="${LOGIN_USER_ID == chatlog.senderId}">
+					<div class="cmt-name">
+						<a href="${pageContext.request.contextPath}/user/${chatlog.receiverId}">${chatlog.receiverName}</a>
+						<span class="cmt-time">${time}</span>
+					</div>
+					</c:when>
+				</c:choose>
+				
 				<div class="cmt-content">
-	             	<c:if test="${fn:length(chatlog.content)>40}">
-	             		${fn:substring(chatlog.content,0,20)}...
+	             	<c:if test="${fn:length(fn:escapeXml(chatlog.content))>40}">
+	             	${fn:escapeXml(chatlog.content)}
+	             	
 	             	</c:if>
-	             	<c:if test="${fn:length(chatlog.content)<=40}">
-	             		${chatlog.content}
+	             	<c:if test="${fn:length(fn:escapeXml(chatlog.content))<=40}">
+	             	${fn:escapeXml(chatlog.content)}
 	             	</c:if>
 				</div>
 			</div>

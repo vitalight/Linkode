@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService {
     	user.setPassword(loginViewModel.getPassword());
     	user.setRole("guest");
     	user.setUsername(loginViewModel.getEmail().split("@")[0]);
+    	user.setRatingNumber(0);
+    	user.setRatingTotal(0);
     	userMapper.insert(user);
     	return user.getId();
     }

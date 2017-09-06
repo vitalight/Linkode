@@ -71,7 +71,7 @@ public class UserController extends BaseController {
 		model.addAttribute("type",type);
 		if (type!=null) {
 			model.addAttribute("type",type);
-			return View("/user/main", model, chatLogService.getByReceiverId(id));
+			return View("/user/main", model, chatLogService.getByUserId(id));
 		}
 		model.addAttribute("type","info");
 		return View("/user/main");
@@ -88,7 +88,7 @@ public class UserController extends BaseController {
 			model.addAttribute("portfolios", portfolios);
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
-			return View("/user/chatlog", model, chatLogService.getByReceiverId(id));
+			return View("/user/chatlog", model, chatLogService.getByUserId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
 		}
@@ -117,21 +117,5 @@ public class UserController extends BaseController {
 		}
 		userService.update(old);
 		return RedirectTo("/user/{id}");
-	}
-	
-	/*======== 删除私信 ========*/
-	@GetMapping("/{id1}/chatlog/delete/{id2}")
-	public String deleteAllChat(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
-		List<ChatLog> chats = chatLogService.findBetween(id1, id2);
-		for (int i = 0; i < chats.size(); i++) {
-			ChatLog chat = chats.get(i);
-			if (chat.getReceiverId() == id1) {
-				chat.setReceiverId(-id1);
-			} else {
-				chat.setSenderId(-id1);
-			}
-			chatLogService.update(chat);
-		}
-		return RedirectTo("/user/{id1}/chatlog");
 	}
 }

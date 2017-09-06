@@ -17,10 +17,18 @@
 			<tr>
 				<th>评分</th>
 				<td>
-					<fmt:formatNumber value="${(user.ratingTotal+0.5)/user.ratingNumber-1}" pattern="0" var="ratingInt" />
-					<fmt:formatNumber value="${user.ratingTotal/user.ratingNumber}" pattern="0.0" var="rating" />
-					<c:set var="width" value="${user.ratingTotal/user.ratingNumber+0.2*ratingInt}" />
+				
+					<!-- 评分显示数据准备, 当分母为0时的做特殊处理 -->
+					<c:set var="ratingNumber" value="${user.ratingNumber}" />
+					<c:if test="${ratingNumber==0}">
+						<c:set var="ratingNumber" value="1" />
+					</c:if>
+					<!-- ratingInt是rating的下取整，用于计算显示评分星星的长度 -->
+					<fmt:formatNumber value="${(user.ratingTotal+0.5)/ratingNumber-1}" pattern="0" var="ratingInt" />
+					<fmt:formatNumber value="${user.ratingTotal/ratingNumber}" pattern="0.0" var="rating" />
+					<c:set var="width" value="${user.ratingTotal/ratingNumber+0.2*ratingInt}" />
 					<c:set var="margin" value="${6-width }" />
+					
 					<span class="rate-star">
 						<i class="fa fa-star-o" aria-hidden="true"></i>
 						<i class="fa fa-star-o" aria-hidden="true"></i>
@@ -37,7 +45,13 @@
 						<i class="fa fa-star" aria-hidden="true"></i>
 						</span>
 					</span>
-					<span class="rating-number">(${rating}分)</span>
+					
+					<c:if test="${user.ratingTotal!=0 }">
+						<span class="rating-number">(${rating}分)</span>
+					</c:if>
+					<c:if test="${user.ratingTotal==0 }">
+						<span class="rating-number">(暂无评分)</span>
+					</c:if>
 				</td>
 			</tr>
 			<tr>

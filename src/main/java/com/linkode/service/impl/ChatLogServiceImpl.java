@@ -104,7 +104,7 @@ public class ChatLogServiceImpl implements ChatLogService {
 	}
 
 	@Override
-	public List<ChatViewModel> getByReceiverId(int id) {
+	public List<ChatViewModel> getByUserId(int id) {
 		ChatLogExample chatLogExample = new ChatLogExample();
 		ChatLogExample.Criteria criteria = chatLogExample.createCriteria();
 		ChatLogExample.Criteria orCriteria = chatLogExample.createCriteria();
@@ -119,6 +119,7 @@ public class ChatLogServiceImpl implements ChatLogService {
 			ChatLog chatLog = chatLogs.get(i);
 			if (!senderIds.contains(chatLog.getSenderId()) 
 					&& !senderIds.contains(chatLog.getReceiverId())) {
+				chatLog.setContent(chatLog.getContent().replaceAll("</?[^>]+>", ""));
 				firstChatLogs.add(chatLog);
 				if (chatLog.getSenderId()!=id) {
 					senderIds.add(chatLog.getSenderId());
@@ -130,5 +131,16 @@ public class ChatLogServiceImpl implements ChatLogService {
 		}
 		
 		return transform(firstChatLogs);
+	}
+
+	@Override
+	public void systemMessage(int id, String message) {
+		ChatLog chatlog = new ChatLog();
+		chatlog.setSenderId(0);
+		chatlog.setReceiverId(id);
+		chatlog.setContent(message);
+		chatlog.setTime(new java.util.Date());
+		chatLogMapper.insert(chatlog);
+		
 	}
 }
