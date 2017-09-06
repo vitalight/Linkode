@@ -20,6 +20,8 @@
 <%@ include file="../modules/javascript.jsp"%>
 <script type="text/javascript">
 $(document).ready(function() {
+
+	$("#${user.sex}").attr("selected","selected");
 	$(document).scrollTop($(document).height());
 	$("#${type}").addClass("cute-btn-chose");
 	$(".js-trigger").click(function() {

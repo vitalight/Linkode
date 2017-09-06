@@ -794,7 +794,15 @@ img.avatar.col-sm-1 {
 	text-align:right;
 	font-weight:normal;
 	color:#bbbbbb;
-	line-height: 3;
+	line-height: 4;
+	vertical-align:top;
+}
+.info-table {
+	width:80%;
+}
+textarea.higher {
+	height:6em;
+	margin-top:1em;
 }
 .display-info {
 	width:60em;

@@ -23,11 +23,23 @@
 			
 			<div class="content-text">
 				<form action="${pageContext.request.contextPath}/chat/${id1}/${id2}" method="post">
+					<c:if test="${id2!=0}">
 					<textarea name="message" class="form-control requirement" maxlength="90" name="requirement" required></textarea>
 					<br/>
 					<div class="row">
 						<button class="blue-btn col-sm-2 col-sm-offset-5">发送</button>
 					</div>
+					</c:if>
+					
+					
+					<c:if test="${id2==0}">
+					<textarea name="message" class="form-control requirement" maxlength="90" name="requirement" disabled></textarea>
+					<br/>
+					<div class="row">
+						<button class="blue-btn col-sm-2 col-sm-offset-5" disabled>发送</button>
+					</div>
+					</c:if>
+					
 				</form>
 			</div>
 		</div>

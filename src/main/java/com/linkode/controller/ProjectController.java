@@ -163,7 +163,7 @@ public class ProjectController extends BaseController {
     	
     	Project project = projectService.getById(id);
     	chatLogService.systemMessage(project.getPosterId(), 
-    			"您的项目<a href='../../project/" + id + "'>[" + project.getTitle()+"]</a>有新的申请");
+    			"项目<a href='../../project/" + id + "'>[" + project.getTitle()+"]</a>有新的申请。");
     	return RedirectTo("/project/"+id);
     }
     
@@ -178,6 +178,8 @@ public class ProjectController extends BaseController {
     	project.setContractorId(projectApp.getApplicantId());
     	project.setStartDate(new Date());
     	projectService.update(project);
+    	chatLogService.systemMessage(projectApp.getApplicantId(), 
+    			"您成功承包了项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>。");
     	return RedirectTo("/project/"+project.getId());
     }
     
@@ -186,6 +188,10 @@ public class ProjectController extends BaseController {
     	ProjectApp projectApp = projectAppService.getById(id);
     	projectApp.setResult(0);
     	projectAppService.update(projectApp);
+
+    	Project project=projectService.findByPrimaryKey(projectApp.getProjectId());
+    	chatLogService.systemMessage(projectApp.getApplicantId(), 
+    			"您对项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>的申请已被拒绝。");
     	return RedirectTo("/project/"+projectApp.getProjectId());
     }
     
@@ -202,22 +208,34 @@ public class ProjectController extends BaseController {
     	pc.setTime(new Date());
     	pc.setProjectId(id);
         projectCommitService.insert(pc);
+        
+        Project project = projectService.findByPrimaryKey(id);
+    	chatLogService.systemMessage(project.getPosterId(), 
+    			"项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>有新的提交。");
         return RedirectTo("/project/"+id);
     }
 
     @GetMapping("/commit/{id}/accept")
-    public String commitAcceptAction(Model model, @PathVariable("id") Integer id) {
+    public String commitAcceptAction(Model model, @PathVariable("id") Integer id) throws CustomException {
     	ProjectCommit pc = projectCommitService.getById(id);
     	pc.setResult("accept");
     	projectCommitService.update(pc);
+    	
+        Project project = projectService.findByPrimaryKey(pc.getProjectId());
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被通过。");
     	return RedirectTo("/project/"+pc.getProjectId());
     }
     
     @GetMapping("/commit/{id}/reject")
-    public String commitRejectAction(Model model, @PathVariable("id") Integer id ){
+    public String commitRejectAction(Model model, @PathVariable("id") Integer id ) throws CustomException{
     	ProjectCommit pc = projectCommitService.getById(id);
     	pc.setResult("reject");
     	projectCommitService.update(pc);
+
+        Project project = projectService.findByPrimaryKey(pc.getProjectId());
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被拒绝。");
     	return RedirectTo("/project/"+pc.getProjectId());
     }
     
@@ -236,6 +254,8 @@ public class ProjectController extends BaseController {
         user.setRatingNumber(user.getRatingNumber()+1);
         user.setRatingTotal(user.getRatingTotal()+projectRating.getRating());
         userService.update(user);
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您承包的项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>已经完结。");
         return RedirectTo("/project/"+id);
     }
 
