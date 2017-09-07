@@ -58,9 +58,26 @@
 					<th>性别</th>
 					<td>
 					<select name="sex" class="form-control">
-					<option value="secret" id="secret">保密</option>
+					
+					<c:if test="${user.sex=='secret'}">
+					<option value="secret" id="secret" selected>保密</option>
 					<option value="female" id="female">女</option>
 					<option value="male" id="male">男</option>
+					</c:if>
+					
+					<c:if test="${user.sex=='female'}">
+					<option value="secret" id="secret">保密</option>
+					<option value="female" id="female" selected>女</option>
+					<option value="male" id="male">男</option>
+					</c:if>
+					
+					
+					<c:if test="${user.sex=='male'}">
+					<option value="secret" id="secret">保密</option>
+					<option value="female" id="female">女</option>
+					<option value="male" id="male" selected>男</option>
+					</c:if>
+					
 					</select>
 					</td>
 				</tr>

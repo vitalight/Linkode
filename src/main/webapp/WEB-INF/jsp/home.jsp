@@ -8,7 +8,11 @@
 		<div class="bg-container">
 		</div>
 		<div class="display-container">
-			<div class="display-type">热门作品<span class="grey glyphicon glyphicon-chevron-right"></span></div>
+			<div class="display-type">
+				<a href="${pageContext.request.contextPath}/portfolio">热门作品</a>
+				<span class="grey glyphicon glyphicon-chevron-right"></span>
+				
+			</div>
 			
 			<c:forEach items="${portfolios}" end="7" var="portfolio">
 			<div class="display-item">
@@ -32,7 +36,10 @@
 				<a class="card-over" target="_blank" href="${ads[0].content}"></a>
 			</div>
 		
-			<div class="display-type">推荐项目<span class="grey glyphicon glyphicon-chevron-right"></span></div>
+			<div class="display-type">
+				<a href="${pageContext.request.contextPath}/project">推荐项目</a>
+				<span class="grey glyphicon glyphicon-chevron-right"></span>
+			</div>
 			
 			<c:forEach items="${projects}" end="7" var="project">
 			<div class="display-item">

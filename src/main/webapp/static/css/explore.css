@@ -213,6 +213,9 @@ h3 {
     margin-left:1em;
     background-color:white;
 }
+.hollow-btn:focus {
+	color: var(--Lblue);
+}
 .hollow-btn.cute-btn-chose {
 	
 	color:var(--Lblue);
@@ -254,6 +257,9 @@ h3 {
 }
 .yellow-bg:hover {
 	background-color:var(--Ldyellow);
+}
+.cmt-line {
+	position:relative;
 }
 .cmt-line .hollow-btn {
 	margin-top:0.5em;
@@ -659,7 +665,12 @@ img.avatar.col-sm-1 {
 	font-weight:700;
 	margin:1em 0;
 }
-
+.display-type a {
+	color:black;
+}
+.display-type a:hover {
+	color:var(--Ldblue);
+}
 .display-item {
 	background-color:white;
 	border:var(--Lgrey) 1px solid;
@@ -727,6 +738,19 @@ img.avatar.col-sm-1 {
 	color:var(--Ldgrey);
 }
 /*========= 用户信息 ============*/
+
+.red-number {
+	background-color: var(--Lred);
+    color: white;
+    font-weight: 700;
+    font-size: 0.8em;
+    border-radius: 1em;
+    padding: 0.1em 0.6em;
+    display: inline-block;
+    position:absolute;
+    left:4em;
+    border:white 2px solid;
+}
 .js-trigger {
 	cursor:pointer;
 }

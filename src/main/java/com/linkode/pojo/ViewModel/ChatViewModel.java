@@ -2,6 +2,8 @@ package com.linkode.pojo.ViewModel;
 
 import java.util.Date;
 
+import com.linkode.pojo.ChatLog;
+
 public class ChatViewModel {
 	private Integer id;
 	private Integer senderId;
@@ -10,6 +12,15 @@ public class ChatViewModel {
 	private String receiverName;
 	private String content;
 	private Date time;
+	private int messages;
+	
+	public ChatViewModel(ChatLog chatLog){
+		this.id = chatLog.getId();
+		this.senderId = chatLog.getSenderId();
+		this.receiverId = chatLog.getReceiverId();
+		this.content = chatLog.getContent();
+		this.time = chatLog.getTime();
+	}
 	
 	public void setId(Integer id) {
 		this.id = id;
@@ -65,5 +76,13 @@ public class ChatViewModel {
 	
 	public Date getTime() {
 		return time;
+	}
+
+	public int getMessages() {
+		return messages;
+	}
+
+	public void setMessages(int messages) {
+		this.messages = messages;
 	}
 }

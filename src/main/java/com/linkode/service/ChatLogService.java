@@ -14,6 +14,7 @@ public interface ChatLogService {
 	void insert(ChatLog chatLog);
 	void update(ChatLog chatLog);
 	List<ChatViewModel> transform(List<ChatLog> chatLogs);
+	List<ChatViewModel> transform(List<ChatLog> chatLogs, int id);
 	List<ChatViewModel> getByUserId(int id);
 	
 	void systemMessage(int id, String message);

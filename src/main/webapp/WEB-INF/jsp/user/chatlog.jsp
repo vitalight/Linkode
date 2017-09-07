@@ -24,7 +24,12 @@
 				<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.receiverId%7}.jpg" />
 				</a>
 				</c:when>
+				
 			</c:choose>
+			
+			<c:if test="${chatlog.messages!=0}">
+			<span class="red-number">${chatlog.messages}</span>
+		    </c:if>
 		    
 			<div class="col-sm-7">
 				<c:choose>

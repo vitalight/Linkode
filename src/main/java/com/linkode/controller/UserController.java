@@ -1,5 +1,7 @@
 package com.linkode.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import com.linkode.service.ChatLogService;
 import com.linkode.service.PortfolioService;
 import com.linkode.service.ProjectRatingService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.RelationService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 
@@ -53,6 +56,8 @@ public class UserController extends BaseController {
 	private ProjectService projectService;
 	@Autowired
 	private ProjectRatingService projectRatingService;
+	@Autowired
+	private RelationService relationService;
 	
 	/**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
@@ -70,8 +75,11 @@ public class UserController extends BaseController {
 	// 默认进入个人信息
 	@GetMapping("/{id}")
 	public String checkUser(Model model, @PathVariable("id") Integer id, String type) {
+
+		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
 		model.addAttribute("user", userService.findById(id));
 		model.addAttribute("type",type);
+		model.addAttribute("hasLiked", relationService.hasLiked(userid, id));
 		if (type!=null) {
 			model.addAttribute("type",type);
 			return View("/user/main", model, chatLogService.getByUserId(id));
@@ -122,5 +130,20 @@ public class UserController extends BaseController {
 		}
 		userService.update(old);
 		return RedirectTo("/user/{id}");
+	}
+	
+	/*======= 用户关注 =========*/
+	@GetMapping("/{id}/like")
+	public void likeUser(Model model, @PathVariable("id") Integer id, Writer writer) throws IOException {
+		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
+		if (userid == id){
+			return;
+		}
+		if (relationService.hasLiked(userid, id)) {
+			relationService.dislike(userid, id);
+		} else {
+			relationService.like(userid, id);
+		}
+    	writer.write("success");
 	}
 }

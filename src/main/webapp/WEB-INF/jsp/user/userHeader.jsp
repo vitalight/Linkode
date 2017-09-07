@@ -14,7 +14,12 @@
 				<fmt:message bundle="${lang}" key="${user.sex}"/>&nbsp;&nbsp;|&nbsp;&nbsp;设计爱好者</div>
 			<c:if test="${LOGIN_USER_ID != id}">
 			<a class="hollow-btn" href="${pageContext.request.contextPath}/chat/${LOGIN_USER_ID}/${id}">私信</a>
-			<a class="hollow-btn">关注</a>
+				<c:if test="${!hasLiked}">
+				<a class="hollow-btn" id="js-like" href="javascript:;">关注</a>
+				</c:if>
+				<c:if test="${hasLiked}">
+				<a class="hollow-btn" id="js-like" href="javascript:;">取消关注</a>
+				</c:if>
 			</c:if>
 			
 			<c:if test="${LOGIN_USER_ID == id}">

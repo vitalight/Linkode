@@ -70,7 +70,7 @@
 				<th>生日</th>
 				<td>
 				<c:if test="${user.birthday!=null}">
-				<fmt:formatDate type="Date" value="${user.birthday}"></fmt:formatDate>
+				<fmt:formatDate pattern="YYYY年M月d日 " value="${user.birthday}"></fmt:formatDate>
 				</c:if>
 				
 				<c:if test="${user.birthday==null}">
