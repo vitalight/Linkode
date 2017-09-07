@@ -97,7 +97,7 @@ a.card-over:hover {
 .test-length {
 	border-bottom:blue 1px solid;
 }
-.rate-star, .rate-star-out {
+span.rate-star, span.rate-star-out {
 	color:var(--Lyellow);
 }
 .rate-star-in {
@@ -796,9 +796,13 @@ img.avatar.col-sm-1 {
 	color:#bbbbbb;
 	line-height: 4;
 	vertical-align:top;
+	width:10em;
 }
 .info-table {
 	width:80%;
+}
+td.higher {
+	padding-top:1em;
 }
 textarea.higher {
 	height:6em;

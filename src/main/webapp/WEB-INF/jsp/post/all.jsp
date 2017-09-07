@@ -22,7 +22,7 @@
 			<c:forEach items="${model}" var="post">
 			<div class="row post-line">
 				<div class="col-sm-8">
-					<span class="tag ran-0">精品</span>${post.title}
+					${post.title}
 				</div>
 				<div class="col-sm-2 poster-info">
 					<span class="glyphicon glyphicon-user"></span>

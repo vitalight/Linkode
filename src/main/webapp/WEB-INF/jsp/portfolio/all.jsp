@@ -33,10 +33,10 @@
 				${pvm.username}
 			</span>
 			<span class="likes">
-				<i class="fa fa-heart-o" aria-hidden="true"></i> ${pvm.likes}
+				<i class="fa fa-heart" aria-hidden="true"></i> ${pvm.likes}
 			</span>
 			<span class="comments">
-				<i class="fa fa-comment-o" aria-hidden="true"></i> ${pvm.comments}
+				<i class="fa fa-comment" aria-hidden="true"></i> ${pvm.comments}
 			</span>
 			
 			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>

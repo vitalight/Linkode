@@ -34,6 +34,7 @@ import com.linkode.pojo.ViewModel.ChatViewModel;
 import com.linkode.pojo.ViewModel.PortfolioViewModel;
 import com.linkode.service.ChatLogService;
 import com.linkode.service.PortfolioService;
+import com.linkode.service.ProjectRatingService;
 import com.linkode.service.ProjectService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
@@ -50,6 +51,8 @@ public class UserController extends BaseController {
 	private ChatLogService chatLogService;
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private ProjectRatingService projectRatingService;
 	
 	/**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
@@ -89,6 +92,8 @@ public class UserController extends BaseController {
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
 			return View("/user/chatlog", model, chatLogService.getByUserId(id));
+		} else if (field.equals("rating")) {
+			return View("/user/rating", model, projectRatingService.getByContractorId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
 		}

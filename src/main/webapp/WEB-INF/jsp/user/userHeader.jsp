@@ -25,6 +25,7 @@
 			<a class="nav-btn js-trigger" id="info" >资料</a>
 			<a class="nav-btn js-trigger" id="portfolio" >作品</a>
 			<a class="nav-btn js-trigger" id="project">项目</a>
+			<a class="nav-btn js-trigger" id="rating">评价</a>
 			<c:if test="${LOGIN_USER_ID == id}">
 			<a class="nav-btn js-trigger" id="chatlog">私信箱</a>
 			</c:if>

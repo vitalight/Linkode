@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
     	user.setUsername(loginViewModel.getEmail().split("@")[0]);
     	user.setRatingNumber(0);
     	user.setRatingTotal(0);
+    	user.setSex("secret");
     	userMapper.insert(user);
     	return user.getId();
     }
@@ -80,5 +81,15 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAll() {
     	return userMapper.selectByExample(null);
     }
+
+	@Override
+	public List<User> search(String string) {
+    	UserExample userExample = new UserExample();
+    	UserExample.Criteria criteria = userExample.createCriteria();
+    	criteria.andUsernameLike("%"+string+"%");
+    	
+    	List<User> users = userMapper.selectByExample(userExample);
+		return users;
+	}
 }
 

@@ -25,7 +25,7 @@
 					<%-- ratingInt是rating的下取整，用于计算显示评分星星的长度 --%>
 					<fmt:formatNumber value="${(user.ratingTotal/ratingNumber-0.5)}" pattern="0" var="ratingInt" />
 					<fmt:formatNumber value="${user.ratingTotal/ratingNumber}" pattern="0.0" var="rating" />
-					<fmt:formatNumber value="${user.ratingTotal/ratingNumber*0.92+0.29*ratingInt}" pattern="0.00" var="width" />
+					<fmt:formatNumber value="${rating*0.92+0.29*ratingInt}" pattern="0.00" var="width" />
 					<fmt:formatNumber value="${6-width }" pattern="0.00" var="margin" />
 					
 					<span class="rate-star">
@@ -48,7 +48,7 @@
 					<c:if test="${user.ratingTotal!=0 }">
 						<span class="rating-number">(${rating}分)</span>
 					</c:if>
-					<c:if test="${user.ratingTotal==0 }">
+					<c:if test="${user.ratingTotal==0}">
 						<span class="rating-number">(暂无评分)</span>
 					</c:if>
 				</td>
@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<th>介绍</th>
-				<td>
+				<td class="higher">
 				<c:if test="${user.intro!=null && user.intro!=''}">
 				${user.intro}
 				</c:if>

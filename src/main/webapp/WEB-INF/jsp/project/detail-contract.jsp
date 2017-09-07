@@ -60,7 +60,7 @@
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId%7}.jpg" />
 					<div class="col-sm-7">
 						<div class="cmt-name">${model.username}
-							<span class="cmt-time">
+							<span class="cmt-time rate-star">
 								<c:forEach begin="1" end="${rating.rating}" var="i">
 									<i class="fa fa-star" aria-hidden="true"></i>
 								</c:forEach>
