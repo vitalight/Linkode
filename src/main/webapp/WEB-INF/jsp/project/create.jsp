@@ -34,7 +34,7 @@
 				</div><br/>
 				<div class="row">
 					<div class="col-sm-4" >
-						酬金：<input class="form-control" type="number" step="1" name="money" required/>
+						酬金：<input class="form-control" type="number" step="1" name="money" max="${money}" required/>
 					</div>
 					<div class="col-sm-4 col-sm-offset-1">
 						截止日期:<input class="form-control" type="date" name="endDate" required/>

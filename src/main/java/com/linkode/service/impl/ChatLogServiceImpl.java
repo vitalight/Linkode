@@ -81,6 +81,7 @@ public class ChatLogServiceImpl implements ChatLogService {
 	@Override
 	public void insert(ChatLog chatLog) {
 		chatLogMapper.insert(chatLog);
+		relationService.sendMessage(chatLog.getSenderId(), chatLog.getReceiverId());
 	}
 	
 	@Override
@@ -168,6 +169,6 @@ public class ChatLogServiceImpl implements ChatLogService {
 		chatlog.setContent(message);
 		chatlog.setTime(new java.util.Date());
 		chatLogMapper.insert(chatlog);
-		
+		relationService.sendMessage(0, id);
 	}
 }

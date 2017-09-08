@@ -9,13 +9,7 @@
 	<div class="margin-bottom margin-top display-sheet">
 		<div class="sheet-content">
 			<div class="row">
-				<h1>${model.title}
-				
-				<c:if test="${LOGIN_USER_ROLE == 'admin' || LOGIN_USER_ID == model.posterId}">
-				<a class="edit-link" href="${pageContext.request.contextPath}/project/delete/${model.id}">删除项目</a>
-				<a class="edit-link" href="${pageContext.request.contextPath}/project/update/${model.id}">编辑项目</a>
-				</c:if>
-				</h1>
+				<h1>${model.title}</h1>
 			</div>
 			
 			<!-- 蓝色信息栏 -->

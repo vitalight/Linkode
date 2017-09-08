@@ -90,6 +90,15 @@
 				</c:if>
 				</td>
 			</tr>
+			
+			<c:if test="${LOGIN_USER_ID == id}">
+			<tr>
+				<th>余额</th>
+				<td>
+				${user.money}元
+				</td>
+			</tr>
+			</c:if>
 		</tbody>
 	</table>
 	<br/>

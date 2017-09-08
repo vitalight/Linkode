@@ -64,8 +64,6 @@ public class ChatLogController extends BaseController {
 		chatLog.setReceiverId(id2);
 		chatLog.setTime(new java.util.Date());
 		chatLogService.insert(chatLog);
-		
-		relationService.sendMessage(id1, id2);
 		return RedirectTo("/chat/{id1}/{id2}");
 	}
 }

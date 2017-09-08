@@ -72,7 +72,10 @@ public class ProjectController extends BaseController {
     }
 
     @GetMapping("/create")
-    public String createView() {
+    public String createView(Model model) {
+    	Integer userId = (Integer)session().getAttribute("LOGIN_USER_ID");
+    	User user = userService.getById(userId);
+        model.addAttribute("money", user.getMoney());
         return View("/project/create");
     }
 
@@ -103,6 +106,8 @@ public class ProjectController extends BaseController {
     @GetMapping("/update/{id}")
     public String updateView(Model model, @PathVariable("id") Integer id) throws CustomException {
         Project project = projectService.findByPrimaryKey(id);
+        User user = userService.getById(project.getPosterId());
+        model.addAttribute("money", user.getMoney()+project.getMoney());
         return View("/project/update", model, project);
     }
 
@@ -142,13 +147,22 @@ public class ProjectController extends BaseController {
     /*======== 改 ========*/
     @PostMapping("/update")
     public String updateAction(Model model, HttpServletRequest req, @Validated Project newProject, BindingResult bindingResult) throws CustomException, ParseException {
-        Project project = projectService.findByPrimaryKey(newProject.getId());
-        project.setEndDate(newProject.getEndDate());
-        project.setMoney(newProject.getMoney());
-        project.setRequirement(newProject.getRequirement());
-        project.setType(newProject.getType());
-        project.setTitle(newProject.getTitle());
-        projectService.updateByPrimaryKey(project);
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+    	User user = userService.getById(userid);
+		Project project = projectService.findByPrimaryKey(newProject.getId());
+    	if (user.getMoney()+project.getMoney()-newProject.getMoney()<0 | project.getStatus()!="post") {
+    		return RedirectTo("/project/myProject");
+    	}
+		user.setMoney(user.getMoney()+project.getMoney()-newProject.getMoney());
+		userService.update(user);
+		
+		project.setEndDate(newProject.getEndDate());
+		project.setMoney(newProject.getMoney());
+		project.setRequirement(newProject.getRequirement());
+		project.setType(newProject.getType());
+		project.setTitle(newProject.getTitle());
+		projectService.updateByPrimaryKey(project);
+		
         return RedirectTo("/project/myProject");
     }
     
@@ -250,11 +264,12 @@ public class ProjectController extends BaseController {
         projectRatingService.insert(projectRating);
         
         User user = userService.findById(project.getContractorId());
+        user.setMoney(user.getMoney()+project.getMoney());
         user.setRatingNumber(user.getRatingNumber()+1);
         user.setRatingTotal(user.getRatingTotal()+projectRating.getRating());
         userService.update(user);
     	chatLogService.systemMessage(project.getContractorId(), 
-    			"您承包的项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>已经完结。");
+    			"您承包的项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>已完结,"+project.getMoney()+"元酬金已经到账。");
         return RedirectTo("/project/"+id);
     }
 
@@ -262,11 +277,18 @@ public class ProjectController extends BaseController {
     @PostMapping("/create")
     public String createAction(Model model, HttpServletRequest request, @Valid Project project, BindingResult bindingResult) throws CustomException, ParseException {
         Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
-
+        User user = userService.findById(userid);
+        if (user.getMoney()<project.getMoney()) {
+        	return RedirectTo("/project/myProject");
+        }
+        
         project.setPosterId(userid);
         project.setStartDate(new java.util.Date());
         project.setStatus("post");
         projectService.insert(project);
+        
+        user.setMoney(user.getMoney()-project.getMoney());
+        userService.update(user);
         return RedirectTo("/project/myProject");
     }
 
