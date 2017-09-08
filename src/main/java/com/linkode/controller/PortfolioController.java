@@ -1,29 +1,25 @@
 package com.linkode.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import com.linkode.exception.CustomException;
 import com.linkode.pojo.Portfolio;
 import com.linkode.pojo.PortfolioCmt;
-import com.linkode.pojo.ViewModel.PortfolioViewModel;
+import com.linkode.pojo.PortfolioLike;
 import com.linkode.service.PortfolioCmtService;
+import com.linkode.service.PortfolioLikeService;
 import com.linkode.service.PortfolioService;
-import com.linkode.util.DataPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +33,8 @@ public class PortfolioController extends BaseController {
     private PortfolioService portfolioService;
     @Autowired
     private PortfolioCmtService portfolioCmtService;
+    @Autowired
+    private PortfolioLikeService portfolioLikeService;
 
     /*======== 查 ========*/
     @GetMapping("")
@@ -58,7 +56,9 @@ public class PortfolioController extends BaseController {
 
     @GetMapping("/{id}")
     public String detailView(Model model, @PathVariable("id") Integer id) throws CustomException {
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         model.addAttribute("cmts", portfolioCmtService.getAllPCVMById(id));
+        model.addAttribute("like",portfolioLikeService.getByUidPid(userid, id)?"hasLiked":"");
         return View("/portfolio/detail", model, portfolioService.getPVMByPrimaryKey(id));
     }
 
@@ -90,7 +90,28 @@ public class PortfolioController extends BaseController {
         portfolioService.insert(portfolio);
         return RedirectTo("/portfolio/mine");
     }
-
+    
+    @GetMapping("/{id}/like")
+    public void like(@PathVariable("id") Integer id, Writer writer) throws IOException {
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+    	Portfolio portfolio = portfolioService.findByPrimaryKey(id);
+    	if (portfolioLikeService.getByUidPid(userid, id)) {
+    		portfolioLikeService.deleteByUidPid(userid, id);
+	    	portfolio.setLikes(portfolio.getLikes()-1);
+    	} else {
+	    	PortfolioLike portfolioLike = new PortfolioLike();
+	    	portfolioLike.setPortfolioId(id);
+	    	portfolioLike.setUserId(userid);
+	    	portfolioLikeService.insert(portfolioLike);
+	   
+	    	portfolio.setLikes(portfolio.getLikes()+1);
+    	}
+    	portfolioService.updateByPrimaryKey(portfolio);
+    	StringBuffer stringBuffer = new StringBuffer();
+    	stringBuffer.append(portfolio.getLikes());
+    	writer.write(stringBuffer.toString());
+    }
+    
     @PostMapping("/{id}/comment")
     public String comment(@PathVariable("id") Integer id, PortfolioCmt portfolioCmt) {
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");

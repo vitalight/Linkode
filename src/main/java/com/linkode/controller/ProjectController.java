@@ -11,9 +11,13 @@ import com.linkode.exception.CustomException;
 import com.linkode.pojo.Project;
 import com.linkode.pojo.ProjectApp;
 import com.linkode.pojo.ProjectCommit;
+import com.linkode.pojo.ProjectRating;
+import com.linkode.pojo.User;
+import com.linkode.service.ChatLogService;
 import com.linkode.service.ProjectAppService;
 import com.linkode.service.ProjectCommitService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.ProjectRatingService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 
@@ -45,7 +49,10 @@ public class ProjectController extends BaseController {
     private ProjectCommitService projectCommitService;
     @Autowired
     private UserService userService;
-    
+    @Autowired
+    private ProjectRatingService projectRatingService;
+    @Autowired
+    private ChatLogService chatLogService;
     /**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
      * 若不setTimeZone，则存入数据库中的日期会缺一天。
@@ -84,6 +91,8 @@ public class ProjectController extends BaseController {
 	        model.addAttribute("apps",projectAppService.getPAVMByProjectId(id));
 	        model.addAttribute("hasApplied", hasApplied);
         	return View("/project/detail-post", model, project);
+        } else if (project.getStatus().equals("confirm")) {
+        	model.addAttribute("rating", projectRatingService.getByProjectId(id));
         }
         model.addAttribute("commits", projectCommitService.getByProjectId(id));
         model.addAttribute("user", userService.getById(project.getContractorId()));
@@ -139,7 +148,6 @@ public class ProjectController extends BaseController {
         project.setRequirement(newProject.getRequirement());
         project.setType(newProject.getType());
         project.setTitle(newProject.getTitle());
-        project.setStartDate(new java.util.Date());
         projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myProject");
     }
@@ -151,6 +159,10 @@ public class ProjectController extends BaseController {
     	projectApp.setProjectId(id);
     	projectApp.setTime(new Date());
     	projectAppService.insert(projectApp);
+    	
+    	Project project = projectService.getById(id);
+    	chatLogService.systemMessage(project.getPosterId(), 
+    			"项目<a href='../../project/" + id + "'>[" + project.getTitle()+"]</a>有新的申请。");
     	return RedirectTo("/project/"+id);
     }
     
@@ -165,6 +177,8 @@ public class ProjectController extends BaseController {
     	project.setContractorId(projectApp.getApplicantId());
     	project.setStartDate(new Date());
     	projectService.update(project);
+    	chatLogService.systemMessage(projectApp.getApplicantId(), 
+    			"您成功承包了项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>。");
     	return RedirectTo("/project/"+project.getId());
     }
     
@@ -173,6 +187,10 @@ public class ProjectController extends BaseController {
     	ProjectApp projectApp = projectAppService.getById(id);
     	projectApp.setResult(0);
     	projectAppService.update(projectApp);
+
+    	Project project=projectService.findByPrimaryKey(projectApp.getProjectId());
+    	chatLogService.systemMessage(projectApp.getApplicantId(), 
+    			"您对项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>的申请已被拒绝。");
     	return RedirectTo("/project/"+projectApp.getProjectId());
     }
     
@@ -189,30 +207,54 @@ public class ProjectController extends BaseController {
     	pc.setTime(new Date());
     	pc.setProjectId(id);
         projectCommitService.insert(pc);
+        
+        Project project = projectService.findByPrimaryKey(id);
+    	chatLogService.systemMessage(project.getPosterId(), 
+    			"项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>有新的提交。");
         return RedirectTo("/project/"+id);
     }
 
     @GetMapping("/commit/{id}/accept")
-    public String commitAcceptAction(Model model, @PathVariable("id") Integer id) {
+    public String commitAcceptAction(Model model, @PathVariable("id") Integer id) throws CustomException {
     	ProjectCommit pc = projectCommitService.getById(id);
     	pc.setResult("accept");
     	projectCommitService.update(pc);
+    	
+        Project project = projectService.findByPrimaryKey(pc.getProjectId());
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被通过。");
     	return RedirectTo("/project/"+pc.getProjectId());
     }
     
     @GetMapping("/commit/{id}/reject")
-    public String commitRejectAction(Model model, @PathVariable("id") Integer id ){
+    public String commitRejectAction(Model model, @PathVariable("id") Integer id ) throws CustomException{
     	ProjectCommit pc = projectCommitService.getById(id);
     	pc.setResult("reject");
     	projectCommitService.update(pc);
+
+        Project project = projectService.findByPrimaryKey(pc.getProjectId());
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被拒绝。");
     	return RedirectTo("/project/"+pc.getProjectId());
     }
     
-    @GetMapping("/{id}/confirm")
-    public String comfirmAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException {
+    @PostMapping("/{id}/confirm")
+    public String comfirmAction(Model model, @PathVariable("id") Integer id, ProjectRating projectRating) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
         project.setStatus("confirm");
         projectService.updateByPrimaryKey(project);
+
+        projectRating.setProjectId(id);
+        projectRating.setPosterId(project.getPosterId());
+        projectRating.setContractorId(project.getContractorId());
+        projectRatingService.insert(projectRating);
+        
+        User user = userService.findById(project.getContractorId());
+        user.setRatingNumber(user.getRatingNumber()+1);
+        user.setRatingTotal(user.getRatingTotal()+projectRating.getRating());
+        userService.update(user);
+    	chatLogService.systemMessage(project.getContractorId(), 
+    			"您承包的项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>已经完结。");
         return RedirectTo("/project/"+id);
     }
 

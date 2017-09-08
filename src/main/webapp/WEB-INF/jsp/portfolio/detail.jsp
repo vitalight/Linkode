@@ -2,7 +2,6 @@
 <% request.setAttribute("title","作品浏览"); %>
 <% request.setAttribute("headType","portfolio"); %>
 <%@ include file="../modules/web-header.jsp"%>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
 </head>
 <body>
 <%@ include file="../modules/header.jsp"%>
@@ -11,7 +10,10 @@
 		<div class="sheet-content">
 			<div class="row">
 				<h1>${model.title}
-				
+				<span class="likes">
+					<a id="js-like" class="${like}" href="javascript:;"><i class="fa fa-heart" aria-hidden="true"></i></a>
+					<span id="number">${model.likes}</span>人觉得很赞
+				</span>
 				<c:if test="${LOGIN_USER_ID == model.userId || LOGIN_USER_ROLE == 'admin'}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除作品</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑作品</a>
@@ -50,7 +52,12 @@
 				<div class="cmt-line row">
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
 					<div class="col-sm-11">
-						<div class="cmt-name">${cmt.username}<span class="cmt-time">${time}</span></div>
+						<div class="cmt-name">
+							<a href="${pageContext.request.contextPath}/user/${cmt.userId}">
+								${cmt.username}
+							</a>
+							<span class="cmt-time">${time}</span>
+						</div>
 						<div class="cmt-content">${cmt.content }</div>
 					</div>
 				</div>
@@ -61,17 +68,15 @@
 	
 
 <%@ include  file="../modules/javascript.jsp"%>
-<script src="${pageContext.request.contextPath}/static/js/jquery.md5.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	if (${type == null}) {
-		$("#all").addClass("type-chose");
-	}
-	else {
-		$("#${type}").addClass("type-chose");
-	}
+	$("#js-like").click(function() {
+		var targetUrl = "${pageContext.request.contextPath}/portfolio/${model.id}/like";
+		$.get(targetUrl,function(data,status){
+			$("#js-like").toggleClass("hasLiked");
+			$("#number").text(data);
+		});
+	});
 }); 
 </script>
 <%@ include  file="../modules/web-footer.jsp"%>

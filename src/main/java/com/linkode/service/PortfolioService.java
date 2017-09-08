@@ -18,7 +18,9 @@ public interface PortfolioService {
     DataPage<PortfolioViewModel> selectPVMPage(Integer pageNum, Integer pageSize, Integer indexCount,String type);
     Portfolio findByPrimaryKey(Integer id);
     
+    List<PortfolioViewModel> transform(List<Portfolio> portfolios);
     List<PortfolioViewModel> getAllPVM(String type);
     List<PortfolioViewModel> getByUserId(Integer userid);
 	PortfolioViewModel getPVMByPrimaryKey(Integer id);
+	List<PortfolioViewModel> search(String string);
 }

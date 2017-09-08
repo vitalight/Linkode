@@ -40,6 +40,17 @@ $(document).ready(function() {
 			$("#"+type).addClass("cute-btn-chose");
 		});	
 	});
+	
+	$("#js-like").click(function() {
+		var targetUrl = "${pageContext.request.contextPath}/user/${id}/like";
+		$.get(targetUrl,function(data,status){
+			if($("#js-like").text()=="关注") {
+				$("#js-like").text("取消关注");
+			} else {
+				$("#js-like").text("关注");
+			}
+		});
+	});
 });
 </script>
 <%@ include file="../modules/web-footer.jsp"%>

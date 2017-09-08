@@ -29,7 +29,7 @@
 
 			<form id="login-form" action="${pageContext.request.contextPath}/login" method="post">
 				<input placeholder="邮箱" class="login-input account"
-					id="email" name="email" /><br />
+					id="email" name="email" autofocus/><br />
 				<input placeholder="密码" type="password"
 					class="login-input password" id="password" name="password" /><br /><br/>
 				<input type="submit" class="blue-green-bottom" value="登录" />

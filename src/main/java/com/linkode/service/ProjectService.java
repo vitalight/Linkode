@@ -34,4 +34,5 @@ public interface ProjectService {
 	List<ProjectViewModel> getPVMByPosterId(int id);
 	List<ProjectViewModel> getPVMByContractorId(int id);
 	List<ProjectViewModel> getPVMByApplicantId(int id);
+	List<ProjectViewModel> search(String string);
 }

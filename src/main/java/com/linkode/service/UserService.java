@@ -19,4 +19,6 @@ public interface UserService {
 	
 	User getById(int id);
 	List<User> getAll();
+	List<User> search(String string);
+	List<User> getByLikerId(int id);
 }

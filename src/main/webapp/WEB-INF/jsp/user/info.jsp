@@ -17,28 +17,85 @@
 			<tr>
 				<th>评分</th>
 				<td>
-					<fmt:formatNumber value="${user.ratingTotal/user.ratingNumber}" pattern="0.0">
-					</fmt:formatNumber>
+					<%-- 评分显示数据准备, 当分母为0时的做特殊处理 --%>
+					<c:set var="ratingNumber" value="${user.ratingNumber}" />
+					<c:if test="${ratingNumber==0}">
+						<c:set var="ratingNumber" value="1" />
+					</c:if>
+					<%-- ratingInt是rating的下取整，用于计算显示评分星星的长度 --%>
+					<fmt:formatNumber value="${(user.ratingTotal/ratingNumber-0.5)}" pattern="0" var="ratingInt" />
+					<fmt:formatNumber value="${user.ratingTotal/ratingNumber}" pattern="0.0" var="rating" />
+					<fmt:formatNumber value="${rating*0.92+0.29*ratingInt}" pattern="0.00" var="width" />
+					<fmt:formatNumber value="${6-width }" pattern="0.00" var="margin" />
+					
+					<span class="rate-star">
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+					</span>
+					<span style="width:${width}em; margin-right:${margin}em" class="rate-star-out">
+						<span class="rate-star-in">
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						<i class="fa fa-star" aria-hidden="true"></i>
+						</span>
+					</span>
+					
+					<c:if test="${user.ratingTotal!=0 }">
+						<span class="rating-number">(${rating}分)</span>
+					</c:if>
+					<c:if test="${user.ratingTotal==0}">
+						<span class="rating-number">(暂无评分)</span>
+					</c:if>
 				</td>
 			</tr>
 			<tr>
 				<th>性别</th>
-				<td>${user.sex}</td>
+				<td>
+				<c:if test="${user.sex!=null && user.sex!=''}">
+				<fmt:setBundle basename="messages" var="lang"/>
+				<fmt:message bundle="${lang}" key="${user.sex}"/>
+				</c:if>
+				
+				<c:if test="${user.sex==null || user.sex==''}">
+				保密
+				</c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>生日</th>
 				<td>
-					<fmt:formatDate type="Date" value="${user.birthday}"></fmt:formatDate>
+				<c:if test="${user.birthday!=null}">
+				<fmt:formatDate pattern="YYYY年M月d日 " value="${user.birthday}"></fmt:formatDate>
+				</c:if>
+				
+				<c:if test="${user.birthday==null}">
+				保密
+				</c:if>
 				</td>
 			</tr>
 			<tr>
 				<th>介绍</th>
-				<td>${user.intro}</td>
+				<td class="higher">
+				<c:if test="${user.intro!=null && user.intro!=''}">
+				${user.intro}
+				</c:if>
+				
+				<c:if test="${user.intro==null || user.intro==''}">
+				暂无
+				</c:if>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 	<br/>
 	<c:if test="${LOGIN_USER_ID == id}">
-	<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
+	<div class="middle">
+		<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
+	</div>
 	</c:if>
 </div>

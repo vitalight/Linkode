@@ -1,5 +1,7 @@
 package com.linkode.controller;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,7 +36,9 @@ import com.linkode.pojo.ViewModel.ChatViewModel;
 import com.linkode.pojo.ViewModel.PortfolioViewModel;
 import com.linkode.service.ChatLogService;
 import com.linkode.service.PortfolioService;
+import com.linkode.service.ProjectRatingService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.RelationService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
 
@@ -50,6 +54,10 @@ public class UserController extends BaseController {
 	private ChatLogService chatLogService;
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private ProjectRatingService projectRatingService;
+	@Autowired
+	private RelationService relationService;
 	
 	/**
      * 此类用于将Jsp上的java.sql.Date转为java.util.Date并解决时区问题。
@@ -67,11 +75,18 @@ public class UserController extends BaseController {
 	// 默认进入个人信息
 	@GetMapping("/{id}")
 	public String checkUser(Model model, @PathVariable("id") Integer id, String type) {
-		model.addAttribute("user", userService.findById(id));
+
+		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
+		User user = userService.findById(id);
+		if (user==null) {
+			return View("404");
+		}
+		model.addAttribute("user", user);
 		model.addAttribute("type",type);
+		model.addAttribute("hasLiked", relationService.hasLiked(userid, id));
 		if (type!=null) {
 			model.addAttribute("type",type);
-			return View("/user/main", model, chatLogService.getByReceiverId(id));
+			return View("/user/main", model, chatLogService.getByUserId(id));
 		}
 		model.addAttribute("type","info");
 		return View("/user/main");
@@ -88,7 +103,11 @@ public class UserController extends BaseController {
 			model.addAttribute("portfolios", portfolios);
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
-			return View("/user/chatlog", model, chatLogService.getByReceiverId(id));
+			return View("/user/chatlog", model, chatLogService.getByUserId(id));
+		} else if (field.equals("rating")) {
+			return View("/user/rating", model, projectRatingService.getByContractorId(id));
+		} else if (field.equals("likes")) {
+			return View("/user/likes", model, userService.getByLikerId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
 		}
@@ -119,19 +138,18 @@ public class UserController extends BaseController {
 		return RedirectTo("/user/{id}");
 	}
 	
-	/*======== 删除私信 ========*/
-	@GetMapping("/{id1}/chatlog/delete/{id2}")
-	public String deleteAllChat(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
-		List<ChatLog> chats = chatLogService.findBetween(id1, id2);
-		for (int i = 0; i < chats.size(); i++) {
-			ChatLog chat = chats.get(i);
-			if (chat.getReceiverId() == id1) {
-				chat.setReceiverId(-id1);
-			} else {
-				chat.setSenderId(-id1);
-			}
-			chatLogService.update(chat);
+	/*======= 用户关注 =========*/
+	@GetMapping("/{id}/like")
+	public void likeUser(Model model, @PathVariable("id") Integer id, Writer writer) throws IOException {
+		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
+		if (userid == id){
+			return;
 		}
-		return RedirectTo("/user/{id1}/chatlog");
+		if (relationService.hasLiked(userid, id)) {
+			relationService.dislike(userid, id);
+		} else {
+			relationService.like(userid, id);
+		}
+    	writer.write("success");
 	}
 }

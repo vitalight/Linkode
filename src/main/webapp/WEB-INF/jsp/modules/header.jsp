@@ -4,7 +4,7 @@
 <%@ taglib prefix="ckeditor" uri="http://ckeditor.com" %>
 <nav class="white-nav navbar-fixed-top" id="nav">
 	<ul>
-		<li><a class="logo-btn" ><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
+		<li><a class="logo-btn" href="${pageContext.request.contextPath}/home"><img class="nav-logo" src="${pageContext.request.contextPath}/static/img/LK.png"/></a></li>
 		<li><a class="nav-btn" id="head-main" href="${pageContext.request.contextPath}/home">主页</a></li>
 		
 		<c:if test="${LOGIN_USER_ROLE == 'admin'}">
@@ -16,6 +16,10 @@
 		<li><a class="nav-btn" id="head-tutorial" href="${pageContext.request.contextPath}/tutorial">教程</a></li>
 		<li><a class="nav-btn" id="head-post" href="${pageContext.request.contextPath}/post">讨论</a></li>
 		<li><a class="nav-btn" id="head-project" href="${pageContext.request.contextPath}/project">项目</a></li>
+		<li><form action="${pageContext.request.contextPath}/search" method="get">
+			<input class="form-control search" name="keyword" placeholder="search..." value="${keyword} required	"/>
+			</form>
+		</li>
 		</c:if>
 		
 		<shiro:notAuthenticated>

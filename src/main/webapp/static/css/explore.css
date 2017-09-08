@@ -54,10 +54,12 @@ div.empty-bar {
 	height:36em;
 	background-color:transparent;
 	border:none;
+	display:block;
 }
 .empty-bar img {
 	width:17.6em;
-	margin:5em calc(50% - 8.8em) 1em;
+	display:block;
+	margin:5em auto 1em;
 }
 .empty-text{
 	text-align:center;
@@ -92,7 +94,27 @@ a.card-over:hover {
 	display:inline;
 }
 /*============== 我的项目条==========*/
-
+.test-length {
+	border-bottom:blue 1px solid;
+}
+span.rate-star, span.rate-star-out {
+	color:var(--Lyellow);
+}
+.rate-star-in {
+	width:6em;
+	display:inline-block;
+}
+.rate-star-out {
+	display:inline-block;
+	overflow:hidden;
+	position:relative;
+	right:6em;
+	top:0.4em;
+}
+.rating-number {
+	position:relative;
+	right:6em;
+}
 .display-bar {
 	margin:0 auto 1.5em;
 	width:60em;
@@ -191,6 +213,9 @@ h3 {
     margin-left:1em;
     background-color:white;
 }
+.hollow-btn:focus {
+	color: var(--Lblue);
+}
 .hollow-btn.cute-btn-chose {
 	
 	color:var(--Lblue);
@@ -202,6 +227,10 @@ h3 {
 	height:auto;
 }
 /*=============== 项目承包请求 ===============*/
+#rating-error {
+	color:var(--Lred);
+	margin-left:1em;
+}
 .some-margin {
 	margin-left:1em;
 }
@@ -229,9 +258,15 @@ h3 {
 .yellow-bg:hover {
 	background-color:var(--Ldyellow);
 }
+.cmt-line {
+	position:relative;
+}
 .cmt-line .hollow-btn {
 	margin-top:0.5em;
 	width:7.5em;
+}
+.cmt-line a {
+	display:initial;
 }
 .hollow-btn:hover {
 	background-color:rgba(0,0,0,0.03);
@@ -333,7 +368,7 @@ h3.input-title {
 	margin:1em;
 	margin-left:-15px;
 }
-.blue-btn {
+.blue-btn, .grey-btn {
 	padding-left:1em;
 	padding-right:1em;
 	background-color:var(--Lblue);
@@ -342,9 +377,15 @@ h3.input-title {
 	color:white;
 	text-align:center;
 }
-.blue-btn:hover {
+.grey-btn {
+	background-color:var(--Ldgrey);
+}
+.blue-btn:hover{
 	color:white;
 	background-color:var(--Ldblue);
+}
+.grey-btn:hover {
+	color:white;
 }
 .float-right {
 	float:right;
@@ -404,6 +445,20 @@ div.margin-top {
 	color:var(--Lgreen);
 	font-size:3em;
 	margin:1.5em 0 0.6em;
+}
+h1 .likes {
+	font-size:0.4em;
+	vertical-align:middle;
+	width:auto;	
+}
+.likes a {
+	color:var(--Ldgrey);
+}
+a.hasLiked {
+	color:var(--Lred);
+}
+.likes a:hover {
+	color:var(--Lred);
 }
 
 .content-info {
@@ -561,6 +616,8 @@ img.avatar.col-sm-1 {
 .floor-cmt .cmt-line {
 	border:none;
 	padding-left:0;
+	padding-top:1em;
+	padding-bottom:0.5em;
 }
 .a-text {
 	margin:0 1em;
@@ -592,11 +649,12 @@ img.avatar.col-sm-1 {
 	height:25em;
 	width:100%;
 	margin:0 auto;
+		
+	position: relative;
+    background: url("../img/homebg.jpg") center top no-repeat;
+    background-size: cover;
 }
 .home-bg {
-	width:110em;    
-	position: relative;
-    left: calc(50% - 54.5em);
 }
 .display-container {
 	width:75em;
@@ -607,7 +665,12 @@ img.avatar.col-sm-1 {
 	font-weight:700;
 	margin:1em 0;
 }
-
+.display-type a {
+	color:black;
+}
+.display-type a:hover {
+	color:var(--Ldblue);
+}
 .display-item {
 	background-color:white;
 	border:var(--Lgrey) 1px solid;
@@ -653,9 +716,17 @@ img.avatar.col-sm-1 {
 	color:var(--Lblue);
 }
 .item-intro {
-	padding:1em;
+	margin-top:1em;
+	padding:0 1em;
 	font-size:0.9em;
 	color:var(--Ldgrey);
+}
+.item-limit {
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	display:-webkit-box; 
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:3; 
 }
 .display-ad {
 	position:relative;
@@ -675,6 +746,19 @@ img.avatar.col-sm-1 {
 	color:var(--Ldgrey);
 }
 /*========= 用户信息 ============*/
+
+.red-number {
+	background-color: var(--Lred);
+    color: white;
+    font-weight: 700;
+    font-size: 0.8em;
+    border-radius: 1em;
+    padding: 0.1em 0.6em;
+    display: inline-block;
+    position:absolute;
+    left:4em;
+    border:white 2px solid;
+}
 .js-trigger {
 	cursor:pointer;
 }
@@ -742,7 +826,19 @@ img.avatar.col-sm-1 {
 	text-align:right;
 	font-weight:normal;
 	color:#bbbbbb;
-	line-height: 3;
+	line-height: 4;
+	vertical-align:top;
+	width:10em;
+}
+.info-table {
+	width:80%;
+}
+td.higher {
+	padding-top:1em;
+}
+textarea.higher {
+	height:6em;
+	margin-top:1em;
 }
 .display-info {
 	width:60em;
@@ -755,10 +851,12 @@ img.avatar.col-sm-1 {
 	font-size: 1.1em;
     float: none;
     width: 8em;
-    display:block;
     margin:0 auto;
     padding:0.5em;
     
+}
+.middle {
+	text-align:center;
 }
 .chatlog.display-sheet {
 	margin-top:2em;
@@ -816,6 +914,7 @@ img.avatar.col-sm-1 {
 	display:block;
 	border-radius:0.5em;
 	padding:0.5em 1em;
+	word-wrap: break-word;
 }
 .time {
 	color:rgb(143,143,148);
@@ -850,4 +949,7 @@ img.avatar.col-sm-1 {
 }
 .chatlog .cmt-content {
 	color:grey;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }

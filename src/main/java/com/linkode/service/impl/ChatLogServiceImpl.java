@@ -8,11 +8,14 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.linkode.dao.ChatLogMapper;
+import com.linkode.dao.RelationMapper;
 import com.linkode.dao.UserMapper;
 import com.linkode.pojo.ChatLog;
 import com.linkode.pojo.ChatLogExample;
+import com.linkode.pojo.Relation;
 import com.linkode.pojo.ViewModel.ChatViewModel;
 import com.linkode.service.ChatLogService;
+import com.linkode.service.RelationService;
 import com.linkode.service.UserService;
 
 public class ChatLogServiceImpl implements ChatLogService {
@@ -21,6 +24,8 @@ public class ChatLogServiceImpl implements ChatLogService {
 	private ChatLogMapper chatLogMapper;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private RelationService relationService;
 	
 	@Override
 	public ChatLog findByPrimaryKey(Integer id) {
@@ -79,18 +84,40 @@ public class ChatLogServiceImpl implements ChatLogService {
 	}
 	
 	@Override
+	public List<ChatViewModel> transform(List<ChatLog> chatLogs, int id) {
+		List<ChatViewModel> chats = new ArrayList<ChatViewModel>();
+		for (int i = 0; i < chatLogs.size(); i++) {
+			ChatLog chatLog = chatLogs.get(i);
+			ChatViewModel chat = new ChatViewModel(chatLog);
+			String senderName = userMapper.selectByPrimaryKey(chatLog.getSenderId()).getUsername();
+			String receiverName = userMapper.selectByPrimaryKey(chatLog.getReceiverId()).getUsername();
+			
+			Relation relation;
+			if (chat.getSenderId()==id) {
+				relation = relationService.getBy2UserId(chat.getReceiverId(), id);
+			} else {
+				relation = relationService.getBy2UserId(chat.getSenderId(), id);
+			}
+			if (relation != null) {
+				chat.setMessages(relation.getMessages());
+			} else {
+				chat.setMessages(0);
+			}
+			chat.setSenderName(senderName);
+			chat.setReceiverName(receiverName);
+			chats.add(chat);
+		}
+		return chats;
+	}
+	
 	public List<ChatViewModel> transform(List<ChatLog> chatLogs) {
 		List<ChatViewModel> chats = new ArrayList<ChatViewModel>();
 		for (int i = 0; i < chatLogs.size(); i++) {
-			ChatViewModel chat = new ChatViewModel();
 			ChatLog chatLog = chatLogs.get(i);
-			chat.setContent(chatLog.getContent());
-			chat.setSenderId(Math.abs(chatLog.getSenderId()));
-			chat.setReceiverId(Math.abs(chatLog.getReceiverId()));
-			chat.setTime(chatLog.getTime());
-			chat.setId(chatLog.getId());
+			ChatViewModel chat = new ChatViewModel(chatLog);
 			String senderName = userMapper.selectByPrimaryKey(Math.abs(chatLog.getSenderId())).getUsername();
 			String receiverName = userMapper.selectByPrimaryKey(Math.abs(chatLog.getReceiverId())).getUsername();
+			
 			chat.setSenderName(senderName);
 			chat.setReceiverName(receiverName);
 			chats.add(chat);
@@ -104,7 +131,7 @@ public class ChatLogServiceImpl implements ChatLogService {
 	}
 
 	@Override
-	public List<ChatViewModel> getByReceiverId(int id) {
+	public List<ChatViewModel> getByUserId(int id) {
 		ChatLogExample chatLogExample = new ChatLogExample();
 		ChatLogExample.Criteria criteria = chatLogExample.createCriteria();
 		ChatLogExample.Criteria orCriteria = chatLogExample.createCriteria();
@@ -119,6 +146,7 @@ public class ChatLogServiceImpl implements ChatLogService {
 			ChatLog chatLog = chatLogs.get(i);
 			if (!senderIds.contains(chatLog.getSenderId()) 
 					&& !senderIds.contains(chatLog.getReceiverId())) {
+				chatLog.setContent(chatLog.getContent().replaceAll("</?[^>]+>", ""));
 				firstChatLogs.add(chatLog);
 				if (chatLog.getSenderId()!=id) {
 					senderIds.add(chatLog.getSenderId());
@@ -129,6 +157,17 @@ public class ChatLogServiceImpl implements ChatLogService {
 			}
 		}
 		
-		return transform(firstChatLogs);
+		return transform(firstChatLogs, id);
+	}
+
+	@Override
+	public void systemMessage(int id, String message) {
+		ChatLog chatlog = new ChatLog();
+		chatlog.setSenderId(0);
+		chatlog.setReceiverId(id);
+		chatlog.setContent(message);
+		chatlog.setTime(new java.util.Date());
+		chatLogMapper.insert(chatlog);
+		
 	}
 }
