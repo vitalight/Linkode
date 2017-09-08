@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-08-04 17:05:05
+-- Generation Time: 2017-09-08 07:13:04
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -77,7 +77,35 @@ INSERT INTO `chat_log` (`id`, `senderId`, `receiverId`, `time`, `content`) VALUE
 (16, 3, 1, '2017-08-03 09:22:44', '发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意'),
 (17, 1, 3, '2017-08-03 09:29:12', '发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意发还很大意'),
 (18, 3, 1, '2017-08-03 09:37:15', '现在几点啦'),
-(19, 1, 4, '2017-08-04 21:31:23', '你是谁啊');
+(19, 1, 4, '2017-08-04 21:31:23', '你是谁啊'),
+(20, 1, 3, '2017-08-07 08:44:31', '我也不知道'),
+(21, 1, 2, '2017-08-25 19:41:30', '你怎么还没有提交项目啊'),
+(22, 2, 1, '2017-08-25 19:41:49', '等一下'),
+(23, 1, 2, '2017-08-25 19:42:05', 'ok'),
+(24, 2, 1, '2017-08-25 19:42:16', '恩'),
+(28, 3, 0, '2017-08-31 09:32:42', '作品id:&nbsp;12<br/>举报理由:&nbsp;太黄嘟嘟了'),
+(29, 3, 0, '2017-08-31 09:40:12', '作品id:&nbsp;12<br/>举报理由:&nbsp;555'),
+(30, 0, 3, '2017-09-07 00:00:00', '您的项目<a href=''../../project/53''>[请管理员来看一下]</a>有新的申请'),
+(31, 0, 1, '2017-09-06 10:04:38', '您对项目<a href=''../../project/53''>[请管理员来看一下]</a>的申请已被拒绝。'),
+(32, 0, 3, '2017-09-06 10:05:17', '您的项目<a href=''../../project/53''>[请管理员来看一下]</a>有新的申请。'),
+(33, 0, 3, '2017-09-06 10:05:24', '您的项目<a href=''../../project/53''>[请管理员来看一下]</a>有新的申请。'),
+(34, 0, 1, '2017-09-06 10:05:49', '您成功承包了项目<a href=''../../project/53''>[请管理员来看一下]</a>。'),
+(35, 1, 2, '2017-09-06 10:08:22', '123'),
+(36, 0, 3, '2017-09-06 10:13:51', '项目<a href=''../../project/53''>[请管理员来看一下]</a>有新的提交。'),
+(37, 0, 3, '2017-09-06 10:13:56', '您在项目<a href=''../../project/53''>[请管理员来看一下]</a>中的提交已被拒绝。'),
+(38, 0, 3, '2017-09-06 10:14:02', '项目<a href=''../../project/53''>[请管理员来看一下]</a>有新的提交。'),
+(39, 0, 3, '2017-09-06 10:14:05', '您在项目<a href=''../../project/53''>[请管理员来看一下]</a>中的提交已被通过。'),
+(40, 0, 3, '2017-09-06 10:14:13', '您承包的项目<a href=''../../project/53''>[请管理员来看一下]</a>已经完结。'),
+(41, 1, 2, '2017-09-06 21:55:00', '232332'),
+(42, 1, 2, '2017-09-07 14:52:47', '1'),
+(43, 1, 2, '2017-09-07 14:52:48', '2'),
+(44, 1, 2, '2017-09-07 14:52:49', '3'),
+(45, 2, 1, '2017-09-07 14:53:21', '4'),
+(46, 2, 1, '2017-09-07 14:53:40', '5'),
+(47, 2, 3, '2017-09-07 15:06:38', '123'),
+(48, 2, 1, '2017-09-07 15:10:56', '2'),
+(49, 1, 2, '2017-09-08 11:44:40', 'wefaoijwioefajioweafjoiejwafoijewaoifjoiwajefjiowajefwaef'),
+(50, 1, 2, '2017-09-08 11:44:54', '问卷诶啊我空间覅哦啊危机佛我价位哦我金佛我我安静哦我积分哇哦我及违法未发生的拉菲记录开始');
 
 -- --------------------------------------------------------
 
@@ -105,24 +133,26 @@ CREATE TABLE `portfolio` (
   `type` varchar(50) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   `likes` int(11) DEFAULT NULL,
-  `comments` int(11) DEFAULT NULL
+  `comments` int(11) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `portfolio`
 --
 
-INSERT INTO `portfolio` (`id`, `userId`, `title`, `content`, `type`, `time`, `likes`, `comments`) VALUES
-(1, 2, '梵高自画像', '帅的不得了', 'image', '2017-07-31 00:00:00', 1000, 6),
-(2, 3, '金正恩的童年回忆', '金正恩（朝鲜语：김정은英文：Kim Jong-un），1984年1月8日出生于朝鲜平壤，', 'literature', '2017-07-20 00:00:00', 10, 4),
-(5, 1, '极简派', '少即是多。', 'video', NULL, 0, 3),
-(6, 3, '满江红', '满江红岳飞怒发冲冠，凭阑处、潇潇雨歇。抬望眼、仰天长啸，壮怀激烈。三十功名尘与土，', 'literature', NULL, 0, 1),
-(7, 3, '蒙娜丽莎', '前声称找到了疑似修女丽莎・盖拉尔迪尼的遗骨。对《蒙娜丽莎》原型的身份\r\n						', 'image', NULL, 0, 1),
-(8, 3, '上交继续教育学院宣传片', '快点来学，1000块就可以得上海交大文凭。', 'video', NULL, 0, 1),
-(9, 1, '瓦尔登湖', '我自己临摹的瓦尔登湖。', 'image', NULL, 0, 1),
-(10, 3, '登录界面', '#001 for the DailyUI challenge ? Click attachment to see larger version.', 'image', '2017-07-18 00:00:00', 6666, 0),
-(12, 5, '猫', '动物是人类的朋友，猫咪也是。', 'image', '2017-07-13 00:00:00', 0, 14),
-(13, 6, '小学生检讨', '我不该横穿马路的，妈妈我错了。', 'image', '2017-07-29 00:00:00', 123, 1);
+INSERT INTO `portfolio` (`id`, `userId`, `title`, `content`, `type`, `time`, `likes`, `comments`, `url`, `status`) VALUES
+(1, 2, '梵高自画像', '帅的不得了', 'image', '2017-07-31 00:00:00', 0, 6, NULL, NULL),
+(2, 3, '金正恩的童年回忆', '金正恩（朝鲜语：김정은英文：Kim Jong-un），1984年1月8日出生于朝鲜平壤，', 'literature', '2017-07-20 00:00:00', 0, 3, NULL, NULL),
+(5, 1, '极简派', '少即是多。', 'video', '2017-08-05 00:00:00', 1, 3, NULL, NULL),
+(6, 3, '满江红', '满江红岳飞怒发冲冠，凭阑处、潇潇雨歇。抬望眼、仰天长啸，壮怀激烈。三十功名尘与土，', 'literature', '2017-08-06 00:00:00', 1, 1, NULL, NULL),
+(7, 3, '蒙娜丽莎', '前声称找到了疑似修女丽莎・盖拉尔迪尼的遗骨。对《蒙娜丽莎》原型的身份\r\n						', 'image', '2017-08-10 00:00:00', 0, 1, NULL, NULL),
+(8, 3, '上交继续教育学院宣传片', '快点来学，1000块就可以得上海交大文凭。', 'video', '2017-08-11 00:00:00', 0, 1, NULL, NULL),
+(9, 1, '瓦尔登湖', '我自己临摹的瓦尔登湖。', 'image', '2017-08-12 00:00:00', 0, 1, NULL, NULL),
+(10, 3, '登录界面', '#001 for the DailyUI challenge ? Click attachment to see larger version.', 'image', '2017-08-13 00:00:00', 1, 0, NULL, NULL),
+(12, 5, '猫', '动物是人类的朋友，猫咪也是。', 'image', '2017-08-14 00:00:00', 1, 1, NULL, NULL),
+(13, 6, '小学生检讨', '我不该横穿马路的，妈妈我错了。', 'image', '2017-08-15 00:00:00', 2, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,6 +204,18 @@ CREATE TABLE `portfolio_like` (
   `portfolioId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `portfolio_like`
+--
+
+INSERT INTO `portfolio_like` (`id`, `userId`, `portfolioId`) VALUES
+(11, 1, 13),
+(13, 1, 6),
+(14, 1, 10),
+(16, 1, 12),
+(17, 1, 5),
+(18, 5, 13);
+
 -- --------------------------------------------------------
 
 --
@@ -195,7 +237,8 @@ CREATE TABLE `post` (
 
 INSERT INTO `post` (`id`, `type`, `title`, `content`, `time`, `userId`) VALUES
 (1, 'img2', '怎么打开电脑？', '我不知道怎么打开电脑.', '2017-07-26 00:00:00', 4),
-(3, 'music', 'hello', 'this is test', '2017-07-31 00:00:00', 5);
+(3, 'music', 'hello', 'this is test', '2017-07-31 00:00:00', 5),
+(4, NULL, '13', '132123132', '2017-08-07 09:02:24', 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +262,10 @@ CREATE TABLE `post_cmt` (
 INSERT INTO `post_cmt` (`id`, `postid`, `content`, `time`, `userId`, `postCmtId`) VALUES
 (11, 3, '123', '2017-07-21 16:22:48', 3, NULL),
 (15, 1, '试一试就好了', '2017-07-21 16:57:09', 3, NULL),
-(16, 1, '回复一下自己', '2017-07-21 16:57:17', 3, 15);
+(16, 1, '回复一下自己', '2017-07-21 16:57:17', 3, 15),
+(17, 1, '其实很简单的', '2017-08-11 10:19:31', 2, NULL),
+(18, 1, '@vital 你是傻瓜', '2017-08-11 10:19:42', 2, 15),
+(19, 1, 'hhhhh', '2017-08-25 19:24:19', 1, 17);
 
 -- --------------------------------------------------------
 
@@ -253,10 +299,13 @@ INSERT INTO `project` (`id`, `posterId`, `contractorId`, `title`, `requirement`,
 (42, 5, 1, '国家一级保密项目', '帮我写一下小学暑假作业，包括语文数学英语，验收通过才给钱。', 'literature', '2017-07-19', '2017-07-29', 'confirm', 100, 0),
 (43, 1, NULL, '游戏海报设计', '上面一号宋体大字写“砍一刀到999级，满地掉人民币”，配上霸气暗黑背景。', 'image', '2017-07-17', '2017-07-31', 'post', 66666, 0),
 (44, 1, NULL, '123', 'aewfeawf', 'literature', '2017-07-18', '2017-07-31', 'post', 234, 0),
-(45, 2, 1, '唱一首红歌', '6月28日来唱', 'music', '2017-07-19', '2017-06-28', 'contract', 500, 0),
+(45, 2, 1, '唱一首红歌', '6月28日来唱', 'music', '2017-07-19', '2017-06-28', 'confirm', 500, 0),
 (46, 2, 3, 'some more', 'come some people', 'video', '2017-07-19', '2017-07-25', 'confirm', 66666, 0),
 (47, 2, 1, '啦啦啦啦', '啦啦啦啦啦啦啦啦啦啦啦', 'music', '2017-07-21', '2017-07-13', 'confirm', 663414, 0),
-(50, 1, NULL, '如果我是DJ你会爱我吗', '要写一首比孟女哭长城还悲伤的歌。', 'music', '2017-07-21', '2017-07-12', 'post', 2342466, 0);
+(50, 1, NULL, '如果我是DJ你会爱我吗', '要写一首比孟女哭长城还悲伤的歌。', 'music', '2017-09-08', '2017-10-27', 'post', 2342466, 0),
+(51, 1, 2, '评价测试', '手机都金佛我发', 'video', '2017-08-25', '2017-12-31', 'confirm', 6666, 0),
+(52, 1, 2, '再测', '安慰法挖二分玩', 'image', '2017-09-05', '2016-12-31', 'confirm', 1111, 0),
+(53, 3, 1, '请管理员来看一下', '你看一下这个怎么样', 'image', '2017-09-06', '2018-12-31', 'confirm', 123123, 0);
 
 -- --------------------------------------------------------
 
@@ -294,7 +343,11 @@ INSERT INTO `project_app` (`id`, `projectId`, `applicantId`, `content`, `time`, 
 (18, 42, 1, 'jason要报名', '2017-07-19 14:15:53', 0),
 (19, 42, 1, '我还要报名', '2017-07-19 14:16:32', 1),
 (21, 47, 1, '囧闻案件覅偶加我覅偶尔', '2017-07-21 09:51:51', 0),
-(22, 47, 1, 'wefhuihwauifhwafeoew', '2017-07-21 09:52:22', 1);
+(22, 47, 1, 'wefhuihwauifhwafeoew', '2017-07-21 09:52:22', 1),
+(23, 51, 2, '让我来做吧', '2017-08-25 19:11:27', 1),
+(24, 52, 2, '123', '2017-08-25 19:12:24', 1),
+(25, 53, 1, '好的', '2017-09-05 21:26:32', 0),
+(27, 53, 1, '再来一次', '2017-09-06 10:05:24', 1);
 
 -- --------------------------------------------------------
 
@@ -328,20 +381,62 @@ INSERT INTO `project_commit` (`id`, `time`, `content`, `result`, `projectId`) VA
 (11, '2017-07-19 14:17:58', '我画了一个jason头', 'accept', 42),
 (12, '2017-07-21 09:52:37', 'joifwjeiofjweaofjewafwaf', 'accept', 47),
 (13, '2017-07-21 09:52:44', 'fawefawjfioawfjawef', 'reject', 47),
-(14, '2017-07-21 09:52:50', 'awefmioawjefoijwaioefjowjafe', 'accept', 47);
+(14, '2017-07-21 09:52:50', 'awefmioawjefoijwaioefjowjafe', 'accept', 47),
+(15, '2017-09-06 10:13:51', '123第一次', 'reject', 53),
+(16, '2017-09-06 10:14:02', '234第二次', 'accept', 53);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `rating`
+-- 表的结构 `project_rating`
 --
 
-CREATE TABLE `rating` (
+CREATE TABLE `project_rating` (
   `id` int(11) NOT NULL,
-  `posterId` int(11) DEFAULT NULL,
+  `projectId` int(11) DEFAULT NULL,
   `contractorId` int(11) DEFAULT NULL,
-  `rate` int(11) DEFAULT NULL
+  `posterId` int(11) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `content` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `project_rating`
+--
+
+INSERT INTO `project_rating` (`id`, `projectId`, `contractorId`, `posterId`, `rating`, `content`) VALUES
+(3, 51, 2, 1, 3, '很棒'),
+(6, 35, 1, 2, 1, '超差劲的'),
+(14, 52, 2, 1, 2, '再测就再测吧'),
+(15, 53, 1, 3, 4, '还行吧');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `relation`
+--
+
+CREATE TABLE `relation` (
+  `id` int(11) NOT NULL,
+  `senderId` int(11) DEFAULT NULL,
+  `receiverId` int(11) DEFAULT NULL,
+  `messages` int(11) DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `relation`
+--
+
+INSERT INTO `relation` (`id`, `senderId`, `receiverId`, `messages`, `likes`) VALUES
+(1, 1, 2, 2, 1),
+(2, 2, 1, 0, 0),
+(3, 2, 3, 0, 0),
+(4, 1, 4, 0, 0),
+(5, 1, 5, 0, 1),
+(6, 1, 7, 0, 0),
+(7, 1, 3, 0, 1),
+(8, 1, 6, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -407,18 +502,20 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `ratingNumber`, `ratingTotal`, `sex`, `birthday`, `role`, `money`, `intro`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@sjtu.edu.cn', 1, 5, 'male', '2017-06-01', 'admin', 1000000, 'hello~'),
-(2, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@qq.com', 1, 5, 'female', '2017-07-04', 'admin', 666666, NULL),
-(3, 'vital', 'c32add6b67bd0c26c50f1716849bfae9', 'vital@q', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
-(4, 'abc', '900150983cd24fb0d6963f7d28e17f72', 'abc@2', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
-(5, 'abc', '900150983cd24fb0d6963f7d28e17f72', 'abc@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
+(0, '系统消息', '123', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(1, '王麻子', '21232f297a57a5a743894a0e4a801fc3', 'admin@sjtu.edu.cn', 3, 10, 'male', '2017-06-15', 'admin', 1000000, 'hello~'),
+(2, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@qq.com', 8, 20, 'male', '2017-07-04', 'admin', 666666, 'hello, i''m test'),
+(3, 'vital', 'c32add6b67bd0c26c50f1716849bfae9', 'vital@q', 2, 3, 'male', '2017-08-02', 'guest', NULL, 'I''m a programmer'),
+(4, 'abc', '900150983cd24fb0d6963f7d28e17f72', 'abc@2', 2, 9, NULL, NULL, 'guest', NULL, NULL),
+(5, 'abc', '900150983cd24fb0d6963f7d28e17f72', 'abc@1', NULL, NULL, 'secret', '2017-09-02', 'guest', NULL, '该插件捆绑了一套有用的验证方法，包括 URL 和电子邮件验证，同时提供了一个用来编写用户自定义方法的 API。该插件捆绑了一套有用的验证方法，包括 URL 和电子邮件验证，同时提供了一个用来编写用户自定义方法的 API。'),
 (6, 'aa', '4124bc0a9335c27f086f24ba207a4912', 'aa@1', 1, 2, 'male', NULL, 'guest', NULL, NULL),
 (8, 'test', 'test', 'test@132.com', 1, 5, 'male', NULL, 'admin', NULL, NULL),
 (9, 'qq', '099b3b060154898840f0ebdfb46ec78f', 'qq@qq', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
 (10, 'hello', '5d41402abc4b2a76b9719d911017c592', 'hello@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
-(11, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'guest@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
+(11, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'guest@1', 0, 0, 'secret', NULL, 'guest', NULL, NULL),
 (12, 'new', '22af645d1859cb5ca6da0c484f1f37ea', 'new@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
-(13, 'a', '0cc175b9c0f1b6a831c399e269772661', 'a@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL);
+(13, 'a', '0cc175b9c0f1b6a831c399e269772661', 'a@1', NULL, NULL, NULL, NULL, 'guest', NULL, NULL),
+(15, '123', '202cb962ac59075b964b07152d234b70', '123@1', 0, 0, NULL, NULL, 'guest', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -506,11 +603,20 @@ ALTER TABLE `project_commit`
   ADD KEY `projectId` (`projectId`);
 
 --
--- Indexes for table `rating`
+-- Indexes for table `project_rating`
 --
-ALTER TABLE `rating`
+ALTER TABLE `project_rating`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `contractorId` (`contractorId`);
+  ADD KEY `contractorId` (`contractorId`),
+  ADD KEY `projectId` (`projectId`);
+
+--
+-- Indexes for table `relation`
+--
+ALTER TABLE `relation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `senderId` (`senderId`),
+  ADD KEY `receiverId` (`receiverId`);
 
 --
 -- Indexes for table `report`
@@ -544,7 +650,7 @@ ALTER TABLE `ad`
 -- 使用表AUTO_INCREMENT `chat_log`
 --
 ALTER TABLE `chat_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- 使用表AUTO_INCREMENT `follow`
 --
@@ -564,37 +670,42 @@ ALTER TABLE `portfolio_cmt`
 -- 使用表AUTO_INCREMENT `portfolio_like`
 --
 ALTER TABLE `portfolio_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- 使用表AUTO_INCREMENT `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- 使用表AUTO_INCREMENT `post_cmt`
 --
 ALTER TABLE `post_cmt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- 使用表AUTO_INCREMENT `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- 使用表AUTO_INCREMENT `project_app`
 --
 ALTER TABLE `project_app`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- 使用表AUTO_INCREMENT `project_commit`
 --
 ALTER TABLE `project_commit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
--- 使用表AUTO_INCREMENT `rating`
+-- 使用表AUTO_INCREMENT `project_rating`
 --
-ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `project_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- 使用表AUTO_INCREMENT `relation`
+--
+ALTER TABLE `relation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- 使用表AUTO_INCREMENT `report`
 --
@@ -609,7 +720,7 @@ ALTER TABLE `tutorial`
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
