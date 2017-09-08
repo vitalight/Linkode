@@ -77,7 +77,11 @@ public class UserController extends BaseController {
 	public String checkUser(Model model, @PathVariable("id") Integer id, String type) {
 
 		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
-		model.addAttribute("user", userService.findById(id));
+		User user = userService.findById(id);
+		if (user==null) {
+			return View("404");
+		}
+		model.addAttribute("user", user);
 		model.addAttribute("type",type);
 		model.addAttribute("hasLiked", relationService.hasLiked(userid, id));
 		if (type!=null) {
@@ -102,6 +106,8 @@ public class UserController extends BaseController {
 			return View("/user/chatlog", model, chatLogService.getByUserId(id));
 		} else if (field.equals("rating")) {
 			return View("/user/rating", model, projectRatingService.getByContractorId(id));
+		} else if (field.equals("likes")) {
+			return View("/user/likes", model, userService.getByLikerId(id));
 		} else {
 	        return View("/user/project", model, projectService.getPVMByPosterId(user.getId()));
 		}

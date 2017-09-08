@@ -148,7 +148,6 @@ public class ProjectController extends BaseController {
         project.setRequirement(newProject.getRequirement());
         project.setType(newProject.getType());
         project.setTitle(newProject.getTitle());
-        project.setStartDate(new java.util.Date());
         projectService.updateByPrimaryKey(project);
         return RedirectTo("/project/myProject");
     }

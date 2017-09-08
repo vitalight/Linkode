@@ -1,11 +1,15 @@
 package com.linkode.service.impl;
 
+import com.linkode.dao.RelationMapper;
 import com.linkode.dao.UserMapper;
+import com.linkode.pojo.Relation;
+import com.linkode.pojo.RelationExample;
 import com.linkode.pojo.User;
 import com.linkode.pojo.UserExample;
 import com.linkode.pojo.ViewModel.LoginViewModel;
 import com.linkode.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private RelationMapper relationMapper;
     @Autowired
     private UserMapper userMapper;
 
@@ -88,6 +94,26 @@ public class UserServiceImpl implements UserService {
     	UserExample.Criteria criteria = userExample.createCriteria();
     	criteria.andUsernameLike("%"+string+"%");
     	
+    	List<User> users = userMapper.selectByExample(userExample);
+		return users;
+	}
+
+	@Override
+	public List<User> getByLikerId(int id) {
+		RelationExample relationExample = new RelationExample();
+		RelationExample.Criteria criteria = relationExample.createCriteria();
+		criteria.andSenderIdEqualTo(id);
+		criteria.andLikesEqualTo(1);
+		List<Relation> relations = relationMapper.selectByExample(relationExample);
+		
+		List<Integer> userIds = new ArrayList<Integer>();
+		for (Relation relation:relations) {
+			userIds.add(relation.getReceiverId());
+		}
+		
+    	UserExample userExample = new UserExample();
+    	UserExample.Criteria ucriteria = userExample.createCriteria();
+    	ucriteria.andIdIn(userIds);
     	List<User> users = userMapper.selectByExample(userExample);
 		return users;
 	}

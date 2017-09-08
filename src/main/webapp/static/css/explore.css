@@ -716,9 +716,17 @@ img.avatar.col-sm-1 {
 	color:var(--Lblue);
 }
 .item-intro {
-	padding:1em;
+	margin-top:1em;
+	padding:0 1em;
 	font-size:0.9em;
 	color:var(--Ldgrey);
+}
+.item-limit {
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	display:-webkit-box; 
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:3; 
 }
 .display-ad {
 	position:relative;
@@ -906,6 +914,7 @@ textarea.higher {
 	display:block;
 	border-radius:0.5em;
 	padding:0.5em 1em;
+	word-wrap: break-word;
 }
 .time {
 	color:rgb(143,143,148);
@@ -940,4 +949,7 @@ textarea.higher {
 }
 .chatlog .cmt-content {
 	color:grey;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }

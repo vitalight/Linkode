@@ -56,13 +56,7 @@
 				</c:choose>
 				
 				<div class="cmt-content">
-	             	<c:if test="${fn:length(fn:escapeXml(chatlog.content))>40}">
-	             	${fn:escapeXml(chatlog.content)}
-	             	
-	             	</c:if>
-	             	<c:if test="${fn:length(fn:escapeXml(chatlog.content))<=40}">
-	             	${fn:escapeXml(chatlog.content)}
-	             	</c:if>
+					${fn:escapeXml(chatlog.content)}
 				</div>
 			</div>
 		    <c:if test="${LOGIN_USER_ID == chatlog.senderId}">

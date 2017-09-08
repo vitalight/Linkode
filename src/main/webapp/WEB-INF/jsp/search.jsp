@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% request.setAttribute("title","搜索"); %>
 <%@ include file="./modules/web-header.jsp"%>
 <%@ include file="./modules/header.jsp"%>
@@ -15,7 +16,7 @@
 				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
 				<div class="item-title">${user.username }</div>
 				<div class="item-intro">
-					个人介绍：${user.intro}<br/>
+					<div class="item-limit">个人介绍：${user.intro}</div>
 					评分：<%-- 评分显示数据准备, 当分母为0时的做特殊处理 --%>
 					<c:set var="ratingNumber" value="${user.ratingNumber}" />
 					<c:if test="${ratingNumber==0}">

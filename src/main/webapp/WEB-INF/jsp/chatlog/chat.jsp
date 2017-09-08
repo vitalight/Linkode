@@ -50,7 +50,7 @@
 $(document).ready(function() {
 	// 每2秒自动刷新一次 实现即时聊天
 	refresh();
-	setInterval(refresh,2000);
+	setInterval(refresh,3000);
 	function refresh(){
 		var height = $('.chat-window')[0].scrollHeight;
 		$("#js-placeholder").load("${pageContext.request.contextPath}/chat/content/${id1}/${id2}", function() {
@@ -58,6 +58,7 @@ $(document).ready(function() {
 				$('.chat-window').scrollTop($('.chat-window')[0].scrollHeight);
 			}
 		});
+	
 	};
 });
 </script>
