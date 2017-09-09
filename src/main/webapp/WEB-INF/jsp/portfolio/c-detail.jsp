@@ -64,36 +64,47 @@
 		</div>
 	</div>
 	
-   	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
+    	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
 					</button>
-					<h4 class="modal-title" id="modalTitle">举报</h4>
+					<h4 class="modal-title" id="modalTitle"></h4>
 				</div>
 				<div class="modal-body">
-					<div class="row">
 						<div class="col-lg-12">
-							<form role="form">
-								<input type="hidden" class="form-control" name="senderId" value="${LOGIN_USER_ID}" />
-								<input type="hidden" class="form-control" name="itemId" value="${model.id}" />
-								<input type="hidden" class="form-control" name="itemType" value="portfolio" />
-								<div class="form-group">
-									<label>举报理由</label>
-									<input class="form-control" name="content" />
-								</div>
-							</form>
+						<form role="form">
+						<input type="hidden" class="form-control" name="senderId" value="${LOGIN_USER_ID}" />
+						<input type="hidden" class="form-control" name="itemId" value="${model.id}" />
+					
+						
+							举报理由:
+							<select class="form-control" name="type" required>
+								<option value="政治">政治</option>
+								<option value="色情">色情</option>
+								<option value="侮辱">侮辱</option>
+								<option value="广告">广告</option>
+							</select>
+						
+						<br><br>
+							<div class="row">
+					<div class="form-group">
+									<label>详细原因（可选）</label><input class="form-control" name="content" />
+								</div>>
+				</div>
+				<br/>
+				</form>
 						</div>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" id="save">确定</button>
 				</div>
 			</div>
+	
 		</div>
 	</div>
 
@@ -102,38 +113,5 @@
 <script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <%@ include file="../modules/crud-footer.jsp"%>
-
-<script type="text/javascript">
-$(function() {
-	$("#report").click(function(e) {
-		$('#modal').modal('show');
-	});
-	
-	$("#save").click(function(e) {
-		var senderId = $("input[name='senderId']").val();
-		var content = "作品id: " + $("input[name='itemId']").val() + "<br/>举报理由: " +$("input[name='content']").val();
-		var dataset = e.currentTarget.dataset;
-		var rurl="/Linkode/chat/"+ $("input[name='senderId']").val()+"/0";
-		
-			jQuery.ajax({
-				type:"POST",
-			    url:rurl,
-				processData : true,
-				dataType : "text",
-				data : {
-					message : content,
-				},
-				complete : function(data) {
-					bootbox.alert({
-						message : '举报成功~',
-						callback : function() {
-							location.reload();
-						}
-					});
-				}
-			})
-		$('#modal').modal('hide');
-	});
-});
-</script>
+<script src="${pageContext.request.contextPath}/static/js/report.js"></script>
 <%@ include  file="../modules/web-footer.jsp"%>

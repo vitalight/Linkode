@@ -18,4 +18,5 @@ public interface ChatLogService {
 	List<ChatViewModel> getByUserId(int id);
 	
 	void systemMessage(int id, String message);
+	ChatViewModel getReport();
 }

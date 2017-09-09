@@ -14,9 +14,10 @@
 					<a id="js-like" class="${like}" href="javascript:;"><i class="fa fa-heart" aria-hidden="true"></i></a>
 					<span id="number">${model.likes}</span>人觉得很赞
 				</span>
+				<a class="edit-link" href="javascript:;" id="report">举报</a>
 				<c:if test="${LOGIN_USER_ID == model.userId || LOGIN_USER_ROLE == 'admin'}">
-				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除作品</a>
-				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑作品</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑</a>
 				</c:if>
 				</h1>
 			</div>
@@ -66,8 +67,46 @@
 		</div>
 	</div>
 	
+	<%-- 举报框 --%>
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+					</button>
+					<h4 class="modal-title" id="modalTitle">举报</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<form role="form" id="form-rate">
+								<div class="form-group">
+									<label>举报类型</label>
+									<select class="form-control" name="type" required>
+										<option value="政治">政治</option>
+										<option value="色情">色情</option>
+										<option value="侮辱">侮辱</option>
+										<option value="广告">广告</option>
+									</select>
+									<label>详细原因</label>
+									<input name="content" class="form-control" placeholder="选填" maxlength="90" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="save">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
+<script src="${pageContext.request.contextPath}/static/js/crud/bootbox.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#js-like").click(function() {
@@ -76,6 +115,35 @@ $(document).ready(function() {
 			$("#js-like").toggleClass("hasLiked");
 			$("#number").text(data);
 		});
+	});
+	$("#report").click(function(e) {
+		$('#modal').modal('show');
+	});
+	
+	$("#save").click(function(e) {
+		var type = $("select[name='type']").val();
+		var content = $("input[name='content']").val();
+		var url= "/Linkode/portfolio/report/${model.id}";
+		
+		jQuery.ajax({
+			type:"POST",
+		    url:url,
+			processData : true,
+			dataType : "text",
+			data : {
+				type : type,
+				content : content,
+			},
+			complete : function(data) {
+				bootbox.alert({
+					message : '举报成功',
+					callback : function() {
+						location.reload();
+					}
+				});
+			}
+		})
+		$('#modal').modal('hide');
 	});
 }); 
 </script>

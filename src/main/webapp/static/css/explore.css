@@ -916,6 +916,16 @@ textarea.higher {
 	padding:0.5em 1em;
 	word-wrap: break-word;
 }
+.bubble a:focus {
+	text-decoration:underline;
+	color:var(--Lblue);
+}
+.bubble .hollow-btn {
+	float:none;
+	display:inline-block;
+	width:auto;
+	margin-top:0.5em;
+}
 .time {
 	color:rgb(143,143,148);
 	font-size:0.9em;

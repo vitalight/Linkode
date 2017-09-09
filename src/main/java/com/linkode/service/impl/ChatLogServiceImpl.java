@@ -13,9 +13,11 @@ import com.linkode.dao.UserMapper;
 import com.linkode.pojo.ChatLog;
 import com.linkode.pojo.ChatLogExample;
 import com.linkode.pojo.Relation;
+import com.linkode.pojo.Report;
 import com.linkode.pojo.ViewModel.ChatViewModel;
 import com.linkode.service.ChatLogService;
 import com.linkode.service.RelationService;
+import com.linkode.service.ReportService;
 import com.linkode.service.UserService;
 
 public class ChatLogServiceImpl implements ChatLogService {
@@ -26,6 +28,8 @@ public class ChatLogServiceImpl implements ChatLogService {
 	private UserMapper userMapper;
 	@Autowired
 	private RelationService relationService;
+	@Autowired
+	private ReportService reportService;
 	
 	@Override
 	public ChatLog findByPrimaryKey(Integer id) {
@@ -170,5 +174,26 @@ public class ChatLogServiceImpl implements ChatLogService {
 		chatlog.setTime(new java.util.Date());
 		chatLogMapper.insert(chatlog);
 		relationService.sendMessage(0, id);
+	}
+	
+	/* 用于管理员的聊天记录中，显示举报功能 */
+	@Override
+	public ChatViewModel getReport() {
+		ChatLog chatLog = new ChatLog();
+		List<Report> reports = reportService.getNew();
+		if (reports.size()==0) {
+			chatLog.setContent("暂无新的举报。");
+			chatLog.setTime(new java.util.Date());
+			ChatViewModel cvm = new ChatViewModel(chatLog);
+			cvm.setMessages(0);
+			return cvm;
+		}
+		Report report = reports.get(reports.size()-1);
+		chatLog.setContent(reportService.toString(report));
+		chatLog.setContent(chatLog.getContent().replaceAll("</?[^>]+>", ""));
+		chatLog.setTime(report.getTime());
+		ChatViewModel cvm = new ChatViewModel(chatLog);
+		cvm.setMessages(reports.size());
+		return cvm;
 	}
 }

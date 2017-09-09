@@ -35,4 +35,6 @@
     <bean id="projectRatingService" class="com.linkode.service.impl.ProjectRatingServiceImpl"/>
 
 	<bean id="relationService" class="com.linkode.service.impl.RelationServiceImpl"/>
+	<bean id="reportService" class="com.linkode.service.impl.ReportServiceImpl"/>
+	
 </beans>

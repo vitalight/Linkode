@@ -4,6 +4,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="margin-top display-sheet chatlog">
 	<div class="sheet-content chatlog">
+		<%-- 管理员审核举报 --%>
+		<c:if test="${report!=null}">
+		<div class="cmt-line row">
+			<fmt:formatDate pattern="M月d日 H:m" value="${report.time}" var="time" />
+			<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-0.jpg" />
+			<c:if test="${report.messages!=0}">
+			<span class="red-number">${report.messages}</span>
+			</c:if>
+			<div class="col-sm-7">
+				<div class="cmt-name">
+					举报审核
+					<span class="cmt-time">${time}</span>
+				</div>
+				<div class="cmt-content">
+					${fn:escapeXml(report.content)}
+				</div>
+			</div>
+			<a class="col-sm-offset-2 col-sm-2 hollow-btn" href="${pageContext.request.contextPath}/report">查看</a>
+		</div>
+		</c:if> 
+		
 		<c:forEach items="${model}" var="chatlog">
 		<fmt:formatDate pattern="M月d日 H:m" value="${chatlog.time}" var="time" />
 		
@@ -35,7 +56,7 @@
 				<c:choose>
 					<c:when test="${chatlog.senderId == 0 || chatlog.receiverId == 0}">
 					<div class="cmt-name">
-						${chatlog.receiverName}
+						系统通知
 						<span class="cmt-time">${time}</span>
 					</div>
 					</c:when>

@@ -56,5 +56,6 @@ public class PortfolioLikeServiceImpl implements PortfolioLikeService{
 		criteria.andPortfolioIdEqualTo(portfolioId);
 		return portfolioLikeMapper.deleteByExample(portfolioLikeExample);
 	}
+	
 
 }

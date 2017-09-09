@@ -171,7 +171,6 @@
 	</div>
 <%@ include  file="../modules/javascript.jsp"%>
 <script src="${pageContext.request.contextPath}/static/js/crud/bootbox.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#confirm").click(function(e) {

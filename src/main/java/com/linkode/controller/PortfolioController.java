@@ -9,9 +9,13 @@ import com.linkode.exception.CustomException;
 import com.linkode.pojo.Portfolio;
 import com.linkode.pojo.PortfolioCmt;
 import com.linkode.pojo.PortfolioLike;
+import com.linkode.pojo.Report;
+import com.linkode.pojo.ViewModel.PortfolioViewModel;
 import com.linkode.service.PortfolioCmtService;
 import com.linkode.service.PortfolioLikeService;
 import com.linkode.service.PortfolioService;
+import com.linkode.service.ReportService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +39,8 @@ public class PortfolioController extends BaseController {
     private PortfolioCmtService portfolioCmtService;
     @Autowired
     private PortfolioLikeService portfolioLikeService;
+    @Autowired
+    private ReportService reportService;
 
     /*======== 查 ========*/
     @GetMapping("")
@@ -57,9 +63,13 @@ public class PortfolioController extends BaseController {
     @GetMapping("/{id}")
     public String detailView(Model model, @PathVariable("id") Integer id) throws CustomException {
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+    	PortfolioViewModel pvm = portfolioService.getPVMByPrimaryKey(id);
+    	if (pvm.getStatus()!=null && pvm.getStatus()==0) {
+    		return View("404");
+    	}
         model.addAttribute("cmts", portfolioCmtService.getAllPCVMById(id));
         model.addAttribute("like",portfolioLikeService.getByUidPid(userid, id)?"hasLiked":"");
-        return View("/portfolio/detail", model, portfolioService.getPVMByPrimaryKey(id));
+        return View("/portfolio/detail", model, pvm);
     }
 
     @GetMapping("/update/{id}")
@@ -130,6 +140,16 @@ public class PortfolioController extends BaseController {
     public String deleteAction(@PathVariable("id") Integer id) {
         portfolioService.deleteByPrimaryKey(id);
         return RedirectTo("/portfolio/mine");
+    }
+    
+    @PostMapping("/report/{id}")
+    public String reportAction(@PathVariable("id") Integer id, Report report) {
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+    	report.setUserId(userid);
+    	report.setTime(new Date());
+    	report.setPortfolioId(id);
+    	reportService.insert(report);
+		return null;
     }
 
 }

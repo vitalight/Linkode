@@ -148,6 +148,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public List<PortfolioViewModel> transform(List<Portfolio> portfolios) {
 		List<PortfolioViewModel> ret = new ArrayList<PortfolioViewModel>();
     	for (Portfolio portfolio:portfolios) {
+    		if (portfolio.getStatus()!=null && portfolio.getStatus()==0) {
+    			continue;
+    		}
 			PortfolioViewModel pvm = new PortfolioViewModel(portfolio);
 			pvm.setUsername(userService.getById(pvm.getUserId()).getUsername());
 			ret.add(pvm);
@@ -155,4 +158,13 @@ public class PortfolioServiceImpl implements PortfolioService {
     	return ret;
 	}
   
+
+	@Override
+	public void ban(int id) {
+		Portfolio portfolio = findByPrimaryKey(id);
+		if (portfolio!=null) {
+			portfolio.setStatus(0);
+			updateByPrimaryKey(portfolio);
+		}
+	}
 }

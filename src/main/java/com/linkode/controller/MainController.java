@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.linkode.service.AdService;
 import com.linkode.service.PortfolioService;
 import com.linkode.service.ProjectService;
+import com.linkode.service.ReportService;
 import com.linkode.service.UserService;
 
 @Controller
@@ -22,6 +23,8 @@ public class MainController extends BaseController {
 	private AdService adService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ReportService reportService;
 	
 	@GetMapping("/home")
 	String home(Model model) {

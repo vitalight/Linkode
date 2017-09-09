@@ -23,4 +23,5 @@ public interface PortfolioService {
     List<PortfolioViewModel> getByUserId(Integer userid);
 	PortfolioViewModel getPVMByPrimaryKey(Integer id);
 	List<PortfolioViewModel> search(String string);
+	void ban(int id);
 }

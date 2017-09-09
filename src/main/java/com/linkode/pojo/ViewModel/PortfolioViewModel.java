@@ -14,6 +14,7 @@ public class PortfolioViewModel {
 	private Date time;
 	private int likes;
 	private int comments;
+	private Integer status;
 
 	public PortfolioViewModel(Portfolio portfolio) {
 		id = portfolio.getId();
@@ -24,6 +25,7 @@ public class PortfolioViewModel {
 		likes = portfolio.getLikes();
 		comments = portfolio.getComments();
 		time = portfolio.getTime();
+		setStatus(portfolio.getStatus());
 	}
 	
 	public String getUsername() {
@@ -95,5 +97,13 @@ public class PortfolioViewModel {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

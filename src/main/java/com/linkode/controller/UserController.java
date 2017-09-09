@@ -4,17 +4,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
-import java.util.Map.Entry;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -28,11 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.linkode.MD5.MD5;
-import com.linkode.pojo.ChatLog;
-import com.linkode.pojo.Portfolio;
-import com.linkode.pojo.Project;
 import com.linkode.pojo.User;
-import com.linkode.pojo.ViewModel.ChatViewModel;
 import com.linkode.pojo.ViewModel.PortfolioViewModel;
 import com.linkode.service.ChatLogService;
 import com.linkode.service.PortfolioService;
@@ -40,7 +28,6 @@ import com.linkode.service.ProjectRatingService;
 import com.linkode.service.ProjectService;
 import com.linkode.service.RelationService;
 import com.linkode.service.UserService;
-import com.linkode.util.DataPage;
 
 @Controller
 @RequestMapping("/user")
@@ -78,7 +65,7 @@ public class UserController extends BaseController {
 
 		Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
 		User user = userService.findById(id);
-		if (user==null) {
+		if (user==null || id==0) {
 			return View("404");
 		}
 		model.addAttribute("user", user);
@@ -86,6 +73,9 @@ public class UserController extends BaseController {
 		model.addAttribute("hasLiked", relationService.hasLiked(userid, id));
 		if (type!=null) {
 			model.addAttribute("type",type);
+			if (session().getAttribute("LOGIN_USER_ROLE").equals("admin")) {
+				model.addAttribute("report", chatLogService.getReport());
+			}
 			return View("/user/main", model, chatLogService.getByUserId(id));
 		}
 		model.addAttribute("type","info");
@@ -103,6 +93,9 @@ public class UserController extends BaseController {
 			model.addAttribute("portfolios", portfolios);
 			return View("/user/portfolio");
 		} else if (field.equals("chatlog")) {
+			if (((String)session().getAttribute("LOGIN_USER_ROLE")).equals("admin")) {
+				model.addAttribute("report", chatLogService.getReport());
+			}
 			return View("/user/chatlog", model, chatLogService.getByUserId(id));
 		} else if (field.equals("rating")) {
 			return View("/user/rating", model, projectRatingService.getByContractorId(id));
