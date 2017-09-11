@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
     	user.setUsername(loginViewModel.getEmail().split("@")[0]);
     	user.setRatingNumber(0);
     	user.setRatingTotal(0);
+    	user.setMoney(0);
     	user.setSex("secret");
     	userMapper.insert(user);
     	return user.getId();
@@ -106,6 +107,9 @@ public class UserServiceImpl implements UserService {
 		criteria.andLikesEqualTo(1);
 		List<Relation> relations = relationMapper.selectByExample(relationExample);
 		
+		if (relations.size()==0) {
+			return null;
+		}
 		List<Integer> userIds = new ArrayList<Integer>();
 		for (Relation relation:relations) {
 			userIds.add(relation.getReceiverId());

@@ -75,6 +75,10 @@ public class PortfolioController extends BaseController {
     @GetMapping("/update/{id}")
     public String updateView(Model model, @PathVariable("id") Integer id) throws CustomException {
         Portfolio portfolio = portfolioService.findByPrimaryKey(id);
+        if (!isAuthorized(portfolio.getUserId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
         return View("/portfolio/update", model, portfolio);
     }
 
@@ -82,6 +86,10 @@ public class PortfolioController extends BaseController {
     @PostMapping("/update")
     public String updateAction(Model model, HttpServletRequest req, @Validated Portfolio newPortfolio, BindingResult bindingResult) throws CustomException, ParseException {
     	Portfolio portfolio = portfolioService.findByPrimaryKey(newPortfolio.getId());
+    	if (!isAuthorized(portfolio.getUserId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
         portfolio.setContent(newPortfolio.getContent());
         portfolio.setType(newPortfolio.getType());
         portfolio.setTitle(newPortfolio.getTitle());
@@ -137,7 +145,11 @@ public class PortfolioController extends BaseController {
     }
     
     @GetMapping("/delete/{id}")
-    public String deleteAction(@PathVariable("id") Integer id) {
+    public String deleteAction(Model model, @PathVariable("id") Integer id) {
+    	if (!isAuthorized(portfolioService.findByPrimaryKey(id).getUserId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
         portfolioService.deleteByPrimaryKey(id);
         return RedirectTo("/portfolio/mine");
     }

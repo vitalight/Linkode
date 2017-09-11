@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="display-container">
+	
 	<c:forEach items="${model}" var="user">
 	<div class="display-item">
 		<img class="item-img" src="${pageContext.request.contextPath}/static/img/small-banner.png" />
@@ -40,4 +41,12 @@
 		<a class="card-over" href="${pageContext.request.contextPath}/user/${user.id}"></a>
 	</div>
 	</c:forEach>
+	
+	
+	<c:if test="${model==null}">
+	<div class="display-bar empty-bar">
+		<img src="${pageContext.request.contextPath}/static/img/empty.png" />
+		<div class="empty-text">空空如也...</div>
+	</div>
+	</c:if>
 </div>

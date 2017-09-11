@@ -47,4 +47,13 @@ public class BaseController {
     	Subject subject = SecurityUtils.getSubject();
     	return subject.getSession();
     }
+    
+    protected Boolean isAuthorized(Integer id) {
+    	Integer userid = (Integer)session().getAttribute("LOGIN_USER_ID");
+    	String role = (String)session().getAttribute("LOGIN_USER_ROLE");
+    	if (!id.equals(userid) && !role.equals("admin")) {
+    		return false;
+    	}
+    	return true;
+    }
 }

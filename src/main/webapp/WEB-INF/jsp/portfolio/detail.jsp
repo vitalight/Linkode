@@ -14,7 +14,10 @@
 					<a id="js-like" class="${like}" href="javascript:;"><i class="fa fa-heart" aria-hidden="true"></i></a>
 					<span id="number">${model.likes}</span>人觉得很赞
 				</span>
+				
+				<c:if test="${LOGIN_USER_ID != model.userId}">
 				<a class="edit-link" href="javascript:;" id="report">举报</a>
+				</c:if>
 				<c:if test="${LOGIN_USER_ID == model.userId || LOGIN_USER_ROLE == 'admin'}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑</a>

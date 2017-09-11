@@ -17,7 +17,7 @@
 		<li><a class="nav-btn" id="head-post" href="${pageContext.request.contextPath}/post">讨论</a></li>
 		<li><a class="nav-btn" id="head-project" href="${pageContext.request.contextPath}/project">项目</a></li>
 		<li><form action="${pageContext.request.contextPath}/search" method="get">
-			<input class="form-control search" name="keyword" placeholder="search..." value="${keyword} required	"/>
+			<input class="form-control search" name="keyword" placeholder="search..." value="${keyword}" required/>
 			</form>
 		</li>
 		</c:if>

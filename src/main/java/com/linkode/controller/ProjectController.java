@@ -106,6 +106,10 @@ public class ProjectController extends BaseController {
     @GetMapping("/update/{id}")
     public String updateView(Model model, @PathVariable("id") Integer id) throws CustomException {
         Project project = projectService.findByPrimaryKey(id);
+    	if (!isAuthorized(project.getPosterId()) || !project.getStatus().equals("post")) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
         User user = userService.getById(project.getPosterId());
         model.addAttribute("money", user.getMoney()+project.getMoney());
         return View("/project/update", model, project);
@@ -150,7 +154,11 @@ public class ProjectController extends BaseController {
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
     	User user = userService.getById(userid);
 		Project project = projectService.findByPrimaryKey(newProject.getId());
-    	if (user.getMoney()+project.getMoney()-newProject.getMoney()<0 | project.getStatus()!="post") {
+    	if (!isAuthorized(project.getPosterId()) || !project.getStatus().equals("post")) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
+    	if (user.getMoney()+project.getMoney()-newProject.getMoney()<0) {
     		return RedirectTo("/project/myProject");
     	}
 		user.setMoney(user.getMoney()+project.getMoney()-newProject.getMoney());
@@ -183,10 +191,14 @@ public class ProjectController extends BaseController {
     @GetMapping("/apply/{id}/accept")
     public String acceptAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException{
     	ProjectApp projectApp = projectAppService.getById(id);
+    	Project project=projectService.findByPrimaryKey(projectApp.getProjectId());
+    	if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	projectApp.setResult(1);
     	projectAppService.update(projectApp);
 
-    	Project project = projectService.findByPrimaryKey(projectApp.getProjectId());
     	project.setStatus("contract");
     	project.setContractorId(projectApp.getApplicantId());
     	project.setStartDate(new Date());
@@ -199,10 +211,16 @@ public class ProjectController extends BaseController {
     @GetMapping("/apply/{id}/reject")
     public String denyAction(Model model, @PathVariable("id") Integer id) throws CustomException, ParseException{
     	ProjectApp projectApp = projectAppService.getById(id);
+    	Project project=projectService.findByPrimaryKey(projectApp.getProjectId());
+    	if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
+    	
     	projectApp.setResult(0);
     	projectAppService.update(projectApp);
 
-    	Project project=projectService.findByPrimaryKey(projectApp.getProjectId());
+    	
     	chatLogService.systemMessage(projectApp.getApplicantId(), 
     			"您对项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>的申请已被拒绝。");
     	return RedirectTo("/project/"+projectApp.getProjectId());
@@ -211,6 +229,10 @@ public class ProjectController extends BaseController {
     @GetMapping("/apply/{id}/delete")
     public String deleteApplyAction(Model model, @PathVariable("id") Integer id) {
     	ProjectApp projectApp = projectAppService.getById(id);
+    	if (!isAuthorized(projectApp.getApplicantId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	int projectId = projectApp.getProjectId();
     	projectAppService.deleteById(id);
     	return RedirectTo("/project/"+projectId);
@@ -218,11 +240,16 @@ public class ProjectController extends BaseController {
 
     @PostMapping("/{id}/commit")
     public String submitAction(Model model, @PathVariable("id") Integer id, ProjectCommit pc) throws CustomException, ParseException {
+        Project project = projectService.findByPrimaryKey(id);
+
+        if (!isAuthorized(project.getContractorId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	pc.setTime(new Date());
     	pc.setProjectId(id);
         projectCommitService.insert(pc);
         
-        Project project = projectService.findByPrimaryKey(id);
     	chatLogService.systemMessage(project.getPosterId(), 
     			"项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>有新的提交。");
         return RedirectTo("/project/"+id);
@@ -231,10 +258,14 @@ public class ProjectController extends BaseController {
     @GetMapping("/commit/{id}/accept")
     public String commitAcceptAction(Model model, @PathVariable("id") Integer id) throws CustomException {
     	ProjectCommit pc = projectCommitService.getById(id);
+        Project project = projectService.findByPrimaryKey(pc.getProjectId());
+        if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	pc.setResult("accept");
     	projectCommitService.update(pc);
     	
-        Project project = projectService.findByPrimaryKey(pc.getProjectId());
     	chatLogService.systemMessage(project.getContractorId(), 
     			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被通过。");
     	return RedirectTo("/project/"+pc.getProjectId());
@@ -243,10 +274,14 @@ public class ProjectController extends BaseController {
     @GetMapping("/commit/{id}/reject")
     public String commitRejectAction(Model model, @PathVariable("id") Integer id ) throws CustomException{
     	ProjectCommit pc = projectCommitService.getById(id);
+    	Project project = projectService.findByPrimaryKey(pc.getProjectId());
+        if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	pc.setResult("reject");
     	projectCommitService.update(pc);
 
-        Project project = projectService.findByPrimaryKey(pc.getProjectId());
     	chatLogService.systemMessage(project.getContractorId(), 
     			"您在项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>中的提交已被拒绝。");
     	return RedirectTo("/project/"+pc.getProjectId());
@@ -255,6 +290,13 @@ public class ProjectController extends BaseController {
     @PostMapping("/{id}/confirm")
     public String comfirmAction(Model model, @PathVariable("id") Integer id, ProjectRating projectRating) throws CustomException, ParseException {
         Project project = projectService.findByPrimaryKey(id);
+        
+
+        if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
+        
         project.setStatus("confirm");
         projectService.updateByPrimaryKey(project);
 
@@ -293,7 +335,17 @@ public class ProjectController extends BaseController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteAction(@PathVariable("id") Integer id) {
+    public String deleteAction(Model model, @PathVariable("id") Integer id) throws CustomException {
+        Project project = projectService.findByPrimaryKey(id);
+        if (!isAuthorized(project.getPosterId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
+
+    	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
+        User user = userService.findById(userid);
+        user.setMoney(user.getMoney()+project.getMoney());
+        userService.update(user);
         projectService.deleteByPrimaryKey(id);
         return RedirectTo("/project/myProject");
     }
