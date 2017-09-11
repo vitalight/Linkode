@@ -16,7 +16,7 @@
 	</div>
 	
 	<div class="display">
-		<form action="${pageContext.request.contextPath}/portfolio/create" method="post">
+		<form action="${pageContext.request.contextPath}/portfolio/create" method="post" enctype="multipart/form-data">
 			<div class="display-bar more-padding auto-height">
 				<div class="row">
 						<div class="col-sm-4">
@@ -38,6 +38,7 @@
 					</div>
 				</div>
 				<br/>
+				<input type="file" name="file" required/>
 				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">发布项目</button>
 			</div>
 		</form>

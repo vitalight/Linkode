@@ -1,5 +1,6 @@
 package com.linkode.util;
 
+import org.apache.commons.fileupload.util.Streams;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -7,11 +8,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
 
@@ -30,6 +33,20 @@ public class FileUploadUtil {
         fileTypes.add(".png");
     }
 
+    public static boolean upload(MultipartFile file, String filename) {
+    	try {
+            if (!file.isEmpty()){
+            	//使用StreamsAPI方式拷贝文件
+                Streams.copy(file.getInputStream(),new FileOutputStream(filename),true);
+                return true;
+            }
+        } catch (IOException e) {
+            System.out.println("文件上传失败");
+            e.printStackTrace();
+        }
+    	return false;
+    }
+    
     public static String upload(HttpServletRequest request, String DirectoryName) throws IllegalStateException, IOException {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 

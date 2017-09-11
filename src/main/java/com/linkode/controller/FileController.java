@@ -1,20 +1,39 @@
 package com.linkode.controller;
 
+import com.linkode.service.PortfolioService;
 import com.linkode.util.FileUploadUtil;
+
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
 
 /**
  * Created by gaoshiqi on 2017/7/17.
  */
 @Controller
-@RequestMapping("/upload")
 public class FileController {
+	@Autowired
+	PortfolioService portfolioService;
+	
     @PostMapping("/CKEditor")
     public void imageUpload(HttpServletRequest request, HttpServletResponse response) {
         String DirectoryName = "static/upload/img";
@@ -27,6 +46,28 @@ public class FileController {
         }
     }
 
+    @GetMapping("/file/portfolio/{id}")
+    public ResponseEntity<byte[]> fileView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
+    	String realPath = request.getSession().getServletContext().getRealPath("/upload");
+    	System.out.println("<test>"+realPath);
+    	String fileName = portfolioService.findByPrimaryKey(id).getUrl();
+    	if (fileName==null) {
+    		return null;
+    	}
+    	
+		File file = new File(realPath+fileName);
+		// 下载浏览器响应的那个文件名
+		String dfileName = fileName;
+		// 下面开始设置HttpHeaders,使得浏览器响应下载
+		HttpHeaders headers = new HttpHeaders();
+		// 设置响应方式
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		// 设置响应文件
+		headers.setContentDispositionFormData("attachment", dfileName);
+		// 把文件以二进制形式写回
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+    }
+    
     @RequestMapping("/File")
     public void fileUpload(HttpServletRequest request) {
         String DirectoryName = "static/upload/file";

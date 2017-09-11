@@ -1,5 +1,7 @@
 package com.linkode.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.ParseException;
@@ -15,7 +17,9 @@ import com.linkode.service.PortfolioCmtService;
 import com.linkode.service.PortfolioLikeService;
 import com.linkode.service.PortfolioService;
 import com.linkode.service.ReportService;
+import com.linkode.util.FileUploadUtil;
 
+import org.apache.commons.fileupload.util.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,13 +105,26 @@ public class PortfolioController extends BaseController {
 
     /*======== 增删 ========*/
     @PostMapping("/create")
-    public String createAction(Model model, HttpServletRequest request, Portfolio portfolio) {
+    public String createAction(Model model, HttpServletRequest request, Portfolio portfolio, @RequestParam("file") MultipartFile file) {
+    	String realPath = request.getSession().getServletContext().getRealPath("/upload");
+    	File realPathDirectory = new File(realPath);
+        if (!realPathDirectory.exists()) {
+            realPathDirectory.mkdirs();
+        }
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         portfolio.setUserId(userid);
         portfolio.setLikes(0);
         portfolio.setComments(0);
         portfolio.setTime(new Date());
         portfolioService.insert(portfolio);
+        
+		String filename = portfolio.getId()+file.getOriginalFilename();
+        if (!FileUploadUtil.upload(file, realPath+filename)) {
+        	portfolioService.deleteByPrimaryKey(portfolio.getId());
+        }
+        portfolio.setUrl(filename);
+        portfolioService.updateByPrimaryKey(portfolio);
+        
         return RedirectTo("/portfolio/mine");
     }
     

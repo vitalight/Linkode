@@ -39,7 +39,7 @@
 			
 				${model.content }
 				<c:if test="${model.type!='literature'}">
-				<img src="../static/img/pic/pic-${model.id%13}.png" />
+				<img src="${pageContext.request.contextPath}/file/portfolio/${model.id}" />
 				</c:if>
 				
 				<h3>评论(${model.comments})</h3>
