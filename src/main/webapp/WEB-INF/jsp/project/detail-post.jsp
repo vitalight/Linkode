@@ -25,7 +25,7 @@
 				<div class="info-right col-sm-10">
 					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.startDate}" var="time"/>
 					<a href="${pageContext.request.contextPath}/user/${model.posterId}">
-					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId}.jpg" />
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/file/user/${model.posterId}" />
 					${model.username}</a> 发布于 ${time}
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${app.time}" var="time" />
 				
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${app.applicantId%7}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${app.applicantId}" />
 					<div class="col-sm-7">
 						<div class="cmt-name">
 							<a href="${pageContext.request.contextPath}/user/${app.applicantId}">

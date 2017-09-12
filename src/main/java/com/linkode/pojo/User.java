@@ -25,6 +25,8 @@ public class User {
 
     private String intro;
 
+    private String url;
+
     public Integer getId() {
         return id;
     }
@@ -111,5 +113,13 @@ public class User {
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

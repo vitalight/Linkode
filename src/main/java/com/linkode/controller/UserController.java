@@ -1,5 +1,6 @@
 package com.linkode.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.ParseException;
@@ -7,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,8 +21,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.linkode.MD5.MD5;
+import com.linkode.pojo.Portfolio;
 import com.linkode.pojo.User;
 import com.linkode.pojo.ViewModel.PortfolioViewModel;
 import com.linkode.service.ChatLogService;
@@ -28,6 +34,7 @@ import com.linkode.service.ProjectRatingService;
 import com.linkode.service.ProjectService;
 import com.linkode.service.RelationService;
 import com.linkode.service.UserService;
+import com.linkode.util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -128,6 +135,24 @@ public class UserController extends BaseController {
 			old.setPassword(MD5.GetMD5Code(pwd));
 		}
 		userService.update(old);
+		return RedirectTo("/user/{id}");
+	}
+	
+	@GetMapping("/{id}/editAvatar")
+	public String editAvatarView() {
+		return View("/user/editAvatar");
+	}
+	
+	@PostMapping("/{id}/editAvatar")
+	public String editAvatarAction(HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
+		String realPath = request.getSession().getServletContext().getRealPath("upload");
+		
+		User user = userService.getById(id);
+		String filename = "avatar"+id+file.getOriginalFilename();
+        FileUploadUtil.upload(file, realPath+"/"+filename);
+		user.setUrl(filename);
+		userService.update(user);
+    	
 		return RedirectTo("/user/{id}");
 	}
 	

@@ -8,7 +8,7 @@
 		<c:if test="${report!=null}">
 		<div class="cmt-line row">
 			<fmt:formatDate pattern="M月d日 H:m" value="${report.time}" var="time" />
-			<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-0.jpg" />
+			<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/0" />
 			<c:if test="${report.messages!=0}">
 			<span class="red-number">${report.messages}</span>
 			</c:if>
@@ -36,13 +36,13 @@
 				
 				<c:when test="${LOGIN_USER_ID != chatlog.senderId}">
 				<a href="${pageContext.request.contextPath}/user/${chatlog.senderId}">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.senderId%7}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${chatlog.senderId}" />
 			    </a>
 				</c:when>
 				
 				<c:when test="${LOGIN_USER_ID == chatlog.senderId}">
 				<a href="${pageContext.request.contextPath}/user/${chatlog.receiverId}">
-				<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chatlog.receiverId%7}.jpg" />
+				<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${chatlog.receiverId}" />
 				</a>
 				</c:when>
 				

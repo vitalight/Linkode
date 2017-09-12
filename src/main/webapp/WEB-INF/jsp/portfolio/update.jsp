@@ -42,8 +42,7 @@ ${model.content}</textarea>
 					</div>
 				</div>
 				<br/>
-				<input type="file" name="file" required/>
-				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">发布项目</button>
+				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">修改项目</button>
 			</div>
 		</form>
 	</div>

@@ -29,7 +29,7 @@
 			
 			<p class="card-name">${pvm.title}</p>
 			<span class="card-info">
-				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${pvm.userId%6}.jpg" />
+				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/file/user/${pvm.userId}" />
 				${pvm.username}
 			</span>
 			<span class="likes">

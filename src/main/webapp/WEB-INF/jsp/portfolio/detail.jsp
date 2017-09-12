@@ -32,7 +32,7 @@
 				<div class="info-right col-sm-10">
 					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.time}" var="time"/>
 					<a href="${pageContext.request.contextPath}/user/${model.userId}">
-					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.userId}.jpg" />
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/file/user/${model.userId}" />
 					${model.username}</a> 发布于 ${time}
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 				<c:forEach items="${cmts}" var="cmt">
 				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${cmt.userId}" />
 					<div class="col-sm-11">
 						<div class="cmt-name">
 							<a href="${pageContext.request.contextPath}/user/${cmt.userId}">

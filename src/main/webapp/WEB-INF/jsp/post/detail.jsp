@@ -21,7 +21,7 @@
 				<div class="cmt-line post-special">
 					<div class="row">
 						<a class="img-a" href="${pageContext.request.contextPath}/user/${model.userId}">
-						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.userId%7}.jpg" />
+						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${model.userId}" />
 						</a>
 						<div class="col-sm-9">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${model.time}" var="time" />
@@ -42,7 +42,7 @@
 					<div class="row">
 						
 						<a class="img-a" href="${pageContext.request.contextPath}/user/${cmt.userId}">
-						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmt.userId%7}.jpg" />
+						<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${cmt.userId}" />
 						</a>
 						<div class="col-sm-7">
 							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${cmt.time}" var="time" />
@@ -66,7 +66,7 @@
 							<div class="cmt-line">
 								<div class="row">
 									<a class="img-a" href="${pageContext.request.contextPath}/user/${cmtCmt.userId}">
-									<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${cmtCmt.userId%7 }.jpg" />
+									<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${cmtCmt.userId}" />
 									</a>
 									<div class="col-sm-11">
 										<div class="cmt-name">

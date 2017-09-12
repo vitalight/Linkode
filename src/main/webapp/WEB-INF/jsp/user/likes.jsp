@@ -6,7 +6,7 @@
 	<c:forEach items="${model}" var="user">
 	<div class="display-item">
 		<img class="item-img" src="${pageContext.request.contextPath}/static/img/small-banner.png" />
-		<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
+		<img class="user-avatar" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 		<div class="item-title">${user.username }</div>
 		<div class="item-intro">
 			<div class="item-limit">个人介绍：${user.intro}</div>

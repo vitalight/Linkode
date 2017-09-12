@@ -6,7 +6,7 @@
 		<img class="user-bg" src="${pageContext.request.contextPath}/static/img/banner.jpg" />
 	</div>
 	<div class="user-info">
-		<img class="info-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
+		<img class="info-avatar" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 		<div class="info">
 			<div class="username">${user.username}</div>
 			<div class="grey-info">

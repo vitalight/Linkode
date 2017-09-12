@@ -20,10 +20,10 @@
 				<div class="info-right col-sm-10">
 					<fmt:formatDate pattern="yyyy年MM月dd日" value="${model.startDate}" var="time"/>
 					<a href="${pageContext.request.contextPath}/user/${model.posterId}">
-					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId%7}.jpg" />
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/file/user/${model.posterId}" />
 					${model.username}</a> 发布于 ${time}，已被
 					<a href="${pageContext.request.contextPath}/user/${user.id}">
-					<img class="avatar size-mid" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
+					<img class="avatar size-mid" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 					${user.username}</a>承包。
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 				<c:if test="${model.status=='confirm'}">
 				<h3>甲方评价</h3>
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${model.posterId%7}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${model.posterId}" />
 					<div class="col-sm-7">
 						<div class="cmt-name">${model.username}
 							<span class="cmt-time rate-star">
@@ -92,7 +92,7 @@
 				
 				<!-- 提交历史记录 -->
 				<div class="cmt-line row">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 					<div class="col-sm-7">
 						<div class="cmt-name">${user.username}<span class="cmt-time">${time}</span></div>
 						<div class="cmt-content">${commit.content }</div>

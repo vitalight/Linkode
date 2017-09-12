@@ -31,7 +31,7 @@
 			</div>
 			<div class="author-info">
 				<img class="bar-avatar" 
-					src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.jpg"/>
+					src="${pageContext.request.contextPath}/file/user/${project.posterId}"/>
 				${project.username}
 			</div>
 			<span class="bar-price">￥${project.money}</span>

@@ -1,6 +1,8 @@
 package com.linkode.controller;
 
+import com.linkode.pojo.User;
 import com.linkode.service.PortfolioService;
+import com.linkode.service.UserService;
 import com.linkode.util.FileUploadUtil;
 
 import org.apache.commons.io.FileUtils;
@@ -33,6 +35,8 @@ import java.net.URLEncoder;
 public class FileController {
 	@Autowired
 	PortfolioService portfolioService;
+	@Autowired
+	UserService userService;
 	
     @PostMapping("/CKEditor")
     public void imageUpload(HttpServletRequest request, HttpServletResponse response) {
@@ -46,10 +50,41 @@ public class FileController {
         }
     }
 
+    // 返回用户头像
+    @GetMapping("/file/user/{id}")
+    public ResponseEntity<byte[]> avatarView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	File realPathDirectory = new File(realPath);
+        if (!realPathDirectory.exists()) {
+            realPathDirectory.mkdirs();
+        }
+    	String fileName = userService.getById(id).getUrl();
+    	
+    	if (fileName==null) {
+    		fileName = "default-avatar.gif";
+    		realPath = request.getSession().getServletContext().getRealPath("static/img");
+    	}
+		File file = new File(realPath+"/"+fileName);
+		// 下载浏览器响应的那个文件名
+		String dfileName = fileName;
+		// 下面开始设置HttpHeaders,使得浏览器响应下载
+		HttpHeaders headers = new HttpHeaders();
+		// 设置响应方式
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		// 设置响应文件
+		headers.setContentDispositionFormData("attachment", dfileName);
+		// 把文件以二进制形式写回
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+    }
+    
     // 返回作品图片
     @GetMapping("/file/portfolio/{id}")
     public ResponseEntity<byte[]> fileView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
     	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	File realPathDirectory = new File(realPath);
+        if (!realPathDirectory.exists()) {
+            realPathDirectory.mkdirs();
+        }
     	String fileName = portfolioService.findByPrimaryKey(id).getUrl();
     	if (fileName==null) {
     		fileName = "default.gif";

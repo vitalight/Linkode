@@ -20,6 +20,10 @@
 	<c:if test="${type=='edit'}">
 		<%@ include file="./edit.jsp" %>
 	</c:if>
+	
+	<c:if test="${type=='editAvatar'}">
+		<%@ include file="./editAvatar.jsp" %>
+	</c:if>
 	</div>
 	<div class="info-tail">
 		© 2017 Linkode

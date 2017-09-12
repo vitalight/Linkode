@@ -13,6 +13,7 @@
     <result column="role" jdbcType="VARCHAR" property="role" />
     <result column="money" jdbcType="INTEGER" property="money" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, username, password, email, ratingNumber, ratingTotal, sex, birthday, role, money, 
-    intro
+    intro, url
   </sql>
   <select id="selectByExample" parameterType="com.linkode.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -113,11 +114,11 @@
     insert into user (username, password, email, 
       ratingNumber, ratingTotal, sex, 
       birthday, role, money, 
-      intro)
+      intro, url)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
       #{ratingNumber,jdbcType=INTEGER}, #{ratingTotal,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{role,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, 
-      #{intro,jdbcType=VARCHAR})
+      #{intro,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.linkode.pojo.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -155,6 +156,9 @@
       <if test="intro != null">
         intro,
       </if>
+      <if test="url != null">
+        url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -186,6 +190,9 @@
       </if>
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +238,9 @@
       <if test="record.intro != null">
         intro = #{record.intro,jdbcType=VARCHAR},
       </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +258,8 @@
       birthday = #{record.birthday,jdbcType=DATE},
       role = #{record.role,jdbcType=VARCHAR},
       money = #{record.money,jdbcType=INTEGER},
-      intro = #{record.intro,jdbcType=VARCHAR}
+      intro = #{record.intro,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +297,9 @@
       <if test="intro != null">
         intro = #{intro,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -300,7 +314,8 @@
       birthday = #{birthday,jdbcType=DATE},
       role = #{role,jdbcType=VARCHAR},
       money = #{money,jdbcType=INTEGER},
-      intro = #{intro,jdbcType=VARCHAR}
+      intro = #{intro,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -8,7 +8,7 @@
 				<img class="item-img"
 					src="${pageContext.request.contextPath}/file/portfolio/${portfolio.id}" />
 				<img class="user-avatar"
-					src="${pageContext.request.contextPath}/static/img/avatar/avatar-${portfolio.userId%7}.jpg" />
+					src="${pageContext.request.contextPath}/file/user/${portfolio.userId}" />
 				<div class="item-title">${portfolio.title}</div>
 				<div class="item-intro">${portfolio.content }</div>
 				<a class="card-over"

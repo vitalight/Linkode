@@ -111,16 +111,10 @@ public class PortfolioController extends BaseController {
     @PostMapping("/update/{id}/file")
     public String updateFileAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
     	String realPath = request.getSession().getServletContext().getRealPath("upload");
-    	File realPathDirectory = new File(realPath);
-        if (!realPathDirectory.exists()) {
-            realPathDirectory.mkdirs();
-        }
-
+    	
     	Portfolio portfolio = portfolioService.findByPrimaryKey(id);
 		String filename = id+file.getOriginalFilename();
-        if (!FileUploadUtil.upload(file, realPath+"/"+filename)) {
-        	portfolioService.deleteByPrimaryKey(portfolio.getId());
-        }
+        FileUploadUtil.upload(file, realPath+"/"+filename);
     	portfolio.setUrl(filename);
     	portfolioService.updateByPrimaryKey(portfolio);
     	
@@ -131,10 +125,7 @@ public class PortfolioController extends BaseController {
     @PostMapping("/create")
     public String createAction(Model model, HttpServletRequest request, Portfolio portfolio, @RequestParam("file") MultipartFile file) {
     	String realPath = request.getSession().getServletContext().getRealPath("upload");
-    	File realPathDirectory = new File(realPath);
-        if (!realPathDirectory.exists()) {
-            realPathDirectory.mkdirs();
-        }
+    	
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         portfolio.setUserId(userid);
         portfolio.setLikes(0);

@@ -6,7 +6,7 @@
 	<c:forEach items="${model}" var="rating">
 	<div class="cmt-line row">
 		<a href="${pageContext.request.contextPath}/user/${rating.posterId}">
-		<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${rating.posterId%7}.jpg" />
+		<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${rating.posterId}" />
 		</a>
 		<div class="col-sm-7">
 			<div class="cmt-name">

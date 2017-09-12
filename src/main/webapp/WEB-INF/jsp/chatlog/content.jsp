@@ -5,7 +5,7 @@
 <c:forEach items="${model}" var="chat">
     <c:if test="${LOGIN_USER_ID != chat.senderId}">
 	<div class="chat-left">
-		<img src="${pageContext.request.contextPath}/static/img/avatar/avatar-${chat.senderId % 7}.jpg" />
+		<img src="${pageContext.request.contextPath}/file/user/${chat.senderId}" />
 		<div class="detail">
 			<div class="time">
 				<fmt:formatDate pattern="M月d日 H:mm"  value="${chat.time}"></fmt:formatDate>
@@ -22,7 +22,7 @@
 	
        <c:if test="${LOGIN_USER_ID == chat.senderId}">
 	<div class="chat-right">
-		<img src="${pageContext.request.contextPath}/static/img/avatar/avatar-${LOGIN_USER_ID % 7}.jpg" />
+		<img src="${pageContext.request.contextPath}/file/user/${LOGIN_USER_ID" />
 		<div class="detail">
 			<div class="time">
 				<fmt:formatDate pattern="M月d日 H:mm"  value="${chat.time}"></fmt:formatDate>

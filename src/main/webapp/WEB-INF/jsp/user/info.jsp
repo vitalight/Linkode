@@ -105,6 +105,7 @@
 	<c:if test="${LOGIN_USER_ID == id}">
 	<div class="middle">
 		<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=edit">修改资料</a>
+		<a class="hollow-btn" href="${pageContext.request.contextPath}/user/${user.id}?type=editAvatar">修改头像</a>
 	</div>
 	</c:if>
 </div>

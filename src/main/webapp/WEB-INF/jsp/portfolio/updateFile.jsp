@@ -21,6 +21,7 @@
 			</div>
 			<div class="row content-text">
 				<img class="small-pic" src="${pageContext.request.contextPath}/file/portfolio/${id}" />
+				<br/>
 				<form action="${pageContext.request.contextPath}/portfolio/update/${id}/file" method="post" enctype="multipart/form-data">
 					<input type="file" name="file" required/>
 					<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">提交修改</button>

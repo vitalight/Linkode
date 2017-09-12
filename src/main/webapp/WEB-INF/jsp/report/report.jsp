@@ -19,7 +19,7 @@
 			<div class="cmt-line row chat-window" id="js-placeholder">
 				<c:forEach items="${model}" var="report">
 					<div class="chat-left">
-						<img src="${pageContext.request.contextPath}/static/img/avatar/avatar-0.jpg" />
+						<img src="${pageContext.request.contextPath}/file/user/0" />
 						<div class="detail">
 							<div class="time">
 								<fmt:formatDate pattern="M月d日 H:mm"  value="${report.time}"></fmt:formatDate>

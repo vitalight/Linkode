@@ -27,7 +27,7 @@
 		</shiro:notAuthenticated>
 	</ul>
 	<c:if test="${!empty LOGIN_USER_ID}">
-		<img class="user-btn avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${LOGIN_USER_ID%7}.jpg"/>
+		<img class="user-btn avatar" src="${pageContext.request.contextPath}/file/user/${LOGIN_USER_ID}"/>
 		<a class="nav-btn user-btn" id="head-user" href="${pageContext.request.contextPath}/user/${LOGIN_USER_ID}"> 
 			<i class="fa fa-user-o"></i>
 			${LOGIN_USER_NAME}

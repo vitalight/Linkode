@@ -497,8 +497,10 @@ a.hasLiked {
 	font-weight:700;
 }
 .content-text img {
-	width:58em;
-	margin:1em 0;
+	max-width:58em;
+	max-height:40em;
+	display:block;
+	margin:1em auto;
 }
 div.margin-bottom {
 	margin-bottom:6em;

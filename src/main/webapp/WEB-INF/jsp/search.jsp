@@ -13,7 +13,7 @@
 			<c:forEach items="${users}" var="user">
 			<div class="display-item">
 				<img class="item-img" src="${pageContext.request.contextPath}/static/img/small-banner.png" />
-				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${user.id%7}.jpg" />
+				<img class="user-avatar" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 				<div class="item-title">${user.username }</div>
 				<div class="item-intro">
 					<div class="item-limit">个人介绍：${user.intro}</div>
@@ -55,7 +55,7 @@
 			<c:forEach items="${portfolios}" var="portfolio">
 			<div class="display-item">
 				<img class="item-img" src="${pageContext.request.contextPath}/file/portfolio/${portfolio.id}" />
-				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${portfolio.userId%7}.jpg" />
+				<img class="user-avatar" src="${pageContext.request.contextPath}/file/user/${portfolio.userId}" />
 				<div class="item-title">${portfolio.title}</div>
 				<div class="item-intro">${portfolio.content }</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${portfolio.id}"></a>
@@ -68,8 +68,8 @@
 			
 			<c:forEach items="${projects}" var="project">
 			<div class="display-item">
-				<img class="item-img" src="${pageContext.request.contextPath}/file/portfolio/${portfolio.id}" />
-				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${project.posterId%7}.jpg" />
+				<img class="item-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${project.id%13}.png" />
+				<img class="user-avatar" src="${pageContext.request.contextPath}/file/user/${project.posterId}" />
 				<div class="item-title">${project.title }</div>
 				<div class="item-intro">${project.requirement}</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/project/${project.id}"></a>
