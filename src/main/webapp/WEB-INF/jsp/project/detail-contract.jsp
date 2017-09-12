@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% request.setAttribute("title","项目信息"); %>
 <% request.setAttribute("headType","project"); %>
 <%@ include file="../modules/web-header.jsp"%>
@@ -77,9 +78,10 @@
 				<!-- 项目成果提交 -->
 				<h3>提交(${commits.size()})</h3>
 				<c:if test="${ model.status!='confirm' && LOGIN_USER_ID!=model.posterId}">
-				<form action="${pageContext.request.contextPath}/project/${model.id}/commit" method="post">
+				<form action="${pageContext.request.contextPath}/project/${model.id}/commit" method="post" enctype="multipart/form-data">
 					<textarea name="content" class="form-control requirement" placeholder="正文" maxlength="90" name="content" required></textarea>
 					<br/>
+					<input type="file" name="file" required/>
 					<div class="row">
 						<button class="blue-btn col-sm-2 col-sm-offset-5">提交</button>
 					</div>
@@ -95,7 +97,14 @@
 					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/${user.id}" />
 					<div class="col-sm-7">
 						<div class="cmt-name">${user.username}<span class="cmt-time">${time}</span></div>
-						<div class="cmt-content">${commit.content }</div>
+						<div class="cmt-content">
+							${commit.content }<br/>
+							<c:if test="${commit.filename!=null}">
+							附件：<a href="${pageContext.request.contextPath}/file/commit/${commit.id}" target="_blank">
+								<c:set var="commitId" value="${commit.id}"/>
+								${fn:substringAfter(commit.filename, commitId)}</a>
+							</c:if>
+						</div>
 					</div>
 					<c:choose>
 						<c:when test="${LOGIN_USER_ID==user.id}">

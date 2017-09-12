@@ -2,6 +2,7 @@ package com.linkode.controller;
 
 import com.linkode.pojo.User;
 import com.linkode.service.PortfolioService;
+import com.linkode.service.ProjectCommitService;
 import com.linkode.service.UserService;
 import com.linkode.util.FileUploadUtil;
 
@@ -37,6 +38,8 @@ public class FileController {
 	PortfolioService portfolioService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	ProjectCommitService projectCommitService;
 	
     @PostMapping("/CKEditor")
     public void imageUpload(HttpServletRequest request, HttpServletResponse response) {
@@ -64,6 +67,32 @@ public class FileController {
     		fileName = "default-avatar.gif";
     		realPath = request.getSession().getServletContext().getRealPath("static/img");
     	}
+		File file = new File(realPath+"/"+fileName);
+		// 下载浏览器响应的那个文件名
+		String dfileName = fileName;
+		// 下面开始设置HttpHeaders,使得浏览器响应下载
+		HttpHeaders headers = new HttpHeaders();
+		// 设置响应方式
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		// 设置响应文件
+		headers.setContentDispositionFormData("attachment", dfileName);
+		// 把文件以二进制形式写回
+		return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), headers, HttpStatus.CREATED);
+    }
+    
+    // 返回项目提交文件
+    @GetMapping("/file/commit/{id}")
+    public ResponseEntity<byte[]> commitView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	File realPathDirectory = new File(realPath);
+        if (!realPathDirectory.exists()) {
+            realPathDirectory.mkdirs();
+        }
+    	String fileName = projectCommitService.getById(id).getFilename();
+    	if (fileName==null) {
+    		return null;
+    	}
+    	
 		File file = new File(realPath+"/"+fileName);
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;

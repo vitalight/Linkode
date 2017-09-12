@@ -972,3 +972,7 @@ textarea.higher {
 	text-overflow:ellipsis;
 	white-space:nowrap;
 }
+.cmt-content a:focus {
+	color:var(--Lblue);
+	text-decoration:underline;
+}

@@ -136,6 +136,7 @@ public class PortfolioController extends BaseController {
 		String filename = portfolio.getId()+file.getOriginalFilename();
         if (!FileUploadUtil.upload(file, realPath+"/"+filename)) {
         	portfolioService.deleteByPrimaryKey(portfolio.getId());
+            return RedirectTo("/portfolio/mine");
         }
         portfolio.setUrl(filename);
         portfolioService.updateByPrimaryKey(portfolio);

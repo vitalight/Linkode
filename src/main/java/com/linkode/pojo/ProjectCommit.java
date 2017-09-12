@@ -13,6 +13,8 @@ public class ProjectCommit {
 
     private Integer projectId;
 
+    private String filename;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class ProjectCommit {
 
     public void setProjectId(Integer projectId) {
         this.projectId = projectId;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

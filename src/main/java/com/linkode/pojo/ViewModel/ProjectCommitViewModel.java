@@ -18,12 +18,15 @@ public class ProjectCommitViewModel {
 
     private String username;
     
+    private String filename;
+    
     public ProjectCommitViewModel(ProjectCommit projectCommit) {
     	this.id=projectCommit.getId();
     	this.time = projectCommit.getTime();
     	this.content = projectCommit.getContent();
     	this.result = projectCommit.getResult();
     	this.projectId = projectCommit.getProjectId();
+    	this.filename = projectCommit.getFilename();
     }
     
     public Integer getId() {
@@ -72,5 +75,13 @@ public class ProjectCommitViewModel {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }

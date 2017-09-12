@@ -42,7 +42,7 @@
 				<c:if test="${model.type!='literature'}">
 				<img src="${pageContext.request.contextPath}/file/portfolio/${model.id}" />
 				</c:if>
-				
+				<a class="hollow-btn" href="${pageContext.request.contextPath}/file/portfolio/${model.id}" target="_blank"> 下载 </a>
 				<h3>评论(${model.comments})</h3>
 				<form action="${pageContext.request.contextPath}/portfolio/${model.id}/comment" method="post">
 					<textarea name="content" class="form-control requirement" placeholder="正文" maxlength="90" name="requirement" required></textarea>

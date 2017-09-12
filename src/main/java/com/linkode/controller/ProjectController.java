@@ -20,6 +20,7 @@ import com.linkode.service.ProjectService;
 import com.linkode.service.ProjectRatingService;
 import com.linkode.service.UserService;
 import com.linkode.util.DataPage;
+import com.linkode.util.FileUploadUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -32,6 +33,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -239,8 +242,10 @@ public class ProjectController extends BaseController {
     }
 
     @PostMapping("/{id}/commit")
-    public String submitAction(Model model, @PathVariable("id") Integer id, ProjectCommit pc) throws CustomException, ParseException {
-        Project project = projectService.findByPrimaryKey(id);
+    public String submitAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, ProjectCommit pc, @RequestParam("file") MultipartFile file) throws CustomException, ParseException {
+
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	Project project = projectService.findByPrimaryKey(id);
 
         if (!isAuthorized(project.getContractorId())) {
         	model.addAttribute("message", "无操作权限。");
@@ -249,6 +254,14 @@ public class ProjectController extends BaseController {
     	pc.setTime(new Date());
     	pc.setProjectId(id);
         projectCommitService.insert(pc);
+        
+        String filename="commit"+pc.getId()+file.getOriginalFilename();
+        if (!FileUploadUtil.upload(file, realPath+"/"+filename)) {
+        	projectCommitService.deleteById(pc.getId());
+        	return RedirectTo("/project/"+id);
+        }
+        pc.setFilename(filename);
+        projectCommitService.update(pc);
         
     	chatLogService.systemMessage(project.getPosterId(), 
     			"项目<a href='../../project/" + project.getId() + "'>[" + project.getTitle()+"]</a>有新的提交。");
