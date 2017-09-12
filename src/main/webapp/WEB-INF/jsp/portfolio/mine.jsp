@@ -25,7 +25,7 @@
 			</div>
 			</c:if>
 			<c:if test="${pvm.type != 'literature'}">
-			<img class="display-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${pvm.id%13}.png"/>
+			<img class="display-img" src="${pageContext.request.contextPath}/file/portfolio/${pvm.id}"/>
 			</c:if>
 			
 			<p class="card-name">${pvm.title}</p>

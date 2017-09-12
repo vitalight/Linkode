@@ -33,6 +33,7 @@ public class FileUploadUtil {
         fileTypes.add(".png");
     }
 
+    // 上传普通文件
     public static boolean upload(MultipartFile file, String filename) {
     	try {
             if (!file.isEmpty()){

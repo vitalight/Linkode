@@ -32,6 +32,7 @@
 								<option id="update-literature" value="literature">文学</option>
 							</select>
 						</div>
+						
 				</div><br/><br/>
 				<div class="row">
 					<div class="col-sm-12">
@@ -41,6 +42,7 @@ ${model.content}</textarea>
 					</div>
 				</div>
 				<br/>
+				<input type="file" name="file" required/>
 				<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">发布项目</button>
 			</div>
 		</form>

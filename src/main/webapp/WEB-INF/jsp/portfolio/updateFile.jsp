@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","作品浏览"); %>
+<% request.setAttribute("title","发布作品"); %>
 <% request.setAttribute("headType","portfolio"); %>
 <%@ include file="../modules/web-header.jsp"%>
 </head>
@@ -14,40 +14,19 @@
 		<a class="type-btn" id="create" href="${pageContext.request.contextPath}/portfolio/create">发布作品</a>
 	</div>
 	
-	<div class="display bigger">
-		<c:forEach items="${model}" var="pvm">
-		<div class="display-card height-17">
-		
-			<c:if test="${pvm.type == 'literature'}">
-			<div class=" ran-${pvm.id%3} display-text">
-				${pvm.content}
+	<div class="margin-bottom display-sheet">
+		<div class="sheet-content">
+			<div class="row">
+				<h1>编辑文件</h1>
 			</div>
-			</c:if>
-			<c:if test="${pvm.type != 'literature'}">
-			<img class="display-img" src="${pageContext.request.contextPath}/file/portfolio/${pvm.id}"/>
-			</c:if>
-			
-			<p class="card-name">${pvm.title}</p>
-			<span class="card-info">
-				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${pvm.userId%6}.jpg" />
-				${pvm.username}
-			</span>
-			<span class="likes">
-				<i class="fa fa-heart" aria-hidden="true"></i> ${pvm.likes}
-			</span>
-			<span class="comments">
-				<i class="fa fa-comment" aria-hidden="true"></i> ${pvm.comments}
-			</span>
-			
-			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
+			<div class="row content-text">
+				<img class="small-pic" src="${pageContext.request.contextPath}/file/portfolio/${id}" />
+				<form action="${pageContext.request.contextPath}/portfolio/update/${id}/file" method="post" enctype="multipart/form-data">
+					<input type="file" name="file" required/>
+					<button type="submit" class="col-sm-2 col-sm-offset-10 contract-btn">提交修改</button>
+				</form>
+			</div>
 		</div>
-		</c:forEach>
-		<c:if test="${model==null || model.size()==0}">
-		<div class="display-bar empty-bar bigger-empty">
-			<img src="${pageContext.request.contextPath}/static/img/empty.png" />
-			<div class="empty-text">空空如也...</div>
-		</div>
-		</c:if>
 	</div>
 
 <%@ include  file="../modules/javascript.jsp"%>
@@ -56,12 +35,7 @@
 <script src="${pageContext.request.contextPath}/static/js/form-validate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	if (${type == null}) {
-		$("#all").addClass("type-chose");
-	}
-	else {
-		$("#${type}").addClass("type-chose");
-	}
+	$("#update-${model.type}").attr("selected","selected"); 
 }); 
 </script>
 <%@ include  file="../modules/web-footer.jsp"%>

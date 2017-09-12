@@ -46,16 +46,17 @@ public class FileController {
         }
     }
 
+    // 返回作品图片
     @GetMapping("/file/portfolio/{id}")
     public ResponseEntity<byte[]> fileView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
-    	String realPath = request.getSession().getServletContext().getRealPath("/upload");
-    	System.out.println("<test>"+realPath);
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
     	String fileName = portfolioService.findByPrimaryKey(id).getUrl();
     	if (fileName==null) {
-    		return null;
+    		fileName = "default.gif";
+    		realPath = request.getSession().getServletContext().getRealPath("static/img");
     	}
     	
-		File file = new File(realPath+fileName);
+		File file = new File(realPath+"/"+fileName);
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;
 		// 下面开始设置HttpHeaders,使得浏览器响应下载

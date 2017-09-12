@@ -16,7 +16,7 @@
 			
 			<c:forEach items="${portfolios}" end="7" var="portfolio">
 			<div class="display-item">
-				<img class="item-img" src="${pageContext.request.contextPath}/static/img/pic/pic-${portfolio.id%13}.png" />
+				<img class="item-img" src="${pageContext.request.contextPath}/file/portfolio/${portfolio.id}" />
 				<img class="user-avatar" src="${pageContext.request.contextPath}/static/img/avatar/avatar-${portfolio.userId%7}.jpg" />
 				<div class="item-title">${portfolio.title}</div>
 				<div class="item-intro">${portfolio.content }</div>

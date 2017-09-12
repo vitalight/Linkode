@@ -21,6 +21,7 @@
 				<c:if test="${LOGIN_USER_ID == model.userId || LOGIN_USER_ROLE == 'admin'}">
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/delete/${model.id}">删除</a>
 				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}">编辑</a>
+				<a class="edit-link" href="${pageContext.request.contextPath}/portfolio/update/${model.id}/file">编辑文件</a>
 				</c:if>
 				</h1>
 			</div>

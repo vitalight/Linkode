@@ -298,6 +298,13 @@ textarea.requirement {
 	padding-bottom:1em;
 }
 /*=============== 作品 ==============*/
+.content-text img.small-pic {
+	max-height: 30em;
+	max-width: 58em;
+	width: auto;
+	margin: 0 auto;
+	display:block;
+}
 .bigger {
 	width:83.5em;
 }

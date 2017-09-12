@@ -103,10 +103,34 @@ public class PortfolioController extends BaseController {
         return RedirectTo("/portfolio/"+newPortfolio.getId());
     }
 
+    @GetMapping("/update/{id}/file")
+    public String updateFileView(Model model, @PathVariable("id") Integer id) {
+    	return View("/portfolio/updateFile");
+    }
+    
+    @PostMapping("/update/{id}/file")
+    public String updateFileAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	File realPathDirectory = new File(realPath);
+        if (!realPathDirectory.exists()) {
+            realPathDirectory.mkdirs();
+        }
+
+    	Portfolio portfolio = portfolioService.findByPrimaryKey(id);
+		String filename = id+file.getOriginalFilename();
+        if (!FileUploadUtil.upload(file, realPath+"/"+filename)) {
+        	portfolioService.deleteByPrimaryKey(portfolio.getId());
+        }
+    	portfolio.setUrl(filename);
+    	portfolioService.updateByPrimaryKey(portfolio);
+    	
+        return RedirectTo("/portfolio/"+id);
+    }
+    
     /*======== 增删 ========*/
     @PostMapping("/create")
     public String createAction(Model model, HttpServletRequest request, Portfolio portfolio, @RequestParam("file") MultipartFile file) {
-    	String realPath = request.getSession().getServletContext().getRealPath("/upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("upload");
     	File realPathDirectory = new File(realPath);
         if (!realPathDirectory.exists()) {
             realPathDirectory.mkdirs();
@@ -119,7 +143,7 @@ public class PortfolioController extends BaseController {
         portfolioService.insert(portfolio);
         
 		String filename = portfolio.getId()+file.getOriginalFilename();
-        if (!FileUploadUtil.upload(file, realPath+filename)) {
+        if (!FileUploadUtil.upload(file, realPath+"/"+filename)) {
         	portfolioService.deleteByPrimaryKey(portfolio.getId());
         }
         portfolio.setUrl(filename);
