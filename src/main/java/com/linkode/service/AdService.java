@@ -12,5 +12,6 @@ public interface AdService {
 	
 	Ad getById(int id);
 	List<Ad> getAll();
+	List<Ad> getRandom();
 	DataPage<Ad> selectPage(Integer pageNum, Integer pageSize, Integer indexCount);
 }

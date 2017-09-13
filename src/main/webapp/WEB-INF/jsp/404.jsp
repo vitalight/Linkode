@@ -7,8 +7,8 @@
 <body>
 	<div class="middle">
 		Opss! This page is eaten by Jason.<br/>
-		<form action="${pageContext.request.contextPath}/login">
-			<button class="login-btn">登录</button>
+		<form action="${pageContext.request.contextPath}/home">
+			<button class="login-btn">主页</button>
 		</form>
 	</div>
 </body>

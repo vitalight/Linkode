@@ -32,7 +32,7 @@
 			</c:forEach>
 			
 			<div class="display-ad">
-				<img src="${pageContext.request.contextPath}/static/img/ad/ad-${ads[0].id}.png" />
+				<img src="${pageContext.request.contextPath}/file/ad/${ads[0].id}" />
 				<a class="card-over" target="_blank" href="${ads[0].content}"></a>
 			</div>
 		
@@ -59,7 +59,7 @@
 			</c:forEach>
 			
 			<div class="display-ad">
-				<img src="${pageContext.request.contextPath}/static/img/ad/ad-${ads[1].id}.png" />
+				<img src="${pageContext.request.contextPath}/file/ad/${ads[1].id}" />
 				<a class="card-over" target="_blank" href="${ads[1].content}"></a>
 			</div>
 			

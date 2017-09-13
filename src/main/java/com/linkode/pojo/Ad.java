@@ -13,6 +13,8 @@ public class Ad {
 
     private Date endDate;
 
+    private String filename;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +53,13 @@ public class Ad {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

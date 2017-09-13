@@ -1,5 +1,6 @@
 package com.linkode.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,26 @@ public class AdServiceImpl implements AdService {
 	
 	public List<Ad> getAll() {
 		return adMapper.selectByExample(null);
+	}
+	
+	public List<Ad> getRandom() {
+		List<Ad> ads = getAll();
+		List<Ad> ret = new ArrayList<Ad>();
+		if (ads.size()<3) {
+			return ads;
+		}
+		
+		java.util.Random r=new java.util.Random();
+		int r1 = r.nextInt(ads.size());
+		int r2 = r.nextInt(ads.size());
+		while (r2 == r1) {
+			r2 = r.nextInt(ads.size());
+		}
+		
+		ret.add(ads.get(r1));
+		ret.add(ads.get(r2));
+		
+		return ret;
 	}
 	
 	public DataPage<Ad> selectPage(Integer pageNum, Integer pageSize, Integer indexCount) {
