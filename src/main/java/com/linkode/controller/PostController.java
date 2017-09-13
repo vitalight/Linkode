@@ -81,7 +81,12 @@ public class PostController extends BaseController {
 	@PostMapping("/update")
 	public String updateAction(Model model, HttpServletRequest req, @Validated Post newPost,
 			BindingResult bindingResult) throws CustomException, ParseException {
+		
 		Post post = postService.getById(newPost.getId());
+		if (!isAuthorized(post.getUserId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
 		post.setContent(newPost.getContent());
 		post.setType(newPost.getType());
 		post.setTitle(newPost.getTitle());
@@ -113,6 +118,10 @@ public class PostController extends BaseController {
 	@GetMapping("/comment/delete/{id}")
 	public String commentDeleteAction(Model model, @PathVariable("id") Integer id) {
     	Integer postid = postCmtService.getById(id).getPostid();
+		if (!isAuthorized(postCmtService.getById(id).getUserId())) {
+        	model.addAttribute("message", "无操作权限。");
+        	return View("error");
+        }
     	postCmtService.deleteById(id);
 		return RedirectTo("/post/"+postid);
 	}

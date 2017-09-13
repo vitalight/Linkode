@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","项目"); %>
+<% request.setAttribute("title","发布项目"); %>
 <% request.setAttribute("headType","project"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">
@@ -34,7 +34,7 @@
 				</div><br/>
 				<div class="row">
 					<div class="col-sm-4" >
-						酬金：<input class="form-control" type="number" step="1" name="money" max="${money}" required/>
+						酬金：<input class="form-control" type="number" min="1" step="1" name="money" max="${money}" required/>
 					</div>
 					<div class="col-sm-4 col-sm-offset-1">
 						截止日期:<input class="form-control" type="date" name="endDate" required/>

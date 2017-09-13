@@ -37,7 +37,7 @@
 				</div><br/>
 				<div class="row">
 					<div class="col-sm-4" >
-						酬金:<input class="form-control" type="number" step="1" name="money" value="${model.money}" required/>
+						酬金:<input class="form-control" type="number" min="1" step="1" name="money" value="${model.money}" required/>
 					</div>
 					<div class="col-sm-4 col-sm-offset-1">
 						<fmt:formatDate pattern="yyyy-MM-dd" value='${model.endDate}' var="time"/>

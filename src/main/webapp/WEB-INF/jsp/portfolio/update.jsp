@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","发布作品"); %>
+<% request.setAttribute("title","编辑作品"); %>
 <% request.setAttribute("headType","portfolio"); %>
 <%@ include file="../modules/web-header.jsp"%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/explore.css">

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% request.setAttribute("title","发布帖子"); %>
+<% request.setAttribute("title","查看帖子"); %>
 <% request.setAttribute("headType","post"); %>
 <%@ include file="../modules/web-header.jsp"%>
 </head>

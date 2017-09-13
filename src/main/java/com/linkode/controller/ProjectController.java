@@ -333,7 +333,7 @@ public class ProjectController extends BaseController {
     public String createAction(Model model, HttpServletRequest request, @Valid Project project, BindingResult bindingResult) throws CustomException, ParseException {
         Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         User user = userService.findById(userid);
-        if (user.getMoney()<project.getMoney()) {
+        if (user.getMoney()<project.getMoney()|project.getMoney()<0) {
         	return RedirectTo("/project/myProject");
         }
         

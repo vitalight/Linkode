@@ -24,13 +24,9 @@
 				<div class="col-sm-8">
 					${post.title}
 				</div>
-				<div class="col-sm-2 poster-info">
+				<div class="col-sm-2 col-sm-offset-2 poster-info">
 					<span class="glyphicon glyphicon-user"></span>
 					${post.username} &nbsp &nbsp
-				</div>
-				<div class="col-sm-2 poster-info">
-					<span class="glyphicon glyphicon-comment"></span>
-					?
 				</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/post/${post.id}"></a>
 			</div>
