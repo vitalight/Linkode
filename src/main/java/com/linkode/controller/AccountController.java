@@ -93,6 +93,7 @@ public class AccountController extends BaseController {
 	                String username = user.getUsername();
 	                subject.getSession().setAttribute("LOGIN_USER_ID",id);
 	                subject.getSession().setAttribute("LOGIN_USER_NAME",username);
+	                subject.getSession().setAttribute("LOGIN_USER_ROLE",user.getRole());
 	                return RedirectTo("/home");
 	            }catch (Exception e){
 	                model.addAttribute("errormsg","注册意外错误。");
