@@ -145,7 +145,7 @@ public class UserController extends BaseController {
 	
 	@PostMapping("/{id}/editAvatar")
 	public String editAvatarAction(HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
-		String realPath = request.getSession().getServletContext().getRealPath("upload");
+		String realPath = request.getSession().getServletContext().getRealPath("static/img/avatar");
 		
 		User user = userService.getById(id);
 		String filename = "avatar"+id+file.getOriginalFilename();

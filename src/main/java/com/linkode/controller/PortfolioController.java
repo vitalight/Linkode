@@ -110,7 +110,7 @@ public class PortfolioController extends BaseController {
     
     @PostMapping("/update/{id}/file")
     public String updateFileAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/pic");
     	
     	Portfolio portfolio = portfolioService.findByPrimaryKey(id);
 		String filename = id+file.getOriginalFilename();
@@ -124,7 +124,7 @@ public class PortfolioController extends BaseController {
     /*======== 增删 ========*/
     @PostMapping("/create")
     public String createAction(Model model, HttpServletRequest request, Portfolio portfolio, @RequestParam("file") MultipartFile file) {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/pic");
     	
     	Integer userid = (Integer) session().getAttribute("LOGIN_USER_ID");
         portfolio.setUserId(userid);

@@ -244,7 +244,7 @@ public class ProjectController extends BaseController {
     @PostMapping("/{id}/commit")
     public String submitAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, ProjectCommit pc, @RequestParam("file") MultipartFile file) throws CustomException, ParseException {
 
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/file");
     	Project project = projectService.findByPrimaryKey(id);
 
         if (!isAuthorized(project.getContractorId())) {

@@ -59,18 +59,16 @@ public class FileController {
     // 返回用户头像
     @GetMapping("/file/user/{id}")
     public ResponseEntity<byte[]> avatarView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/avatar");
     	File realPathDirectory = new File(realPath);
         if (!realPathDirectory.exists()) {
             realPathDirectory.mkdirs();
         }
     	String fileName = userService.getById(id).getUrl();
-    	
-    	if (fileName==null) {
-    		fileName = "default-avatar.gif";
-    		realPath = request.getSession().getServletContext().getRealPath("static/img");
-    	}
 		File file = new File(realPath+"/"+fileName);
+    	if (fileName==null || !file.exists()) {
+    		file = new File(request.getSession().getServletContext().getRealPath("static/img")+"/default-avatar.gif");
+    	}
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;
 		// 下面开始设置HttpHeaders,使得浏览器响应下载
@@ -86,17 +84,16 @@ public class FileController {
     // 返回项目提交文件
     @GetMapping("/file/commit/{id}")
     public ResponseEntity<byte[]> commitView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/file");
     	File realPathDirectory = new File(realPath);
         if (!realPathDirectory.exists()) {
             realPathDirectory.mkdirs();
         }
     	String fileName = projectCommitService.getById(id).getFilename();
-    	if (fileName==null) {
+		File file = new File(realPath+"/"+fileName);
+    	if (fileName==null || !file.exists()) {
     		return null;
     	}
-    	
-		File file = new File(realPath+"/"+fileName);
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;
 		// 下面开始设置HttpHeaders,使得浏览器响应下载
@@ -112,18 +109,17 @@ public class FileController {
     // 返回广告图片
     @GetMapping("/file/ad/{id}")
     public ResponseEntity<byte[]> adView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/ad");
     	File realPathDirectory = new File(realPath);
         if (!realPathDirectory.exists()) {
             realPathDirectory.mkdirs();
         }
     	String fileName = adService.getById(id).getFilename();
-    	if (fileName==null) {
-    		fileName = "default.gif";
-    		realPath = request.getSession().getServletContext().getRealPath("static/img");
+		File file = new File(realPath+"/"+fileName);
+    	if (fileName==null || !file.exists()) {
+    		file = new File(request.getSession().getServletContext().getRealPath("static/img")+"/default.gif");
     	}
     	
-		File file = new File(realPath+"/"+fileName);
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;
 		// 下面开始设置HttpHeaders,使得浏览器响应下载
@@ -139,18 +135,17 @@ public class FileController {
     // 返回作品图片
     @GetMapping("/file/portfolio/{id}")
     public ResponseEntity<byte[]> fileView(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Integer id) throws IOException {
-    	String realPath = request.getSession().getServletContext().getRealPath("upload");
+    	String realPath = request.getSession().getServletContext().getRealPath("static/img/pic");
     	File realPathDirectory = new File(realPath);
         if (!realPathDirectory.exists()) {
             realPathDirectory.mkdirs();
         }
     	String fileName = portfolioService.findByPrimaryKey(id).getUrl();
-    	if (fileName==null) {
-    		fileName = "default.gif";
-    		realPath = request.getSession().getServletContext().getRealPath("static/img");
+		File file = new File(realPath+"/"+fileName);
+    	if (fileName==null || !file.exists()) {
+    		file = new File(request.getSession().getServletContext().getRealPath("static/img")+"/default.gif");
     	}
     	
-		File file = new File(realPath+"/"+fileName);
 		// 下载浏览器响应的那个文件名
 		String dfileName = fileName;
 		// 下面开始设置HttpHeaders,使得浏览器响应下载

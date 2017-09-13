@@ -86,7 +86,7 @@ public class MainController extends BaseController {
 	
 	@PostMapping("/ad/{id}/editFile")
 	String adEditFileAction(Model model, HttpServletRequest request, @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
-		String realPath = request.getSession().getServletContext().getRealPath("upload");
+		String realPath = request.getSession().getServletContext().getRealPath("static/img/ad");
     	
     	Ad ad = adService.getById(id);
 		String filename = "ad"+id+file.getOriginalFilename();
@@ -110,7 +110,7 @@ public class MainController extends BaseController {
 	
 	@PostMapping("/ad/create")
 	String adCreateAction(Model model,  HttpServletRequest request, Ad ad, @RequestParam("file") MultipartFile file) {
-		String realPath = request.getSession().getServletContext().getRealPath("upload");
+		String realPath = request.getSession().getServletContext().getRealPath("static/img/ad");
     	
         adService.insert(ad);
         
