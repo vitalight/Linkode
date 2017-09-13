@@ -50,16 +50,8 @@ public class ChatLogController extends BaseController {
 	@PostMapping("/{id1}/{id2}")
 	public String replyChat(HttpServletRequest request, @PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
 		String message = (String)request.getParameter("message");
-		String content = "";
-		for (int i = 0; i < message.length(); i++) {
-			if (message.charAt(i) == ' ') {
-				content += "&nbsp;";
-			} else {
-				content += message.charAt(i);
-			}
-		}
 		ChatLog chatLog = new ChatLog();
-		chatLog.setContent(content);
+		chatLog.setContent(message);
 		chatLog.setSenderId(id1);
 		chatLog.setReceiverId(id2);
 		chatLog.setTime(new java.util.Date());

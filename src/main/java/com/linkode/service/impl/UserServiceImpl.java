@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public int insert(User user) {
+    	user.setUsername(user.getUsername().replaceAll("</?[^>]+>", ""));
     	userMapper.insert(user);
     	return user.getId();
     }
@@ -71,6 +72,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public int update(User user) {
+    	user.setUsername(user.getUsername().replaceAll("</?[^>]+>", ""));
     	return userMapper.updateByPrimaryKey(user);
     }
     

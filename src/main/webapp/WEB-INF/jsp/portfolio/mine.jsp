@@ -29,6 +29,7 @@
 			</c:if>
 			
 			<p class="card-name">${pvm.title}</p>
+			<p class="nowrap">
 			<span class="card-info">
 				<img class="avatar size-15" class="avatar" src="${pageContext.request.contextPath}/file/user/${pvm.userId}" />
 				${pvm.username}
@@ -39,6 +40,7 @@
 			<span class="comments">
 				<i class="fa fa-comment" aria-hidden="true"></i> ${pvm.comments}
 			</span>
+			</p>
 			<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${pvm.id}"></a>
 		</div>
 		</c:forEach>

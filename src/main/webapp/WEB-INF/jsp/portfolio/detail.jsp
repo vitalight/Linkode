@@ -37,8 +37,7 @@
 				</div>
 			</div>
 			<div class="row content-text">
-			
-				${model.content }
+				<div class="model-content" style="white-space: pre-line;">${model.content }</div>
 				<c:if test="${model.type!='literature'}">
 				<img src="${pageContext.request.contextPath}/file/portfolio/${model.id}" />
 				<a class="hollow-btn" href="${pageContext.request.contextPath}/file/portfolio/${model.id}" target="_blank"> 下载 </a>

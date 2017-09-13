@@ -19,7 +19,7 @@
 				<img class="item-img" src="${pageContext.request.contextPath}/file/portfolio/${portfolio.id}" />
 				<img class="user-avatar" src="${pageContext.request.contextPath}/file/user/${portfolio.userId}" />
 				<div class="item-title">${portfolio.title}</div>
-				<div class="item-intro">${portfolio.content }</div>
+				<div class="item-intro item-limit">${portfolio.content }</div>
 				<a class="card-over" href="${pageContext.request.contextPath}/portfolio/${portfolio.id}"></a>
 			</div>
 			</c:forEach>

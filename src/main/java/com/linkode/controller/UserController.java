@@ -130,10 +130,6 @@ public class UserController extends BaseController {
 
         session().setAttribute("LOGIN_USER_NAME",user.getUsername());
 		old.setIntro(user.getIntro());
-		String pwd = user.getPassword();
-		if (pwd != null) {
-			old.setPassword(MD5.GetMD5Code(pwd));
-		}
 		userService.update(old);
 		return RedirectTo("/user/{id}");
 	}

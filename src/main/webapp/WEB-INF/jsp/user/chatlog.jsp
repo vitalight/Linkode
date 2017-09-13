@@ -31,7 +31,7 @@
 		<div class="cmt-line row">
 			<c:choose>
 				<c:when test="${chatlog.senderId == 0 || chatlog.receiverId == 0}">
-					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/static/img/avatar/avatar-0.jpg" />
+					<img class="avatar col-sm-1" src="${pageContext.request.contextPath}/file/user/0" />
 				</c:when>
 				
 				<c:when test="${LOGIN_USER_ID != chatlog.senderId}">
@@ -77,7 +77,7 @@
 				</c:choose>
 				
 				<div class="cmt-content">
-					${fn:escapeXml(chatlog.content)}
+					${chatlog.content }
 				</div>
 			</div>
 		    <c:if test="${LOGIN_USER_ID == chatlog.senderId}">

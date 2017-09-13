@@ -29,8 +29,9 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public void insert(Portfolio Portfolio) {
-        portfolioMapper.insert(Portfolio);
+    public void insert(Portfolio portfolio) {
+    	portfolio.setTitle(portfolio.getTitle().replaceAll("</?[^>]+>", ""));
+        portfolioMapper.insert(portfolio);
     }
 
     @Override
@@ -39,8 +40,9 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public void updateByPrimaryKey(Portfolio Portfolio) {
-        portfolioMapper.updateByPrimaryKey(Portfolio);
+    public void updateByPrimaryKey(Portfolio portfolio) {
+    	portfolio.setTitle(portfolio.getTitle().replaceAll("</?[^>]+>", ""));
+        portfolioMapper.updateByPrimaryKey(portfolio);
     }
 
     @Override

@@ -66,6 +66,9 @@ div.empty-bar {
 	font-size:2em;
 	color:rgb(161,173,188);
 }
+.nowrap {
+	white-space:nowrap;
+}
 .height-17 {
 	height:17em;
 	overflow:hidden;
@@ -345,16 +348,14 @@ textarea.requirement {
 .card-info {
 	color:var(--Ldgrey);
 	margin-bottom:0em;
-	width:4.5em;
+	width:8em;
 	display:inline-block;
 }
 .likes, .comments {
 	color:var(--Ldgrey);
-	margin-left:1em;
 	font-size:0.85em;
 	display:inline-block;
 	width:3.5em;
-	text-align:right;
 }
 .comments {
 	margin-right:-1em;

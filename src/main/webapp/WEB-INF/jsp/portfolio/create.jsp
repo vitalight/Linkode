@@ -33,7 +33,7 @@
 				</div><br/><br/>
 				<div class="row">
 					<div class="col-sm-12">
-						作品介绍：<textarea name="content" class="form-control requirement" maxlength="50" name="requirement" required></textarea>
+						作品介绍：<textarea name="content" class="form-control requirement" maxlength="290" name="requirement" required></textarea>
 					</div>
 				</div>
 				<br/>

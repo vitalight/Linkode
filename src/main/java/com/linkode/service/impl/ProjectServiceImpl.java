@@ -41,6 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public int insert(Project project) {
+    	project.setTitle(project.getTitle().replaceAll("</?[^>]+>", ""));
         projectMapper.insert(project);
         return project.getId();
     }
@@ -52,6 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateByPrimaryKey(Project project) {
+    	project.setTitle(project.getTitle().replaceAll("</?[^>]+>", ""));
         projectMapper.updateByPrimaryKey(project);
     }
 
@@ -178,7 +180,7 @@ public class ProjectServiceImpl implements ProjectService {
 		List<ProjectViewModel> pvms = getAllPVM();
 		List<ProjectViewModel> ret = new ArrayList<ProjectViewModel>();
 		for (ProjectViewModel pvm:pvms) {
-			if (pvm.getStatus().equals("post")) {
+			if (pvm.getStatus().equals("post") && pvm.getEndDate().after(new java.util.Date())) {
 				ret.add(pvm);
 			}
 		}
